@@ -560,7 +560,15 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7cef6dd5-3721-417a-bf31-69acd33ab193
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f9be06af-385d-4fb3-984e-aad10e42fbd3
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -756,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edbb7f2406f55e8488a10f77e956853d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: 0}
 --- !u!1 &476063595
 GameObject:
   m_ObjectHideFlags: 0
