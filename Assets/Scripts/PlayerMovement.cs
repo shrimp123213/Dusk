@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private InputActionMap playerAct;
 
     private Vector2 inputVector;
-    private bool isMidAir;
+    private bool isGrounded;
 
     [Header("¸I¼²½c¥Î")]
-    public LayerMask FloorLayer;
+    public LayerMask GroundLayer;
 
     [System.Serializable] public class HorizontalMovement
     {
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         inputActionAsset = GetComponent<PlayerInput>().actions;
         playerAct = inputActionAsset.FindActionMap("Player");
 
-        isMidAir = true;
+        isGrounded = true;
     }
     
     void Update()
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             inputVector.x = 0;
 
         #region ¸õÅD
-        if (jump.currentCoyoteTime > 0)
+        if (jump.currentCoyoteTime > 0 && !isGrounded)
             jump.currentCoyoteTime = Mathf.Clamp(jump.currentCoyoteTime - Time.deltaTime, 0, jump.CoyoteTime);
         if (jump.currentBufferTime > 0)
             jump.currentBufferTime = Mathf.Clamp(jump.currentBufferTime - Time.deltaTime, 0, jump.BufferTime);
@@ -79,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
         {
             jump.currentBufferTime = jump.BufferTime;
         }
-        if (jump.currentBufferTime > 0 && (jump.currentCoyoteTime > 0 || !isMidAir))
+        if (jump.currentBufferTime > 0 && (jump.currentCoyoteTime > 0 || isGrounded))
         {
             rb2D.velocity = new Vector3(rb2D.velocity.x, jump.TakeoffVelocity);
-            //isMidAir = true;
+            //isGrounded = true;
             jump.currentBufferTime = 0;
             jump.currentCoyoteTime = 0;
         }
@@ -127,44 +127,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #region child trigger
-    public void OnGroundCheckEnter(Collider2D other)
-    {
-        print(1 << other.gameObject.layer);
-        print(FloorLayer.value);
-        print(other.gameObject.name);
-        if (1 << other.gameObject.layer == FloorLayer.value)
-        {
-            isMidAir = false;
-            print("Enter");
-        }
-    }
-    public void OnGroundCheckExit(Collider2D other)
-    {
 
-        if (1 << other.gameObject.layer == FloorLayer.value)
-        {
-            print("Exit");
-            isMidAir = true;
-        }
-    }
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (1 << other.gameObject.layer == FloorLayer.value)
+        if (1 << collision.gameObject.layer == GroundLayer.value && collision.contacts[0].normal == Vector2.up)
         {
-            isMidAir = false;
+            isGrounded = true;
+            jump.currentCoyoteTime = jump.CoyoteTime;
             print("Enter");
         }
     }
-    
-    private void OnTriggerExit2D(Collider2D other)
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (1 << other.gameObject.layer == FloorLayer.value)
+        if (1 << collision.gameObject.layer == GroundLayer.value)
         {
             print("Exit");
-            isMidAir = true;
-            jump.currentCoyoteTime = jump.CoyoteTime;
+            isGrounded = false;
         }
     }
 }

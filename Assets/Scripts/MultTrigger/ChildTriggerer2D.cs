@@ -22,4 +22,5 @@ public class ChildTriggerer2D : MonoBehaviour
     {
         onTriggerExit?.Invoke(other);
     }
+
 }
