@@ -14,8 +14,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 inputVector;
     private bool isGrounded;
 
-    [Header("¸I¼²½c¥Î")]
-    public LayerMask GroundLayer;
 
     [System.Serializable] public class HorizontalMovement
     {
@@ -40,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
         public float currentBufferTime;
         public float CoyoteTime;
         public float currentCoyoteTime;
+
+        public List<GameObject> touchedGrounds = new List<GameObject>();
+        public LayerMask GroundLayer;
     }
     public Jump jump;
 
@@ -132,20 +133,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (1 << collision.gameObject.layer == GroundLayer.value && collision.contacts[0].normal == Vector2.up)
+        if (1 << collision.gameObject.layer == jump.GroundLayer.value && collision.contacts[0].normal == Vector2.up)
         {
+            if (!jump.touchedGrounds.Contains(collision.gameObject))
+                jump.touchedGrounds.Add(collision.gameObject);
+
             isGrounded = true;
             jump.currentCoyoteTime = jump.CoyoteTime;
-            print("Enter");
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (1 << collision.gameObject.layer == jump.GroundLayer.value && collision.contacts[0].normal == Vector2.up && rb2D.velocity.y == 0 && isGrounded == false)
+        {
+            if (!jump.touchedGrounds.Contains(collision.gameObject))
+                jump.touchedGrounds.Add(collision.gameObject);
+
+            isGrounded = true;
+            jump.currentCoyoteTime = jump.CoyoteTime;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (1 << collision.gameObject.layer == GroundLayer.value)
+        if (1 << collision.gameObject.layer == jump.GroundLayer.value)
         {
-            print("Exit");
-            isGrounded = false;
+            jump.touchedGrounds.Remove(collision.gameObject);
+
+            if (jump.touchedGrounds.Count == 0)
+                isGrounded = false;
         }
     }
 }
