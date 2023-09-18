@@ -704,7 +704,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da714978cbc21f4494a12f366a9fd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentCharacterStates: 0
+  Ani: {fileID: 0}
+  Rigid: {fileID: 0}
+  SpeedFactor: 1
+  Xinput: 0
+  Yinput: 0
+  Facing: 1
+  KeyJump: 0
+  KeyJumpJust: 0
+  isLocal: 0
+  Charging: 0
+  Airbrone: 0
+  isDead: 0
+  Dodge: 0
+  CanLongJump: 0
+  LowGravityTime: 0
+  Inputs: 
+  HitEffect: {fileID: 0}
+  _Health: 0
+  HealthMax: {fileID: 0}
+  Speed: {fileID: 0}
+  Attack: {fileID: 0}
+  HurtBoxColor: {r: 0, g: 0, b: 0, a: 0}
+  Player: {fileID: 0}
 --- !u!1 &476063595
 GameObject:
   m_ObjectHideFlags: 0
