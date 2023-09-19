@@ -41,7 +41,7 @@ public class AerutaDebug : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            Character component2 = Object.Instantiate(Resources.Load<GameObject>("Character/EnemyA/Enemy01"), PlayerMain.i.transform.position, Quaternion.identity).GetComponent<Mob>();
+            Character component2 = Object.Instantiate(Resources.Load<GameObject>("Character/EnemyA/Enemy01"), PlayerMain.i.transform.position, Quaternion.identity).GetComponent<Character>();
             component2.Health = 100f;
             component2.Speed.BaseSet(0f);
         }

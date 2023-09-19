@@ -30,3 +30,29 @@ public class Vector3Utli : MonoBehaviour
         return new Vector2(_XCurve.Evaluate(_time) * _Power.x, _YCurve.Evaluate(_time) * _Power.y);
     }
 }
+
+public class InputUtli : MonoBehaviour
+{
+    public static InputKey GetHighestAxis(float x, float y)
+    {
+        float num = Mathf.Abs(x);
+        float num2 = Mathf.Abs(y);
+        if (num <= 0.45f && num2 <= 0.45f)
+        {
+            return InputKey.None;
+        }
+        if (num > num2)
+        {
+            if (x > 0f)
+            {
+                return InputKey.Right;
+            }
+            return InputKey.Left;
+        }
+        if (y > 0f)
+        {
+            return InputKey.Up;
+        }
+        return InputKey.Down;
+    }
+}

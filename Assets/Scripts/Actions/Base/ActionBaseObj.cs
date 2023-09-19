@@ -130,7 +130,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.GetComponent<IHitable>().TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m)), _m);
+                bool num = collider2D.GetComponent<IHitable>().TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m);
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -167,9 +167,9 @@ public class ActionBaseObj : ScriptableObject
             EndAction(_m);
             _m.NowAction = null;
             _m.Ani.SetTrigger("Idle");
-            if (_m.Inputs.Contains(InputKey.Attack))
+            if (_m.Inputs.Contains(InputKey.Claw))
             {
-                _m.Inputs.Remove(InputKey.Attack);
+                _m.Inputs.Remove(InputKey.Claw);
             }
             if ((bool)_m.TextInput)
             {

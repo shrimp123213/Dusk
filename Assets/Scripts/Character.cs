@@ -38,7 +38,7 @@ public class Character : MonoBehaviour, IHitable
 
     public bool CanLongJump;
 
-    public float LowGravityTime;
+    public float LowGravityTime;//¨ü¶Ë«á´îºC?
 
     //public float ThinkCD;
 

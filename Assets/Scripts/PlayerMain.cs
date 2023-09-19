@@ -8,167 +8,9 @@ using UnityEngine.UI;
 
 public class PlayerMain : Character
 {
-    private Rigidbody2D rb2D;
-
     //玩家Input
     public InputActionAsset inputActionAsset;
     private InputActionMap playerAct;
-
-    private Vector2 inputVector;
-    private bool isGrounded;
-
-
-    [System.Serializable] public class HorizontalMovement
-    {
-        public float MaxSpeed;
-        public float Acceleration;
-        public float Deceleration;
-        public float TurnAcceleration;
-    }
-    public HorizontalMovement horizontalMovement;
-
-    [System.Serializable] public class Jump
-    {
-        public float JumpHeight;
-        public float TakeoffVelocity;
-
-        public float DownGravity;
-        public bool ReleasedJump;
-
-        public float TerminalVelocity;
-
-        public float BufferTime;
-        public float currentBufferTime;
-        public float CoyoteTime;
-        public float currentCoyoteTime;
-
-        public List<GameObject> touchedGrounds = new List<GameObject>();
-        public LayerMask GroundLayer;
-    }
-    public Jump jump;
-
-
-    private void OnEnable()
-    {
-        playerAct.Enable();
-    }
-    private void OnDisable()
-    {
-        playerAct.Disable();
-    }
-    void Awake()
-    {
-        rb2D = GetComponent<Rigidbody2D>();
-
-        inputActionAsset = GetComponent<PlayerInput>().actions;
-        playerAct = inputActionAsset.FindActionMap("Player");
-
-        isGrounded = true;
-    }
-    
-    void Update()
-    {
-        inputVector = playerAct.FindAction("Movement").ReadValue<Vector2>();
-        if (inputVector.x > -0.0001f && inputVector.x < 0.0001f)//校正搖桿只上下推時x軸會變成1.525879E-05的bug
-            inputVector.x = 0;
-
-        #region 跳躍
-        if (jump.currentCoyoteTime > 0 && !isGrounded)
-            jump.currentCoyoteTime = Mathf.Clamp(jump.currentCoyoteTime - Time.deltaTime, 0, jump.CoyoteTime);
-        if (jump.currentBufferTime > 0)
-            jump.currentBufferTime = Mathf.Clamp(jump.currentBufferTime - Time.deltaTime, 0, jump.BufferTime);
-
-        if (playerAct.FindAction("Jump").IsPressed()) 
-        {
-            jump.currentBufferTime = jump.BufferTime;
-        }
-        if (jump.currentBufferTime > 0 && (jump.currentCoyoteTime > 0 || isGrounded))
-        {
-            rb2D.velocity = new Vector3(rb2D.velocity.x, jump.TakeoffVelocity);
-            //isGrounded = true;
-            jump.currentBufferTime = 0;
-            jump.currentCoyoteTime = 0;
-        }
-
-        if (playerAct.FindAction("Jump").WasPressedThisFrame())
-            jump.ReleasedJump = false;
-        if (playerAct.FindAction("Jump").WasReleasedThisFrame())
-            jump.ReleasedJump = true;
-
-        #endregion
-    }
-
-    private void FixedUpdate()
-    {
-        float horizontalVelocity = 0;
-        if (inputVector.x == 0)
-        {
-            //先把rb2D.velocity.x取絕對值做正數計算後再乘上rb2D.velocity.x原本的正負，這樣做負數計算不會出bug
-            horizontalVelocity = Sign(rb2D.velocity.x) * Mathf.Clamp(Mathf.Abs(rb2D.velocity.x) - horizontalMovement.Deceleration * Time.deltaTime, 0, horizontalMovement.MaxSpeed);
-        }
-        else if (inputVector.x != 0 && rb2D.velocity.x != 0 && Sign(inputVector.x) != Sign(rb2D.velocity.x)) //輸入方向 不等於 腳色正在移動的方向
-        {
-            horizontalVelocity = Sign(rb2D.velocity.x) * Mathf.Clamp(Mathf.Abs(rb2D.velocity.x) - horizontalMovement.TurnAcceleration * Time.deltaTime, 0, horizontalMovement.MaxSpeed);
-        }
-        else //輸入方向 等於 腳色正在移動的方向
-        {
-            horizontalVelocity = Mathf.Clamp(rb2D.velocity.x + Sign(inputVector.x) * horizontalMovement.Acceleration * Time.deltaTime, -horizontalMovement.MaxSpeed, horizontalMovement.MaxSpeed);
-        }
-
-        float verticalVelocity = rb2D.velocity.y + Physics2D.gravity.y * Time.deltaTime;
-        if (rb2D.velocity.y <= jump.TerminalVelocity)
-            verticalVelocity = jump.TerminalVelocity;
-        else if (rb2D.velocity.y > 0 && jump.ReleasedJump)
-            verticalVelocity += jump.DownGravity * Time.deltaTime;
-
-        rb2D.velocity = new Vector3(horizontalVelocity, verticalVelocity);
-    }
-
-    static float Sign(float number)
-    {
-        return number < 0 ? -1 : (number > 0 ? 1 : 0);
-    }
-
-    #region child trigger
-
-    #endregion
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (1 << collision.gameObject.layer == jump.GroundLayer.value && collision.contacts[0].normal == Vector2.up)
-        {
-            if (!jump.touchedGrounds.Contains(collision.gameObject))
-                jump.touchedGrounds.Add(collision.gameObject);
-
-            isGrounded = true;
-            jump.currentCoyoteTime = jump.CoyoteTime;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (1 << collision.gameObject.layer == jump.GroundLayer.value && collision.contacts[0].normal == Vector2.up && rb2D.velocity.y == 0 && isGrounded == false)
-        {
-            if (!jump.touchedGrounds.Contains(collision.gameObject))
-                jump.touchedGrounds.Add(collision.gameObject);
-
-            isGrounded = true;
-            jump.currentCoyoteTime = jump.CoyoteTime;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (1 << collision.gameObject.layer == jump.GroundLayer.value)
-        {
-            jump.touchedGrounds.Remove(collision.gameObject);
-
-            if (jump.touchedGrounds.Count == 0)
-                isGrounded = false;
-        }
-    }
-
-
 
     public static PlayerMain i;
 
@@ -188,16 +30,26 @@ public class PlayerMain : Character
 
     public List<InputKey> RestrictInput = new List<InputKey>();
 
-    public Interacter MyInteracter;
+    //public Interacter MyInteracter;
 
     public GameObject Platform;
+
+    private void OnEnable()
+    {
+        playerAct.Enable();
+    }
+    private void OnDisable()
+    {
+        playerAct.Disable();
+    }
+
 
     public override void OnAwake()
     {
         base.OnAwake();
         i = this;
         isLocal = true;
-        MyInteracter = GetComponentInChildren<Interacter>();
+        //MyInteracter = GetComponentInChildren<Interacter>();
         Orb = GetComponent<OrbUser>();
         OrbUser.Local = Orb;
         //Swinger = GetComponent<PlayerSwing>();
@@ -206,17 +58,20 @@ public class PlayerMain : Character
         SilderHealth = GameObject.Find("HealthBar").GetComponent<Slider>();
         TextInput = GameObject.Find("Input").GetComponent<TextMeshProUGUI>();
         Application.targetFrameRate = 120;
+
+        inputActionAsset = GetComponent<PlayerInput>().actions;
+        playerAct = inputActionAsset.FindActionMap("Player");
     }
 
     private void Start()
     {
         OrbListDisplayer.i.Target = Orb;
-        Debug.Log(Input.GetJoystickNames().Length);
+        //Debug.Log(Input.GetJoystickNames().Length);
     }
 
     public override void ProcessInput()
     {
-        if (Inputs.Contains(InputKey.Skill))
+        if (Inputs.Contains(InputKey.Burst))
         {
             ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
             switch (InputUtli.GetHighestAxis(Xinput, Yinput))
@@ -238,7 +93,7 @@ public class PlayerMain : Character
             }
             Inputs.Clear();
         }
-        if (Inputs.Contains(InputKey.Dash))
+        if (Inputs.Contains(InputKey.Evade))
         {
             if (base.isActing && NowAction.Id != 4)
             {
@@ -270,26 +125,9 @@ public class PlayerMain : Character
         }
         if (!base.isActing)
         {
-            if (Inputs.Contains(InputKey.Attack) && CanAttack)
+            if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions[0u]);
-                Inputs.Clear();
-            }
-            else if (Inputs.Contains(InputKey.ExploreAction))
-            {
-                switch (InputUtli.GetHighestAxis(Xinput, Yinput))
-                {
-                    case InputKey.Up:
-                        Object.Instantiate(Platform, base.transform.position + Vector3Utli.CacuFacing(new Vector3(2.25f, 2.75f), Facing), Quaternion.identity);
-                        break;
-                    default:
-                        //Swinger.StartHook();
-                        break;
-                    case InputKey.Down:
-                    case InputKey.Left:
-                    case InputKey.Right:
-                        break;
-                }
                 Inputs.Clear();
             }
         }
@@ -334,7 +172,7 @@ public class PlayerMain : Character
     {
         TextMeshProUGUI textInput = TextInput;
         textInput.text = textInput.text + _actionBaseObj.AnimationKey + " > ";
-        Swinger.CutHook();
+        //Swinger.CutHook();
         base.StartAction(_actionBaseObj);
         if (_actionBaseObj.Id == 0)
         {
@@ -361,7 +199,7 @@ public class PlayerMain : Character
         bool result = false;
         foreach (ActionLink link in NowAction.Links)
         {
-            if ((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || Input.GetAxis("Vertical") > 0.35f) && Inputs.Contains(link.Key1))
+            if ((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1))
             {
                 StartAction(ActionLoader.i.Actions[link.LinkAcionId]);
                 result = true;
@@ -380,10 +218,10 @@ public class PlayerMain : Character
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (DialogHandler.i.isDialoging)
-        {
-            return;
-        }
+        //if (DialogHandler.i.isDialoging)
+        //{
+        //    return;
+        //}
         if (!CanDash && !base.isActing)
         {
             CanDash = base.isGround;
@@ -392,36 +230,32 @@ public class PlayerMain : Character
         {
             CanAttack = base.isGround;
         }
-        KeyJump = Input.GetButton("Jump");
+        KeyJump = playerAct.FindAction("Jump").IsPressed();
         bool flag = Ani.GetCurrentAnimatorStateInfo(0).IsTag("Immobile");
-        if (Input.GetButtonDown("Jump") && !flag)
+        if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
         {
             KeyJumpJust = true;
         }
-        Xinput = (flag ? 0f : Input.GetAxis("Horizontal"));
-        Yinput = Input.GetAxis("Vertical");
-        Orb.Drive = Input.GetButton("Drive");
-        if (Input.GetButton("Attack"))
+        Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
+        Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
+        Orb.Drive = playerAct.FindAction("Gun").IsPressed();//////////////////////////////////////////////////////////改按鍵
+        if (playerAct.FindAction("Claw").IsPressed())
         {
-            bool buttonDown = Input.GetButtonDown("Attack");
-            if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)
-            {
-                TryInput(InputKey.Attack);
-            }
+            //bool buttonDown = Input.GetButtonDown("Attack");
+            //if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)
+            //{
+                TryInput(InputKey.Claw);
+            //}
         }
-        if (Input.GetButtonDown("Evade"))
+        if (playerAct.FindAction("Evade").WasPressedThisFrame())
         {
-            TryInput(InputKey.Dash);
+            TryInput(InputKey.Evade);
         }
-        if (Input.GetButtonDown("Skill"))
+        if (playerAct.FindAction("Burst").WasPressedThisFrame())
         {
-            TryInput(InputKey.Skill);
+            TryInput(InputKey.Burst);
         }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            TryInput(InputKey.ExploreAction);
-        }
-        Charging = Input.GetButton("Skill");
+        Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
         {
             ActionLinkTime.maxValue = NowAction.LinkKey;
@@ -438,7 +272,7 @@ public class PlayerMain : Character
     {
         if (collision.CompareTag("Lava"))
         {
-            RoomManager.i.TeleportToSafePoint();
+            //RoomManager.i.TeleportToSafePoint();
         }
     }
 

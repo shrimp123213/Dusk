@@ -44,13 +44,49 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Claw"",
+                    ""type"": ""Button"",
+                    ""id"": ""bad91b9b-2b30-4cf7-b2e5-0da475cd8537"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Burst"",
+                    ""type"": ""Button"",
+                    ""id"": ""33707063-bb7f-43a3-9ba4-fc6637d09c16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gun"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e4750b0-ffb2-417e-9f72-97579b409077"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Evade"",
+                    ""type"": ""Button"",
+                    ""id"": ""168a1565-04b6-43fe-961d-008bfcbf5e98"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""4020355a-61dd-48db-89ac-066f275a89d7"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -83,7 +119,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""a208d535-0bfa-42f8-bfb2-508286623831"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -94,7 +130,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""93fd7902-3a50-4a4b-882a-c970d30168e2"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -105,7 +141,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""f36c70b0-e444-4af6-843b-f95502950332"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -116,7 +152,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""7821c189-dede-40b1-ad72-0292915d4f1b"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -143,6 +179,94 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07b80046-039f-4499-b5e2-cfa0f42f37e4"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Claw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8992447b-e0cf-4302-888a-9218094d189b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Claw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34909993-a2db-404a-954b-9a9775ebad55"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Burst"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2aeb0a4e-5131-472a-a216-7c795a19e33f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Burst"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e9a5312-952d-4f0c-b9f1-bd9afad8270e"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7586448f-c34d-4827-a8ee-358f8e7690f1"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Gun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2c8459e-5f25-4105-b7a8-2a0f7b6d9c2e"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Evade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""052bfdd9-0f8d-427f-9dd8-c6173cb55ca6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Evade"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -178,6 +302,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Claw = m_Player.FindAction("Claw", throwIfNotFound: true);
+        m_Player_Burst = m_Player.FindAction("Burst", throwIfNotFound: true);
+        m_Player_Gun = m_Player.FindAction("Gun", throwIfNotFound: true);
+        m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -241,12 +369,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Claw;
+    private readonly InputAction m_Player_Burst;
+    private readonly InputAction m_Player_Gun;
+    private readonly InputAction m_Player_Evade;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Claw => m_Wrapper.m_Player_Claw;
+        public InputAction @Burst => m_Wrapper.m_Player_Burst;
+        public InputAction @Gun => m_Wrapper.m_Player_Gun;
+        public InputAction @Evade => m_Wrapper.m_Player_Evade;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -262,6 +398,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Claw.started += instance.OnClaw;
+            @Claw.performed += instance.OnClaw;
+            @Claw.canceled += instance.OnClaw;
+            @Burst.started += instance.OnBurst;
+            @Burst.performed += instance.OnBurst;
+            @Burst.canceled += instance.OnBurst;
+            @Gun.started += instance.OnGun;
+            @Gun.performed += instance.OnGun;
+            @Gun.canceled += instance.OnGun;
+            @Evade.started += instance.OnEvade;
+            @Evade.performed += instance.OnEvade;
+            @Evade.canceled += instance.OnEvade;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -272,6 +420,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Claw.started -= instance.OnClaw;
+            @Claw.performed -= instance.OnClaw;
+            @Claw.canceled -= instance.OnClaw;
+            @Burst.started -= instance.OnBurst;
+            @Burst.performed -= instance.OnBurst;
+            @Burst.canceled -= instance.OnBurst;
+            @Gun.started -= instance.OnGun;
+            @Gun.performed -= instance.OnGun;
+            @Gun.canceled -= instance.OnGun;
+            @Evade.started -= instance.OnEvade;
+            @Evade.performed -= instance.OnEvade;
+            @Evade.canceled -= instance.OnEvade;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -311,5 +471,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnClaw(InputAction.CallbackContext context);
+        void OnBurst(InputAction.CallbackContext context);
+        void OnGun(InputAction.CallbackContext context);
+        void OnEvade(InputAction.CallbackContext context);
     }
 }
