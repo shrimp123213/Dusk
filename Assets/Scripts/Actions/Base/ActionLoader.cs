@@ -14,6 +14,7 @@ public class ActionLoader : MonoBehaviour
         foreach (ActionBaseObj actionBaseObj in array)
         {
             Actions.Add(actionBaseObj.Id, actionBaseObj);
+            Debug.Log("Add");
         }
     }
 }

@@ -22,7 +22,8 @@ public class OrbListDisplayer : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             Orbs.Add(Object.Instantiate(PrefabOrb, TransList).GetComponent<OrbInUI>());
-            Orbs[i].transform.SetAsFirstSibling();
+            Orbs[i].transform.SetAsLastSibling();
+            Orbs[i].GetComponent<RectTransform>().localPosition = new Vector3(i * PrefabOrb.GetComponent<RectTransform>().rect.width, 0, 0);
         }
     }
 

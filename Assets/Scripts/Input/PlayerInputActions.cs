@@ -80,6 +80,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hint_Energy"",
+                    ""type"": ""Button"",
+                    ""id"": ""930899f4-a025-443c-ad48-7165bc0430f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -269,6 +278,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Evade"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec2fdd6c-1ab8-4954-8fda-4e4e636cec4f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Hint_Energy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -306,6 +326,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Burst = m_Player.FindAction("Burst", throwIfNotFound: true);
         m_Player_Gun = m_Player.FindAction("Gun", throwIfNotFound: true);
         m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
+        m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -373,6 +394,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Burst;
     private readonly InputAction m_Player_Gun;
     private readonly InputAction m_Player_Evade;
+    private readonly InputAction m_Player_Hint_Energy;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -383,6 +405,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Burst => m_Wrapper.m_Player_Burst;
         public InputAction @Gun => m_Wrapper.m_Player_Gun;
         public InputAction @Evade => m_Wrapper.m_Player_Evade;
+        public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +433,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Evade.started += instance.OnEvade;
             @Evade.performed += instance.OnEvade;
             @Evade.canceled += instance.OnEvade;
+            @Hint_Energy.started += instance.OnHint_Energy;
+            @Hint_Energy.performed += instance.OnHint_Energy;
+            @Hint_Energy.canceled += instance.OnHint_Energy;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -432,6 +458,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Evade.started -= instance.OnEvade;
             @Evade.performed -= instance.OnEvade;
             @Evade.canceled -= instance.OnEvade;
+            @Hint_Energy.started -= instance.OnHint_Energy;
+            @Hint_Energy.performed -= instance.OnHint_Energy;
+            @Hint_Energy.canceled -= instance.OnHint_Energy;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -475,5 +504,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnBurst(InputAction.CallbackContext context);
         void OnGun(InputAction.CallbackContext context);
         void OnEvade(InputAction.CallbackContext context);
+        void OnHint_Energy(InputAction.CallbackContext context);
     }
 }

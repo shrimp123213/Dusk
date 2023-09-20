@@ -27,7 +27,8 @@ public class OrbInUI : MonoBehaviour
             if (!Setted)
             {
                 Setted = true;
-                ImgBack.color = Color.clear;
+                //ImgBack.color = Color.clear;
+                ImgBack.color = new Color(0.125f, 0.125f, 0.5f, 0.5f);
                 ImgFront.color = Color.clear;
                 ImgFront.fillAmount = 0f;
                 Amount = 0f;
@@ -41,8 +42,8 @@ public class OrbInUI : MonoBehaviour
             ImgFront.fillAmount = Amount;
             if (!isDrive)
             {
-                ImgBack.color = new Color(0.405f, 0.405f, 0.405f, 0.5f + Amount * 0.5f);
-                ImgFront.color = new Color(1f, 0.841f, 0.599f, 0.25f + Amount * 0.75f);
+                ImgBack.color = new Color(0.125f, 0.125f, .85f, 0.5f + Amount * 0.5f);
+                ImgFront.color = new Color(1f, 1f, 1f, 0.25f + Amount * 0.75f);
             }
             else
             {

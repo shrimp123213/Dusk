@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using System;
+using System.ComponentModel;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -125,11 +126,12 @@ public class Character : MonoBehaviour, IHitable
         }
     }
 
-    public bool isOnSlope
+    public bool isOnSlope//////////////////////////§P©w«Ý§ï¶i
     {
         get
         {
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(base.transform.position, -Vector2.up, 1f, LayerMask.GetMask("Ground"));
+            BoxCollider2D component = GetComponent<BoxCollider2D>();
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(base.transform.position, -Vector2.up, component.bounds.extents.y + 1f, LayerMask.GetMask("Ground"));
             if (raycastHit2D.collider != null && Mathf.Abs(raycastHit2D.normal.x) > 0.05f)
             {
                 return true;
@@ -148,7 +150,7 @@ public class Character : MonoBehaviour, IHitable
     public virtual void OnAwake()
     {
         Rigid = GetComponent<Rigidbody2D>();
-        Ani = GetComponent<Animator>();
+        Ani = GetComponentInChildren<Animator>();
         Player = GetComponent<PlayerMain>();
         HitEffect = GetComponent<HitEffector>();
         HitEffect.CallAwake(Ani);
@@ -301,10 +303,10 @@ public class Character : MonoBehaviour, IHitable
 
     public void Move()
     {
-        if ((bool)Player /*&& Player.Swinger.isSwinging*/)
-        {
-            return;
-        }
+        //if ((bool)Player && Player.Swinger.isSwinging)
+        //{
+        //    return;
+        //}
         if (OnLadder)
         {
             LadderMove();
@@ -348,6 +350,7 @@ public class Character : MonoBehaviour, IHitable
         if ((bool)Player)
         {
             Ani.SetBool("Moving", value);
+            Ani.SetBool("Jumping", !isGround);
         }
         if (KeyJumpJust)
         {
@@ -367,14 +370,17 @@ public class Character : MonoBehaviour, IHitable
         if (Rigid.velocity.y < 0f)
         {
             velocity.y = Physics2D.gravity.y * vector.x * 5.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
+            Ani.SetFloat("VelocityY", velocity.y);
         }
         else if (Rigid.velocity.y > 0f && KeyJump && CanLongJump)
         {
             velocity.y = Physics2D.gravity.y * vector.y * 2.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
+            Ani.SetFloat("VelocityY", velocity.y);
         }
         else if (Rigid.velocity.y > 0f)
         {
             velocity.y = Physics2D.gravity.y * vector.y * 5.5f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
+            Ani.SetFloat("VelocityY", velocity.y);
         }
         if (num == 0 || LowGravityTime > 0f)
         {
@@ -481,7 +487,7 @@ public class Character : MonoBehaviour, IHitable
         base.gameObject.layer = 9;
         for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
         {
-            UnityEngine.Object.Instantiate(GeneralPrefabSO.i.P_HealthShard, base.transform.position + new Vector3(0f, 1.25f), Quaternion.identity);
+            //UnityEngine.Object.Instantiate(GeneralPrefabSO.i.P_HealthShard, base.transform.position + new Vector3(0f, 1.25f), Quaternion.identity);
         }
         base.gameObject.SetActive(value: false);
     }

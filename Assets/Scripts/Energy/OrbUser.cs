@@ -8,7 +8,7 @@ public class OrbUser : MonoBehaviour
 
     public int OrbCount;
 
-    public int OrbMax = 3;
+    public int OrbMax = 5;
 
     public bool Drive;
 
@@ -54,9 +54,9 @@ public class OrbUser : MonoBehaviour
 
     public void CheckSpin()
     {
-        if (OrbSpinner.i.CurrentCount != OrbCount)
-        {
-            OrbSpinner.i.SetOrb(OrbCount);
-        }
+        //if (OrbSpinner.i.CurrentCount != OrbCount)
+        //{
+        //    OrbSpinner.i.SetOrb(OrbCount);
+        //}
     }
 }

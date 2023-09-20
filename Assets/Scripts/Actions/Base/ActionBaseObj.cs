@@ -123,7 +123,16 @@ public class ActionBaseObj : ScriptableObject
                 continue;
             }
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
-            Collider2D[] array = Physics2D.OverlapCircleAll(_m.transform.position + vector, attackSpot.Range, LayerMask.GetMask("Character"));
+            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, LayerMask.GetMask("Character"));
+            Vector2 debugVector = _m.transform.position + vector;
+            Vector2 topRight = attackSpot.Range / 2;
+            Vector2 topLeft = new Vector2(-attackSpot.Range.x, attackSpot.Range.y) / 2;
+            Vector2 bottomRight = new Vector2(attackSpot.Range.x, -attackSpot.Range.y) / 2;
+            Vector2 bottomLeft = -attackSpot.Range / 2;
+            Debug.DrawLine(debugVector + topRight, debugVector + topLeft);
+            Debug.DrawLine(debugVector + topRight, debugVector + bottomRight);
+            Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft);
+            Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft);
             foreach (Collider2D collider2D in array)
             {
                 if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(collider2D.gameObject, _m.NowAction.HitMax))
@@ -135,7 +144,7 @@ public class ActionBaseObj : ScriptableObject
                 if (num)
                 {
                     _m.AttackLand();
-                    CameraManager.i.GenerateImpulse(DamageRatio);
+                    //CameraManager.i.GenerateImpulse(DamageRatio);
                     if (collider2D.CompareTag("Breakable"))
                     {
                         return;
@@ -199,7 +208,7 @@ public class AttackTiming
 
     public Vector3 Offset;
 
-    public float Range;
+    public Vector2 Range;
 }
 
 

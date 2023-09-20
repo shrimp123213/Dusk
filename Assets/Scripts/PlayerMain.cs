@@ -127,7 +127,7 @@ public class PlayerMain : Character
         {
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
-                StartAction(ActionLoader.i.Actions[0u]);
+                StartAction(ActionLoader.i.Actions[1u]);
                 Inputs.Clear();
             }
         }
@@ -238,7 +238,7 @@ public class PlayerMain : Character
         }
         Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
         Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
-        Orb.Drive = playerAct.FindAction("Gun").IsPressed();//////////////////////////////////////////////////////////§ï«öÁä
+        Orb.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
         if (playerAct.FindAction("Claw").IsPressed())
         {
             //bool buttonDown = Input.GetButtonDown("Attack");
