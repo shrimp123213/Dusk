@@ -10,32 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
-  m_Name: X1
+  m_Name: Claw1
   m_EditorClassIdentifier: 
-  Id: 1
-  DisplayName: X1
-  AnimationKey: X1
+  Id: Claw1
+  DisplayName: Claw1
+  AnimationKey: Claw1
   InterruptLevel: 0
   InterruptSameLevel: 0
   Clip: {fileID: 7400000, guid: 8a89520483116f94c900e7c218c936cc, type: 2}
-  DamageRatio: 1
+  DamageRatio: 0
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 4
     KeyFrameEnd: 12
-    Offset: {x: 0.6, y: 0.15, z: 0}
-    Range: {x: 1, y: 0.5}
+    Offset: {x: 0.7, y: 0.15, z: 0}
+    Range: {x: 1.2, y: 0.5}
   HitMax: 1
   SuckEffect: 0
-  LinkKey: 2
-  Links: []
+  Links:
+  - Frame: 17
+    LifeTime: 0
+    Key1: 7
+    KeyArrow: 0
+    LinkAcionId: Burst1
+    CanChangeFace: 0
+    PreviousId: 
+  - Frame: 17
+    LifeTime: 0
+    Key1: 8
+    KeyArrow: 0
+    LinkAcionId: Gun1
+    CanChangeFace: 0
+    PreviousId: 
+  - Frame: 17
+    LifeTime: 0
+    Key1: 6
+    KeyArrow: 0
+    LinkAcionId: Claw2
+    CanChangeFace: 0
+    PreviousId: 
   Moves: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedOnFacing: 1
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 0
-  OrbRecovery: 0
-  EndActionFloatTime: 0
+  OrbRecovery: 1
+  EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1

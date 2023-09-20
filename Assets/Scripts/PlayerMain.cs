@@ -71,31 +71,31 @@ public class PlayerMain : Character
 
     public override void ProcessInput()
     {
-        if (Inputs.Contains(InputKey.Burst))
-        {
-            ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
-            switch (InputUtli.GetHighestAxis(Xinput, Yinput))
-            {
-                case InputKey.Left:
-                case InputKey.Right:
-                    actionBaseObj = ActionLoader.i.Actions[102u];
-                    break;
-                case InputKey.Down:
-                    actionBaseObj = ActionLoader.i.Actions[103u];
-                    break;
-                case InputKey.Up:
-                    actionBaseObj = ActionLoader.i.Actions[104u];
-                    break;
-            }
-            if (TryCastAction(actionBaseObj))
-            {
-                StartAction(actionBaseObj);
-            }
-            Inputs.Clear();
-        }
+        //if (Inputs.Contains(InputKey.Burst))
+        //{
+        //    ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
+        //    switch (InputUtli.GetHighestAxis(Xinput, Yinput))
+        //    {
+        //        case InputKey.Left:
+        //        case InputKey.Right:
+        //            actionBaseObj = ActionLoader.i.Actions[102u];
+        //            break;
+        //        case InputKey.Down:
+        //            actionBaseObj = ActionLoader.i.Actions[103u];
+        //            break;
+        //        case InputKey.Up:
+        //            actionBaseObj = ActionLoader.i.Actions[104u];
+        //            break;
+        //    }
+        //    if (TryCastAction(actionBaseObj))
+        //    {
+        //        StartAction(actionBaseObj);
+        //    }
+        //    Inputs.Clear();
+        //}
         if (Inputs.Contains(InputKey.Evade))
         {
-            if (base.isActing && NowAction.Id != 4)
+            if (base.isActing && NowAction.Id != "Evade")
             {
                 if (Orb.OrbCount > 0)
                 {
@@ -103,7 +103,7 @@ public class PlayerMain : Character
                     {
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
-                    StartAction(ActionLoader.i.Actions[4u]);
+                    StartAction(ActionLoader.i.Actions["Evade"]);
                     Orb.Consume();
                     CanDash = false;
                     Inputs.Clear();
@@ -118,7 +118,7 @@ public class PlayerMain : Character
             {
                 CanDash = false;
                 CanAttack = true;
-                StartAction(ActionLoader.i.Actions[4u]);
+                StartAction(ActionLoader.i.Actions["Evade"]);
                 Inputs.Clear();
                 return;
             }
@@ -127,7 +127,14 @@ public class PlayerMain : Character
         {
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
-                StartAction(ActionLoader.i.Actions[1u]);
+                StartAction(ActionLoader.i.Actions["Claw1"]);
+                Inputs.Clear();
+            }
+            if (Inputs.Contains(InputKey.Gun) && CanAttack)
+            {
+                if (TryCastAction(ActionLoader.i.Actions["Gun1"]))
+                    StartAction(ActionLoader.i.Actions["Gun1"]);
+
                 Inputs.Clear();
             }
         }
@@ -146,24 +153,26 @@ public class PlayerMain : Character
         }
     }
 
-    public override bool TryCastAction(ActionBaseObj _actionBaseObj)
+    public override bool TryCastAction(ActionBaseObj _actionBaseObj, bool isShowMessage = true)
     {
         Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
         if (flag && _actionBaseObj.OrbCost > 0f && Orb.TotalOrb < _actionBaseObj.OrbCost)
         {
             flag = false;
-            SkillPopup.i.ShowMessage("動力不足 !");
+            if (isShowMessage)
+                SkillPopup.i.ShowMessage("No Energy !");
         }
-        if (flag && base.isActing)
-        {
-            flag = (_actionBaseObj.InterruptSameLevel ? (NowAction.InterruptLevel <= _actionBaseObj.InterruptLevel) : (NowAction.InterruptLevel < _actionBaseObj.InterruptLevel));
-            Debug.Log("Action Interrupt " + flag);
-        }
+        //if (flag && base.isActing)
+        //{
+        //    flag = (_actionBaseObj.InterruptSameLevel ? (NowAction.InterruptLevel <= _actionBaseObj.InterruptLevel) : (NowAction.InterruptLevel < _actionBaseObj.InterruptLevel));
+        //    Debug.Log("Action Interrupt " + flag);
+        //}
         if (flag && _actionBaseObj.GroundOnly && !base.isGround)
         {
             flag = false;
-            SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName + "只能在地面使用 !");
+            if (isShowMessage)
+                SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName + "只能在地面使用 !");
         }
         return flag;
     }
@@ -174,10 +183,10 @@ public class PlayerMain : Character
         textInput.text = textInput.text + _actionBaseObj.AnimationKey + " > ";
         //Swinger.CutHook();
         base.StartAction(_actionBaseObj);
-        if (_actionBaseObj.Id == 0)
-        {
-            CanAttack = false;
-        }
+        //if (_actionBaseObj.Id == 0)
+        //{
+        //    CanAttack = false;
+        //}
         Orb.Consume(_actionBaseObj.OrbCost);
     }
 
@@ -194,13 +203,18 @@ public class PlayerMain : Character
         }
     }
 
-    public override bool TryLink()
+    public override bool TryLink(string _Id)
     {
         bool result = false;
         foreach (ActionLink link in NowAction.Links)
         {
+            if (link.PreviousId != "" && link.PreviousId != _Id)
+                continue;
             if ((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1))
             {
+                if (!TryCastAction(ActionLoader.i.Actions[link.LinkAcionId], false))
+                    continue;
+
                 StartAction(ActionLoader.i.Actions[link.LinkAcionId]);
                 result = true;
                 Inputs.Clear();
@@ -208,7 +222,7 @@ public class PlayerMain : Character
                 {
                     Facing = ((Xinput > 0f) ? 1 : (-1));
                 }
-                AerutaDebug.i.CallEffect(1);
+                //AerutaDebug.i.CallEffect(1);
                 break;
             }
         }
@@ -239,7 +253,7 @@ public class PlayerMain : Character
         Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
         Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
         Orb.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
-        if (playerAct.FindAction("Claw").IsPressed())
+        if (playerAct.FindAction("Claw").WasPressedThisFrame())
         {
             //bool buttonDown = Input.GetButtonDown("Attack");
             //if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)
@@ -255,11 +269,22 @@ public class PlayerMain : Character
         {
             TryInput(InputKey.Burst);
         }
+        if (playerAct.FindAction("Gun").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Gun);
+        }
         Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
         {
-            ActionLinkTime.maxValue = NowAction.LinkKey;
-            ActionLinkTime.value = ActionState.Frame;
+            if (NowAction.Links.Count <= 0)
+            {
+                ActionLinkTime.value = 0f;
+            }
+            else
+            {
+                ActionLinkTime.maxValue = ActionState.TotalFrame;// - NowAction.Links[0].Frame;
+                ActionLinkTime.value = ActionState.Frame;// - NowAction.Links[0].Frame;
+            }
         }
         else
         {
@@ -280,4 +305,5 @@ public class PlayerMain : Character
     {
         CanDash = true;
     }
+
 }

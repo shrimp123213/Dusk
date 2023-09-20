@@ -66,6 +66,8 @@ public class HitEffector : MonoBehaviour
             else if (HitStun <= 0f)
             {
                 TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
+                Ani.Play("Idle");
+                Ani.Update(0f);
             }
         }
         if (Main && TimeSlow > 0f)
