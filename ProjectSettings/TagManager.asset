@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
   - 
   - 
   - 
-  - 
+  - Velocity
   - 
   - 
   - 
@@ -43,4 +43,13 @@ TagManager:
     locked: 0
   - name: UIText
     uniqueID: 3974339295
+    locked: 0
+  - name: Back
+    uniqueID: 587311043
+    locked: 0
+  - name: Middle
+    uniqueID: 3424868055
+    locked: 0
+  - name: Front
+    uniqueID: 1938277311
     locked: 0
