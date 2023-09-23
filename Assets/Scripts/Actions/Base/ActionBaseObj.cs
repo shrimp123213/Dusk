@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
 {
-    public uint Id;
+    public string Id;
+
+    public string PreviousId;
 
     public string DisplayName;
 
@@ -30,9 +33,6 @@ public class ActionBaseObj : ScriptableObject
 
     [Header("攻擊成功時將空中的敵人往自己拉")]
     public bool SuckEffect;
-
-    [Header("連技判定時間點")]
-    public int LinkKey;
 
     [Header("連技")]
     public List<ActionLink> Links;
@@ -76,7 +76,7 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
-        _m.Ani.SetTrigger(AnimationKey);
+        _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
         if (TimeSlowAmount > 0f)
         {
@@ -139,7 +139,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.GetComponent<IHitable>().TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m);
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m);
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -166,16 +166,16 @@ public class ActionBaseObj : ScriptableObject
             }
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
-        if (!actionState.TryedLink && actionState.IsAfterFrame(_m.NowAction.LinkKey))
+        if (!actionState.Linked && _m.NowAction.Links.Count > 0 && actionState.IsAfterFrame(_m.NowAction.Links[0].Frame) && _m.StoredMoves.Count <= 0) 
         {
-            actionState.TryedLink = true;
-            actionState.Linked = _m.TryLink();
+            actionState.Linked = _m.TryLink(PreviousId);
         }
         if (actionState.ActionTime >= 1f && !actionState.Linked)
         {
             EndAction(_m);
             _m.NowAction = null;
-            _m.Ani.SetTrigger("Idle");
+            _m.Ani.Play("Idle");
+            _m.Ani.Update(0f);
             if (_m.Inputs.Contains(InputKey.Claw))
             {
                 _m.Inputs.Remove(InputKey.Claw);
@@ -215,11 +215,17 @@ public class AttackTiming
 [Serializable]
 public class ActionLink
 {
+    public int Frame;
+
+    public float LifeTime;
+
     public InputKey Key1;
 
     public InputKey KeyArrow;
 
-    public uint LinkAcionId;
+    public string LinkAcionId;
 
     public bool CanChangeFace;
+
+    public string PreviousId;
 }

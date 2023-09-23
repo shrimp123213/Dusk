@@ -118,10 +118,10 @@ public class Character : MonoBehaviour, IHitable
             RaycastHit2D raycastHit2D = Physics2D.BoxCast(component.bounds.center, component.size, 0f, Vector2.down, 0.015f, LayerMask.GetMask("Ground"));
             if ((bool)raycastHit2D)
             {
-                Debug.DrawLine(raycastHit2D.point, component.bounds.center, Color.green, 2f);
+                //Debug.DrawLine(raycastHit2D.point, component.bounds.center, Color.green, 2f);
                 return true;
             }
-            Debug.DrawLine(component.bounds.center, component.bounds.min + Vector3.down * 0.02f, Color.red, 2f);
+            //Debug.DrawLine(component.bounds.center, component.bounds.min + Vector3.down * 0.02f, Color.red, 2f);
             return false;
         }
     }
@@ -208,15 +208,18 @@ public class Character : MonoBehaviour, IHitable
         Inputs.Clear();
     }
 
-    public virtual bool TryCastAction(ActionBaseObj _actionBaseObj)
+    public virtual bool TryCastAction(ActionBaseObj _actionBaseObj, bool isShowMessage)
     {
         return true;
     }
 
     public virtual void StartAction(ActionBaseObj _actionBaseObj)
     {
+        string previousId = NowAction == null ? _actionBaseObj.Id == "Gun1" ? "" : _actionBaseObj.Id : NowAction.Id == "Gun1" ? NowAction.PreviousId : NowAction.Id;
+        Debug.Log(previousId);
         NowAction?.EndAction(this);
         NowAction = _actionBaseObj;
+        NowAction.PreviousId = previousId;
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
@@ -235,7 +238,7 @@ public class Character : MonoBehaviour, IHitable
         HitEffect.SetAttackStun();
     }
 
-    public virtual bool TryLink()
+    public virtual bool TryLink(string _Id)
     {
         return false;
     }
@@ -446,9 +449,9 @@ public class Character : MonoBehaviour, IHitable
                 return false;
             }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            DOTween.Sequence().Append(component.DOFade(0.75f, 0.1f)).Append(component.DOFade(1f, 0.15f));
-            DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
-            Debug.Log("Hit : " + base.gameObject.name);
+            //DOTween.Sequence().Append(component.DOFade(1.75f, 0.1f));//.Append(component.DOFade(1f, 0.15f));
+            //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
+            //Debug.Log("Hit : " + base.gameObject.name);
             LowGravityTime = 0.665f;
             HitEffect.SetHitStun();
             //if ((bool)AITree)
@@ -512,14 +515,15 @@ public class Character : MonoBehaviour, IHitable
             {
                 Airbrone = true;
             }
-            Debug.Log(string.Concat(Rigid.velocity, isActing.ToString()));
+            //Debug.Log(string.Concat(Rigid.velocity, isActing.ToString()));
         }
         isKnockback = true;
         CanLongJump = false;
         Rigid.drag = 0f;
         //if (!AITree)
         //{
-            Ani.SetTrigger("Attacked");
+            Ani.Play("Attacked");
+            Ani.Update(0f);
             HitEffect.SetTimeSlow(0.15f);
         //}
     }
