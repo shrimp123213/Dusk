@@ -123,7 +123,7 @@ public class ActionBaseObj : ScriptableObject
                 continue;
             }
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
-            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, LayerMask.GetMask("Character"));
+            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
             Vector2 debugVector = _m.transform.position + vector;
             Vector2 topRight = attackSpot.Range / 2;
             Vector2 topLeft = new Vector2(-attackSpot.Range.x, attackSpot.Range.y) / 2;
