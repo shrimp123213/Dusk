@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Claw2
   m_EditorClassIdentifier: 
   Id: Claw2
-  PreviousId: Gun1
+  PreviousId: Claw1
   DisplayName: Claw2
   AnimationKey: Claw2
   InterruptLevel: 0
@@ -31,13 +31,77 @@ MonoBehaviour:
   Links:
   - Frame: 32
     LifeTime: 0
+    Key1: 7
+    KeyArrow: 0
+    LinkAcionId: Burst2
+    CanChangeFace: 0
+    PreviousId: 
+  - Frame: 32
+    LifeTime: 0
     Key1: 8
     KeyArrow: 0
     LinkAcionId: Gun1
     CanChangeFace: 0
     PreviousId: 
-  Moves: []
-  ApplyForce: {x: 0, y: 0}
+  - Frame: 32
+    LifeTime: 0
+    Key1: 6
+    KeyArrow: 0
+    LinkAcionId: Claw3
+    CanChangeFace: 0
+    PreviousId: 
+  Moves:
+  - KeyFrame: 11
+    Power_ZTime: {x: 3, y: 0, z: 0.1}
+    XCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    YCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  ApplyForce: {x: 2, y: 0}
   ForceBasedOnFacing: 1
   UsePopup: 1
   TimeSlowAmount: 0

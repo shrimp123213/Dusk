@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Burst1
   m_EditorClassIdentifier: 
   Id: Burst1
+  PreviousId: Claw1
   DisplayName: Burst1
   AnimationKey: Burst1
   InterruptLevel: 0
@@ -24,7 +25,7 @@ MonoBehaviour:
   - KeyFrameFrom: 0
     KeyFrameEnd: 2
     Offset: {x: 0.7, y: 0, z: 0}
-    Range: {x: 1.2, y: 1}
+    Range: {x: 2, y: 1}
   HitMax: 1
   SuckEffect: 0
   Links:

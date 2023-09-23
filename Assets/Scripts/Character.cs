@@ -216,7 +216,7 @@ public class Character : MonoBehaviour, IHitable
     public virtual void StartAction(ActionBaseObj _actionBaseObj)
     {
         string previousId = NowAction == null ? _actionBaseObj.Id == "Gun1" ? "" : _actionBaseObj.Id : NowAction.Id == "Gun1" ? NowAction.PreviousId : NowAction.Id;
-        Debug.Log(previousId);
+        //Debug.Log(previousId);
         NowAction?.EndAction(this);
         NowAction = _actionBaseObj;
         NowAction.PreviousId = previousId;

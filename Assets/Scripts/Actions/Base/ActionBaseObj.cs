@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static FunkyCode.Light2D;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
@@ -158,20 +159,32 @@ public class ActionBaseObj : ScriptableObject
                     }
                     component.TakeForce(Vector3Utli.CacuFacing(_m.NowAction.ApplyForce, ForceBasedOnFacing ? Vector3Utli.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
                     _ = (component.transform.position - _m.transform.position).normalized;
-                    if (AnimationKey == "N3")
-                    {
-                        AerutaDebug.i.InsClap(component.transform.position + new Vector3(0f, 1.5f, 0f));
-                    }
                 }
             }
+        }
+        if (AnimationKey == "Claw4sp")
+        {
+            _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, -45f * _m.Facing);
+        }
+        if (AnimationKey == "Evade")
+        {
+            _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
         if (!actionState.Linked && _m.NowAction.Links.Count > 0 && actionState.IsAfterFrame(_m.NowAction.Links[0].Frame) && _m.StoredMoves.Count <= 0) 
         {
+            if (AnimationKey == "Claw4sp")
+            {
+                _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
+            }
             actionState.Linked = _m.TryLink(PreviousId);
         }
         if (actionState.ActionTime >= 1f && !actionState.Linked)
         {
+            if (AnimationKey == "Claw4sp")
+            {
+                _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
+            }
             EndAction(_m);
             _m.NowAction = null;
             _m.Ani.Play("Idle");

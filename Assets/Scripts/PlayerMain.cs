@@ -156,7 +156,7 @@ public class PlayerMain : Character
 
     public override bool TryCastAction(ActionBaseObj _actionBaseObj, bool isShowMessage = true)
     {
-        Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
+        //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
         if (flag && _actionBaseObj.OrbCost > 0f && Orb.TotalOrb < _actionBaseObj.OrbCost)
         {

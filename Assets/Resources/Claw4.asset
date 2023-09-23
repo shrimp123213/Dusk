@@ -10,79 +10,90 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
-  m_Name: Claw2sp
+  m_Name: Claw4
   m_EditorClassIdentifier: 
-  Id: Claw2sp
-  PreviousId: Burst1
-  DisplayName: Claw2sp
-  AnimationKey: Claw2sp
+  Id: Claw4
+  PreviousId: Claw3
+  DisplayName: Claw4
+  AnimationKey: Claw4
   InterruptLevel: 0
   InterruptSameLevel: 0
-  Clip: {fileID: 7400000, guid: 2eca5bae037e47b43a226007d5fd20cc, type: 2}
+  Clip: {fileID: 7400000, guid: 039876e7c2ac86e4589f99796fc9a012, type: 2}
   DamageRatio: 0
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 36
-    KeyFrameEnd: 54
-    Offset: {x: 1, y: 0.05, z: 0}
-    Range: {x: 2.5, y: 0.5}
+  - KeyFrameFrom: 11
+    KeyFrameEnd: 21
+    Offset: {x: 0.7, y: 0.15, z: 0}
+    Range: {x: 2.2, y: 0.5}
   HitMax: 1
   SuckEffect: 0
   Links:
-  - Frame: 56
+  - Frame: 32
     LifeTime: 0
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkAcionId: Burst4
     CanChangeFace: 0
     PreviousId: 
-  - Frame: 56
+  - Frame: 32
     LifeTime: 0
     Key1: 8
     KeyArrow: 0
     LinkAcionId: Gun1
     CanChangeFace: 0
     PreviousId: 
-  - Frame: 56
-    LifeTime: 0
-    Key1: 6
-    KeyArrow: 0
-    LinkAcionId: Claw3
-    CanChangeFace: 0
-    PreviousId: 
   Moves:
-  - KeyFrame: 36
-    Power_ZTime: {x: 42, y: 0, z: 0.4}
+  - KeyFrame: 11
+    Power_ZTime: {x: 3, y: 0, z: 0.1}
     XCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -2.8325496
-        outSlope: -2.8325496
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.040760867
+        inWeight: 0
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: -0.0023498535
-        inSlope: -0.07471288
-        outSlope: -0.07471288
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.107142866
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     YCurve:
       serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 0
-      m_PostInfinity: 0
-      m_RotationOrder: 0
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   ApplyForce: {x: 2, y: 0}
   ForceBasedOnFacing: 1
   UsePopup: 1
