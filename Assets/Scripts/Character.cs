@@ -31,7 +31,7 @@ public class Character : MonoBehaviour, IHitable
 
     public bool Charging;
 
-    public bool Airbrone;
+    public bool Airbrone;//被打飛到空中
 
     public bool isDead;
 
@@ -445,7 +445,7 @@ public class Character : MonoBehaviour, IHitable
         {
             if (Dodge)
             {
-                AerutaDebug.i.CallEffect(2);
+                //AerutaDebug.i.CallEffect(2);
                 return false;
             }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -505,7 +505,7 @@ public class Character : MonoBehaviour, IHitable
         {
             Rigid.velocity = Vector2.zero;
             Rigid.AddForce(new Vector2(_Force.x + _AddiForce.x, ((_Force.y == 0f) ? 3f : _Force.y) + _AddiForce.y) * Rigid.mass, ForceMode2D.Impulse);
-            AerutaDebug.i.CallEffect(0);
+            //AerutaDebug.i.CallEffect(0);
         }
         else
         {

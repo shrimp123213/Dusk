@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -250,7 +251,7 @@ public class PlayerMain : Character
         {
             KeyJumpJust = true;
         }
-        Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
+        Xinput = (flag || !TryCanForward() ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
         Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
         Orb.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
         if (playerAct.FindAction("Claw").WasPressedThisFrame())
@@ -306,4 +307,16 @@ public class PlayerMain : Character
         CanDash = true;
     }
 
+    public bool TryCanForward()
+    {
+        BoxCollider2D component = GetComponent<BoxCollider2D>();
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(component.bounds.center, Vector2.right * Facing, component.bounds.extents.x + .1f, LayerMask.GetMask("Character"));
+        if (raycastHit2D.collider != null && raycastHit2D.collider.IsTouching(component)) 
+        {
+            Debug.DrawLine(raycastHit2D.point, component.bounds.center, Color.red, 2f);
+            return false;
+        }
+        Debug.DrawLine(component.bounds.center, component.bounds.center + (component.bounds.extents.x + .1f) * Vector3.right * Facing, Color.green, 2f);
+        return true;
+    }
 }

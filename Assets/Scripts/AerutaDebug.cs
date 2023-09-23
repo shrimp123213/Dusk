@@ -16,7 +16,7 @@ public class AerutaDebug : MonoBehaviour
         i = this;
     }
 
-    public void CallEffect(int num)
+    public void CallEffect(int num)//顯示打中擊飛敵人、閃避成功等UI
     {
         if (Sequences[num] != null && Sequences[num].active)
         {
