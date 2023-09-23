@@ -5,7 +5,7 @@ public class ActionLoader : MonoBehaviour
 {
     public static ActionLoader i;
 
-    public Dictionary<uint, ActionBaseObj> Actions = new Dictionary<uint, ActionBaseObj>();
+    public Dictionary<string, ActionBaseObj> Actions = new Dictionary<string, ActionBaseObj>();
 
     private void Awake()
     {
@@ -14,7 +14,7 @@ public class ActionLoader : MonoBehaviour
         foreach (ActionBaseObj actionBaseObj in array)
         {
             Actions.Add(actionBaseObj.Id, actionBaseObj);
-            Debug.Log("Add");
+            //Debug.Log("Add");
         }
     }
 }
