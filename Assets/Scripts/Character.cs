@@ -216,7 +216,7 @@ public class Character : MonoBehaviour, IHitable
     public virtual void StartAction(ActionBaseObj _actionBaseObj)
     {
         string previousId = NowAction == null ? _actionBaseObj.Id == "Gun1" ? "" : _actionBaseObj.Id : NowAction.Id == "Gun1" ? NowAction.PreviousId : NowAction.Id;
-        Debug.Log(previousId);
+        //Debug.Log(previousId);
         NowAction?.EndAction(this);
         NowAction = _actionBaseObj;
         NowAction.PreviousId = previousId;
@@ -336,7 +336,7 @@ public class Character : MonoBehaviour, IHitable
         else if (Xinput != 0f && !Airbrone)
         {
             value = true;
-            velocity.x = Speed.Final * (float)num * num2 * SpeedFactor * ((Mathf.Abs(Xinput) > 0.25f) ? 1f : 0.5f) * (float)((Xinput > 0f) ? 1 : (-1));
+            velocity.x = Speed.Final * (float)num * num2 * TryIsNotBlockedByCharacter() * SpeedFactor * ((Mathf.Abs(Xinput) > 0.25f) ? 1f : 0.5f) * (float)((Xinput > 0f) ? 1 : (-1));
         }
         else
         {
@@ -531,6 +531,22 @@ public class Character : MonoBehaviour, IHitable
     public void ResumeAI()
     {
         //AITree.EnableBehavior();
+    }
+
+
+    public int TryIsNotBlockedByCharacter()
+    {
+        BoxCollider2D component = GetComponent<BoxCollider2D>();
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(component.bounds.center, Vector2.right * Facing, component.bounds.extents.x + .1f, LayerMask.GetMask("Character"));
+
+        if (raycastHit2D.collider != null) 
+        {
+            if (raycastHit2D.point.x >= raycastHit2D.collider.bounds.max.x || raycastHit2D.point.x <= raycastHit2D.collider.bounds.min.x)
+            {
+                return 0;
+            }
+        }
+        return 1;
     }
 }
 
