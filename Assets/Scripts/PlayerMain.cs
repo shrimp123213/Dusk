@@ -181,7 +181,9 @@ public class PlayerMain : Character
     public override void StartAction(ActionBaseObj _actionBaseObj)
     {
         TextMeshProUGUI textInput = TextInput;
-        textInput.text = textInput.text + _actionBaseObj.AnimationKey + " > ";
+        if ((_actionBaseObj.AnimationKey.Contains("Claw") || _actionBaseObj.AnimationKey.Contains("Burst")) && textInput.text != "")
+            textInput.text = textInput.text + "\n";
+        textInput.text = textInput.text + _actionBaseObj.AnimationKey + " -> ";
         //Swinger.CutHook();
         base.StartAction(_actionBaseObj);
         //if (_actionBaseObj.Id == 0)
@@ -269,6 +271,10 @@ public class PlayerMain : Character
         if (playerAct.FindAction("Burst").WasPressedThisFrame())
         {
             TryInput(InputKey.Burst);
+        }
+        if (playerAct.FindAction("Burst").WasReleasedThisFrame())
+        {
+            TryInput(InputKey.BurstRelease);
         }
         if (playerAct.FindAction("Gun").WasPressedThisFrame())
         {

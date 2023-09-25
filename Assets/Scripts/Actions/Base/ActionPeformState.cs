@@ -1,4 +1,5 @@
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class ActionPeformState
 {
@@ -55,6 +56,18 @@ public class ActionPeformState
     public bool IsAfterFrame(int _frame)
     {
         return (double)ActionTime > (double)_frame / (double)TotalFrame;
+    }
+
+    public bool IsInLifeTime(float _lifeTime)
+    {
+        if (_lifeTime == -1)
+        {
+            return true;
+        }
+        else
+        {
+            return ActionTime < _lifeTime;
+        }
     }
 
     public bool IsWithinFrame(int Start, int End)

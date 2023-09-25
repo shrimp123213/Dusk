@@ -9,4 +9,5 @@ public enum InputKey
     Claw,
     Burst,
     Gun,
+    BurstRelease,
 }

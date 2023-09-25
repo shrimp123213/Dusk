@@ -171,7 +171,7 @@ public class ActionBaseObj : ScriptableObject
             _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
-        if (!actionState.Linked && _m.NowAction.Links.Count > 0 && actionState.IsAfterFrame(_m.NowAction.Links[0].Frame) && _m.StoredMoves.Count <= 0) 
+        if (!actionState.Linked && _m.NowAction.Links.Count > 0 && actionState.IsAfterFrame(_m.NowAction.Links[0].Frame) && actionState.IsInLifeTime(_m.NowAction.Links[0].LifeTime) && _m.StoredMoves.Count <= 0) 
         {
             if (AnimationKey == "Claw4sp")
             {
@@ -230,7 +230,7 @@ public class ActionLink
 {
     public int Frame;
 
-    public float LifeTime;
+    public float LifeTime = -1;
 
     public InputKey Key1;
 

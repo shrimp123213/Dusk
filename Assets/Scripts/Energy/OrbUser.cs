@@ -18,7 +18,7 @@ public class OrbUser : MonoBehaviour
     {
         if (OrbCount < OrbMax)
         {
-            Add(Time.deltaTime * 0.05f);
+            Add(Time.deltaTime * 0.1f);
         }
     }
 

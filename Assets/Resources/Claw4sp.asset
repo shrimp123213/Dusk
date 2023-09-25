@@ -46,14 +46,14 @@ MonoBehaviour:
   SuckEffect: 0
   Links:
   - Frame: 56
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
     LinkAcionId: Burst4
     CanChangeFace: 0
     PreviousId: 
   - Frame: 56
-    LifeTime: 0
+    LifeTime: -1
     Key1: 8
     KeyArrow: 0
     LinkAcionId: Gun1
@@ -111,7 +111,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   ApplyForce: {x: 2, y: 0}
-  ForceBasedOnFacing: 1
+  ForceBasedOnFacing: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 0

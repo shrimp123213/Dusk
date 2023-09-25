@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Burst3
   m_EditorClassIdentifier: 
   Id: Burst3
-  PreviousId: Claw3
+  PreviousId: Claw3sp
   DisplayName: Burst3
   AnimationKey: Burst3
   InterruptLevel: 0
@@ -30,14 +30,14 @@ MonoBehaviour:
   SuckEffect: 0
   Links:
   - Frame: 42
-    LifeTime: 0
+    LifeTime: -1
     Key1: 8
     KeyArrow: 0
     LinkAcionId: Gun1
     CanChangeFace: 0
     PreviousId: 
   - Frame: 42
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
     LinkAcionId: Claw4sp
@@ -95,7 +95,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   ApplyForce: {x: 0, y: 0}
-  ForceBasedOnFacing: 1
+  ForceBasedOnFacing: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 1

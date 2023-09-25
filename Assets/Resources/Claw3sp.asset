@@ -34,21 +34,21 @@ MonoBehaviour:
   SuckEffect: 0
   Links:
   - Frame: 52
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
     LinkAcionId: Burst3
     CanChangeFace: 0
     PreviousId: 
   - Frame: 52
-    LifeTime: 0
+    LifeTime: -1
     Key1: 8
     KeyArrow: 0
     LinkAcionId: Gun1
     CanChangeFace: 0
     PreviousId: 
   - Frame: 52
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
     LinkAcionId: Claw4
@@ -97,7 +97,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   ApplyForce: {x: 1, y: 0}
-  ForceBasedOnFacing: 1
+  ForceBasedOnFacing: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 0
