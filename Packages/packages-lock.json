@@ -9,6 +9,31 @@
       },
       "hash": "5d5d2dab89b2455f0ae33b7e15b8628d1f583551"
     },
+    "com.esotericsoftware.spine.spine-csharp": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-csharp/src#4.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "64853b73bcbce53a1851b2b3b05ba8f5ab37e6d8"
+    },
+    "com.esotericsoftware.spine.spine-unity": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Assets/Spine#4.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.esotericsoftware.spine.spine-csharp": "4.1.0"
+      },
+      "hash": "64853b73bcbce53a1851b2b3b05ba8f5ab37e6d8"
+    },
+    "com.esotericsoftware.spine.urp-shaders": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.urp-shaders#4.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "7.1.5"
+      },
+      "hash": "64853b73bcbce53a1851b2b3b05ba8f5ab37e6d8"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.11",
       "depth": 1,
