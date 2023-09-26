@@ -58,7 +58,7 @@ public class ActionPeformState
         return (double)ActionTime > (double)_frame / (double)TotalFrame;
     }
 
-    public bool IsInLifeTime(float _lifeTime)
+    public virtual bool IsInLifeTime(int _frame, float _lifeTime)
     {
         if (_lifeTime == -1)
         {
@@ -66,7 +66,11 @@ public class ActionPeformState
         }
         else
         {
-            return ActionTime < _lifeTime;
+            Debug.Log(_frame);
+            Debug.Log(Frame);
+            Debug.Log(TotalFrame);
+            Debug.Log(Mathf.RoundToInt((float)TotalFrame * _lifeTime));
+            return IsWithinFrame(_frame, _frame + Mathf.RoundToInt((float)TotalFrame * _lifeTime));
         }
     }
 

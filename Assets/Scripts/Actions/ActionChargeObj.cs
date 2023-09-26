@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ActionCharge", menuName = "Actions/Charge")]
@@ -11,9 +12,11 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
     public float ChargeSuccessTime;
 
+    public bool ChargingStopMoving;
+
     public override bool Movable(Character _m)
     {
-        if (((ActionPeformStateCharge)_m.ActionState).Charging)
+        if (((ActionPeformStateCharge)_m.ActionState).Charging && !ChargingStopMoving)
         {
             return true;
         }
@@ -43,7 +46,6 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                 actionPeformStateCharge.Success = actionPeformStateCharge.ChargeAmount > ChargeSuccessTime;
                 if (actionPeformStateCharge.Success)
                 {
-
                     SkillCharge.i.SetAmount(0f);
                     _m.Ani.Play(AnimationKey);//©ñ¶}®É¼½BurstCharge1Success
                     _m.Ani.Update(0f);
@@ -52,25 +54,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                 }
                 else
                 {
-                    if (!actionPeformStateCharge.Linked && _m.NowAction.Links.Count > 0 && _m.StoredMoves.Count <= 0)
-                    {
-                        actionPeformStateCharge.Linked = _m.TryLink(PreviousId);
-                    }
-                    if (!actionPeformStateCharge.Linked)
-                    {
-                        EndAction(_m);
-                        _m.NowAction = null;
-                        _m.Ani.Play("Idle");
-                        _m.Ani.Update(0f);
-                        if (_m.Inputs.Contains(InputKey.Claw))
-                        {
-                            _m.Inputs.Remove(InputKey.Claw);
-                        }
-                        if ((bool)_m.TextInput)
-                        {
-                            _m.TextInput.text = "";
-                        }
-                    }
+                    _m.TryLink(PreviousId);
                 }
             }
             else
@@ -97,7 +81,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         }
         SkillCharge.i.SetText(DisplayName);
         SkillCharge.i.SetSuccessTime(ChargeSuccessTime);
-        Debug.Log("A ChargeAble Action Started !");
+        //Debug.Log("A ChargeAble Action Started !");
         return new ActionPeformStateCharge();
     }
 
@@ -130,4 +114,23 @@ public class ActionPeformStateCharge : ActionPeformState
     public float ChargeAmount;
 
     public bool Success;
+
+    public override bool IsInLifeTime(int _frame, float _lifeTime)
+    {
+        if (_lifeTime == -1)
+        {
+            return true;
+        }
+        else
+        {
+            float Start = (float)_frame / (float)TotalFrame;
+            float End = Start + _lifeTime;
+
+            if (ChargeAmount >= Start)
+            {
+                return ChargeAmount <= End;
+            }
+            return false;
+        }
+    }
 }

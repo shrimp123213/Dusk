@@ -30,12 +30,54 @@ MonoBehaviour:
   SuckEffect: 0
   Links:
   - Frame: 0
-    LifeTime: 0
+    LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
     LinkAcionId: Burst1
     CanChangeFace: 0
-    PreviousId: 
+    PreviousId: Claw1
+  - Frame: 0
+    LifeTime: 0.5
+    Key1: 9
+    KeyArrow: 0
+    LinkAcionId: Burst2
+    CanChangeFace: 0
+    PreviousId: Claw2
+  - Frame: 0
+    LifeTime: 0.5
+    Key1: 9
+    KeyArrow: 0
+    LinkAcionId: Burst2
+    CanChangeFace: 0
+    PreviousId: Claw2sp
+  - Frame: 0
+    LifeTime: 0.5
+    Key1: 9
+    KeyArrow: 0
+    LinkAcionId: Burst3
+    CanChangeFace: 0
+    PreviousId: Claw3
+  - Frame: 0
+    LifeTime: 0.5
+    Key1: 9
+    KeyArrow: 0
+    LinkAcionId: Burst3
+    CanChangeFace: 0
+    PreviousId: Claw3sp
+  - Frame: 0
+    LifeTime: 0.5
+    Key1: 9
+    KeyArrow: 0
+    LinkAcionId: Burst4
+    CanChangeFace: 0
+    PreviousId: Claw4
+  - Frame: 0
+    LifeTime: 0.5
+    Key1: 9
+    KeyArrow: 0
+    LinkAcionId: Burst4
+    CanChangeFace: 0
+    PreviousId: Claw4sp
   Moves:
   - KeyFrame: 36
     Power_ZTime: {x: 42, y: 0, z: 0.4}
@@ -73,8 +115,8 @@ MonoBehaviour:
   ForceBasedOnFacing: 0
   UsePopup: 1
   TimeSlowAmount: 0
-  OrbCost: 0
-  OrbRecovery: 1
+  OrbCost: 1
+  OrbRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1
@@ -82,3 +124,4 @@ MonoBehaviour:
   ExtendPreviousAnimation: 1
   ChargeSpeed: 1
   ChargeSuccessTime: 0.5
+  ChargingStopMoving: 1

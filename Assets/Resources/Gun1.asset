@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gun1
   m_EditorClassIdentifier: 
   Id: Gun1
-  PreviousId: Claw4
+  PreviousId: Burst2
   DisplayName: Gun1
   AnimationKey: Gun1
   InterruptLevel: 0
@@ -61,28 +61,28 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst4
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw4
   - Frame: 35
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst3
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw3
   - Frame: 35
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw2
   - Frame: 35
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst1
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw1
   - Frame: 35
@@ -110,21 +110,21 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw2sp
   - Frame: 35
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst3
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw3sp
   - Frame: 35
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst4
+    LinkAcionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw4sp
   - Frame: 35
