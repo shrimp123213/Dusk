@@ -33,14 +33,14 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: BurstCharge1
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: 
   - Frame: 32
     LifeTime: -1
     Key1: 8
     KeyArrow: 0
-    LinkAcionId: Gun1
+    LinkActionId: Gun1
     CanChangeFace: 0
     PreviousId: 
   Moves:
@@ -94,6 +94,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
   ApplyForce: {x: 2, y: 0}
   ForceBasedOnFacing: 0
   UsePopup: 1

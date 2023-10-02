@@ -223,7 +223,7 @@ public class Character : MonoBehaviour, IHitable
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
-        Debug.Log(ActionState.Clip.name);
+        //Debug.Log(ActionState.Clip.name);
         ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
         HurtBoxColor = new Color(UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f));
         NowAction.Init(this);
@@ -239,7 +239,7 @@ public class Character : MonoBehaviour, IHitable
         HitEffect.SetAttackStun();
     }
 
-    public virtual bool TryLink(string _Id)
+    public virtual bool TryLink(string _Id, bool _forceSuccess = false)
     {
         return false;
     }
@@ -446,7 +446,7 @@ public class Character : MonoBehaviour, IHitable
         {
             if (Dodge)
             {
-                //AerutaDebug.i.CallEffect(2);
+                OnDodge();
                 return false;
             }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -474,6 +474,13 @@ public class Character : MonoBehaviour, IHitable
             Dead();
         }
         return true;
+    }
+
+    public virtual void OnDodge()
+    {
+        
+
+        
     }
 
     public void SetAnimationIdle()

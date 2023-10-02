@@ -606,8 +606,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u9375\u76E4\u64CD\u4F5C\r\n\u79FB\u52D5 \u2191\u2193\u2190\u2192\r\n\u8DF3
-    Z\r\n\u8F15\u653B\u64CA X\r\n\u7279\u6B8A\u653B\u64CA C\r\n\u9060\u7A0B\u653B\u64CA
-    V\n\u9583\u907F Shift"
+    Space\n\u8F15\u653B\u64CA Z\n\u7279\u6B8A\u653B\u64CA X\n\u9060\u7A0B\u653B\u64CA
+    C\n\u9583\u907F Shift"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7725e38cfb786d44b911d3831ce69c2, type: 2}
   m_sharedMaterial: {fileID: 7855768936521019781, guid: c7725e38cfb786d44b911d3831ce69c2, type: 2}
@@ -3544,7 +3544,7 @@ MonoBehaviour:
   _Health: 100
   TextInput: {fileID: 0}
   TransSkillPopup: {fileID: 0}
-  HurtBoxColor: {r: 0, g: 0, b: 0, a: 0}
+  HurtBoxColor: {r: 1, g: 0, b: 0, a: 0}
   Player: {fileID: 0}
   MobId: 1
   OnLadder: 0

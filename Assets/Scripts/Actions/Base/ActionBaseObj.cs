@@ -56,6 +56,8 @@ public class ActionBaseObj : ScriptableObject
 
     public float OrbRecovery;
 
+    public float DodgeEnergyRecovery;
+
     public float EndActionFloatTime;
 
     public bool GroundOnly;
@@ -64,6 +66,24 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void Init(Character _m)
     {
+        foreach (ActionMovement movement in _m.NowAction.Moves) 
+        {
+            if (movement.CanEvade)
+            {
+                ActionPeformState actionState = _m.ActionState;
+
+                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame;
+                float Duration = 0;
+                if (movement.EndEvadeFrame == -1)
+                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                else
+                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+
+                var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
+                Afterimage.SetValue(StartDelay, Duration);
+
+            }
+        }
     }
 
     public virtual bool Movable(Character _m)
@@ -116,6 +136,15 @@ public class ActionBaseObj : ScriptableObject
         if (!actionState.CanDoThingsThisUpdate())
         {
             return;
+        }
+        _m.Dodge = false;
+        foreach (ActionMovement movement in _m.NowAction.Moves)
+        {
+            if (movement.CanEvade && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
+            {
+                _m.Dodge = true;
+                break;
+            }
         }
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
         {
@@ -236,7 +265,7 @@ public class ActionLink
 
     public InputKey KeyArrow;
 
-    public string LinkAcionId;
+    public string LinkActionId;
 
     public bool CanChangeFace;
 

@@ -154,6 +154,16 @@ public class PlayerMain : Character
         }
     }
 
+    public override void OnDodge()
+    {
+        base.OnDodge();
+        AerutaDebug.i.CallEffect(2);
+        if (base.isActing)
+        {
+            Orb.Add(NowAction.DodgeEnergyRecovery);
+        }
+    }
+
     public override bool TryCastAction(ActionBaseObj _actionBaseObj, bool isShowMessage = true)
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
@@ -206,19 +216,19 @@ public class PlayerMain : Character
         }
     }
 
-    public override bool TryLink(string _Id)
+    public override bool TryLink(string _Id, bool _forceSuccess)
     {
         bool result = false;
         foreach (ActionLink link in NowAction.Links)
         {
             if (link.PreviousId != "" && link.PreviousId != _Id)
                 continue;
-            if ((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1))
+            if (((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1)) || _forceSuccess)
             {
-                if (!TryCastAction(ActionLoader.i.Actions[link.LinkAcionId], false))
+                if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
                     continue;
 
-                StartAction(ActionLoader.i.Actions[link.LinkAcionId]);
+                StartAction(ActionLoader.i.Actions[link.LinkActionId]);
                 result = true;
                 Inputs.Clear();
                 if (link.CanChangeFace && Xinput != 0f)

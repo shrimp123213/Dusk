@@ -54,7 +54,13 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                 }
                 else
                 {
-                    _m.TryLink(PreviousId);
+                    foreach (InputKey inputKey in _m.Inputs)
+                    {
+                        Debug.Log(inputKey);
+                    }
+
+                    Debug.Log(_m.TryLink(PreviousId, true));
+
                 }
             }
             else
@@ -99,6 +105,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
     public override void Init(Character _m)
     {
+        base.Init(_m);
     }
 }
 

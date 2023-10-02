@@ -33,49 +33,49 @@ MonoBehaviour:
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst1
+    LinkActionId: Burst1
     CanChangeFace: 0
     PreviousId: Claw1
   - Frame: 0
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkActionId: Burst2
     CanChangeFace: 0
     PreviousId: Claw2
   - Frame: 0
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkActionId: Burst2
     CanChangeFace: 0
     PreviousId: Claw2sp
   - Frame: 0
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst3
+    LinkActionId: Burst3
     CanChangeFace: 0
     PreviousId: Claw3
   - Frame: 0
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst3
+    LinkActionId: Burst3
     CanChangeFace: 0
     PreviousId: Claw3sp
   - Frame: 0
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst4
+    LinkActionId: Burst4
     CanChangeFace: 0
     PreviousId: Claw4
   - Frame: 0
     LifeTime: 0.5
     Key1: 9
     KeyArrow: 0
-    LinkAcionId: Burst4
+    LinkActionId: Burst4
     CanChangeFace: 0
     PreviousId: Claw4sp
   Moves:
@@ -111,6 +111,9 @@ MonoBehaviour:
       m_PreInfinity: 0
       m_PostInfinity: 0
       m_RotationOrder: 4
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
   ApplyForce: {x: 2, y: 0}
   ForceBasedOnFacing: 0
   UsePopup: 1

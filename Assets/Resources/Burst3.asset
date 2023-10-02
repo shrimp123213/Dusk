@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Burst3
   m_EditorClassIdentifier: 
   Id: Burst3
-  PreviousId: Claw3
+  PreviousId: BurstCharge1
   DisplayName: Burst3
   AnimationKey: Burst3
   InterruptLevel: 0
@@ -33,14 +33,14 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 8
     KeyArrow: 0
-    LinkAcionId: Gun1
+    LinkActionId: Gun1
     CanChangeFace: 0
     PreviousId: 
   - Frame: 42
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw4sp
+    LinkActionId: Claw4sp
     CanChangeFace: 0
     PreviousId: 
   Moves:
@@ -94,12 +94,16 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    CanEvade: 1
+    StartEvadeFrame: 0
+    EndEvadeFrame: 10
   ApplyForce: {x: 0, y: 0}
   ForceBasedOnFacing: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 0
   OrbRecovery: 0
+  DodgeEnergyRecovery: 3
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1
