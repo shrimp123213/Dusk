@@ -25,9 +25,9 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys:
-    - rid: 4662663828374028289
-  viewPosition: {x: 534, y: 129, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+    - rid: 4662663857265967108
+  viewPosition: {x: 456, y: -57, z: 0}
+  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
   references:
     version: 2
     RefIds:
@@ -49,20 +49,13 @@ MonoBehaviour:
         restartOnSuccess: 1
         restartOnFailure: 0
         maxRepeats: 0
-    - rid: 4662663828374028289
-      type: {class: Vector2Key, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
-      data:
-        name: Position
-        typeName: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-          PublicKeyToken=null
-        value: {x: 0, y: 0}
     - rid: 4662663828374028291
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
         guid: e4ec5554bf7035049857f8f6cd3d0dcb
-        position: {x: 180, y: 450}
+        position: {x: 165, y: 480}
         blackboard:
           keys: []
         description: 
@@ -97,8 +90,6 @@ MonoBehaviour:
         children:
         - rid: 4662663828374028298
         - rid: 4662663828374028293
-        - rid: 4662663828374028291
-        - rid: 4662663828374028301
     - rid: 4662663828374028298
       type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
       data:
@@ -114,30 +105,10 @@ MonoBehaviour:
           reference:
             rid: -2
           defaultValue: 5
-        stoppingDistance:
+        target:
           reference:
-            rid: -2
-          defaultValue: 0.1
-        updateRotation:
-          reference:
-            rid: -2
-          defaultValue: 1
-        acceleration:
-          reference:
-            rid: -2
-          defaultValue: 40
-        tolerance:
-          reference:
-            rid: -2
-          defaultValue: 1
-        targetPosition:
-          reference:
-            rid: -2
-          defaultValue: {x: 4.6, y: -4.12}
-        moveTime:
-          reference:
-            rid: -2
-          defaultValue: 3
+            rid: 4662663857265967108
+          defaultValue: {fileID: 0}
     - rid: 4662663828374028301
       type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
       data:
@@ -153,30 +124,17 @@ MonoBehaviour:
           reference:
             rid: -2
           defaultValue: 5
-        stoppingDistance:
+        target:
           reference:
-            rid: -2
-          defaultValue: 0.1
-        updateRotation:
-          reference:
-            rid: -2
-          defaultValue: 1
-        acceleration:
-          reference:
-            rid: -2
-          defaultValue: 40
-        tolerance:
-          reference:
-            rid: -2
-          defaultValue: 1
-        targetPosition:
-          reference:
-            rid: -2
-          defaultValue: {x: -4.6, y: 4.12}
-        moveTime:
-          reference:
-            rid: -2
-          defaultValue: 3
+            rid: 4662663857265967108
+          defaultValue: {fileID: 0}
+    - rid: 4662663857265967108
+      type: {class: GameObjectKey, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        name: Target
+        typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        value: {fileID: 0}
     - rid: 7110276235211046912
       type: {class: RootNode, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
