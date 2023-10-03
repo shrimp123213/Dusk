@@ -363,10 +363,10 @@ AnimatorStateMachine:
     m_Position: {x: -410, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9056798786961323678}
-    m_Position: {x: -200, y: 180, z: 0}
+    m_Position: {x: 380, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3233928920940640817}
-    m_Position: {x: -200, y: 230, z: 0}
+    m_Position: {x: 380, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3934212693110878011}
     m_Position: {x: -620, y: 230, z: 0}
@@ -375,7 +375,7 @@ AnimatorStateMachine:
     m_Position: {x: -620, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1794627791265360978}
-    m_Position: {x: -200, y: 130, z: 0}
+    m_Position: {x: 380, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -515816495111300266}
     m_Position: {x: -620, y: 280, z: 0}
@@ -397,6 +397,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 8468581698760786548}
     m_Position: {x: -620, y: 480, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2872940319140280515}
+    m_Position: {x: 380, y: 90, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 287274246980710156}
+    m_Position: {x: 380, y: -110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -689,6 +695,32 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1102 &287274246980710156
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Heal
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 19a0367e28b6ebe428b26c94c7656c25, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &503930822698953434
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -767,6 +799,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 02db1ac98512f4544a4bc485ee69d49d, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &2872940319140280515
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BurstCharge1Success
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 1d645fe04d25ac345adea044fe22d480, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

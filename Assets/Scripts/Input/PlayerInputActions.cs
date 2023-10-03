@@ -89,6 +89,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""5746ea40-fe5c-4d35-b832-fa38699c3b0b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Hint_Energy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb08016e-3e2a-4fc2-8e43-a6a773d87bf7"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bde867f2-a7b9-405c-81ee-03777d07c28c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -327,6 +358,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Gun = m_Player.FindAction("Gun", throwIfNotFound: true);
         m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
+        m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -395,6 +427,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Gun;
     private readonly InputAction m_Player_Evade;
     private readonly InputAction m_Player_Hint_Energy;
+    private readonly InputAction m_Player_Heal;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -406,6 +439,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Gun => m_Wrapper.m_Player_Gun;
         public InputAction @Evade => m_Wrapper.m_Player_Evade;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
+        public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,6 +470,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Hint_Energy.started += instance.OnHint_Energy;
             @Hint_Energy.performed += instance.OnHint_Energy;
             @Hint_Energy.canceled += instance.OnHint_Energy;
+            @Heal.started += instance.OnHeal;
+            @Heal.performed += instance.OnHeal;
+            @Heal.canceled += instance.OnHeal;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -461,6 +498,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Hint_Energy.started -= instance.OnHint_Energy;
             @Hint_Energy.performed -= instance.OnHint_Energy;
             @Hint_Energy.canceled -= instance.OnHint_Energy;
+            @Heal.started -= instance.OnHeal;
+            @Heal.performed -= instance.OnHeal;
+            @Heal.canceled -= instance.OnHeal;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -505,5 +545,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnGun(InputAction.CallbackContext context);
         void OnEvade(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
+        void OnHeal(InputAction.CallbackContext context);
     }
 }

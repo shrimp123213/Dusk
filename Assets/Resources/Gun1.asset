@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gun1
   m_EditorClassIdentifier: 
   Id: Gun1
-  PreviousId: Claw4sp
+  PreviousId: Burst2
   DisplayName: Gun1
   AnimationKey: Gun1
   InterruptLevel: 0
@@ -30,120 +30,120 @@ MonoBehaviour:
   SuckEffect: 0
   Links:
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 8
     KeyArrow: 0
-    LinkAcionId: Gun1
+    LinkActionId: Gun1
     CanChangeFace: 0
     PreviousId: 
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw4
+    LinkActionId: Claw4
     CanChangeFace: 0
     PreviousId: Claw3
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw3
+    LinkActionId: Claw3
     CanChangeFace: 0
     PreviousId: Claw2
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw2
+    LinkActionId: Claw2
     CanChangeFace: 0
     PreviousId: Claw1
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst4
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw4
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst3
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw3
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw2
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst1
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw1
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw2sp
+    LinkActionId: Claw2sp
     CanChangeFace: 0
     PreviousId: Burst1
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw3sp
+    LinkActionId: Claw3sp
     CanChangeFace: 0
     PreviousId: Burst2
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw4sp
+    LinkActionId: Claw4sp
     CanChangeFace: 0
     PreviousId: Burst3
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst2
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw2sp
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst3
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw3sp
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 7
     KeyArrow: 0
-    LinkAcionId: Burst4
+    LinkActionId: BurstCharge1
     CanChangeFace: 0
     PreviousId: Claw4sp
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw3
+    LinkActionId: Claw3
     CanChangeFace: 0
     PreviousId: Claw2sp
   - Frame: 35
-    LifeTime: 0
+    LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkAcionId: Claw4
+    LinkActionId: Claw4
     CanChangeFace: 0
     PreviousId: Claw3sp
   Moves: []
   ApplyForce: {x: 0, y: 0}
-  ForceBasedOnFacing: 1
+  ForceBasedOnFacing: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 1

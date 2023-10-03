@@ -138,6 +138,12 @@ public class PlayerMain : Character
 
                 Inputs.Clear();
             }
+            if (Inputs.Contains(InputKey.Heal))
+            {
+                if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                    StartAction(ActionLoader.i.Actions["Heal"]);
+                Inputs.Clear();
+            }
         }
         //if (Swinger.isSwinging && KeyJumpJust)
         //{
@@ -151,6 +157,16 @@ public class PlayerMain : Character
         if (base.isActing)
         {
             Orb.Add(NowAction.OrbRecovery);
+        }
+    }
+
+    public override void OnEvading()
+    {
+        base.OnEvading();
+        AerutaDebug.i.CallEffect(2);
+        if (base.isActing)
+        {
+            Orb.Add(NowAction.EvadeEnergyRecovery);
         }
     }
 
@@ -181,7 +197,9 @@ public class PlayerMain : Character
     public override void StartAction(ActionBaseObj _actionBaseObj)
     {
         TextMeshProUGUI textInput = TextInput;
-        textInput.text = textInput.text + _actionBaseObj.AnimationKey + " > ";
+        if ((_actionBaseObj.AnimationKey.Contains("Claw") || _actionBaseObj.AnimationKey.Contains("Burst")) && textInput.text != "")
+            textInput.text = textInput.text + "\n";
+        textInput.text = textInput.text + _actionBaseObj.AnimationKey + " -> ";
         //Swinger.CutHook();
         base.StartAction(_actionBaseObj);
         //if (_actionBaseObj.Id == 0)
@@ -204,19 +222,19 @@ public class PlayerMain : Character
         }
     }
 
-    public override bool TryLink(string _Id)
+    public override bool TryLink(string _Id, bool _forceSuccess)
     {
         bool result = false;
         foreach (ActionLink link in NowAction.Links)
         {
             if (link.PreviousId != "" && link.PreviousId != _Id)
                 continue;
-            if ((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1))
+            if (((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1)) || _forceSuccess)
             {
-                if (!TryCastAction(ActionLoader.i.Actions[link.LinkAcionId], false))
+                if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
                     continue;
 
-                StartAction(ActionLoader.i.Actions[link.LinkAcionId]);
+                StartAction(ActionLoader.i.Actions[link.LinkActionId]);
                 result = true;
                 Inputs.Clear();
                 if (link.CanChangeFace && Xinput != 0f)
@@ -273,6 +291,14 @@ public class PlayerMain : Character
         if (playerAct.FindAction("Gun").WasPressedThisFrame())
         {
             TryInput(InputKey.Gun);
+        }
+        if (playerAct.FindAction("Burst").WasReleasedThisFrame())
+        {
+            TryInput(InputKey.BurstRelease);
+        }
+        if (playerAct.FindAction("Heal").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Heal);
         }
         Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
