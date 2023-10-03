@@ -35,7 +35,7 @@ public class Character : MonoBehaviour, IHitable
 
     public bool isDead;
 
-    public bool Dodge;
+    public bool Evading;
 
     public bool CanLongJump;
 
@@ -444,9 +444,9 @@ public class Character : MonoBehaviour, IHitable
         }
         if (_damage.Type != DamageType.Heal)
         {
-            if (Dodge)
+            if (Evading)
             {
-                OnDodge();
+                OnEvading();
                 return false;
             }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -476,7 +476,7 @@ public class Character : MonoBehaviour, IHitable
         return true;
     }
 
-    public virtual void OnDodge()
+    public virtual void OnEvading()
     {
         
 

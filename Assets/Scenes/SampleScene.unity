@@ -470,7 +470,7 @@ MonoBehaviour:
   Charging: 0
   Airbrone: 0
   isDead: 0
-  Dodge: 0
+  Evading: 0
   CanLongJump: 0
   LowGravityTime: 0
   Inputs: 
@@ -607,7 +607,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u9375\u76E4\u64CD\u4F5C\r\n\u79FB\u52D5 \u2191\u2193\u2190\u2192\r\n\u8DF3
     Space\n\u8F15\u653B\u64CA Z\n\u7279\u6B8A\u653B\u64CA X\n\u9060\u7A0B\u653B\u64CA
-    C\n\u9583\u907F Shift"
+    C\n\u9583\u907F Shift\n\u56DE\u8840 V\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7725e38cfb786d44b911d3831ce69c2, type: 2}
   m_sharedMaterial: {fileID: 7855768936521019781, guid: c7725e38cfb786d44b911d3831ce69c2, type: 2}
@@ -1187,13 +1187,13 @@ MonoBehaviour:
   Charging: 0
   Airbrone: 0
   isDead: 0
-  Dodge: 0
+  Evading: 0
   CanLongJump: 0
   LowGravityTime: 0
   Inputs: 
   NowAction: {fileID: 0}
   HitEffect: {fileID: 467524512}
-  _Health: 100
+  _Health: 50
   TextInput: {fileID: 0}
   TransSkillPopup: {fileID: 0}
   HurtBoxColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1204,7 +1204,7 @@ MonoBehaviour:
   inputActionAsset: {fileID: -944628639613478452, guid: 566886060a401fb41bba845ef3148021, type: 3}
   Orb: {fileID: 0}
   CanAttack: 0
-  RestrictInput: 010000000200000003000000040000000500000006000000070000000800000009000000
+  RestrictInput: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   Platform: {fileID: 0}
 --- !u!61 &467524511
 BoxCollider2D:
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   Charging: 0
   Airbrone: 0
   isDead: 0
-  Dodge: 0
+  Evading: 0
   CanLongJump: 0
   LowGravityTime: 0
   Inputs: 
@@ -3535,7 +3535,7 @@ MonoBehaviour:
   Charging: 0
   Airbrone: 0
   isDead: 0
-  Dodge: 0
+  Evading: 0
   CanLongJump: 0
   LowGravityTime: 0
   Inputs: 
@@ -4156,7 +4156,7 @@ MonoBehaviour:
   Charging: 0
   Airbrone: 0
   isDead: 0
-  Dodge: 0
+  Evading: 0
   CanLongJump: 0
   LowGravityTime: 0
   Inputs: 
@@ -4269,7 +4269,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 200}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950514268
 MonoBehaviour:
@@ -4293,8 +4293,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c7725e38cfb786d44b911d3831ce69c2, type: 2}
+  m_sharedMaterial: {fileID: 7855768936521019781, guid: c7725e38cfb786d44b911d3831ce69c2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

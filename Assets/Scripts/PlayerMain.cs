@@ -138,6 +138,12 @@ public class PlayerMain : Character
 
                 Inputs.Clear();
             }
+            if (Inputs.Contains(InputKey.Heal))
+            {
+                if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                    StartAction(ActionLoader.i.Actions["Heal"]);
+                Inputs.Clear();
+            }
         }
         //if (Swinger.isSwinging && KeyJumpJust)
         //{
@@ -154,13 +160,13 @@ public class PlayerMain : Character
         }
     }
 
-    public override void OnDodge()
+    public override void OnEvading()
     {
-        base.OnDodge();
+        base.OnEvading();
         AerutaDebug.i.CallEffect(2);
         if (base.isActing)
         {
-            Orb.Add(NowAction.DodgeEnergyRecovery);
+            Orb.Add(NowAction.EvadeEnergyRecovery);
         }
     }
 
@@ -282,13 +288,17 @@ public class PlayerMain : Character
         {
             TryInput(InputKey.Burst);
         }
+        if (playerAct.FindAction("Gun").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Gun);
+        }
         if (playerAct.FindAction("Burst").WasReleasedThisFrame())
         {
             TryInput(InputKey.BurstRelease);
         }
-        if (playerAct.FindAction("Gun").WasPressedThisFrame())
+        if (playerAct.FindAction("Heal").WasPressedThisFrame())
         {
-            TryInput(InputKey.Gun);
+            TryInput(InputKey.Heal);
         }
         Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)

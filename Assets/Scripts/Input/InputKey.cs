@@ -10,4 +10,5 @@ public enum InputKey
     Burst,
     Gun,
     BurstRelease,
+    Heal,
 }

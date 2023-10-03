@@ -56,7 +56,7 @@ public class ActionBaseObj : ScriptableObject
 
     public float OrbRecovery;
 
-    public float DodgeEnergyRecovery;
+    public float EvadeEnergyRecovery;
 
     public float EndActionFloatTime;
 
@@ -80,7 +80,7 @@ public class ActionBaseObj : ScriptableObject
                     Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
-                Afterimage.SetValue(StartDelay, Duration);
+                Afterimage.SetLifeTime(StartDelay, Duration);
 
             }
         }
@@ -137,12 +137,12 @@ public class ActionBaseObj : ScriptableObject
         {
             return;
         }
-        _m.Dodge = false;
+        _m.Evading = false;
         foreach (ActionMovement movement in _m.NowAction.Moves)
         {
             if (movement.CanEvade && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
             {
-                _m.Dodge = true;
+                _m.Evading = true;
                 break;
             }
         }
