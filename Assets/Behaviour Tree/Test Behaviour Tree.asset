@@ -21,13 +21,15 @@ MonoBehaviour:
   - rid: 4662663828374028293
   - rid: 4662663828374028294
   - rid: 4662663828374028298
-  - rid: 4662663828374028301
+  - rid: 4662663871593185284
   treeState: 0
   blackboard:
     keys:
     - rid: 4662663857265967108
-  viewPosition: {x: 456, y: -57, z: 0}
-  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
+    - rid: 4662663895550263296
+    - rid: 4662663895550263300
+  viewPosition: {x: 620, y: 180, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -55,19 +57,19 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: e4ec5554bf7035049857f8f6cd3d0dcb
-        position: {x: 165, y: 480}
+        position: {x: 270, y: 450}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        duration: 2
+        duration: 1
     - rid: 4662663828374028293
       type: {class: Log, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
         guid: d821c054168f1284290ed5947ecf44fe
-        position: {x: -45, y: 450}
+        position: {x: -90, y: 450}
         blackboard:
           keys: []
         description: 
@@ -82,7 +84,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 9d213521a284d7949a298a47cf1291b8
-        position: {x: 0, y: 270}
+        position: {x: 0, y: 255}
         blackboard:
           keys: []
         description: 
@@ -90,40 +92,27 @@ MonoBehaviour:
         children:
         - rid: 4662663828374028298
         - rid: 4662663828374028293
+        - rid: 4662663871593185284
+        - rid: 4662663828374028291
     - rid: 4662663828374028298
       type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 854d29cb99b1fe244b68dfaa3c0a39ca
-        position: {x: -315, y: 450}
+        position: {x: -300, y: 450}
         blackboard:
           keys: []
         description: 
-        drawGizmos: 1
+        drawGizmos: 0
         speed:
           reference:
             rid: -2
           defaultValue: 5
-        target:
-          reference:
-            rid: 4662663857265967108
-          defaultValue: {fileID: 0}
-    - rid: 4662663828374028301
-      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 4b9ea5919ea05e544ab7f8fcfa66116a
-        position: {x: 375, y: 450}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        speed:
+        tolerance:
           reference:
             rid: -2
-          defaultValue: 5
+          defaultValue: 2
         target:
           reference:
             rid: 4662663857265967108
@@ -134,6 +123,37 @@ MonoBehaviour:
         name: Target
         typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
+        value: {fileID: 0}
+    - rid: 4662663871593185284
+      type: {class: Attack, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 23d5dd170b268c54eb23cd3907e7b9b5
+        position: {x: 90, y: 450}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        target:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 0}
+        character:
+          reference:
+            rid: 4662663895550263300
+          defaultValue: {fileID: 0}
+    - rid: 4662663895550263296
+      type: {class: FloatKey, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        name: MoveSpeed
+        typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        value: 0
+    - rid: 4662663895550263300
+      type: {class: MyTypeKey, ns: , asm: Assembly-CSharp}
+      data:
+        name: Character
+        typeName: Character, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         value: {fileID: 0}
     - rid: 7110276235211046912
       type: {class: RootNode, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
