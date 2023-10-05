@@ -22,14 +22,15 @@ MonoBehaviour:
   - rid: 4662663828374028294
   - rid: 4662663828374028298
   - rid: 4662663871593185284
+  - rid: 4662663903955124224
   treeState: 0
   blackboard:
     keys:
     - rid: 4662663857265967108
     - rid: 4662663895550263296
     - rid: 4662663895550263300
-  viewPosition: {x: 620, y: 180, z: 0}
-  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
+  viewPosition: {x: 568, y: 47, z: 0}
+  viewScale: {x: 0.8695652, y: 0.8695652, z: 1}
   references:
     version: 2
     RefIds:
@@ -57,7 +58,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: e4ec5554bf7035049857f8f6cd3d0dcb
-        position: {x: 270, y: 450}
+        position: {x: 330, y: 450}
         blackboard:
           keys: []
         description: 
@@ -69,7 +70,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: d821c054168f1284290ed5947ecf44fe
-        position: {x: -90, y: 450}
+        position: {x: -165, y: 450}
         blackboard:
           keys: []
         description: 
@@ -92,6 +93,7 @@ MonoBehaviour:
         children:
         - rid: 4662663828374028298
         - rid: 4662663828374028293
+        - rid: 4662663903955124224
         - rid: 4662663871593185284
         - rid: 4662663828374028291
     - rid: 4662663828374028298
@@ -100,7 +102,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 854d29cb99b1fe244b68dfaa3c0a39ca
-        position: {x: -300, y: 450}
+        position: {x: -360, y: 450}
         blackboard:
           keys: []
         description: 
@@ -112,10 +114,14 @@ MonoBehaviour:
         tolerance:
           reference:
             rid: -2
-          defaultValue: 2
+          defaultValue: 3
         target:
           reference:
             rid: 4662663857265967108
+          defaultValue: {fileID: 0}
+        character:
+          reference:
+            rid: 4662663895550263300
           defaultValue: {fileID: 0}
     - rid: 4662663857265967108
       type: {class: GameObjectKey, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -130,7 +136,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 23d5dd170b268c54eb23cd3907e7b9b5
-        position: {x: 90, y: 450}
+        position: {x: 165, y: 450}
         blackboard:
           keys: []
         description: 
@@ -155,6 +161,18 @@ MonoBehaviour:
         name: Character
         typeName: Character, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         value: {fileID: 0}
+    - rid: 4662663903955124224
+      type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 9f24658809c556843ac72ff14505d9ca
+        position: {x: 0, y: 450}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        duration: 0.5
     - rid: 7110276235211046912
       type: {class: RootNode, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
