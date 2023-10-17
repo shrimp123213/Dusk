@@ -17,7 +17,7 @@ MonoBehaviour:
     - name: Default
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      darknessColor: {r: 1, g: 1, b: 1, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -69,6 +69,9 @@ MonoBehaviour:
     colliderLayers:
       names:
       - Default
+      - Player
+      - Ground
+      - Object
     lightLayers:
       names:
       - Default
