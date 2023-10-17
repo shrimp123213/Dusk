@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 5873881658602080609}
   - component: {fileID: 5873881658602080610}
   - component: {fileID: 5873881658443173222}
-  - component: {fileID: 8328332286429011130}
   - component: {fileID: 6768760725032135442}
   - component: {fileID: 833617551161570874}
   m_Layer: 3
@@ -234,13 +233,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5783dbbad6a59184fa58aa75d79bcc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowType: 1
-  shadowLayer: 2
+  shadowType: 5
+  shadowLayer: 0
   shadowDistance: 0
   shadowDistanceMin: 0.5
   shadowDistanceMax: 1
   shadowTranslucency: 0
-  maskType: 1
+  maskType: 0
   maskLit: 0
   maskPivot: 0
   maskLayer: 1
@@ -255,28 +254,10 @@ MonoBehaviour:
     depth: 1
     spriteRenderer: {fileID: 0}
   mainShape:
-    shadowType: 1
-    maskType: 1
+    shadowType: 5
+    maskType: 0
     maskPivot: 0
     transform: {fileID: 5873881658602080615}
---- !u!114 &8328332286429011130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5873881658602080611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourTree: {fileID: 11400000, guid: df15d96b6f30dbe4caccdb4f261a270c, type: 2}
-  validate: 1
-  blackboardOverrides: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!50 &6768760725032135442
 Rigidbody2D:
   serializedVersion: 4

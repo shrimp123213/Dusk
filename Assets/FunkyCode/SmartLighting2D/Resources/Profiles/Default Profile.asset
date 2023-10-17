@@ -52,16 +52,16 @@ MonoBehaviour:
         - layerID: 0
   qualitySettings:
     lightTextureSize: 3
-    lightEffectTextureSize: 3
+    lightEffectTextureSize: 4
     lightFilterMode: 1
     lightmapFilterMode: 1
     updateMethod: 0
     coreAxis: 0
     projection: 0
   dayLightingSettings:
-    direction: 322
-    ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    height: 2.84
+    direction: 0
+    ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    height: 0.1
     bumpMap:
       height: 0.89
       strength: 1.55
