@@ -9,7 +9,7 @@ Shader "Emisstion"
 		_MainTex("MainTex", 2D) = "white" {}
 		_Emisstion("Emisstion", 2D) = "white" {}
 		[HDR]_Color0("Color 0", Color) = (0,1.488596,0.7976993,1)
-		_TextureSample0("Texture Sample 0", 2D) = "white" {}
+		_ToonTex("ToonTex", 2D) = "white" {}
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 		[HideInInspector][NoScaleOffset] unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
@@ -74,7 +74,7 @@ Shader "Emisstion"
 
 			sampler2D _MainTex;
 			sampler2D _Emisstion;
-			sampler2D _TextureSample0;
+			sampler2D _ToonTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _MainTex_ST;
 			float4 _Emisstion_ST;
@@ -156,7 +156,7 @@ Shader "Emisstion"
 				float4 temp_output_13_0 = ( tex2DNode10.r * _Color0 );
 				float2 texCoord21 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
 				
-				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _TextureSample0, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
+				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _ToonTex, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
 
 				#if ETC1_EXTERNAL_ALPHA
 					float4 alpha = SAMPLE_TEXTURE2D( _AlphaTex, sampler_AlphaTex, IN.texCoord0.xy );
@@ -224,7 +224,7 @@ Shader "Emisstion"
 
 			sampler2D _MainTex;
 			sampler2D _Emisstion;
-			sampler2D _TextureSample0;
+			sampler2D _ToonTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _MainTex_ST;
 			float4 _Emisstion_ST;
@@ -306,7 +306,7 @@ Shader "Emisstion"
 				float4 temp_output_13_0 = ( tex2DNode10.r * _Color0 );
 				float2 texCoord21 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
 				
-				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _TextureSample0, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
+				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _ToonTex, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
 
 				#if ETC1_EXTERNAL_ALPHA
 					float4 alpha = SAMPLE_TEXTURE2D( _AlphaTex, sampler_AlphaTex, IN.texCoord0.xy );
@@ -372,7 +372,7 @@ Shader "Emisstion"
 
 			sampler2D _MainTex;
 			sampler2D _Emisstion;
-			sampler2D _TextureSample0;
+			sampler2D _ToonTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _MainTex_ST;
 			float4 _Emisstion_ST;
@@ -440,7 +440,7 @@ Shader "Emisstion"
 				float4 temp_output_13_0 = ( tex2DNode10.r * _Color0 );
 				float2 texCoord21 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
 				
-				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _TextureSample0, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
+				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _ToonTex, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
 
 				half4 outColor = half4(_ObjectId, _PassValue, 1.0, 1.0);
 				return outColor;
@@ -486,7 +486,7 @@ Shader "Emisstion"
 
 			sampler2D _MainTex;
 			sampler2D _Emisstion;
-			sampler2D _TextureSample0;
+			sampler2D _ToonTex;
 			CBUFFER_START( UnityPerMaterial )
 			float4 _MainTex_ST;
 			float4 _Emisstion_ST;
@@ -552,7 +552,7 @@ Shader "Emisstion"
 				float4 temp_output_13_0 = ( tex2DNode10.r * _Color0 );
 				float2 texCoord21 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
 				
-				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _TextureSample0, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
+				float4 Color = ( ( tex2DNode9 * temp_output_13_0 * tex2D( _ToonTex, ( texCoord21 + float2( 0,0 ) ) ).r ) + ( tex2DNode9 * ( 1.0 - tex2DNode10.r ) ) );
 				half4 outColor = _SelectionID;
 				return outColor;
 			}
@@ -575,7 +575,6 @@ Node;AmplifyShaderEditor.ColorNode;12;-1129.167,412.035;Inherit;False;Property;_
 Node;AmplifyShaderEditor.SamplerNode;10;-1161.664,196.2352;Inherit;True;Property;_Emisstion;Emisstion;1;0;Create;True;0;0;0;False;0;False;-1;None;ab206efbeb764794c8573e50212259a7;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleAddOpNode;11;-319.2642,38.93518;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;32;-1318.125,613.5161;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.SamplerNode;34;-1191.371,589.0624;Inherit;True;Property;_TextureSample0;Texture Sample 0;3;0;Create;True;0;0;0;False;0;False;-1;fa8f740c24d491943963236b0fd76bf9;6428ca11361973c4583cd24eb6289993;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;31;-1491.693,711.6651;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.DynamicAppendNode;29;-1771.266,605.9508;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.Vector4Node;28;-1970.463,582.1693;Inherit;False;Constant;_Vector0;Vector 0;3;0;Create;True;0;0;0;False;0;False;2,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -589,10 +588,10 @@ Node;AmplifyShaderEditor.SimpleAddOpNode;42;-31.38927,433.8366;Inherit;True;2;2;
 Node;AmplifyShaderEditor.ColorNode;48;-702.5339,633.1594;Inherit;False;Constant;_Color1;Color 1;4;0;Create;True;0;0;0;False;0;False;1,1,1,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode;21;-1513.038,461.0889;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.Vector2Node;50;-1745.025,432.7449;Inherit;False;Constant;_Vector1;Vector 1;4;0;Create;True;0;0;0;False;0;False;1,1;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.SamplerNode;34;-1191.371,589.0624;Inherit;True;Property;_ToonTex;ToonTex;3;0;Create;True;0;0;0;False;0;False;-1;fa8f740c24d491943963236b0fd76bf9;6428ca11361973c4583cd24eb6289993;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 WireConnection;11;0;9;0
 WireConnection;11;1;13;0
 WireConnection;32;0;21;0
-WireConnection;34;1;32;0
 WireConnection;31;0;29;0
 WireConnection;31;1;30;2
 WireConnection;29;0;28;1
@@ -609,5 +608,6 @@ WireConnection;19;0;10;1
 WireConnection;42;0;35;0
 WireConnection;42;1;37;0
 WireConnection;21;0;50;0
+WireConnection;34;1;32;0
 ASEEND*/
-//CHKSM=0BC520979D9A664DA89CEBC5F3F234361ECD9558
+//CHKSM=2C8286DA66E56119FB6536134C1AC8E513825EA8
