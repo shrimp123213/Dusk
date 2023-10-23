@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: Enemy_Base
+  m_EditorClassIdentifier: 
+  rootNode:
+    rid: 4662664302398013442
+  nodes:
+  - rid: 4662664302398013442
+  - rid: 4662664302398013444
+  - rid: 4662664302398013445
+  - rid: 4662664302398013449
+  treeState: 0
+  blackboard:
+    keys:
+    - rid: 4662664302398013450
+    - rid: 4662664302398013452
+    - rid: -2
+  viewPosition: {x: 580, y: 81, z: 0}
+  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4662664302398013442
+      type: {class: RootNode, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 7e80d980-6e1a-46c5-826e-955024c0bd4c
+        position: {x: 0, y: 0}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 4662664302398013445
+    - rid: 4662664302398013444
+      type: {class: Selector, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 7050d0edad35c924ba0de72b528f155d
+        position: {x: 0, y: 210}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 4662664302398013449
+    - rid: 4662664302398013445
+      type: {class: Repeat, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 313f0543650823342a95637dfc0b5740
+        position: {x: 0, y: 105}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 4662664302398013444
+        restartOnSuccess: 1
+        restartOnFailure: 0
+        maxRepeats: 0
+    - rid: 4662664302398013449
+      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: adfbfe20563b54044bbfdc8a0939cd6f
+        position: {x: -465, y: 450}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        speed:
+          reference:
+            rid: -2
+          defaultValue: 5
+        tolerance:
+          reference:
+            rid: -2
+          defaultValue: 1
+        target:
+          reference:
+            rid: 4662664302398013450
+          defaultValue: {fileID: 0}
+        character:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 0}
+    - rid: 4662664302398013450
+      type: {class: GameObjectKey, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        name: Target
+        typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        value: {fileID: 0}
+    - rid: 4662664302398013452
+      type: {class: CharacterKey, ns: , asm: Assembly-CSharp}
+      data:
+        name: Character
+        typeName: Character, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        value: {fileID: 0}
