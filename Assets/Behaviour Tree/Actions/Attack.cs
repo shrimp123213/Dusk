@@ -6,9 +6,6 @@ using TheKiwiCoder;
 [System.Serializable]
 public class Attack : ActionNode
 {
-    [Tooltip("Target")]
-    public NodeProperty<GameObject> target = new NodeProperty<GameObject> { defaultValue = null };
-    
     [Tooltip("Character")]
     public NodeProperty<Character> character  = new NodeProperty<Character> { defaultValue = null };
     

@@ -23,13 +23,11 @@ public class MoveToPosition2D : ActionNode
     
     protected override void OnStart()
     {
-        Debug.Log("tracking");
         character.Value.Xinput = 0;
     }
 
     protected override void OnStop() {
         character.Value.Xinput = 0;
-        Debug.Log("catch");
     }
 
     protected override State OnUpdate() { //移動到目標位置
