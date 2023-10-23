@@ -15,7 +15,7 @@ public class CameraManager : MonoBehaviour
 
     public CinemachineVirtualCamera FocusVCam;
 
-    //public CustomConfiner MainVCamConfiner;
+    public CinemachineConfiner MainVCamConfiner;
 
     public CinemachineImpulseSource CinemachineImpulseSource;
 
