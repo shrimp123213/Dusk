@@ -544,15 +544,24 @@ public class Character : MonoBehaviour, IHitable
     public int TryIsNotBlockedByCharacter()
     {
         BoxCollider2D component = GetComponent<BoxCollider2D>();
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(component.bounds.center, Vector2.right * Facing, component.bounds.extents.x + .1f, LayerMask.GetMask("Character"));
+        RaycastHit2D[] raycastHit2D = Physics2D.RaycastAll(component.bounds.center, Vector2.right * Facing, component.bounds.extents.x + .1f, LayerMask.GetMask("Character"));
 
-        if (raycastHit2D.collider != null)
+        if (raycastHit2D.Length <= 1)//只有射到自己
+            return 1;
+
+        foreach (RaycastHit2D hit in raycastHit2D)
         {
-            if (raycastHit2D.point.x >= raycastHit2D.collider.bounds.max.x || raycastHit2D.point.x <= raycastHit2D.collider.bounds.min.x)
+            if (hit.collider.name != component.name)
             {
-                return 0;
+                if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
+                {
+                    Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
+                    return 0;
+                }
             }
         }
+        
+        Debug.DrawLine(component.bounds.center, component.bounds.center + (component.bounds.extents.x + .1f) * Vector3.right * Facing, Color.green, 2f);
         return 1;
     }
 }
