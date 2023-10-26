@@ -109,7 +109,7 @@ MonoBehaviour:
         drawGizmos: 0
         speed:
           reference:
-            rid: -2
+            rid: 4662663895550263300
           defaultValue: 5
         tolerance:
           reference:
@@ -121,7 +121,7 @@ MonoBehaviour:
           defaultValue: {fileID: 0}
         character:
           reference:
-            rid: 4662663895550263300
+            rid: -2
           defaultValue: {fileID: 0}
     - rid: 4662663857265967108
       type: {class: GameObjectKey, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -141,14 +141,14 @@ MonoBehaviour:
           keys: []
         description: 
         drawGizmos: 0
-        target:
-          reference:
-            rid: -2
-          defaultValue: {fileID: 0}
         character:
           reference:
             rid: 4662663895550263300
           defaultValue: {fileID: 0}
+        action:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 11400000, guid: 8015f208239bfd2489186bf45fc8d400, type: 2}
     - rid: 4662663895550263296
       type: {class: FloatKey, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:

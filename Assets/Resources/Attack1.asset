@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
-  m_Name: Claw1
+  m_Name: Attack1
   m_EditorClassIdentifier: 
-  Id: Claw1
-  PreviousId: Claw1
-  DisplayName: Claw1
-  AnimationKey: Claw1
+  Id: boss1-1_AKT_spur
+  PreviousId: boss1-1_AKT_spur
+  DisplayName: boss1-1_AKT_spur
+  AnimationKey: boss1-1_AKT_spur
   InterruptLevel: 0
   InterruptSameLevel: 0
-  Clip: {fileID: 7400000, guid: 8a89520483116f94c900e7c218c936cc, type: 2}
+  Clip: {fileID: 206176227058316164, guid: e5e11b53a5a8ece469bf3739c80b400f, type: 2}
   DamageRatio: 0
   DamageType: 0
   AttackSpots:
@@ -28,28 +28,7 @@ MonoBehaviour:
     Range: {x: 1.2, y: 0.5}
   HitMax: 1
   SuckEffect: 0
-  Links:
-  - Frame: 17
-    LifeTime: -1
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: BurstCharge1
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 17
-    LifeTime: -1
-    Key1: 8
-    KeyArrow: 0
-    LinkActionId: Gun1
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 17
-    LifeTime: -1
-    Key1: 6
-    KeyArrow: 0
-    LinkActionId: Claw2
-    CanChangeFace: 0
-    PreviousId: 
+  Links: []
   Moves: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedOnFacing: 0

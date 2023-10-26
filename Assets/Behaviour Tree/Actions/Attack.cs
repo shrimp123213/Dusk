@@ -16,6 +16,7 @@ public class Attack : ActionNode
     {
         Debug.Log("attack");   
         character.Value.StartAction(ActionLoader.i.Actions[action.Value.Id]);
+        
     }
     
 

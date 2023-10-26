@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static FunkyCode.Light2D;
+using Spine.Unity;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
@@ -13,7 +14,7 @@ public class ActionBaseObj : ScriptableObject
 
     public string DisplayName;
 
-    [Header("°Êµe")]
+    [Header("å‹•ç•«")]
     public string AnimationKey;
 
     public int InterruptLevel;
@@ -26,24 +27,24 @@ public class ActionBaseObj : ScriptableObject
 
     public DamageType DamageType;
 
-    [Header("§P©wÂI")]
+    [Header("åˆ¤å®šé»")]
     public List<AttackTiming> AttackSpots;
 
-    [Header("§ğÀ»¦¸¼Æ¤W­­")]
+    [Header("æ”»æ“Šæ¬¡æ•¸ä¸Šé™")]
     public int HitMax;
 
-    [Header("§ğÀ»¦¨¥\®É±NªÅ¤¤ªº¼Ä¤H©¹¦Û¤v©Ô")]
+    [Header("æ”»æ“ŠæˆåŠŸæ™‚å°‡ç©ºä¸­çš„æ•µäººå¾€è‡ªå·±æ‹‰")]
     public bool SuckEffect;
 
-    [Header("³s§Ş")]
+    [Header("é€£æŠ€")]
     public List<ActionLink> Links;
 
     [Space]
-    [Header("°Ê§@¹Lµ{ªº¦ì²¾")]
+    [Header("å‹•ä½œéç¨‹çš„ä½ç§»")]
     public List<ActionMovement> Moves;
 
     [Space]
-    [Header("§ğÀ»¦¨¥\®Éªş¥[¤O¹D")]
+    [Header("æ”»æ“ŠæˆåŠŸæ™‚é™„åŠ åŠ›é“")]
     public Vector2 ApplyForce;
 
     public bool ForceBasedOnFacing;

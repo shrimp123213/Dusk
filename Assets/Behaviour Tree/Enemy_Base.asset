@@ -23,13 +23,20 @@ MonoBehaviour:
   - rid: 4662664305554489356
   - rid: 4662664305554489358
   - rid: 4662664305554489359
-  - rid: 4662664305554489360
+  - rid: 4662664351577800704
+  - rid: 4662664370766217218
+  - rid: 4662664370766217220
+  - rid: 4662664370766217221
+  - rid: 4662664370766217222
+  - rid: 4662664370766217227
+  - rid: 4662664370766217228
+  - rid: 4662664370766217230
   treeState: 0
   blackboard:
     keys:
     - rid: 4662664305554489345
     - rid: 4662664305554489346
-  viewPosition: {x: 403, y: 4, z: 0}
+  viewPosition: {x: 258, y: -125, z: 0}
   viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
   references:
     version: 2
@@ -42,7 +49,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 359eba4d-a627-4660-a4f2-548f7c5afbe1
-        position: {x: 0, y: 0}
+        position: {x: 285, y: 0}
         blackboard:
           keys: []
         description: 
@@ -68,13 +75,13 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 123af70ada0cb544abf604fce687f01f
-        position: {x: 0, y: 105}
+        position: {x: 285, y: 105}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
         child:
-          rid: 4662664305554489356
+          rid: 4662664370766217230
         restartOnSuccess: 1
         restartOnFailure: 0
         maxRepeats: 0
@@ -84,7 +91,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a65e56f9b4c1e194d86094aa14c191a5
-        position: {x: -285, y: 375}
+        position: {x: 90, y: 525}
         blackboard:
           keys: []
         description: Trace
@@ -96,7 +103,7 @@ MonoBehaviour:
         tolerance:
           reference:
             rid: -2
-          defaultValue: 3
+          defaultValue: 5
         target:
           reference:
             rid: 4662664305554489345
@@ -111,7 +118,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: f7f615ec082e951488081ce2b913afd9
-        position: {x: 0, y: 630}
+        position: {x: 120, y: 765}
         blackboard:
           keys: []
         description: Claw1
@@ -130,26 +137,25 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a75c9912cfb24134e97460064a4ee77a
-        position: {x: -90, y: 375}
+        position: {x: -45, y: 765}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        duration: 1
+        duration: 0.5
     - rid: 4662664305554489356
       type: {class: Sequencer, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
         guid: 9d826f878b70d9d49b8fca30f8009f6b
-        position: {x: 0, y: 210}
+        position: {x: 285, y: 390}
         blackboard:
           keys: []
-        description: 
+        description: Claw1
         drawGizmos: 0
         children:
         - rid: 4662664305554489349
-        - rid: 4662664305554489355
         - rid: 4662664305554489358
     - rid: 4662664305554489358
       type: {class: Succeed, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -157,7 +163,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4891ac6a24dc14746b09333e49622d47
-        position: {x: 75, y: 375}
+        position: {x: 285, y: 525}
         blackboard:
           keys: []
         description: Traced
@@ -170,23 +176,137 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: cff83d7c9e84a204cacd9dc09e4836a1
-        position: {x: 75, y: 495}
+        position: {x: 285, y: 630}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
         children:
+        - rid: 4662664305554489355
         - rid: 4662664305554489354
-        - rid: 4662664305554489360
-    - rid: 4662664305554489360
+        - rid: 4662664351577800704
+    - rid: 4662664351577800704
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
-        guid: b65d8d11be880114abc1b16a19b47871
-        position: {x: 150, y: 630}
+        guid: ce2da4c59452fb748acc48f5b1d91213
+        position: {x: 285, y: 765}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
         duration: 1
+    - rid: 4662664370766217218
+      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 41be9c8830228ab4b96e980482f16dd8
+        position: {x: 570, y: 525}
+        blackboard:
+          keys: []
+        description: Trace
+        drawGizmos: 0
+        speed:
+          reference:
+            rid: -2
+          defaultValue: 5
+        tolerance:
+          reference:
+            rid: -2
+          defaultValue: 10
+        target:
+          reference:
+            rid: 4662664305554489345
+          defaultValue: {fileID: 0}
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+    - rid: 4662664370766217220
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 15052c1ce677d7b438968d5f6f6fa354
+        position: {x: 750, y: 390}
+        blackboard:
+          keys: []
+        description: Claw2sp
+        drawGizmos: 0
+        children:
+        - rid: 4662664370766217218
+        - rid: 4662664370766217222
+    - rid: 4662664370766217221
+      type: {class: Attack, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8437a9e68e4689e4db54ed1eb9aeeb05
+        position: {x: 585, y: 765}
+        blackboard:
+          keys: []
+        description: Claw2cp
+        drawGizmos: 0
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+        action:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 11400000, guid: 37fdf4d2fd90ce04783c70a578a398c5, type: 2}
+    - rid: 4662664370766217222
+      type: {class: Succeed, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 1a7247de050378440b42647d5e3eda5e
+        position: {x: 750, y: 525}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 4662664370766217227
+    - rid: 4662664370766217227
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: ab1459efc79525d4aad283a625fedb65
+        position: {x: 750, y: 630}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 4662664370766217221
+        - rid: 4662664370766217228
+    - rid: 4662664370766217228
+      type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: 0b74de4383ef9db43a90e3bc6b24dd30
+        position: {x: 750, y: 765}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        duration: 1
+    - rid: 4662664370766217230
+      type: {class: RandomSelector, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: e9da84092855ef4489211c4e3bbd1dc3
+        position: {x: 285, y: 240}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 4662664305554489356
+        - rid: 4662664370766217220
