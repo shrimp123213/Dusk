@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
@@ -26,6 +27,8 @@ public class ActionPeformState
     public int LastFrameVirtual = -1;
 
     public AnimationClip Clip;
+
+    public Spine.Animation AniAsset;
 
     public void SetTime(float _actionTime)
     {

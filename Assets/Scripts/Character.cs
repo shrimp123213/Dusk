@@ -6,11 +6,17 @@ using DG.Tweening;
 using TMPro;
 using System;
 using System.ComponentModel;
+using Spine.Unity;
 
 public class Character : MonoBehaviour, IHitable
 {
     [HideInInspector]
     public Animator Ani;
+
+    [HideInInspector]
+    public SkeletonAnimation SkeleAni;
+    [HideInInspector]
+    public Spine.AnimationState SkeleAniState;
 
     [HideInInspector]
     public Rigidbody2D Rigid;
@@ -150,10 +156,20 @@ public class Character : MonoBehaviour, IHitable
     public virtual void OnAwake()
     {
         Rigid = GetComponent<Rigidbody2D>();
-        Ani = GetComponentInChildren<Animator>();
         Player = GetComponent<PlayerMain>();
+        if ((bool)Player)
+            Ani = GetComponentInChildren<Animator>();
+        else
+        {
+            SkeleAni = GetComponent<SkeletonAnimation>();
+            SkeleAniState = SkeleAni.AnimationState;
+        }
+
         HitEffect = GetComponent<HitEffector>();
-        HitEffect.CallAwake(Ani);
+        if ((bool)Player)
+            HitEffect.CallAwake(Ani);
+        else
+            HitEffect.CallAwake(SkeleAniState);
         //AITree = GetComponent<BehaviorTree>();
         //if ((bool)AITree)
         //{
@@ -222,7 +238,10 @@ public class Character : MonoBehaviour, IHitable
         NowAction.PreviousId = previousId;
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
-        ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+        if ((bool)Player)
+            ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+        else
+            ActionState.AniAsset = SkeleAniState.GetCurrent(0).Animation;
         //Debug.Log(ActionState.Clip.name);
         ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
         HurtBoxColor = new Color(UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f));

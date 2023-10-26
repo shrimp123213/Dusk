@@ -20,8 +20,6 @@ public class ActionBaseObj : ScriptableObject
 
     public bool InterruptSameLevel;
 
-    public AnimationClip Clip;
-
     public float DamageRatio;
 
     public DamageType DamageType;
