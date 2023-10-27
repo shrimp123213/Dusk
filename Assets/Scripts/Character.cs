@@ -239,11 +239,16 @@ public class Character : MonoBehaviour, IHitable
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
         if ((bool)Player)
+        {
             ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+            ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
+        }
         else
+        {
             ActionState.AniAsset = SkeleAniState.GetCurrent(0).Animation;
+            ActionState.TotalFrame = Mathf.RoundToInt(ActionState.AniAsset.Duration);//////////////////////////////////////////////////////////////////
+        }
         //Debug.Log(ActionState.Clip.name);
-        ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
         HurtBoxColor = new Color(UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f));
         NowAction.Init(this);
         NowAction.Id = _actionBaseObj.Id;
@@ -393,17 +398,27 @@ public class Character : MonoBehaviour, IHitable
         if (Rigid.velocity.y < 0f)
         {
             velocity.y = Physics2D.gravity.y * vector.x * 5.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
-            Ani.SetFloat("VelocityY", velocity.y);
+            if ((bool)Player)
+            {
+                Ani.SetFloat("VelocityY", velocity.y);
+            }
+
         }
         else if (Rigid.velocity.y > 0f && KeyJump && CanLongJump)
         {
             velocity.y = Physics2D.gravity.y * vector.y * 2.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
-            Ani.SetFloat("VelocityY", velocity.y);
+            if ((bool)Player)
+            {
+                Ani.SetFloat("VelocityY", velocity.y);
+            }
         }
         else if (Rigid.velocity.y > 0f)
         {
             velocity.y = Physics2D.gravity.y * vector.y * 5.5f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
-            Ani.SetFloat("VelocityY", velocity.y);
+            if ((bool)Player)
+            {
+                Ani.SetFloat("VelocityY", velocity.y);
+            }
         }
         if (num == 0 || LowGravityTime > 0f)
         {
@@ -504,8 +519,12 @@ public class Character : MonoBehaviour, IHitable
 
     public void SetAnimationIdle()
     {
-        Ani.Play((Xinput != 0f) ? "Run" : "Idle");
-        Ani.Update(0f);
+        if ((bool)Player)
+        {
+            Ani.Play((Xinput != 0f) ? "Run" : "Idle");
+            Ani.Update(0f);
+        }
+
     }
 
     public virtual void Dead()
@@ -547,12 +566,12 @@ public class Character : MonoBehaviour, IHitable
         isKnockback = true;
         CanLongJump = false;
         Rigid.drag = 0f;
-        //if (!AITree)
-        //{
+        if ((bool)Player)
+        {
             Ani.Play("Attacked");
             Ani.Update(0f);
-            HitEffect.SetTimeSlow(0.15f);
-        //}
+        }
+        HitEffect.SetTimeSlow(0.15f);
     }
 
     public void ResumeAI()

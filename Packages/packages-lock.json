@@ -25,6 +25,16 @@
       },
       "hash": "64853b73bcbce53a1851b2b3b05ba8f5ab37e6d8"
     },
+    "com.esotericsoftware.spine.timeline": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.timeline#4.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.timeline": "1.2.10",
+        "com.esotericsoftware.spine.spine-unity": "4.1.13"
+      },
+      "hash": "3527b926bd17fb13c342ef58308dec6356abe309"
+    },
     "com.esotericsoftware.spine.urp-shaders": {
       "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.urp-shaders#4.1",
       "depth": 0,

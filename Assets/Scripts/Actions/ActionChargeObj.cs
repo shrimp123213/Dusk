@@ -47,10 +47,24 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                 if (actionPeformStateCharge.Success)
                 {
                     SkillCharge.i.SetAmount(0f);
-                    _m.Ani.Play(AnimationKey);//放開時播BurstCharge1Success
-                    _m.Ani.Update(0f);
-                    _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
-                    _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
+
+                    //放開時播BurstCharge1Success
+                    if ((bool)_m.Player)
+                    {
+                        _m.Ani.Play(AnimationKey);
+                        _m.Ani.Update(0f);
+                        _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+                        _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
+                    }
+                    else
+                    {
+                        _m.SkeleAniState.SetAnimation(0, AnimationKey, true);
+                        _m.SkeleAniState.Update(0f);
+                        _m.ActionState.AniAsset = _m.SkeleAniState.GetCurrent(0).Animation;
+                        _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
+                    }
+                    
+                    
                 }
                 else
                 {
@@ -82,8 +96,17 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         _m.SpeedFactor = 0.35f;
         if (!ExtendPreviousAnimation)
         {
-            _m.Ani.Play(AnimationKeyCharging);
-            _m.Ani.Update(0f);
+            if ((bool)_m.Player)
+            {
+                _m.Ani.Play(AnimationKeyCharging);
+                _m.Ani.Update(0f);
+            }
+            else
+            {
+                _m.SkeleAniState.SetAnimation(0, AnimationKeyCharging, true);
+                _m.SkeleAniState.Update(0f);
+            }
+
         }
         SkillCharge.i.SetText(DisplayName);
         SkillCharge.i.SetSuccessTime(ChargeSuccessTime);

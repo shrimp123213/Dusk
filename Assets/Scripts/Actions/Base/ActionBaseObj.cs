@@ -95,8 +95,17 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
-        _m.Ani.Play(AnimationKey);
-        _m.Ani.Update(0f);
+        if ((bool)_m.Player)
+        {
+            _m.Ani.Play(AnimationKey);
+            _m.Ani.Update(0f);
+        }
+        else
+        {
+            _m.SkeleAniState.SetAnimation(0, AnimationKey, true);
+            _m.SkeleAniState.Update(0f);
+        }
+
         if (TimeSlowAmount > 0f)
         {
             _m.HitEffect.SetTimeSlow(TimeSlowAmount);
@@ -130,7 +139,10 @@ public class ActionBaseObj : ScriptableObject
             return;
         }
         ActionPeformState actionState = _m.ActionState;
-        actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if ((bool)_m.Player) 
+            actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        else
+            actionState.SetTime(_m.SkeleAniState.GetCurrent(0).AnimationTime);
         if (!actionState.CanDoThingsThisUpdate())
         {
             return;
@@ -214,8 +226,12 @@ public class ActionBaseObj : ScriptableObject
             }
             EndAction(_m);
             _m.NowAction = null;
-            _m.Ani.Play("Idle");
-            _m.Ani.Update(0f);
+            if ((bool)_m.Player)
+            {
+                _m.Ani.Play("Idle");
+                _m.Ani.Update(0f);
+            }
+
             if (_m.Inputs.Contains(InputKey.Claw))
             {
                 _m.Inputs.Remove(InputKey.Claw);
