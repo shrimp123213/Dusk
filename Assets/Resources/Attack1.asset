@@ -23,9 +23,9 @@ MonoBehaviour:
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 16
-    KeyFrameEnd: 24
+    KeyFrameEnd: 20
     Offset: {x: 0.7, y: 0.15, z: 0}
-    Range: {x: 1.2, y: 0.5}
+    Range: {x: 8, y: 0.5}
   HitMax: 1
   SuckEffect: 0
   Links: []

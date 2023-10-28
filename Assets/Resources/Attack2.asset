@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
   m_Name: Attack2
   m_EditorClassIdentifier: 
-  Id: boss1-1_ATK_spur
-  PreviousId: boss1-1_ATK_spur
-  DisplayName: boss1-1_ATK_spur
-  AnimationKey: boss1-1_ATK_spur
+  Id: boss1-1_ATK_bigslash
+  PreviousId: boss1-1_ATK_bigslash
+  DisplayName: boss1-1_ATK_bigslash
+  AnimationKey: boss1-1_ATK_bigslash
   InterruptLevel: 0
   InterruptSameLevel: 0
-  Clip: {fileID: 206176227058316164, guid: e5e11b53a5a8ece469bf3739c80b400f, type: 2}
+  Clip: {fileID: 5698539813544354589, guid: e5e11b53a5a8ece469bf3739c80b400f, type: 2}
   DamageRatio: 0
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 8
-    KeyFrameEnd: 12
+  - KeyFrameFrom: 60
+    KeyFrameEnd: 72
     Offset: {x: 0.7, y: 0.15, z: 0}
-    Range: {x: 1.2, y: 0.5}
+    Range: {x: 15, y: 1}
   HitMax: 1
   SuckEffect: 0
   Links: []
