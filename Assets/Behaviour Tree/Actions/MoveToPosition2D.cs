@@ -18,6 +18,9 @@ public class MoveToPosition2D : ActionNode
     [Tooltip("Character")]
     public NodeProperty<Character> character  = new NodeProperty<Character> { defaultValue = null };
     
+    [Tooltip("Move Clip")]
+    public NodeProperty<string> clip  = new NodeProperty<string> { defaultValue = null };
+    
     private float _distance;    //與Target的距離
     
     
@@ -33,6 +36,9 @@ public class MoveToPosition2D : ActionNode
     protected override State OnUpdate() { //移動到目標位置
         if (context != null && target != null)
         {
+            Animator Ani =context.transform.GetComponentInChildren<Animator>();
+            Ani.Play(clip.Value);
+            
             //Rigidbody2D contextRb = context.gameObject.GetComponent<Rigidbody2D>();
             Transform targetTransform = target.Value.transform;
             

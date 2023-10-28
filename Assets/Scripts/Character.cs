@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 public class Character : MonoBehaviour, IHitable
 {
-    [HideInInspector]
+    
     public Animator Ani;
 
     [HideInInspector]
@@ -161,6 +161,7 @@ public class Character : MonoBehaviour, IHitable
         //}
         TransSkillPopup = GameObject.Find("SkillPopup").transform;
         Health = HealthMax.Final;
+        Debug.Log(Ani);
     }
 
     private void Update()

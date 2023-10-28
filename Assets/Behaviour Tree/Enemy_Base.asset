@@ -31,12 +31,15 @@ MonoBehaviour:
   - rid: 4662664370766217227
   - rid: 4662664370766217228
   - rid: 4662664370766217230
+  - rid: 4662664418144813058
+  - rid: 4662664418144813059
+  - rid: 4662664418144813060
   treeState: 0
   blackboard:
     keys:
     - rid: 4662664305554489345
     - rid: 4662664305554489346
-  viewPosition: {x: 258, y: -125, z: 0}
+  viewPosition: {x: 351, y: -227, z: 0}
   viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
   references:
     version: 2
@@ -112,13 +115,17 @@ MonoBehaviour:
           reference:
             rid: 4662664305554489346
           defaultValue: {fileID: 0}
+        clip:
+          reference:
+            rid: -2
+          defaultValue: boss1-1_AC_move
     - rid: 4662664305554489354
       type: {class: Attack, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: f7f615ec082e951488081ce2b913afd9
-        position: {x: 120, y: 765}
+        position: {x: -45, y: 765}
         blackboard:
           keys: []
         description: Claw1
@@ -130,14 +137,14 @@ MonoBehaviour:
         action:
           reference:
             rid: -2
-          defaultValue: {fileID: 11400000, guid: a2a1d29debc6c4a459aa72dee0f08b0c, type: 2}
+          defaultValue: {fileID: 11400000, guid: 4a8dce90f1487c94a9aaadcf800514ec, type: 2}
     - rid: 4662664305554489355
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
         guid: a75c9912cfb24134e97460064a4ee77a
-        position: {x: -45, y: 765}
+        position: {x: -225, y: 765}
         blackboard:
           keys: []
         description: 
@@ -184,6 +191,7 @@ MonoBehaviour:
         children:
         - rid: 4662664305554489355
         - rid: 4662664305554489354
+        - rid: 4662664418144813058
         - rid: 4662664351577800704
     - rid: 4662664351577800704
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -203,7 +211,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 41be9c8830228ab4b96e980482f16dd8
-        position: {x: 570, y: 525}
+        position: {x: 555, y: 510}
         blackboard:
           keys: []
         description: Trace
@@ -224,13 +232,17 @@ MonoBehaviour:
           reference:
             rid: 4662664305554489346
           defaultValue: {fileID: 0}
+        clip:
+          reference:
+            rid: -2
+          defaultValue: boss1-1_AC_move
     - rid: 4662664370766217220
       type: {class: Sequencer, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
         guid: 15052c1ce677d7b438968d5f6f6fa354
-        position: {x: 750, y: 390}
+        position: {x: 750, y: 375}
         blackboard:
           keys: []
         description: Claw2sp
@@ -244,7 +256,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8437a9e68e4689e4db54ed1eb9aeeb05
-        position: {x: 585, y: 765}
+        position: {x: 750, y: 750}
         blackboard:
           keys: []
         description: Claw2cp
@@ -256,14 +268,14 @@ MonoBehaviour:
         action:
           reference:
             rid: -2
-          defaultValue: {fileID: 11400000, guid: 37fdf4d2fd90ce04783c70a578a398c5, type: 2}
+          defaultValue: {fileID: 11400000, guid: 4a8dce90f1487c94a9aaadcf800514ec, type: 2}
     - rid: 4662664370766217222
       type: {class: Succeed, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
         state: 0
         started: 0
         guid: 1a7247de050378440b42647d5e3eda5e
-        position: {x: 750, y: 525}
+        position: {x: 750, y: 510}
         blackboard:
           keys: []
         description: 
@@ -276,13 +288,15 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: ab1459efc79525d4aad283a625fedb65
-        position: {x: 750, y: 630}
+        position: {x: 750, y: 615}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
         children:
+        - rid: 4662664418144813060
         - rid: 4662664370766217221
+        - rid: 4662664418144813059
         - rid: 4662664370766217228
     - rid: 4662664370766217228
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -290,7 +304,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 0b74de4383ef9db43a90e3bc6b24dd30
-        position: {x: 750, y: 765}
+        position: {x: 1095, y: 750}
         blackboard:
           keys: []
         description: 
@@ -310,3 +324,45 @@ MonoBehaviour:
         children:
         - rid: 4662664305554489356
         - rid: 4662664370766217220
+    - rid: 4662664418144813058
+      type: {class: Reverse, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 2828924c88c279b4590c140379fdef8b
+        position: {x: 120, y: 765}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        clip:
+          reference:
+            rid: -2
+          defaultValue: boss1-1_R_spur_RS
+    - rid: 4662664418144813059
+      type: {class: Reverse, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: cbeaf8ff9891d954fbf9f66196880a34
+        position: {x: 930, y: 750}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        clip:
+          reference:
+            rid: -2
+          defaultValue: boss1-1_R_spur_RS
+    - rid: 4662664418144813060
+      type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
+      data:
+        state: 0
+        started: 0
+        guid: ea746ad0422ccc64faa73f4cc2994bd7
+        position: {x: 585, y: 750}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        duration: 1
