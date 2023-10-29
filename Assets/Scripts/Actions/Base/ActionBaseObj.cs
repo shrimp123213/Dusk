@@ -33,6 +33,9 @@ public class ActionBaseObj : ScriptableObject
     [Header("攻擊成功時將空中的敵人往自己拉")]
     public bool SuckEffect;
 
+    [Header("是否可中斷行動")]
+    public bool CanInterruptAction;
+
     [Header("連技")]
     public List<ActionLink> Links;
 
@@ -41,10 +44,18 @@ public class ActionBaseObj : ScriptableObject
     public List<ActionMovement> Moves;
 
     [Space]
+    [Header("停、啟用碰撞箱的時間點")]
+    public List<ToggleCollider> Toggles;
+
+    [Space]
+    [Header("瞬間傳送")]
+    public List<Teleport> Teleports;
+
+    [Space]
     [Header("攻擊成功時附加力道")]
     public Vector2 ApplyForce;
 
-    public bool ForceBasedOnFacing;
+    public bool ForceBasedByPos;
 
     public bool UsePopup;
 
@@ -61,6 +72,10 @@ public class ActionBaseObj : ScriptableObject
     public bool GroundOnly;
 
     public bool ResetCanAttack;
+
+    private bool[] IsTriggered;
+
+    private bool[] IsTeleported;
 
     public virtual void Init(Character _m)
     {
@@ -82,6 +97,9 @@ public class ActionBaseObj : ScriptableObject
 
             }
         }
+
+        IsTriggered = new bool[_m.NowAction.Toggles.Count];
+        IsTeleported = new bool[_m.NowAction.Teleports.Count];
     }
 
     public virtual bool Movable(Character _m)
@@ -95,16 +113,8 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
-        if ((bool)_m.Player)
-        {
-            _m.Ani.Play(AnimationKey);
-            _m.Ani.Update(0f);
-        }
-        else
-        {
-            _m.SkeleAniState.SetAnimation(0, AnimationKey, true);
-            _m.SkeleAniState.Update(0f);
-        }
+        _m.Ani.Play(AnimationKey);
+        _m.Ani.Update(0f);
 
         if (TimeSlowAmount > 0f)
         {
@@ -139,15 +149,38 @@ public class ActionBaseObj : ScriptableObject
             return;
         }
         ActionPeformState actionState = _m.ActionState;
-        if ((bool)_m.Player) 
-            actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
-        else
-            actionState.SetTime(_m.SkeleAniState.GetCurrent(0).AnimationTime);
+        actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
         if (!actionState.CanDoThingsThisUpdate())
         {
             return;
         }
         _m.Evading = false;
+        if (_m.NowAction.Toggles.Count > 0)
+        {
+            int i = 0;
+            foreach (ToggleCollider toggle in _m.NowAction.Toggles)
+            {
+                if (!IsTriggered[i] && actionState.IsAfterFrame(toggle.KeyFrame))
+                {
+                    IsTriggered[i] = true;
+                    _m.Collider.enabled = toggle.IsActive;
+                }
+                i++;
+            }
+        }
+        if (_m.NowAction.Teleports.Count > 0)
+        {
+            int i = 0;
+            foreach (Teleport teleport in _m.NowAction.Teleports)
+            {
+                if (!IsTeleported[i] && actionState.IsAfterFrame(teleport.KeyFrame))
+                {
+                    IsTeleported[i] = true;
+                    _m.Rigid.MovePosition(teleport.Local ? teleport.Pos + _m.transform.position : teleport.Pos);
+                }
+                i++;
+            }
+        }
         foreach (ActionMovement movement in _m.NowAction.Moves)
         {
             if (movement.CanEvade && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
@@ -158,28 +191,32 @@ public class ActionBaseObj : ScriptableObject
         }
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
         {
-            if (!actionState.IsWithinFrame(attackSpot.KeyFrameFrom, attackSpot.KeyFrameEnd))
-            {
-                continue;
-            }
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
-            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
             Vector2 debugVector = _m.transform.position + vector;
             Vector2 topRight = attackSpot.Range / 2;
             Vector2 topLeft = new Vector2(-attackSpot.Range.x, attackSpot.Range.y) / 2;
             Vector2 bottomRight = new Vector2(attackSpot.Range.x, -attackSpot.Range.y) / 2;
             Vector2 bottomLeft = -attackSpot.Range / 2;
-            Debug.DrawLine(debugVector + topRight, debugVector + topLeft);
-            Debug.DrawLine(debugVector + topRight, debugVector + bottomRight);
-            Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft);
-            Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft);
+            if (!actionState.IsWithinFrame(attackSpot.KeyFrameFrom, attackSpot.KeyFrameEnd))
+            {
+                Debug.DrawLine(debugVector + topRight, debugVector + topLeft, Color.cyan);
+                Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.cyan);
+                Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.cyan);
+                Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.cyan);
+                continue;
+            }
+            Debug.DrawLine(debugVector + topRight, debugVector + topLeft, Color.magenta);
+            Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.magenta);
+            Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.magenta);
+            Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.magenta);
+            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
             foreach (Collider2D collider2D in array)
             {
                 if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(collider2D.gameObject, _m.NowAction.HitMax))
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m);
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, (!collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction));
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -196,7 +233,7 @@ public class ActionBaseObj : ScriptableObject
                     {
                         y = _m.transform.position.y - component.transform.position.y;
                     }
-                    component.TakeForce(Vector3Utli.CacuFacing(_m.NowAction.ApplyForce, ForceBasedOnFacing ? Vector3Utli.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
+                    component.TakeForce(Vector3Utli.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utli.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y), CanInterruptAction);
                     _ = (component.transform.position - _m.transform.position).normalized;
                 }
             }
@@ -226,11 +263,8 @@ public class ActionBaseObj : ScriptableObject
             }
             EndAction(_m);
             _m.NowAction = null;
-            if ((bool)_m.Player)
-            {
-                _m.Ani.Play("Idle");
-                _m.Ani.Update(0f);
-            }
+            _m.Ani.Play("Idle");
+            _m.Ani.Update(0f);
 
             if (_m.Inputs.Contains(InputKey.Claw))
             {
@@ -285,3 +319,23 @@ public class ActionLink
 
     public string PreviousId;
 }
+
+
+[Serializable]
+public class ToggleCollider
+{
+    public int KeyFrame;
+
+    public bool IsActive;
+}
+
+[Serializable]
+public class Teleport
+{
+    public int KeyFrame;
+
+    public bool Local;//打勾的話是原本的位置+Pos，沒有的話是世界座標
+
+    public Vector3 Pos;
+}
+

@@ -28,8 +28,6 @@ public class ActionPeformState
 
     public AnimationClip Clip;
 
-    public Spine.Animation AniAsset;
-
     public void SetTime(float _actionTime)
     {
         ActionTime = _actionTime;

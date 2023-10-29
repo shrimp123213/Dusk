@@ -5,8 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using System;
-using System.ComponentModel;
-using Spine.Unity;
+using TheKiwiCoder;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -14,12 +13,10 @@ public class Character : MonoBehaviour, IHitable
     public Animator Ani;
 
     [HideInInspector]
-    public SkeletonAnimation SkeleAni;
-    [HideInInspector]
-    public Spine.AnimationState SkeleAniState;
+    public Rigidbody2D Rigid;
 
     [HideInInspector]
-    public Rigidbody2D Rigid;
+    public Collider2D Collider;
 
     public float SpeedFactor = 1f;
 
@@ -44,6 +41,8 @@ public class Character : MonoBehaviour, IHitable
     public bool Evading;
 
     public bool CanLongJump;
+
+    public bool ImmuneInterruptAction;
 
     public float LowGravityTime;//¨ü¶Ë«á´îºC?
 
@@ -72,8 +71,9 @@ public class Character : MonoBehaviour, IHitable
 
     public CharacterStat Attack = new CharacterStat(10f);
 
-    //[HideInInspector]
-    //public BehaviorTree AITree;
+    [HideInInspector]
+    public BehaviourTreeInstance AITree;
+    public BlackboardKey<Vector2> TeleportKeyReference;
 
     public TextMeshProUGUI TextInput;
 
@@ -155,26 +155,22 @@ public class Character : MonoBehaviour, IHitable
 
     public virtual void OnAwake()
     {
+        Collider = GetComponent<Collider2D>();
         Rigid = GetComponent<Rigidbody2D>();
         Player = GetComponent<PlayerMain>();
-        if ((bool)Player)
-            Ani = GetComponentInChildren<Animator>();
-        else
-        {
-            SkeleAni = GetComponent<SkeletonAnimation>();
-            SkeleAniState = SkeleAni.AnimationState;
-        }
-
+        Ani = GetComponentInChildren<Animator>();
         HitEffect = GetComponent<HitEffector>();
-        if ((bool)Player)
-            HitEffect.CallAwake(Ani);
-        else
-            HitEffect.CallAwake(SkeleAniState);
+        HitEffect.CallAwake(Ani);
+
+        AITree = GetComponent<BehaviourTreeInstance>();
+        if ((bool)AITree)
+            TeleportKeyReference = AITree.FindBlackboardKey<Vector2>("TeleportTargetPos");
         //AITree = GetComponent<BehaviorTree>();
         //if ((bool)AITree)
         //{
         //    AITree.EnableBehavior();
         //}
+
         TransSkillPopup = GameObject.Find("SkillPopup").transform;
         Health = HealthMax.Final;
     }
@@ -238,16 +234,8 @@ public class Character : MonoBehaviour, IHitable
         NowAction.PreviousId = previousId;
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
-        if ((bool)Player)
-        {
-            ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
-            ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
-        }
-        else
-        {
-            ActionState.AniAsset = SkeleAniState.GetCurrent(0).Animation;
-            ActionState.TotalFrame = Mathf.RoundToInt(ActionState.AniAsset.Duration);//////////////////////////////////////////////////////////////////
-        }
+        ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+        ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
         //Debug.Log(ActionState.Clip.name);
         HurtBoxColor = new Color(UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f));
         NowAction.Init(this);
@@ -296,10 +284,7 @@ public class Character : MonoBehaviour, IHitable
     public void StopMove()
     {
         Xinput = 0f;
-        if ((bool)Player)
-        {
-            Ani.SetBool("Moving", value: false);
-        }
+        Ani.SetBool("Moving", value: false);
     }
 
     private void LadderMove()
@@ -321,10 +306,7 @@ public class Character : MonoBehaviour, IHitable
         {
             StoredMoves.Clear();
         }
-        if ((bool)Player)
-        {
-            Ani.SetBool("Moving", value);
-        }
+        Ani.SetBool("Moving", value);
         Rigid.gravityScale = 0f;
         Rigid.velocity = zero;
     }
@@ -375,11 +357,8 @@ public class Character : MonoBehaviour, IHitable
         {
             value = false;
         }
-        if ((bool)Player)
-        {
-            Ani.SetBool("Moving", value);
-            Ani.SetBool("Jumping", !isGround);
-        }
+        Ani.SetBool("Moving", value);
+        Ani.SetBool("Jumping", !isGround);
         if (KeyJumpJust)
         {
             KeyJumpJust = false;
@@ -398,27 +377,17 @@ public class Character : MonoBehaviour, IHitable
         if (Rigid.velocity.y < 0f)
         {
             velocity.y = Physics2D.gravity.y * vector.x * 5.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
-            if ((bool)Player)
-            {
-                Ani.SetFloat("VelocityY", velocity.y);
-            }
-
+            Ani.SetFloat("VelocityY", velocity.y);
         }
         else if (Rigid.velocity.y > 0f && KeyJump && CanLongJump)
         {
             velocity.y = Physics2D.gravity.y * vector.y * 2.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
-            if ((bool)Player)
-            {
-                Ani.SetFloat("VelocityY", velocity.y);
-            }
+            Ani.SetFloat("VelocityY", velocity.y);
         }
         else if (Rigid.velocity.y > 0f)
         {
             velocity.y = Physics2D.gravity.y * vector.y * 5.5f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
-            if ((bool)Player)
-            {
-                Ani.SetFloat("VelocityY", velocity.y);
-            }
+            Ani.SetFloat("VelocityY", velocity.y);
         }
         if (num == 0 || LowGravityTime > 0f)
         {
@@ -470,7 +439,7 @@ public class Character : MonoBehaviour, IHitable
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }
 
-    public bool TakeDamage(Damage _damage, Character _attacker = null)
+    public bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false)
     {
         if (isDead)
         {
@@ -488,7 +457,7 @@ public class Character : MonoBehaviour, IHitable
             //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
             //Debug.Log("Hit : " + base.gameObject.name);
             LowGravityTime = 0.665f;
-            HitEffect.SetHitStun();
+            HitEffect.SetHitStun(isActionInterrupted);
             //if ((bool)AITree)
             //{
             //    AITree.SendEvent("Attacked", (object)_attacker.transform);
@@ -519,12 +488,8 @@ public class Character : MonoBehaviour, IHitable
 
     public void SetAnimationIdle()
     {
-        if ((bool)Player)
-        {
-            Ani.Play((Xinput != 0f) ? "Run" : "Idle");
-            Ani.Update(0f);
-        }
-
+        Ani.Play((Xinput != 0f) ? "Run" : "Idle");
+        Ani.Update(0f);
     }
 
     public virtual void Dead()
@@ -541,9 +506,9 @@ public class Character : MonoBehaviour, IHitable
         base.gameObject.SetActive(value: false);
     }
 
-    public void TakeForce(Vector2 _Force, Vector2 _AddiForce)
+    public void TakeForce(Vector2 _Force, Vector2 _AddiForce, bool canInterruptAction)
     {
-        if (isActing)
+        if (isActing && canInterruptAction && !ImmuneInterruptAction)
         {
             NowAction.EndAction(this);
         }
@@ -566,11 +531,13 @@ public class Character : MonoBehaviour, IHitable
         isKnockback = true;
         CanLongJump = false;
         Rigid.drag = 0f;
-        if ((bool)Player)
+
+        if (!ImmuneInterruptAction)
         {
             Ani.Play("Attacked");
             Ani.Update(0f);
         }
+
         HitEffect.SetTimeSlow(0.15f);
     }
 
@@ -614,5 +581,5 @@ public enum CharacterStates
 
 public interface IHitable
 {
-    bool TakeDamage(Damage _damage, Character _attacker = null);
+    bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false);
 }

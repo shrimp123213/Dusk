@@ -18,7 +18,6 @@ MonoBehaviour:
   AnimationKey: Claw3sp
   InterruptLevel: 0
   InterruptSameLevel: 0
-  Clip: {fileID: 7400000, guid: 6c9d222ddb17750419a3faead21239ba, type: 2}
   DamageRatio: 0
   DamageType: 0
   AttackSpots:
@@ -32,6 +31,7 @@ MonoBehaviour:
     Range: {x: 1.5, y: 2.1}
   HitMax: 1
   SuckEffect: 0
+  CanInterruptAction: 1
   Links:
   - Frame: 52
     LifeTime: -1
@@ -100,11 +100,12 @@ MonoBehaviour:
     StartEvadeFrame: 0
     EndEvadeFrame: 0
   ApplyForce: {x: 1, y: 0}
-  ForceBasedOnFacing: 0
+  ForceBasedByPos: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 0
   OrbRecovery: 1
+  EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1

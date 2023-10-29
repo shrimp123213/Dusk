@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class HitEffector : MonoBehaviour
 {
+    private bool isActionInterrupted;
+
     private Animator Ani;
-    private Spine.AnimationState SkeleAniState;
 
     public bool Main;
 
@@ -34,11 +35,6 @@ public class HitEffector : MonoBehaviour
         Ani = ani;
         TransSprite = base.transform.GetChild(0);
     }
-    public void CallAwake(Spine.AnimationState skeleAniState)
-    {
-        SkeleAniState = skeleAniState;
-        TransSprite = base.transform.GetChild(0);
-    }
 
     private void LateUpdate()
     {
@@ -54,12 +50,10 @@ public class HitEffector : MonoBehaviour
         if (AttackStunDura > 0f)
         {
             AttackStunDura -= Time.deltaTime;
-            if ((bool)Ani) Ani.speed = 0f;
-            if (SkeleAniState != null) SkeleAniState.TimeScale = 0f;
+            Ani.speed = 0f;
             if (AttackStunDura <= 0f)
             {
-                if ((bool)Ani) Ani.speed = 1f;
-                if (SkeleAniState != null) SkeleAniState.TimeScale = 1f;
+                Ani.speed = 1f;
             }
         }
         if (HitStun > 0f)
@@ -74,17 +68,14 @@ public class HitEffector : MonoBehaviour
             else if (HitStun <= 0f)
             {
                 TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
-                if ((bool)Ani)
+
+                if (isActionInterrupted)
                 {
                     Ani.Play("Idle");
                     Ani.Update(0f);
+                    isActionInterrupted = false;
                 }
-                if (SkeleAniState != null)
-                {
-                    SkeleAniState.SetAnimation(0, "Idle", true);
-                    SkeleAniState.Update(0f);
-                }
-
+                
             }
         }
         if (Main && TimeSlow > 0f)
@@ -106,8 +97,10 @@ public class HitEffector : MonoBehaviour
         AttackStunDura = 0.075f;
     }
 
-    public void SetHitStun()
+    public void SetHitStun(bool _isActionInterrupted)
     {
+        if (!isActionInterrupted)//避免被打第一次中斷行動後被打第二次的攻擊沒有附加中斷導致結束暈眩後沒有回到Idle
+            isActionInterrupted = _isActionInterrupted;
         HitStun = 0.25f;
     }
 

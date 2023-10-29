@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "ActionHeal", menuName = "Actions/Heal")]
-public class ActionHeal : ActionBaseObj
+public class ActionHealObj : ActionBaseObj
 {
     [Header("ActionHeal")]
     public float HealAmount;
