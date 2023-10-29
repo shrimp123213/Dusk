@@ -31177,6 +31177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ani: {fileID: 0}
+  SkeleAni: {fileID: 0}
   Rigid: {fileID: 0}
   SpeedFactor: 1
   Xinput: 0
@@ -41614,7 +41615,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1987312402}
+  - {fileID: 407902707}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -41660,7 +41661,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 1654228108}
   meshFilter: {fileID: 1654228109}
   materials:
-  - {fileID: 1987312402}
+  - {fileID: 407902707}
   meshModeShader: 1
   getSpriteMesh: {fileID: 1008762134}
   getMeshLight: {fileID: 0}
@@ -46942,6 +46943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ani: {fileID: 0}
+  SkeleAni: {fileID: 0}
   Rigid: {fileID: 0}
   SpeedFactor: 1
   Xinput: 0

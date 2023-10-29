@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HitEffector : MonoBehaviour
 {
+    private bool isActionInterrupted;
+
     private Animator Ani;
 
     public bool Main;
@@ -66,8 +68,14 @@ public class HitEffector : MonoBehaviour
             else if (HitStun <= 0f)
             {
                 TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
-                Ani.Play("Idle");
-                Ani.Update(0f);
+
+                if (isActionInterrupted)
+                {
+                    Ani.Play("Idle");
+                    Ani.Update(0f);
+                    isActionInterrupted = false;
+                }
+                
             }
         }
         if (Main && TimeSlow > 0f)
@@ -89,8 +97,10 @@ public class HitEffector : MonoBehaviour
         AttackStunDura = 0.075f;
     }
 
-    public void SetHitStun()
+    public void SetHitStun(bool _isActionInterrupted)
     {
+        if (!isActionInterrupted)//避免被打第一次中斷行動後被打第二次的攻擊沒有附加中斷導致結束暈眩後沒有回到Idle
+            isActionInterrupted = _isActionInterrupted;
         HitStun = 0.25f;
     }
 

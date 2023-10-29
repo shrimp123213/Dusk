@@ -45,10 +45,13 @@ public class AfterimageGenerator : MonoBehaviour
         {
             if (emitLeft <= 0f)
             {
-                Debug.Log("spawnEffect");
+                //Debug.Log("spawnEffect");
                 GameObject obj = new GameObject();
                 SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = base.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+
+                spriteRenderer.sortingLayerName = "Middle";
+                spriteRenderer.sortingOrder = 1;
 
                 spriteRenderer.color = NewColor;
                 DOTween.Sequence().SetDelay(DelayFadeTime).Append(spriteRenderer.DOFade(0f, FadeTime));

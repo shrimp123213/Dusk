@@ -47,7 +47,9 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                 if (actionPeformStateCharge.Success)
                 {
                     SkillCharge.i.SetAmount(0f);
-                    _m.Ani.Play(AnimationKey);//放開時播BurstCharge1Success
+
+                    //放開時播BurstCharge1Success
+                    _m.Ani.Play(AnimationKey);
                     _m.Ani.Update(0f);
                     _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
                     _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
