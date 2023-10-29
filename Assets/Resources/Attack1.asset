@@ -18,7 +18,6 @@ MonoBehaviour:
   AnimationKey: boss1-1_ATK_spur
   InterruptLevel: 0
   InterruptSameLevel: 0
-  Clip: {fileID: 206176227058316164, guid: e5e11b53a5a8ece469bf3739c80b400f, type: 2}
   DamageRatio: 0
   DamageType: 0
   AttackSpots:
@@ -28,10 +27,13 @@ MonoBehaviour:
     Range: {x: 8, y: 0.5}
   HitMax: 1
   SuckEffect: 0
+  CanInterruptAction: 0
   Links: []
   Moves: []
+  Toggles: []
+  Teleports: []
   ApplyForce: {x: 0, y: 0}
-  ForceBasedOnFacing: 0
+  ForceBasedByPos: 0
   UsePopup: 1
   TimeSlowAmount: 0
   OrbCost: 0

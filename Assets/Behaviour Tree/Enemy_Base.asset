@@ -17,30 +17,30 @@ MonoBehaviour:
   nodes:
   - rid: 4662664305554489344
   - rid: 4662664305554489347
-  - rid: 4662664305554489349
-  - rid: 4662664305554489354
   - rid: 4662664305554489355
   - rid: 4662664305554489356
   - rid: 4662664305554489358
   - rid: 4662664305554489359
   - rid: 4662664351577800704
-  - rid: 4662664370766217218
   - rid: 4662664370766217220
-  - rid: 4662664370766217221
   - rid: 4662664370766217222
   - rid: 4662664370766217227
   - rid: 4662664370766217228
   - rid: 4662664370766217230
-  - rid: 4662664418144813058
-  - rid: 4662664418144813059
   - rid: 4662664418144813060
+  - rid: 4662664447010799616
+  - rid: 4662664447010799617
+  - rid: 4662664447010799618
+  - rid: 4662664447010799619
+  - rid: 4662664447010799620
+  - rid: 4662664447010799621
   treeState: 0
   blackboard:
     keys:
     - rid: 4662664305554489345
     - rid: 4662664305554489346
-  viewPosition: {x: 277, y: 28, z: 0}
-  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
+  viewPosition: {x: 288, y: -10, z: 0}
+  viewScale: {x: 0.62362975, y: 0.62362975, z: 1}
   references:
     version: 2
     RefIds:
@@ -88,56 +88,6 @@ MonoBehaviour:
         restartOnSuccess: 1
         restartOnFailure: 0
         maxRepeats: 0
-    - rid: 4662664305554489349
-      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: a65e56f9b4c1e194d86094aa14c191a5
-        position: {x: 75, y: 510}
-        blackboard:
-          keys: []
-        description: Trace
-        drawGizmos: 0
-        speed:
-          reference:
-            rid: -2
-          defaultValue: 5
-        tolerance:
-          reference:
-            rid: -2
-          defaultValue: 7
-        target:
-          reference:
-            rid: 4662664305554489345
-          defaultValue: {fileID: 0}
-        character:
-          reference:
-            rid: 4662664305554489346
-          defaultValue: {fileID: 0}
-        clip:
-          reference:
-            rid: -2
-          defaultValue: boss1-1_AC_move
-    - rid: 4662664305554489354
-      type: {class: Attack, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: f7f615ec082e951488081ce2b913afd9
-        position: {x: -60, y: 750}
-        blackboard:
-          keys: []
-        description: Claw1
-        drawGizmos: 0
-        character:
-          reference:
-            rid: 4662664305554489346
-          defaultValue: {fileID: 0}
-        action:
-          reference:
-            rid: -2
-          defaultValue: {fileID: 11400000, guid: 4a8dce90f1487c94a9aaadcf800514ec, type: 2}
     - rid: 4662664305554489355
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
@@ -159,10 +109,10 @@ MonoBehaviour:
         position: {x: 285, y: 375}
         blackboard:
           keys: []
-        description: Claw1
+        description: Attck1
         drawGizmos: 0
         children:
-        - rid: 4662664305554489349
+        - rid: 4662664447010799617
         - rid: 4662664305554489358
     - rid: 4662664305554489358
       type: {class: Succeed, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -190,8 +140,8 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 4662664305554489355
-        - rid: 4662664305554489354
-        - rid: 4662664418144813058
+        - rid: 4662664447010799616
+        - rid: 4662664447010799619
         - rid: 4662664351577800704
     - rid: 4662664351577800704
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -205,37 +155,6 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         duration: 0.8
-    - rid: 4662664370766217218
-      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 41be9c8830228ab4b96e980482f16dd8
-        position: {x: 555, y: 510}
-        blackboard:
-          keys: []
-        description: Trace
-        drawGizmos: 0
-        speed:
-          reference:
-            rid: -2
-          defaultValue: 5
-        tolerance:
-          reference:
-            rid: -2
-          defaultValue: 7
-        target:
-          reference:
-            rid: 4662664305554489345
-          defaultValue: {fileID: 0}
-        character:
-          reference:
-            rid: 4662664305554489346
-          defaultValue: {fileID: 0}
-        clip:
-          reference:
-            rid: -2
-          defaultValue: boss1-1_AC_move
     - rid: 4662664370766217220
       type: {class: Sequencer, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
@@ -245,30 +164,11 @@ MonoBehaviour:
         position: {x: 750, y: 375}
         blackboard:
           keys: []
-        description: Claw2sp
+        description: Attck2
         drawGizmos: 0
         children:
-        - rid: 4662664370766217218
+        - rid: 4662664447010799618
         - rid: 4662664370766217222
-    - rid: 4662664370766217221
-      type: {class: Attack, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 8437a9e68e4689e4db54ed1eb9aeeb05
-        position: {x: 750, y: 750}
-        blackboard:
-          keys: []
-        description: BigSlash
-        drawGizmos: 0
-        character:
-          reference:
-            rid: 4662664305554489346
-          defaultValue: {fileID: 0}
-        action:
-          reference:
-            rid: -2
-          defaultValue: {fileID: 11400000, guid: dc74fd0e1eda63744bdaeea94971fa6d, type: 2}
     - rid: 4662664370766217222
       type: {class: Succeed, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
@@ -295,8 +195,8 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 4662664418144813060
-        - rid: 4662664370766217221
-        - rid: 4662664418144813059
+        - rid: 4662664447010799621
+        - rid: 4662664447010799620
         - rid: 4662664370766217228
     - rid: 4662664370766217228
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
@@ -324,36 +224,6 @@ MonoBehaviour:
         children:
         - rid: 4662664305554489356
         - rid: 4662664370766217220
-    - rid: 4662664418144813058
-      type: {class: Reverse, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 2828924c88c279b4590c140379fdef8b
-        position: {x: 120, y: 750}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        clip:
-          reference:
-            rid: -2
-          defaultValue: boss1-1_R_spur_RS
-    - rid: 4662664418144813059
-      type: {class: Reverse, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: cbeaf8ff9891d954fbf9f66196880a34
-        position: {x: 930, y: 750}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        clip:
-          reference:
-            rid: -2
-          defaultValue: boss1-1_R_bigslash_RS
     - rid: 4662664418144813060
       type: {class: Wait, ns: TheKiwiCoder, asm: thekiwicoder.behaviourtreeeditor}
       data:
@@ -366,3 +236,133 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         duration: 1
+    - rid: 4662664447010799616
+      type: {class: Attack, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: a929b5c00bf429348ac571daf3ea144f
+        position: {x: -75, y: 750}
+        blackboard:
+          keys: []
+        description: boss1-1_ATK_spur
+        drawGizmos: 0
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+        action:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 11400000, guid: 4a8dce90f1487c94a9aaadcf800514ec, type: 2}
+    - rid: 4662664447010799617
+      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: c965967411dd593498e41138f7d98f54
+        position: {x: 90, y: 510}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        speed:
+          reference:
+            rid: -2
+          defaultValue: 5
+        tolerance:
+          reference:
+            rid: -2
+          defaultValue: 8
+        target:
+          reference:
+            rid: 4662664305554489345
+          defaultValue: {fileID: 0}
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+        clip:
+          reference:
+            rid: -2
+          defaultValue: Run
+    - rid: 4662664447010799618
+      type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 7619d685c7e87a645ae84d72ef953413
+        position: {x: 555, y: 510}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        speed:
+          reference:
+            rid: -2
+          defaultValue: 5
+        tolerance:
+          reference:
+            rid: -2
+          defaultValue: 12
+        target:
+          reference:
+            rid: 4662664305554489345
+          defaultValue: {fileID: 0}
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+        clip:
+          reference:
+            rid: -2
+          defaultValue: Run
+    - rid: 4662664447010799619
+      type: {class: Reverse, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8ba426fa776203a43bb83a0df63e61b5
+        position: {x: 105, y: 750}
+        blackboard:
+          keys: []
+        description: boss1-1_R_bigslash_RS
+        drawGizmos: 0
+        clip:
+          reference:
+            rid: -2
+          defaultValue: boss1-1_R_spur_RS
+    - rid: 4662664447010799620
+      type: {class: Reverse, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 865c5aebf00382c499da2e3c2cbd6a02
+        position: {x: 930, y: 750}
+        blackboard:
+          keys: []
+        description: boss1-1_R_bigslash_RS
+        drawGizmos: 0
+        clip:
+          reference:
+            rid: -2
+          defaultValue: boss1-1_R_bigslash_RS
+    - rid: 4662664447010799621
+      type: {class: Attack, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 4f680a3f0070bc6429ba7900d09aeca0
+        position: {x: 750, y: 750}
+        blackboard:
+          keys: []
+        description: boss1-1_ATK_bigslash
+        drawGizmos: 0
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+        action:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 11400000, guid: dc74fd0e1eda63744bdaeea94971fa6d, type: 2}
