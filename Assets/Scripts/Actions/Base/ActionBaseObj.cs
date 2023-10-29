@@ -34,10 +34,10 @@ public class ActionBaseObj : ScriptableObject
     [Header("攻擊成功時將空中的敵人往自己拉")]
     public bool SuckEffect;
 
-    [Header("�O�_�i���_���")]
+    [Header("是否可中斷行動")]
     public bool CanInterruptAction;
 
-    [Header("�s��")]
+    [Header("連技")]
     public List<ActionLink> Links;
 
     [Space]
@@ -45,15 +45,15 @@ public class ActionBaseObj : ScriptableObject
     public List<ActionMovement> Moves;
 
     [Space]
-    [Header("���B�ҥθI���c���ɶ��I")]
+    [Header("停、啟用碰撞箱的時間點")]
     public List<ToggleCollider> Toggles;
 
     [Space]
-    [Header("�����ǰe")]
+    [Header("瞬間傳送")]
     public List<Teleport> Teleports;
 
     [Space]
-    [Header("�������\�ɪ��[�O�D")]
+    [Header("攻擊成功時附加力道")]
     public Vector2 ApplyForce;
 
     public bool ForceBasedByPos;
