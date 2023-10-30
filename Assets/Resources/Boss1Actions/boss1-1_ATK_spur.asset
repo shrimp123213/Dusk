@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
-  m_Name: Attack1
+  m_Name: boss1-1_ATK_spur
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_spur
   PreviousId: boss1-1_ATK_spur
@@ -22,9 +22,9 @@ MonoBehaviour:
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 16
-    KeyFrameEnd: 20
+    KeyFrameEnd: 30
     Offset: {x: 3, y: 1, z: 0}
-    Range: {x: 8, y: 0.5}
+    Range: {x: 5, y: 0.5}
   HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 0
@@ -34,11 +34,11 @@ MonoBehaviour:
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
-  UsePopup: 1
+  UsePopup: 0
   TimeSlowAmount: 0
   OrbCost: 0
-  OrbRecovery: 1
+  OrbRecovery: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
-  ResetCanAttack: 1
+  ResetCanAttack: 0

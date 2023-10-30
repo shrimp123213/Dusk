@@ -7,10 +7,10 @@ using TheKiwiCoder;
 public class MoveToPosition2D : ActionNode
 {
     [Tooltip("How fast to move")]
-    public NodeProperty<float> speed = new NodeProperty<float> { defaultValue = 5.0f };
+    public NodeProperty<float> speed = new NodeProperty<float> { defaultValue = 3.0f };
     
     [Tooltip("Returns success when the remaining distance is less than this amount")]
-    public NodeProperty<float> tolerance = new NodeProperty<float> { defaultValue = 1.0f };
+    public NodeProperty<float> tolerance = new NodeProperty<float> { defaultValue = 12.0f };
 
     [Tooltip("Target")]
     public NodeProperty<GameObject> target = new NodeProperty<GameObject> { defaultValue = null };
@@ -42,11 +42,15 @@ public class MoveToPosition2D : ActionNode
             //Rigidbody2D contextRb = context.gameObject.GetComponent<Rigidbody2D>();
             Transform targetTransform = target.Value.transform;
             
-            context.transform.position = Vector2.MoveTowards(context.transform.position,
-                                                                 new Vector2(targetTransform.position.x,context.transform.position.y),
-                                                        speed.Value * Time.deltaTime);
-            
             _distance = (context.transform.position - target.Value.transform.position).sqrMagnitude; //計算距離
+            
+            if(_distance > tolerance.Value)
+            {
+                context.transform.position = Vector2.MoveTowards(context.transform.position,
+                    new Vector2(targetTransform.position.x,context.transform.position.y),
+                    speed.Value * Time.deltaTime);
+            }
+            
             if (context.transform.position.x >= targetTransform.position.x) //如果目標在左邊，則翻轉
             {
                 character.Value.Xinput = -1;

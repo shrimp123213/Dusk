@@ -34,13 +34,14 @@ MonoBehaviour:
   - rid: 4662664447010799619
   - rid: 4662664447010799620
   - rid: 4662664447010799621
+  - rid: 4662664461887471624
   treeState: 0
   blackboard:
     keys:
     - rid: 4662664305554489345
     - rid: 4662664305554489346
-  viewPosition: {x: 288, y: -10, z: 0}
-  viewScale: {x: 0.62362975, y: 0.62362975, z: 1}
+  viewPosition: {x: 250, y: -90, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
@@ -109,7 +110,7 @@ MonoBehaviour:
         position: {x: 285, y: 375}
         blackboard:
           keys: []
-        description: Attck1
+        description: boss1-1_ATK_spur
         drawGizmos: 0
         children:
         - rid: 4662664447010799617
@@ -164,7 +165,7 @@ MonoBehaviour:
         position: {x: 750, y: 375}
         blackboard:
           keys: []
-        description: Attck2
+        description: boss1-1_ATK_bigslash
         drawGizmos: 0
         children:
         - rid: 4662664447010799618
@@ -195,6 +196,7 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 4662664418144813060
+        - rid: 4662664461887471624
         - rid: 4662664447010799621
         - rid: 4662664447010799620
         - rid: 4662664370766217228
@@ -204,7 +206,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 0b74de4383ef9db43a90e3bc6b24dd30
-        position: {x: 1095, y: 750}
+        position: {x: 1245, y: 750}
         blackboard:
           keys: []
         description: 
@@ -235,7 +237,7 @@ MonoBehaviour:
           keys: []
         description: 
         drawGizmos: 0
-        duration: 1
+        duration: 0.2
     - rid: 4662664447010799616
       type: {class: Attack, ns: , asm: Assembly-CSharp}
       data:
@@ -269,11 +271,11 @@ MonoBehaviour:
         speed:
           reference:
             rid: -2
-          defaultValue: 5
+          defaultValue: 3
         tolerance:
           reference:
             rid: -2
-          defaultValue: 8
+          defaultValue: 12
         target:
           reference:
             rid: 4662664305554489345
@@ -300,11 +302,11 @@ MonoBehaviour:
         speed:
           reference:
             rid: -2
-          defaultValue: 5
+          defaultValue: 3
         tolerance:
           reference:
             rid: -2
-          defaultValue: 12
+          defaultValue: 20
         target:
           reference:
             rid: 4662664305554489345
@@ -338,7 +340,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 865c5aebf00382c499da2e3c2cbd6a02
-        position: {x: 930, y: 750}
+        position: {x: 1080, y: 750}
         blackboard:
           keys: []
         description: boss1-1_R_bigslash_RS
@@ -353,7 +355,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4f680a3f0070bc6429ba7900d09aeca0
-        position: {x: 750, y: 750}
+        position: {x: 915, y: 750}
         blackboard:
           keys: []
         description: boss1-1_ATK_bigslash
@@ -366,3 +368,22 @@ MonoBehaviour:
           reference:
             rid: -2
           defaultValue: {fileID: 11400000, guid: dc74fd0e1eda63744bdaeea94971fa6d, type: 2}
+    - rid: 4662664461887471624
+      type: {class: Attack, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 63ba398e63086954da6c56bc70c7ebf9
+        position: {x: 750, y: 750}
+        blackboard:
+          keys: []
+        description: boss1-1_ATK_spin
+        drawGizmos: 0
+        character:
+          reference:
+            rid: 4662664305554489346
+          defaultValue: {fileID: 0}
+        action:
+          reference:
+            rid: -2
+          defaultValue: {fileID: 11400000, guid: cf7d9467d919e7647a693be756204d8a, type: 2}

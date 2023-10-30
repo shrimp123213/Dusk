@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
-  m_Name: Attack2
+  m_Name: boss1-1_ATK_bigslash
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_bigslash
   PreviousId: boss1-1_ATK_bigslash
@@ -18,25 +18,27 @@ MonoBehaviour:
   AnimationKey: boss1-1_ATK_bigslash
   InterruptLevel: 0
   InterruptSameLevel: 0
-  Clip: {fileID: 5698539813544354589, guid: e5e11b53a5a8ece469bf3739c80b400f, type: 2}
   DamageRatio: 0
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 60
-    KeyFrameEnd: 72
-    Offset: {x: 0.7, y: 0.15, z: 0}
-    Range: {x: 15, y: 1}
+    KeyFrameEnd: 80
+    Offset: {x: 3, y: 3, z: 0}
+    Range: {x: 9, y: 7}
   HitMax: 1
   SuckEffect: 0
+  CanInterruptAction: 0
   Links: []
   Moves: []
+  Toggles: []
+  Teleports: []
   ApplyForce: {x: 0, y: 0}
-  ForceBasedOnFacing: 0
-  UsePopup: 1
+  ForceBasedByPos: 0
+  UsePopup: 0
   TimeSlowAmount: 0
   OrbCost: 0
-  OrbRecovery: 1
+  OrbRecovery: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
-  ResetCanAttack: 1
+  ResetCanAttack: 0
