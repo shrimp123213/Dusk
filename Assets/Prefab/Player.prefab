@@ -143,9 +143,9 @@ MonoBehaviour:
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.3
-  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensity: 0.3
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: bfc38773c3a70123d75623cc
+  m_ApplyToSortingLayers: c3a70123
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2
+  m_PointLightOuterRadius: 3
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ani: {fileID: 0}
   Rigid: {fileID: 0}
+  Collider: {fileID: 0}
   SpeedFactor: 1
   Xinput: 0
   Yinput: 0
@@ -327,11 +328,13 @@ MonoBehaviour:
   isDead: 0
   Evading: 0
   CanLongJump: 0
+  ImmuneInterruptAction: 1
   LowGravityTime: 0
   Inputs: 
   NowAction: {fileID: 0}
   HitEffect: {fileID: 1254543844293297468}
   _Health: 50
+  AITree: {fileID: 0}
   TextInput: {fileID: 0}
   TransSkillPopup: {fileID: 0}
   HurtBoxColor: {r: 0, g: 0, b: 0, a: 0}
