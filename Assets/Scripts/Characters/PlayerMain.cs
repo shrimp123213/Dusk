@@ -126,6 +126,12 @@ public class PlayerMain : Character
         }
         if (!base.isActing)
         {
+            if (Inputs.Contains(InputKey.Mark) && CanAttack)
+            {
+                if (TryCastAction(ActionLoader.i.Actions["Mark"]))
+                    StartAction(ActionLoader.i.Actions["Mark"]);
+                Inputs.Clear();
+            }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions["Claw1"]);
@@ -180,6 +186,20 @@ public class PlayerMain : Character
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Energy !");
         }
+
+        if (flag && _actionBaseObj.NeedButterfly && Butterfly.i.Cooldown > 0f)
+        {
+            flag = false;
+            if (isShowMessage)
+                SkillPopup.i.ShowMessage("Butterfly Not Ready !");
+        }
+        //if (flag && !_actionBaseObj.TryNewConditionPossible(this))有新的使用條件再用
+        //{
+        //    flag = false;
+        //    if (isShowMessage)
+        //        SkillPopup.i.ShowMessage("Butterfly Not Ready !");
+        //}
+
         //if (flag && base.isActing)
         //{
         //    flag = (_actionBaseObj.InterruptSameLevel ? (NowAction.InterruptLevel <= _actionBaseObj.InterruptLevel) : (NowAction.InterruptLevel < _actionBaseObj.InterruptLevel));
@@ -299,6 +319,10 @@ public class PlayerMain : Character
         if (playerAct.FindAction("Heal").WasPressedThisFrame())
         {
             TryInput(InputKey.Heal);
+        }
+        if (playerAct.FindAction("Mark").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Mark);
         }
         Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
