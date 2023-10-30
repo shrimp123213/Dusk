@@ -40,8 +40,8 @@ MonoBehaviour:
     keys:
     - rid: 4662664305554489345
     - rid: 4662664305554489346
-  viewPosition: {x: 250, y: -90, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 223, y: -137, z: 0}
+  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
   references:
     version: 2
     RefIds:
@@ -287,7 +287,7 @@ MonoBehaviour:
         clip:
           reference:
             rid: -2
-          defaultValue: Run
+          defaultValue: boss1-1_AC_move
     - rid: 4662664447010799618
       type: {class: MoveToPosition2D, ns: , asm: Assembly-CSharp}
       data:
@@ -318,7 +318,7 @@ MonoBehaviour:
         clip:
           reference:
             rid: -2
-          defaultValue: Run
+          defaultValue: boss1-1_AC_move
     - rid: 4662664447010799619
       type: {class: Reverse, ns: , asm: Assembly-CSharp}
       data:

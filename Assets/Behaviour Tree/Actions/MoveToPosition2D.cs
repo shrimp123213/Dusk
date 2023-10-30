@@ -26,11 +26,11 @@ public class MoveToPosition2D : ActionNode
     
     protected override void OnStart()
     {
-        character.Value.Xinput = 0;
+        character.Value.Facing = context.transform.position.x >= target.Value.transform.position.x ? -1 : 1;
     }
 
     protected override void OnStop() {
-        character.Value.Xinput = 0;
+        character.Value.Facing = context.transform.position.x >= target.Value.transform.position.x ? -1 : 1;
     }
 
     protected override State OnUpdate() { //移動到目標位置
@@ -44,31 +44,32 @@ public class MoveToPosition2D : ActionNode
             
             _distance = (context.transform.position - target.Value.transform.position).sqrMagnitude; //計算距離
             
-            if(_distance > tolerance.Value)
+            if( _distance > tolerance.Value)
             {
                 context.transform.position = Vector2.MoveTowards(context.transform.position,
                     new Vector2(targetTransform.position.x,context.transform.position.y),
                     speed.Value * Time.deltaTime);
             }
             
-            if (context.transform.position.x >= targetTransform.position.x) //如果目標在左邊，則翻轉
+            /*if (context.transform.position.x >= targetTransform.position.x) //如果目標在左邊，則翻轉
             {
                 character.Value.Xinput = -1;
                 /*context.transform.GetChild(0).localScale = new Vector3(-5, 5, 5);
                 new Vector3(context.transform.GetChild(0).localScale.x*-1f,
                     context.transform.GetChild(0).localScale.y,
-                    context.transform.GetChild(0).localScale.z);*/
+                    context.transform.GetChild(0).localScale.z);#1#
             }
-            else if (context.transform.position.x <= targetTransform.position.x)
+            
+            if (context.transform.position.x <= targetTransform.position.x)
             {
                 character.Value.Xinput = 1;
                 /*context.transform.GetChild(0).localScale = new Vector3(5, 5, 5);
                 new Vector3(context.transform.GetChild(0).localScale.x*1f,
                     context.transform.GetChild(0).localScale.y,
-                    context.transform.GetChild(0).localScale.z);*/
-            }
+                    context.transform.GetChild(0).localScale.z);#1#
+            }*/
+            
         }
-        
         
         if (_distance < tolerance.Value)    //如果距離小於容許值，則返回成功
         {
