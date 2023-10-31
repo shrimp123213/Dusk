@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using static FunkyCode.Light2D;
-using Spine.Unity;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
@@ -111,7 +110,7 @@ public class ActionBaseObj : ScriptableObject
         return false;
     }
 
-    //public virtual bool TryNewConditionPossible(Character _m)���s���ϥα���A��
+    //public virtual bool TryNewConditionPossible(Character _m)有新的使用條件再用
     //{
     //    return true;
     //}
@@ -343,7 +342,7 @@ public class Teleport
 {
     public int KeyFrame;
 
-    public bool Local;//���Ī��ܬO�쥻����m+Pos�A�S�����ܬO�@�ɮy��
+    public bool Local;//打勾的話是原本的位置+Pos，沒有的話是世界座標
 
     public Vector3 Pos;
 }
