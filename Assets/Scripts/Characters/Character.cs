@@ -18,6 +18,8 @@ public class Character : MonoBehaviour, IHitable
     [HideInInspector]
     public Collider2D Collider;
 
+    public Vector2 MarkPos;
+
     public float SpeedFactor = 1f;
 
     public float Xinput;

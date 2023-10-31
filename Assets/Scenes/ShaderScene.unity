@@ -1895,7 +1895,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 568991636}
   m_FillRect: {fileID: 568991635}
   m_HandleRect: {fileID: 0}
@@ -6957,7 +6957,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1803879334}
   m_FillRect: {fileID: 1803879333}
   m_HandleRect: {fileID: 0}
@@ -31058,7 +31058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1228571799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48170,6 +48170,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!21 &1909763815
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Light2D/Internal/Multiply
+  m_Shader: {fileID: 4800000, guid: 8f8b48660dacfbf4fb273a0cc7db3a0d, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 1927841414}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &1915194777
 GameObject:
   m_ObjectHideFlags: 0
@@ -49796,7 +49824,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.5
   m_Depth: -9
   m_CullingMask:
     serializedVersion: 2
@@ -54054,11 +54082,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1254543844293297408, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1254543844293297408, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.48
+      value: -0.97
       objectReference: {fileID: 0}
     - target: {fileID: 1254543844293297408, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -54095,6 +54123,18 @@ PrefabInstance:
     - target: {fileID: 1254543844293297408, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254543844293297409, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
+      propertyPath: MarkPos.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254543844293297409, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
+      propertyPath: RestrictInput.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254543844293297409, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
+      propertyPath: RestrictInput.Array.data[10]
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1254543844293297419, guid: 700c005b882d8da4e988d5444aa68fed, type: 3}
       propertyPath: m_Name

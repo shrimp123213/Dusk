@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using static FunkyCode.Light2D;
 using Spine.Unity;
@@ -61,6 +62,8 @@ public class ActionBaseObj : ScriptableObject
     public bool UsePopup;
 
     public float TimeSlowAmount;
+    
+    public bool NeedButterfly;
 
     public float OrbCost;
 
@@ -107,6 +110,11 @@ public class ActionBaseObj : ScriptableObject
     {
         return false;
     }
+
+    //public virtual bool TryNewConditionPossible(Character _m)有新的使用條件再用
+    //{
+    //    return true;
+    //}
 
     public virtual ActionPeformState StartAction(Character _m)
     {

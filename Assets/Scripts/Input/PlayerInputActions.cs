@@ -98,6 +98,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mark"",
+                    ""type"": ""Button"",
+                    ""id"": ""0065c157-a839-45f0-924a-8f69c343bf1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -302,7 +311,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cb08016e-3e2a-4fc2-8e43-a6a773d87bf7"",
-                    ""path"": ""<Keyboard>/v"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -313,11 +322,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bde867f2-a7b9-405c-81ee-03777d07c28c"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6589a437-ad50-4ae4-9f18-a14ed0a67d3c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Mark"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f6c621d-2e4b-4ad5-92c7-8e88e5bac18d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Mark"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -359,6 +390,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
+        m_Player_Mark = m_Player.FindAction("Mark", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -428,6 +460,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Evade;
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
+    private readonly InputAction m_Player_Mark;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -440,6 +473,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Evade => m_Wrapper.m_Player_Evade;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
+        public InputAction @Mark => m_Wrapper.m_Player_Mark;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -473,6 +507,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Heal.started += instance.OnHeal;
             @Heal.performed += instance.OnHeal;
             @Heal.canceled += instance.OnHeal;
+            @Mark.started += instance.OnMark;
+            @Mark.performed += instance.OnMark;
+            @Mark.canceled += instance.OnMark;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -501,6 +538,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Heal.started -= instance.OnHeal;
             @Heal.performed -= instance.OnHeal;
             @Heal.canceled -= instance.OnHeal;
+            @Mark.started -= instance.OnMark;
+            @Mark.performed -= instance.OnMark;
+            @Mark.canceled -= instance.OnMark;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -546,5 +586,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnEvade(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
+        void OnMark(InputAction.CallbackContext context);
     }
 }
