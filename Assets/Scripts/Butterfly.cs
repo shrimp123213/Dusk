@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class Butterfly : MonoBehaviour
 {
+    public GameObject BlastEffect;
     public GameObject AppearEffect;
+    [SerializeField]
+    private GameObject TraceEffect;
 
     public Character MarkTarget;
 
-    private bool isAppear;
+    public bool isAppear;
     private bool onTarget;
 
     private float moveDelay;
@@ -112,7 +115,6 @@ public class Butterfly : MonoBehaviour
         speed += Time.deltaTime * 10;
 
         targetDistance = Vector3.Distance(transform.position, MarkTarget.transform.position + (Vector3)MarkTarget.MarkPos);
-        Debug.Log(targetDistance);
 
         if (targetDistance < tolerance)
         {
@@ -128,10 +130,11 @@ public class Butterfly : MonoBehaviour
         }
     }
 
-    private void Appear()
+    public void Appear()
     {
         Ani.Play("Appear");
         Ani.Update(0f);
+        Debug.Log("Appear");
 
         moveDelay = 0f;
 
@@ -141,12 +144,15 @@ public class Butterfly : MonoBehaviour
         transform.parent = PlayerMain.i.transform;
 
         isAppear = true;
+
+        TraceEffect.SetActive(true);
     }
 
     public void Disappear()
     {
         Ani.Play("Disappear");
         Ani.Update(0f);
+        Debug.Log("Disappear");
 
         SliderMarkTime.gameObject.SetActive(false);
 
@@ -154,5 +160,17 @@ public class Butterfly : MonoBehaviour
         onTarget = false;
 
         isAppear = false;
+
+        TraceEffect.SetActive(false);
+    }
+
+    public void Blast()
+    {
+        Disappear();
+        Debug.Log("Blast");
+
+        Object.Instantiate(BlastEffect, transform.position, Quaternion.identity, transform);
+
+        PlayerMain.i.HitEffect.SetGlobalSlow();
     }
 }

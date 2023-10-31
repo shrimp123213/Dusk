@@ -42,6 +42,8 @@ public class Character : MonoBehaviour, IHitable
 
     public bool Evading;
 
+    public bool Blocking;
+
     public bool CanLongJump;
 
     public bool ImmuneInterruptAction;
@@ -69,7 +71,7 @@ public class Character : MonoBehaviour, IHitable
 
     public CharacterStat HealthMax = new CharacterStat(100f);
 
-    public CharacterStat Speed = new CharacterStat(7.75f);
+    public CharacterStat Speed = new CharacterStat(5.5f);
 
     public CharacterStat Attack = new CharacterStat(10f);
 
@@ -368,7 +370,7 @@ public class Character : MonoBehaviour, IHitable
             {
                 CanLongJump = true;
                 LowGravityTime = 0f;
-                velocity.y = 18.5f;
+                velocity.y = 10f;
             }
         }
         if (CanLongJump && !KeyJump)
@@ -469,7 +471,8 @@ public class Character : MonoBehaviour, IHitable
             //    Invoke("ResumeAI", 0.75f);
             //}
         }
-        Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
+        if (!Blocking)
+            Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
         if (Health <= 0f)
         {
             if ((bool)_attacker)

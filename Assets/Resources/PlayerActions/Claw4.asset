@@ -97,10 +97,14 @@ MonoBehaviour:
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
+  Toggles: []
+  Teleports: []
   ApplyForce: {x: 2, y: 0}
   ForceBasedByPos: 0
   UsePopup: 1
   TimeSlowAmount: 0
+  NeedButterfly: 0
+  MarkTimeRecovery: 0.5
   OrbCost: 0
   OrbRecovery: 1
   EvadeEnergyRecovery: 0

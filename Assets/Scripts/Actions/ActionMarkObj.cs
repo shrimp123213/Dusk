@@ -15,12 +15,18 @@ public class ActionMarkObj : ActionBaseObj
 
     public override void HitSuccess(Character _m, Character _hitted)
     {
+        if (!Butterfly.i.isAppear)
+            Butterfly.i.Appear();
         Butterfly.i.MarkTarget = _hitted;
+        Butterfly.i.transform.parent = null;
     }
 
     public override void ProcessAction(Character _m)
     {
         base.ProcessAction(_m);
+
+        if (_m.NowAction == null)
+            return;
 
         ActionPeformState actionState = _m.ActionState;
         bool isAfterAllAttackFrame = true;
@@ -39,8 +45,19 @@ public class ActionMarkObj : ActionBaseObj
         }
     }
 
+    public override void EndAction(Character _m)
+    {
+        if (Butterfly.i.isAppear && !(bool)Butterfly.i.MarkTarget)
+            Butterfly.i.Disappear();
+
+        base.EndAction(_m);
+    }
+
+    
+
     //public override bool TryNewConditionPossible(Character _m)有新的使用條件再用
     //{
     //    return Butterfly.i.Cooldown <= 0f;
     //}
 }
+

@@ -64,6 +64,8 @@ public class ActionBaseObj : ScriptableObject
     
     public bool NeedButterfly;
 
+    public float MarkTimeRecovery;
+
     public float OrbCost;
 
     public float OrbRecovery;
@@ -143,6 +145,10 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void HitSuccess(Character _m, Character _hitted)
     {
+        if (_hitted==Butterfly.i.MarkTarget)
+        {
+            Butterfly.i.MarkTime += MarkTimeRecovery;
+        }
     }
 
     public virtual float GetDamageRatio(Character _m)
