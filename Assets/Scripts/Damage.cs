@@ -14,8 +14,6 @@ public class Damage
 public enum DamageType
 {
     Normal,
-    Claw,
-    Burst,
-    Gun,
+    Mark,
     Heal,
 }

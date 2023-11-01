@@ -19,7 +19,7 @@ public class OrbListDisplayer : MonoBehaviour
     {
         OrbListDisplayer.i = this;
         CanvasGroup = GetComponent<CanvasGroup>();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < Target.OrbMax; i++)
         {
             Orbs.Add(Object.Instantiate(PrefabOrb, TransList).GetComponent<OrbInUI>());
             Orbs[i].transform.SetAsLastSibling();

@@ -142,10 +142,14 @@ MonoBehaviour:
     CanChangeFace: 0
     PreviousId: Claw3sp
   Moves: []
+  Toggles: []
+  Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
   UsePopup: 1
   TimeSlowAmount: 0
+  NeedButterfly: 0
+  MarkTimeRecovery: 0.5
   OrbCost: 1
   OrbRecovery: 0
   EvadeEnergyRecovery: 0

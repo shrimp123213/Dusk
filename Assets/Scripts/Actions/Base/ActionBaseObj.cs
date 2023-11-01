@@ -14,7 +14,7 @@ public class ActionBaseObj : ScriptableObject
 
     public string DisplayName;
 
-    [Header("å‹•ç•«")]
+    [Header("°Êµe")]
     public string AnimationKey;
 
     public int InterruptLevel;
@@ -25,35 +25,38 @@ public class ActionBaseObj : ScriptableObject
 
     public DamageType DamageType;
 
-    [Header("åˆ¤å®šé»")]
+    [Header("§P©wÂI")]
     public List<AttackTiming> AttackSpots;
 
-    [Header("æ”»æ“Šæ¬¡æ•¸ä¸Šé™")]
+    [Header("§ğÀ»¦¸¼Æ¤W­­")]
     public int HitMax;
 
-    [Header("æ”»æ“ŠæˆåŠŸæ™‚å°‡ç©ºä¸­çš„æ•µäººå¾€è‡ªå·±æ‹‰")]
+    [Header("§ğÀ»¦¨¥\®É±NªÅ¤¤ªº¼Ä¤H©¹¦Û¤v©Ô")]
     public bool SuckEffect;
 
-    [Header("æ˜¯å¦å¯ä¸­æ–·è¡Œå‹•")]
+    [Header("¬O§_¥i¤¤Â_¦æ°Ê")]
     public bool CanInterruptAction;
 
-    [Header("é€£æŠ€")]
+    [Header("¬O§_Ä²µo¼Ğ°O")]
+    public bool CanTriggerMark;
+
+    [Header("³s§Ş")]
     public List<ActionLink> Links;
 
     [Space]
-    [Header("å‹•ä½œéç¨‹çš„ä½ç§»")]
+    [Header("°Ê§@¹Lµ{ªº¦ì²¾")]
     public List<ActionMovement> Moves;
 
     [Space]
-    [Header("åœã€å•Ÿç”¨ç¢°æ’ç®±çš„æ™‚é–“é»")]
+    [Header("°±¡B±Ò¥Î¸I¼²½cªº®É¶¡ÂI")]
     public List<ToggleCollider> Toggles;
 
     [Space]
-    [Header("ç¬é–“å‚³é€")]
+    [Header("Àş¶¡¶Ç°e")]
     public List<Teleport> Teleports;
 
     [Space]
-    [Header("æ”»æ“ŠæˆåŠŸæ™‚é™„åŠ åŠ›é“")]
+    [Header("§ğÀ»¦¨¥\®Éªş¥[¤O¹D")]
     public Vector2 ApplyForce;
 
     public bool ForceBasedByPos;
@@ -64,9 +67,13 @@ public class ActionBaseObj : ScriptableObject
     
     public bool NeedButterfly;
 
+    public float MarkTimeRecovery;
+
     public float OrbCost;
 
     public float OrbRecovery;
+
+    public float OrbRecoveryAdditionalByMark;
 
     public float EvadeEnergyRecovery;
 
@@ -79,6 +86,8 @@ public class ActionBaseObj : ScriptableObject
     private bool[] IsTriggered;
 
     private bool[] IsTeleported;
+
+    public bool IsHeavyAttack;
 
     public virtual void Init(Character _m)
     {
@@ -110,7 +119,7 @@ public class ActionBaseObj : ScriptableObject
         return false;
     }
 
-    //public virtual bool TryNewConditionPossible(Character _m)æœ‰æ–°çš„ä½¿ç”¨æ¢ä»¶å†ç”¨
+    //public virtual bool TryNewConditionPossible(Character _m)¦³·sªº¨Ï¥Î±ø¥ó¦A¥Î
     //{
     //    return true;
     //}
@@ -121,6 +130,7 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
+        _m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
 
@@ -128,6 +138,12 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.HitEffect.SetTimeSlow(TimeSlowAmount);
         }
+
+        if (!IsHeavyAttack)
+            AerutaDebug.i.Feedback.LightAttackCount++;
+        else
+            AerutaDebug.i.Feedback.HeavyAttackCount++;
+
         return new ActionPeformState();
     }
 
@@ -141,8 +157,29 @@ public class ActionBaseObj : ScriptableObject
         }
     }
 
-    public virtual void HitSuccess(Character _m, Character _hitted)
+    public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
     {
+        if (_hitted == Butterfly.i.MarkTarget) 
+        {
+            Butterfly.i.MarkTime += MarkTimeRecovery;
+
+            if (CanTriggerMark) 
+                TriggerMark(_m, _hitted, IHitable);
+        }
+
+    }
+
+    public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
+    {
+        Butterfly.i.Blast();
+
+        _m.TriggerMark();
+
+        IHitable.TakeDamage(new Damage(10, DamageType.Mark), _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
+
+        //_hitted²Ö¿nÅé·F­È
+
+        AerutaDebug.i.Feedback.MarkTriggerCount++;
     }
 
     public virtual float GetDamageRatio(Character _m)
@@ -224,7 +261,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, (!collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction));
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -235,7 +272,7 @@ public class ActionBaseObj : ScriptableObject
                         return;
                     }
                     Character component = collider2D.GetComponent<Character>();
-                    HitSuccess(_m, component);
+                    HitSuccess(_m, component, IHitable);
                     float y = 0f;
                     if (SuckEffect)
                     {
@@ -271,6 +308,7 @@ public class ActionBaseObj : ScriptableObject
             }
             EndAction(_m);
             _m.NowAction = null;
+            _m.Ani.Rebind();
             _m.Ani.Play("Idle");
             _m.Ani.Update(0f);
 
@@ -342,7 +380,7 @@ public class Teleport
 {
     public int KeyFrame;
 
-    public bool Local;//æ‰“å‹¾çš„è©±æ˜¯åŸæœ¬çš„ä½ç½®+Posï¼Œæ²’æœ‰çš„è©±æ˜¯ä¸–ç•Œåº§æ¨™
+    public bool Local;//¥´¤Äªº¸Ü¬O­ì¥»ªº¦ì¸m+Pos¡A¨S¦³ªº¸Ü¬O¥@¬É®y¼Ğ
 
     public Vector3 Pos;
 }

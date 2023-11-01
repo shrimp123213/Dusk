@@ -28,6 +28,7 @@ MonoBehaviour:
   HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
+  CanTriggerMark: 1
   Links:
   - Frame: 0
     LifeTime: 0.5
@@ -114,16 +115,22 @@ MonoBehaviour:
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
+  Toggles: []
+  Teleports: []
   ApplyForce: {x: 2, y: 0}
   ForceBasedByPos: 0
   UsePopup: 1
   TimeSlowAmount: 0
-  OrbCost: 1
+  NeedButterfly: 0
+  MarkTimeRecovery: 0
+  OrbCost: 0
   OrbRecovery: 0
+  OrbRecoveryAdditionalByMark: 2
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1
+  IsHeavyAttack: 0
   AnimationKeyCharging: 
   ExtendPreviousAnimation: 1
   ChargeSpeed: 1

@@ -9,14 +9,13 @@ using UnityEngine.UI;
 
 public class Boss1 : Character
 {
-    public Vector3 TeleportTargetPos;
 
-
+    private Slider SilderHealth;
 
     public override void OnAwake()
     {
         base.OnAwake();
-        
+        SilderHealth = GameObject.Find("BossHealthBar").GetComponent<Slider>();
     }
 
     public override void AttackLand()
@@ -36,8 +35,15 @@ public class Boss1 : Character
     public override void OnUpdate()
     {
         base.OnUpdate();
-        
 
+
+        SilderHealth.value = base.Health / HealthMax.Final;
     }
 
+    public override void Dead()
+    {
+        SilderHealth.value = base.Health / HealthMax.Final;
+        base.Dead();
+        AerutaDebug.i.ShowStatistics();
+    }
 }

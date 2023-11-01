@@ -42,6 +42,8 @@ public class Character : MonoBehaviour, IHitable
 
     public bool Evading;
 
+    public bool Blocking;
+
     public bool CanLongJump;
 
     public bool ImmuneInterruptAction;
@@ -69,7 +71,7 @@ public class Character : MonoBehaviour, IHitable
 
     public CharacterStat HealthMax = new CharacterStat(100f);
 
-    public CharacterStat Speed = new CharacterStat(7.75f);
+    public CharacterStat Speed = new CharacterStat(5.5f);
 
     public CharacterStat Attack = new CharacterStat(10f);
 
@@ -249,6 +251,10 @@ public class Character : MonoBehaviour, IHitable
         }
     }
 
+    public virtual void TriggerMark()
+    {
+    }
+
     public virtual void AttackLand()
     {
         HitEffect.SetAttackStun();
@@ -369,7 +375,7 @@ public class Character : MonoBehaviour, IHitable
             {
                 CanLongJump = true;
                 LowGravityTime = 0f;
-                velocity.y = 18.5f;
+                velocity.y = 10f;
             }
         }
         if (CanLongJump && !KeyJump)
@@ -469,8 +475,11 @@ public class Character : MonoBehaviour, IHitable
             //    CancelInvoke("ResumeAI");
             //    Invoke("ResumeAI", 0.75f);
             //}
+            if ((bool)Player)
+                AerutaDebug.i.Feedback.HittedCount++;
         }
-        Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
+        if (!Blocking)
+            Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
         if (Health <= 0f)
         {
             if ((bool)_attacker)
@@ -491,6 +500,7 @@ public class Character : MonoBehaviour, IHitable
 
     public void SetAnimationIdle()
     {
+        Ani.Rebind();
         Ani.Play((Xinput != 0f) ? "Run" : "Idle");
         Ani.Update(0f);
     }
@@ -537,6 +547,7 @@ public class Character : MonoBehaviour, IHitable
 
         if (!ImmuneInterruptAction)
         {
+            Ani.Rebind();
             Ani.Play("Attacked");
             Ani.Update(0f);
         }

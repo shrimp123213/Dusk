@@ -71,6 +71,7 @@ public class HitEffector : MonoBehaviour
 
                 if (isActionInterrupted)
                 {
+                    Ani.Rebind();
                     Ani.Play("Idle");
                     Ani.Update(0f);
                     isActionInterrupted = false;
