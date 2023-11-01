@@ -35,13 +35,14 @@ MonoBehaviour:
   - rid: 4662664447010799620
   - rid: 4662664447010799621
   - rid: 4662664461887471624
+  - rid: 7224479720811790336
   treeState: 0
   blackboard:
     keys:
     - rid: 4662664305554489345
     - rid: 4662664305554489346
-  viewPosition: {x: 236, y: -101, z: 0}
-  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
+  viewPosition: {x: 192, y: -58, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
@@ -306,7 +307,7 @@ MonoBehaviour:
         tolerance:
           reference:
             rid: -2
-          defaultValue: 20
+          defaultValue: 12
         target:
           reference:
             rid: 4662664305554489345
@@ -387,3 +388,22 @@ MonoBehaviour:
           reference:
             rid: -2
           defaultValue: {fileID: 11400000, guid: cf7d9467d919e7647a693be756204d8a, type: 2}
+    - rid: 7224479720811790336
+      type: {class: DistanceCheck, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 1400d88ecb46e6143b1f0b040b7c098f
+        position: {x: -75, y: 510}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        target:
+          reference:
+            rid: 4662664305554489345
+          defaultValue: {fileID: 0}
+        tolerance:
+          reference:
+            rid: -2
+          defaultValue: 12

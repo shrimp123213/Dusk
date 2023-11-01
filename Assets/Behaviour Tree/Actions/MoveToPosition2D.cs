@@ -10,7 +10,7 @@ public class MoveToPosition2D : ActionNode
     public NodeProperty<float> speed = new NodeProperty<float> { defaultValue = 3.0f };
     
     [Tooltip("Returns success when the remaining distance is less than this amount")]
-    public NodeProperty<float> tolerance = new NodeProperty<float> { defaultValue = 12.0f };
+    public NodeProperty<float> tolerance;
 
     [Tooltip("Target")]
     public NodeProperty<GameObject> target = new NodeProperty<GameObject> { defaultValue = null };
