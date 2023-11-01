@@ -13,12 +13,14 @@ public class ActionMarkObj : ActionBaseObj
         return base.StartAction(_m);
     }
 
-    public override void HitSuccess(Character _m, Character _hitted)
+    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
     {
         if (!Butterfly.i.isAppear)
             Butterfly.i.Appear();
         Butterfly.i.MarkTarget = _hitted;
         Butterfly.i.transform.parent = null;
+
+        AerutaDebug.i.Feedback.MarkCount++;
     }
 
     public override void ProcessAction(Character _m)

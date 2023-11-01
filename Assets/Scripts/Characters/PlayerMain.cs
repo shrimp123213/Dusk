@@ -157,12 +157,23 @@ public class PlayerMain : Character
         //}
     }
 
+    public override void TriggerMark()
+    {
+        base.TriggerMark();
+        if (base.isActing)
+        {
+            Orb.Add(NowAction.OrbRecoveryAdditionalByMark);
+            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.OrbRecoveryAdditionalByMark;
+        }
+    }
+
     public override void AttackLand()
     {
         base.AttackLand();
         if (base.isActing)
         {
             Orb.Add(NowAction.OrbRecovery);
+            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.OrbRecovery;
         }
     }
 
@@ -231,7 +242,8 @@ public class PlayerMain : Character
 
     public override void Dead()
     {
-        SceneManager.LoadScene(0);
+        Time.timeScale = 0f;
+        AerutaDebug.i.ShowStatistics();
     }
 
     public override void TryInput(InputKey _InputKey)

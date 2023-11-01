@@ -49,6 +49,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                     SkillCharge.i.SetAmount(0f);
 
                     //©ñ¶}®É¼½BurstCharge1Success
+                    _m.Ani.Rebind();
                     _m.Ani.Play(AnimationKey);
                     _m.Ani.Update(0f);
                     _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
@@ -84,12 +85,20 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         _m.SpeedFactor = 0.35f;
         if (!ExtendPreviousAnimation)
         {
+            _m.Ani.Rebind();
             _m.Ani.Play(AnimationKeyCharging);
             _m.Ani.Update(0f);
         }
         SkillCharge.i.SetText(DisplayName);
         SkillCharge.i.SetSuccessTime(ChargeSuccessTime);
         //Debug.Log("A ChargeAble Action Started !");
+
+        if (!IsHeavyAttack)
+            AerutaDebug.i.Feedback.LightAttackCount--;
+        else
+            AerutaDebug.i.Feedback.HeavyAttackCount--;
+        AerutaDebug.i.Feedback.ChargeAttackCount++;
+
         return new ActionPeformStateCharge();
     }
 
@@ -108,6 +117,12 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
     public override void Init(Character _m)
     {
         base.Init(_m);
+    }
+
+    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
+    {
+        base.HitSuccess(_m, _hitted, IHitable);
+
     }
 }
 

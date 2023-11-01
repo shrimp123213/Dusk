@@ -37,6 +37,9 @@ public class ActionBaseObj : ScriptableObject
     [Header("是否可中斷行動")]
     public bool CanInterruptAction;
 
+    [Header("是否觸發標記")]
+    public bool CanTriggerMark;
+
     [Header("連技")]
     public List<ActionLink> Links;
 
@@ -70,6 +73,8 @@ public class ActionBaseObj : ScriptableObject
 
     public float OrbRecovery;
 
+    public float OrbRecoveryAdditionalByMark;
+
     public float EvadeEnergyRecovery;
 
     public float EndActionFloatTime;
@@ -81,6 +86,8 @@ public class ActionBaseObj : ScriptableObject
     private bool[] IsTriggered;
 
     private bool[] IsTeleported;
+
+    public bool IsHeavyAttack;
 
     public virtual void Init(Character _m)
     {
@@ -123,6 +130,7 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
+        _m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
 
@@ -130,6 +138,12 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.HitEffect.SetTimeSlow(TimeSlowAmount);
         }
+
+        if (!IsHeavyAttack)
+            AerutaDebug.i.Feedback.LightAttackCount++;
+        else
+            AerutaDebug.i.Feedback.HeavyAttackCount++;
+
         return new ActionPeformState();
     }
 
@@ -143,12 +157,29 @@ public class ActionBaseObj : ScriptableObject
         }
     }
 
-    public virtual void HitSuccess(Character _m, Character _hitted)
+    public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
     {
-        if (_hitted==Butterfly.i.MarkTarget)
+        if (_hitted == Butterfly.i.MarkTarget) 
         {
             Butterfly.i.MarkTime += MarkTimeRecovery;
+
+            if (CanTriggerMark) 
+                TriggerMark(_m, _hitted, IHitable);
         }
+
+    }
+
+    public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
+    {
+        Butterfly.i.Blast();
+
+        _m.TriggerMark();
+
+        IHitable.TakeDamage(new Damage(10, DamageType.Mark), _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
+
+        //_hitted累積體幹值
+
+        AerutaDebug.i.Feedback.MarkTriggerCount++;
     }
 
     public virtual float GetDamageRatio(Character _m)
@@ -230,7 +261,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, (!collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction));
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -241,7 +272,7 @@ public class ActionBaseObj : ScriptableObject
                         return;
                     }
                     Character component = collider2D.GetComponent<Character>();
-                    HitSuccess(_m, component);
+                    HitSuccess(_m, component, IHitable);
                     float y = 0f;
                     if (SuckEffect)
                     {
@@ -277,6 +308,7 @@ public class ActionBaseObj : ScriptableObject
             }
             EndAction(_m);
             _m.NowAction = null;
+            _m.Ani.Rebind();
             _m.Ani.Play("Idle");
             _m.Ani.Update(0f);
 

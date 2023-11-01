@@ -250,6 +250,10 @@ public class Character : MonoBehaviour, IHitable
         }
     }
 
+    public virtual void TriggerMark()
+    {
+    }
+
     public virtual void AttackLand()
     {
         HitEffect.SetAttackStun();
@@ -470,6 +474,8 @@ public class Character : MonoBehaviour, IHitable
             //    CancelInvoke("ResumeAI");
             //    Invoke("ResumeAI", 0.75f);
             //}
+            if ((bool)Player)
+                AerutaDebug.i.Feedback.HittedCount++;
         }
         if (!Blocking)
             Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
@@ -493,6 +499,7 @@ public class Character : MonoBehaviour, IHitable
 
     public void SetAnimationIdle()
     {
+        Ani.Rebind();
         Ani.Play((Xinput != 0f) ? "Run" : "Idle");
         Ani.Update(0f);
     }
@@ -539,6 +546,7 @@ public class Character : MonoBehaviour, IHitable
 
         if (!ImmuneInterruptAction)
         {
+            Ani.Rebind();
             Ani.Play("Attacked");
             Ani.Update(0f);
         }

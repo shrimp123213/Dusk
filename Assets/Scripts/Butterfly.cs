@@ -134,7 +134,6 @@ public class Butterfly : MonoBehaviour
     {
         Ani.Play("Appear");
         Ani.Update(0f);
-        Debug.Log("Appear");
 
         moveDelay = 0f;
 
@@ -152,7 +151,6 @@ public class Butterfly : MonoBehaviour
     {
         Ani.Play("Disappear");
         Ani.Update(0f);
-        Debug.Log("Disappear");
 
         SliderMarkTime.gameObject.SetActive(false);
 
@@ -167,10 +165,7 @@ public class Butterfly : MonoBehaviour
     public void Blast()
     {
         Disappear();
-        Debug.Log("Blast");
 
         Object.Instantiate(BlastEffect, transform.position, Quaternion.identity, transform);
-
-        PlayerMain.i.HitEffect.SetGlobalSlow();
     }
 }

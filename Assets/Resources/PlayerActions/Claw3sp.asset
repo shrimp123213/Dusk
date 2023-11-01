@@ -32,6 +32,7 @@ MonoBehaviour:
   HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 1
+  CanTriggerMark: 0
   Links:
   - Frame: 52
     LifeTime: -1
@@ -108,7 +109,8 @@ MonoBehaviour:
   NeedButterfly: 0
   MarkTimeRecovery: 0.5
   OrbCost: 0
-  OrbRecovery: 1
+  OrbRecovery: 0.02
+  OrbRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
