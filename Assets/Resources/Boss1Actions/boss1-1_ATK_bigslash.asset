@@ -18,7 +18,7 @@ MonoBehaviour:
   AnimationKey: boss1-1_ATK_bigslash
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 0
+  DamageRatio: 0.5
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 60
@@ -27,7 +27,8 @@ MonoBehaviour:
     Range: {x: 9, y: 7}
   HitMax: 1
   SuckEffect: 0
-  CanInterruptAction: 0
+  CanInterruptAction: 1
+  CanTriggerMark: 0
   Links: []
   Moves: []
   Toggles: []
@@ -36,9 +37,13 @@ MonoBehaviour:
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
+  NeedButterfly: 0
+  MarkTimeRecovery: 0
   OrbCost: 0
   OrbRecovery: 0
+  OrbRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 0
+  IsHeavyAttack: 0
