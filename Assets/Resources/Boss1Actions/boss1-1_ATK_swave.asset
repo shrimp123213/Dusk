@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: boss1-1_ATK_swave
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_swave
-  PreviousId: 
+  PreviousId: boss1-1_ATK_swave
   DisplayName: boss1-1_ATK_swave
   AnimationKey: boss1-1_ATK_swave
   InterruptLevel: 0
@@ -23,8 +23,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 103
     KeyFrameEnd: 115
-    Offset: {x: 3, y: 4, z: 0}
-    Range: {x: 6, y: 8}
+    Offset: {x: 4, y: 4, z: 0}
+    Range: {x: 2, y: 8}
   HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
