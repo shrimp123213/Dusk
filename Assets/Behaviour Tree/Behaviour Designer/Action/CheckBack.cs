@@ -4,7 +4,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class CheckBack : EnemyActionBase
+public class CheckBack : EnemyConditionalBase
 {
     public SharedTransform Target;
     public float Range = 5f;
