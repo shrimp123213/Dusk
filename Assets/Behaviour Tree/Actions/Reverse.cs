@@ -6,7 +6,7 @@ using TheKiwiCoder;
 [System.Serializable]
 public class Reverse : ActionNode
 {
-    [Tooltip("Move Clip")]
+    [Tooltip("Reverse Clip")]
     public NodeProperty<string> clip  = new NodeProperty<string> { defaultValue = null };
     
     protected override void OnStart() {
