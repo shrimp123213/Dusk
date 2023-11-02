@@ -25,6 +25,8 @@ public class CheckBack : EnemyConditionalBase
                 return TaskStatus.Success;
             }
         }
+        if(this.SelfCharacter.Value.isActing)
+            return TaskStatus.Running;
         return TaskStatus.Failure;
     }
 }
