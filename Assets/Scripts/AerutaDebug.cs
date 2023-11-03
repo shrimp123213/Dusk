@@ -21,6 +21,7 @@ public class AerutaDebug : MonoBehaviour
     public GameObject Statistics;
     private float startSceneTime;
 
+    public GameObject ChargeEffect;
     public GameObject BlockEffect;
     public GameObject BloodEffect;
     public GameObject PenetrateTrail;
@@ -69,6 +70,17 @@ public class AerutaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            AerutaDebug.i.Boss1.Ani.speed = 0f;
+            AerutaDebug.i.Boss1.AITree.enabled = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            AerutaDebug.i.Boss1.Ani.speed = 1f;
+            AerutaDebug.i.Boss1.AITree.enabled = true;
         }
     }
 

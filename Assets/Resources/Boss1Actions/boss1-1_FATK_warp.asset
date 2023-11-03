@@ -27,12 +27,12 @@ MonoBehaviour:
     Range: {x: 8, y: 3}
   HitMax: 0
   SuckEffect: 0
-  CanInterruptAction: 0
+  CanInterruptAction: 1
   CanTriggerMark: 0
   Links: []
   Moves:
-  - KeyFrame: 83
-    Power_ZTime: {x: 45, y: 0, z: 0.3}
+  - KeyFrame: 78
+    Power_ZTime: {x: 45, y: -2, z: 0.3}
     XCurve:
       serializedVersion: 2
       m_Curve:
@@ -84,7 +84,11 @@ MonoBehaviour:
     CanEvade: 1
     StartEvadeFrame: 0
     EndEvadeFrame: 0
-  Toggles: []
+  Toggles:
+  - KeyFrame: 0
+    IsActive: 0
+  - KeyFrame: 90
+    IsActive: 1
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
@@ -99,6 +103,7 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 
+  IsTriggered: 0101
   IsTeleported: 
   IsHeavyAttack: 0
+  HitStun: 0.25

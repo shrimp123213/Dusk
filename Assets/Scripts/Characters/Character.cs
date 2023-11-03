@@ -480,24 +480,31 @@ public class Character : MonoBehaviour, IHitable
                 {
                     Butterfly.i.MarkTime = Butterfly.i.MarkTimeMax.Final;
                 }
-                else if (!Butterfly.i.isAppear)
+                else 
                 {
-                    Butterfly.i.Appear();
+                    if (!Butterfly.i.isAppear)
+                        Butterfly.i.Appear();
                     Butterfly.i.MarkTarget = _attacker;
                     Butterfly.i.transform.parent = null;
 
                     AerutaDebug.i.Feedback.MarkCount++;
                 }
 
+                Debug.Log("¨¾¿m");
                 if (NowAction.DisplayName == "BurstCharge1")
                 {
+                    Debug.Log("¨¾¿m2");
                     ActionMarkChargeObj BurstCharge1 = (ActionMarkChargeObj)NowAction;
                     BurstCharge1.BlockSuccess = true;
                 }
 
+                //¨¾¿m¦¨¥\®É¶¡¼È°±
+                HitEffect.SetHitStun(false, false, .5f, false);
+                _attacker.HitEffect.SetHitStun(false, false, .5f, false);
+
                 //µê®z
 
-                return false;
+                return true;
             }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             //DOTween.Sequence().Append(component.DOFade(1.75f, 0.1f));//.Append(component.DOFade(1f, 0.15f));
@@ -515,7 +522,26 @@ public class Character : MonoBehaviour, IHitable
             //}
             if ((bool)Player)
                 AerutaDebug.i.Feedback.HittedCount++;
+
+
+            if (isActing && isActionInterrupted)
+            {
+                NowAction.EndAction(this);
+
+                if (StoredMoves.Count > 0)
+                {
+                    StoredMoves.Clear();
+                }
+            }
+            if (!ImmuneInterruptAction)
+            {
+                Ani.Rebind();
+                Ani.Play("Attacked");
+                Ani.Update(0f);
+            }
         }
+
+
         Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
         if (Health <= 0f)
         {
@@ -556,17 +582,9 @@ public class Character : MonoBehaviour, IHitable
         base.gameObject.SetActive(value: false);
     }
 
-    public void TakeForce(Vector2 _Force, Vector2 _AddiForce, bool canInterruptAction)
+    public void TakeForce(Vector2 _Force, Vector2 _AddiForce)
     {
-        if (isActing && canInterruptAction && !ImmuneInterruptAction)
-        {
-            NowAction.EndAction(this);
-
-            if (StoredMoves.Count > 0)
-            {
-                StoredMoves.Clear();
-            }
-        }
+        
         if (!isGround)
         {
             Rigid.velocity = Vector2.zero;
@@ -587,12 +605,6 @@ public class Character : MonoBehaviour, IHitable
         CanLongJump = false;
         Rigid.drag = 0f;
 
-        if (!ImmuneInterruptAction)
-        {
-            Ani.Rebind();
-            Ani.Play("Attacked");
-            Ani.Update(0f);
-        }
 
         HitEffect.SetTimeSlow(0.15f);
     }

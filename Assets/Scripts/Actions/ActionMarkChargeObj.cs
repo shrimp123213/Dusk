@@ -1,7 +1,5 @@
-using FunkyCode.SuperTilemapEditorSupport.Light.Shadow;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ActionMarkCharge", menuName = "Actions/MarkCharge")]
@@ -24,6 +22,8 @@ public class ActionMarkChargeObj : ActionChargeObj
     private IHitable IHitable;
     private Vector2 ClosestPoint;
 
+    private bool effectInstantiated;
+
     public override ActionPeformState StartAction(Character _m)
     {
         hitSuccess = false;
@@ -31,6 +31,7 @@ public class ActionMarkChargeObj : ActionChargeObj
         hitted = null;
         IHitable = null;
         ClosestPoint = Vector2.zero;
+        effectInstantiated = false;
 
         collider = _m.GetComponent<BoxCollider2D>();
 
@@ -47,6 +48,13 @@ public class ActionMarkChargeObj : ActionChargeObj
         {
             actionPeformStateCharge.ChargeAmount = Mathf.Clamp(Time.deltaTime * ChargeSpeed + actionPeformStateCharge.ChargeAmount, 0f, 1f);
             actionPeformStateCharge.Charging = _m.Charging;
+
+            if (actionPeformStateCharge.ChargeAmount > ChargeSuccessTime && !effectInstantiated)
+            {
+                effectInstantiated = true;
+                Instantiate(AerutaDebug.i.ChargeEffect, Vector3.up * -0.225f + _m.transform.position, Quaternion.identity, _m.transform);
+            }
+
             if (!actionPeformStateCharge.Charging)
             {
                 foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
@@ -124,7 +132,7 @@ public class ActionMarkChargeObj : ActionChargeObj
         if (hitSuccess && !_m.Blocking && !BlockSuccess && actionPeformStateCharge.IsAfterFrame(BlockEndFrame))
         {
             hitSuccess = false;
-            base.HitSuccess(_m, hitted, IHitable, ClosestPoint);
+            //base.HitSuccess(_m, hitted, IHitable, ClosestPoint);
         }
 
         base.ProcessAction(_m);
@@ -136,6 +144,8 @@ public class ActionMarkChargeObj : ActionChargeObj
         hitted = _hitted;
         IHitable = _IHitable;
         ClosestPoint = _ClosestPoint;
+
+        base.HitSuccess(_m, hitted, IHitable, ClosestPoint);
     }
 
     public override void EndAction(Character _m)

@@ -27,7 +27,7 @@ MonoBehaviour:
     Range: {x: 50, y: 4}
   HitMax: 0
   SuckEffect: 0
-  CanInterruptAction: 0
+  CanInterruptAction: 1
   CanTriggerMark: 0
   Links: []
   Moves: []
@@ -49,3 +49,4 @@ MonoBehaviour:
   IsTriggered: 
   IsTeleported: 
   IsHeavyAttack: 0
+  HitStun: 0.25

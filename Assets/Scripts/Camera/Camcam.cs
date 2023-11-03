@@ -27,6 +27,11 @@ public class Camcam : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+    }
+
+    private void LateUpdate()
+    {
         if (UseOverride)
         {
             base.transform.position = Vector3.Lerp(base.transform.position, PosOverride, Time.fixedDeltaTime * 3f);

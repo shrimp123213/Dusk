@@ -26,6 +26,8 @@ public class HitEffector : MonoBehaviour
 
     private bool isImmuneStunAction;
 
+    private bool ShakeCharacter;
+
     private void Awake()
     {
         GlobalMoveTimeScale = 1f;
@@ -65,7 +67,8 @@ public class HitEffector : MonoBehaviour
             if (HitStunInterval <= 0f && HitStun > 0f)
             {
                 HitStunInterval = 0.025f;
-                TransSprite.localPosition = new Vector3((TransSprite.localPosition.x <= 0f) ? Random.Range(0.11f, 0.13f) : (0f - Random.Range(0.11f, 0.13f)), TransSprite.localPosition.y, TransSprite.localPosition.z);
+                if (ShakeCharacter)
+                    TransSprite.localPosition = new Vector3((TransSprite.localPosition.x <= 0f) ? Random.Range(0.11f, 0.13f) : (0f - Random.Range(0.11f, 0.13f)), TransSprite.localPosition.y, TransSprite.localPosition.z);
 
                 if (!isActionInterrupted && !isImmuneStunAction)
                 {
@@ -106,12 +109,14 @@ public class HitEffector : MonoBehaviour
         AttackStunDura = 0.075f;
     }
 
-    public void SetHitStun(bool _isActionInterrupted, bool _IsImmuneStunAction, float _HitStun = .25f)
+    public void SetHitStun(bool _isActionInterrupted, bool _IsImmuneStunAction, float _HitStun = .25f, bool _ShakeCharacter = true)
     {
         if (!isActionInterrupted)//避免被打第一次中斷行動後被打第二次的攻擊沒有附加中斷導致結束暈眩後沒有回到Idle
             isActionInterrupted = _isActionInterrupted;
 
         isImmuneStunAction = _IsImmuneStunAction;
+
+        ShakeCharacter = _ShakeCharacter;
 
         HitStun += _HitStun;
     }
