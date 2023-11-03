@@ -14,7 +14,7 @@ public class Butterfly : MonoBehaviour
     public Character MarkTarget;
 
     public bool isAppear;
-    private bool onTarget;
+    public bool onTarget;
 
     private float moveDelay;
     private float moveDelayMax = .3f;

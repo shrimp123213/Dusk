@@ -90,6 +90,8 @@ public class ActionBaseObj : ScriptableObject
 
     public bool IsHeavyAttack;
 
+    public float HitStun;
+
     public virtual void Init(Character _m)
     {
         foreach (ActionMovement movement in _m.NowAction.Moves) 
@@ -165,7 +167,7 @@ public class ActionBaseObj : ScriptableObject
         {
             Butterfly.i.MarkTime += MarkTimeRecovery;
 
-            if (CanTriggerMark) 
+            if (CanTriggerMark && Butterfly.i.onTarget) 
                 TriggerMark(_m, _hitted, IHitable);
         }
 
@@ -179,7 +181,7 @@ public class ActionBaseObj : ScriptableObject
 
         _m.TriggerMark();
 
-        IHitable.TakeDamage(new Damage(10, DamageType.Mark), _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
+        IHitable.TakeDamage(new Damage(10, DamageType.Mark), 0f, _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
 
         //_hitted≤÷øn≈È∑F≠»
 
@@ -265,7 +267,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {

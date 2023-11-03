@@ -456,7 +456,7 @@ public class Character : MonoBehaviour, IHitable
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }
 
-    public bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default))
+    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default))
     {
         if (isDead)
         {
@@ -504,7 +504,7 @@ public class Character : MonoBehaviour, IHitable
             //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
             //Debug.Log("Hit : " + base.gameObject.name);
             LowGravityTime = 0.665f;
-            HitEffect.SetHitStun(isActionInterrupted, ImmuneStunAction);
+            HitEffect.SetHitStun(isActionInterrupted, ImmuneStunAction, _HitStun);
             //if ((bool)AITree)
             //{
             //    AITree.SendEvent("Attacked", (object)_attacker.transform);
@@ -637,5 +637,5 @@ public enum CharacterStates
 
 public interface IHitable
 {
-    bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default));
+    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default));
 }

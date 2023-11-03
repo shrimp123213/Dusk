@@ -20,17 +20,17 @@ public class ActionMarkChargeObj : ActionChargeObj
 
     public bool BlockSuccess;
 
-    private Character _hitted;
+    private Character hitted;
     private IHitable IHitable;
-    private Vector2 _ClosestPoint;
+    private Vector2 ClosestPoint;
 
     public override ActionPeformState StartAction(Character _m)
     {
         hitSuccess = false;
         BlockSuccess = false;
-        _hitted = null;
+        hitted = null;
         IHitable = null;
-        _ClosestPoint = Vector2.zero;
+        ClosestPoint = Vector2.zero;
 
         collider = _m.GetComponent<BoxCollider2D>();
 
@@ -102,35 +102,40 @@ public class ActionMarkChargeObj : ActionChargeObj
                     _m.Inputs.Remove(InputKey.BurstRelease);
                 }
             }
-            else
-            {
-                SkillCharge.i.SetAmount(actionPeformStateCharge.ChargeAmount / 1f);
-
-                _m.Blocking = false;
-
-                collider.offset = originOffset;
-                collider.size = originSize;
-
-                _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-            }
         }
+        
 
     }
 
     public override void ProcessAction(Character _m)
     {
         ActionPeformStateCharge actionPeformStateCharge = (ActionPeformStateCharge)_m.ActionState;
+        if (!actionPeformStateCharge.Charging)
+        {
+            SkillCharge.i.SetAmount(actionPeformStateCharge.ChargeAmount / 1f);
+
+            _m.Blocking = false;
+
+            collider.offset = originOffset;
+            collider.size = originSize;
+
+            _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+        }
         if (hitSuccess && !_m.Blocking && !BlockSuccess && actionPeformStateCharge.IsAfterFrame(BlockEndFrame))
         {
-            base.HitSuccess(_m, _hitted, IHitable, _ClosestPoint);
+            hitSuccess = false;
+            base.HitSuccess(_m, hitted, IHitable, ClosestPoint);
         }
 
         base.ProcessAction(_m);
     }
 
-    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
+    public override void HitSuccess(Character _m, Character _hitted, IHitable _IHitable, Vector2 _ClosestPoint)
     {
         hitSuccess = true;
+        hitted = _hitted;
+        IHitable = _IHitable;
+        ClosestPoint = _ClosestPoint;
     }
 
     public override void EndAction(Character _m)
