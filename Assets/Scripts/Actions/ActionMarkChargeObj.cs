@@ -110,7 +110,7 @@ public class ActionMarkChargeObj : ActionChargeObj
     public override void ProcessAction(Character _m)
     {
         ActionPeformStateCharge actionPeformStateCharge = (ActionPeformStateCharge)_m.ActionState;
-        if (!actionPeformStateCharge.Charging)
+        if (!actionPeformStateCharge.Charging && actionPeformStateCharge.IsAfterFrame(BlockEndFrame))
         {
             SkillCharge.i.SetAmount(actionPeformStateCharge.ChargeAmount / 1f);
 

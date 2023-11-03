@@ -113,7 +113,7 @@ public class HitEffector : MonoBehaviour
 
         isImmuneStunAction = _IsImmuneStunAction;
 
-        HitStun = _HitStun;
+        HitStun += _HitStun;
     }
 
     public void SetTimeSlow(float _Time)
