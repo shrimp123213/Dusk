@@ -170,7 +170,7 @@ public class Character : MonoBehaviour, IHitable
 
         AITree = GetComponent<BehaviorTree>();
         if ((bool)AITree)
-            //TeleportKeyReference = AITree.GetVariable("TeleportTargetPos");
+            TeleportKeyReference = (AITree.GetVariable("TeleportTargetPos") as SharedVector2).Value;
         //AITree = GetComponent<BehaviorTree>();
         //if ((bool)AITree)
         //{

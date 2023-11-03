@@ -13,23 +13,78 @@ MonoBehaviour:
   m_Name: boss1-1_FATK_warp
   m_EditorClassIdentifier: 
   Id: boss1-1_FATK_warp
-  PreviousId: 
+  PreviousId: boss1-1_FATK_warp
   DisplayName: boss1-1_FATK_warp
   AnimationKey: boss1-1_FATK_warp
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 0.5
+  DamageRatio: 0
   DamageType: 0
-  AttackSpots: []
+  AttackSpots:
+  - KeyFrameFrom: 85
+    KeyFrameEnd: 95
+    Offset: {x: 4, y: 1, z: 0}
+    Range: {x: 8, y: 3}
   HitMax: 0
   SuckEffect: 0
-  CanInterruptAction: 1
+  CanInterruptAction: 0
   CanTriggerMark: 0
   Links: []
-  Moves: []
-  Toggles:
-  - KeyFrame: 40
-    IsActive: 1
+  Moves:
+  - KeyFrame: 83
+    Power_ZTime: {x: 45, y: 0, z: 0.3}
+    XCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.99975586
+        inSlope: 0.064425424
+        outSlope: 0.064425424
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.45184135
+      - serializedVersion: 3
+        time: 1.0054016
+        value: 0.0002746582
+        inSlope: -0.07013554
+        outSlope: -0.07013554
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.5309729
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    YCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0036226623
+        value: 2.0147023
+        inSlope: -3.5660653
+        outSlope: -3.5660653
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.03807461
+      - serializedVersion: 3
+        time: 1
+        value: 1.001709
+        inSlope: -0.044252444
+        outSlope: -0.044252444
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.44903418
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    CanEvade: 1
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
@@ -44,4 +99,6 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
+  IsTriggered: 
+  IsTeleported: 
   IsHeavyAttack: 0

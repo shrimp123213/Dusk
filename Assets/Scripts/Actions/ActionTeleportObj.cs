@@ -10,7 +10,8 @@ public class ActionTeleportObj : ActionBaseObj
 
     public override ActionPeformState StartAction(Character _m)
     {
-        //TeleportTargetPos = _m.TeleportKeyReference.value;
+        TeleportTargetPos = _m.TeleportKeyReference;
+        Debug.Log(TeleportTargetPos);
 
         return base.StartAction(_m);
     }
