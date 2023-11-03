@@ -254,10 +254,10 @@ public class PlayerMain : Character
 
     public override void StartAction(ActionBaseObj _actionBaseObj)
     {
-        TextMeshProUGUI textInput = TextInput;
-        if ((_actionBaseObj.AnimationKey.Contains("Claw") || _actionBaseObj.AnimationKey.Contains("Burst")) && textInput.text != "")
-            textInput.text = textInput.text + "\n";
-        textInput.text = textInput.text + _actionBaseObj.AnimationKey + " -> ";
+        //TextMeshProUGUI textInput = TextInput;
+        //if ((_actionBaseObj.AnimationKey.Contains("Claw") || _actionBaseObj.AnimationKey.Contains("Burst")) && textInput.text != "")
+        //    textInput.text = textInput.text + "\n";
+        //textInput.text = textInput.text + _actionBaseObj.AnimationKey + " -> ";
         //Swinger.CutHook();
         base.StartAction(_actionBaseObj);
         //if (_actionBaseObj.Id == 0)
@@ -373,6 +373,10 @@ public class PlayerMain : Character
         {
             TryInput(InputKey.Mark);
         }
+        if (playerAct.FindAction("UI").WasPressedThisFrame())
+        {
+            AerutaDebug.i.CloseUI();
+        }
         Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
         {
@@ -400,10 +404,10 @@ public class PlayerMain : Character
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Lava"))
-        {
-            //RoomManager.i.TeleportToSafePoint();
-        }
+        //if (collision.CompareTag("Lava"))
+        //{
+        //    //RoomManager.i.TeleportToSafePoint();
+        //}
     }
 
     public void ResetDash()

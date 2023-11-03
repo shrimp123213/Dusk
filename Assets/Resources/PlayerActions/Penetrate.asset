@@ -23,8 +23,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 100
     KeyFrameEnd: 106
-    Offset: {x: -10.25, y: 0, z: 0}
-    Range: {x: 20.5, y: 1}
+    Offset: {x: -5, y: 0, z: 0}
+    Range: {x: 10, y: 1}
   HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
   Links: []
   Moves:
   - KeyFrame: 48
-    Power_ZTime: {x: 100, y: 0, z: 0.5}
+    Power_ZTime: {x: 50, y: 0, z: 0.5}
     XCurve:
       serializedVersion: 2
       m_Curve:
@@ -76,7 +76,7 @@ MonoBehaviour:
   MarkTimeRecovery: 0
   OrbCost: 1
   OrbRecovery: 0
-  OrbRecoveryAdditionalByMark: 0.5
+  OrbRecoveryAdditionalByMark: 0.2
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
   GroundOnly: 0

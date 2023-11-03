@@ -107,6 +107,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UI"",
+                    ""type"": ""Button"",
+                    ""id"": ""9201e65c-06d2-4739-9ec0-aa50b4c3ba5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Mark"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0d52a9d-d5cc-49bb-a5e6-081f5b7c2679"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27dab242-dbc6-401d-9734-56060b2844ba"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -391,6 +422,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         m_Player_Mark = m_Player.FindAction("Mark", throwIfNotFound: true);
+        m_Player_UI = m_Player.FindAction("UI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -461,6 +493,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
     private readonly InputAction m_Player_Mark;
+    private readonly InputAction m_Player_UI;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -474,6 +507,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputAction @Mark => m_Wrapper.m_Player_Mark;
+        public InputAction @UI => m_Wrapper.m_Player_UI;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -510,6 +544,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Mark.started += instance.OnMark;
             @Mark.performed += instance.OnMark;
             @Mark.canceled += instance.OnMark;
+            @UI.started += instance.OnUI;
+            @UI.performed += instance.OnUI;
+            @UI.canceled += instance.OnUI;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -541,6 +578,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Mark.started -= instance.OnMark;
             @Mark.performed -= instance.OnMark;
             @Mark.canceled -= instance.OnMark;
+            @UI.started -= instance.OnUI;
+            @UI.performed -= instance.OnUI;
+            @UI.canceled -= instance.OnUI;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -587,5 +627,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnMark(InputAction.CallbackContext context);
+        void OnUI(InputAction.CallbackContext context);
     }
 }

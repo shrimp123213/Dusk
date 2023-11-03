@@ -9,25 +9,41 @@ public class Contact : MonoBehaviour
     public Animator[] fences;
 
     public BehaviorTree AITree;
-    
-    private BoxCollider2D contactCol;
-    
-    
+    private Animator ani;
+
+
     void Start()
     {
-        contactCol = GetComponent<BoxCollider2D>();
-        AITree.DisableBehavior();
+        ani = AITree.GetComponentInChildren<Animator>();
     }
 
+    private void Update()
+    {
+        if (ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start") 
+        {
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 285f / 501f) 
+            {
+                fences[0].Play("FenceUp");
+                fences[1].Play("FenceUp");
+                
+            }
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 480f / 501f)
+            {
+                AITree.GetComponent<Character>().HitEffect.HitStun = .01f;
+                gameObject.SetActive(false);
+            }
+;
+        }
+        
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            fences[0].Play("FenceUp");
-            fences[1].Play("FenceUp");
-            AITree.EnableBehavior();
-            
+            AITree.enabled = true;
+
+            AerutaDebug.i.StartGameTime = Time.unscaledTime;
         }
     }
 }

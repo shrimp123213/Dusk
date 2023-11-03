@@ -31,7 +31,7 @@ public class HitEffector : MonoBehaviour
     private void Awake()
     {
         GlobalMoveTimeScale = 1f;
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 
     public void CallAwake(Animator ani)

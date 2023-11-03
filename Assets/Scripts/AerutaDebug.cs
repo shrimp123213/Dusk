@@ -19,7 +19,7 @@ public class AerutaDebug : MonoBehaviour
 
     public Feedback Feedback = new Feedback();
     public GameObject Statistics;
-    private float startSceneTime;
+    public float StartGameTime;
 
     public GameObject ChargeEffect;
     public GameObject BlockEffect;
@@ -30,11 +30,13 @@ public class AerutaDebug : MonoBehaviour
 
     public Character Boss1;
 
+    public Image ControlGamepad, ControlKeyboard;
+
     private void Awake()
     {
         i = this;
 
-        startSceneTime = Time.unscaledTime;
+        Time.timeScale = 0f;
     }
 
     public void CallEffect(int num)//顯示打中擊飛敵人、閃避成功等UI
@@ -82,6 +84,7 @@ public class AerutaDebug : MonoBehaviour
             AerutaDebug.i.Boss1.Ani.speed = 1f;
             AerutaDebug.i.Boss1.AITree.enabled = true;
         }
+
     }
 
     public void InsClap(Vector3 _v3)
@@ -93,10 +96,25 @@ public class AerutaDebug : MonoBehaviour
     public void ShowStatistics()
     {
         Statistics.SetActive(true);
-        Feedback.PlayTime = Time.unscaledTime - startSceneTime;
+        Feedback.PlayTime = Time.unscaledTime - StartGameTime;
         Statistics.transform.GetChild(0).GetComponent<TMP_Text>().text = Feedback.LeftText();
         Statistics.transform.GetChild(1).GetComponent<TMP_Text>().text = Feedback.MiddleText();
         Statistics.transform.GetChild(2).GetComponent<TMP_Text>().text = Feedback.RightText();
+    }
+
+    public void CloseUI()
+    {
+        if (ControlGamepad.enabled && !ControlKeyboard.enabled)
+        {
+            ControlGamepad.enabled = false;
+            ControlKeyboard.enabled = true;
+        }
+        else if (!ControlGamepad.enabled && ControlKeyboard.enabled)
+        {
+            ControlGamepad.enabled = false;
+            ControlKeyboard.enabled = false;
+            Time.timeScale = 1f;
+        }
     }
 }
 

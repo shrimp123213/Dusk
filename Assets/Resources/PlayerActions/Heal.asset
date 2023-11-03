@@ -18,7 +18,7 @@ MonoBehaviour:
   AnimationKey: Heal
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1
+  DamageRatio: 0
   DamageType: 2
   AttackSpots: []
   HitMax: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   TimeSlowAmount: 0
   NeedButterfly: 0
   MarkTimeRecovery: 0
-  OrbCost: 1
+  OrbCost: 0
   OrbRecovery: 0
   OrbRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
@@ -45,5 +45,6 @@ MonoBehaviour:
   IsTriggered: 
   IsTeleported: 
   IsHeavyAttack: 0
-  HealAmount: 10
+  HitStun: 0
+  HealAmount: 50
   KeyFrame: 82
