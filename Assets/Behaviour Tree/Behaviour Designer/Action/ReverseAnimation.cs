@@ -14,6 +14,7 @@ public class ReverseAnimation : EnemyActionBase
         Ani.Play(ReverseAnimationName);
         if(Ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             return TaskStatus.Success;
+        
         return TaskStatus.Running;
     }
 }
