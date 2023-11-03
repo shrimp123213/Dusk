@@ -9,6 +9,8 @@ public class EnemyStartAction : EnemyActionBase
     public SharedTransform Target;
     
     public ActionBaseObj Action;
+
+    public bool Flip;
     
     //public string ReverseAnimationName;
    
@@ -39,5 +41,13 @@ public class EnemyStartAction : EnemyActionBase
                 return TaskStatus.Success;
         }*/
         return TaskStatus.Success;
+    }
+
+    public override void OnEnd()
+    {
+        if (Flip)
+        {
+            this.SelfCharacter.Value.Facing *= -1;
+        }
     }
 }
