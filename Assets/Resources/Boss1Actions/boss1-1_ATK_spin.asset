@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: boss1-1_ATK_spin
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_spin
-  PreviousId: 
+  PreviousId: boss1-1_ATK_spin
   DisplayName: boss1-1_ATK_spin
   AnimationKey: boss1-1_ATK_spin
   InterruptLevel: 0
@@ -23,8 +23,12 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 72
     KeyFrameEnd: 80
-    Offset: {x: 1, y: 2, z: 0}
-    Range: {x: 10, y: 4}
+    Offset: {x: -2, y: 2, z: 0}
+    Range: {x: 8, y: 4}
+  - KeyFrameFrom: 72
+    KeyFrameEnd: 82
+    Offset: {x: 0, y: 0, z: 0}
+    Range: {x: 0, y: 0}
   HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 1
