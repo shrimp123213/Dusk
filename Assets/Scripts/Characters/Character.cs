@@ -471,11 +471,29 @@ public class Character : MonoBehaviour, IHitable
             }
             if (Blocking)
             {
-                Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.identity, null);
+                Instantiate(AerutaDebug.i.BlockEffect, _ClosestPoint, Quaternion.identity, null);
                 AerutaDebug.i.Feedback.BlockCount++;
                 if ((bool)Player)
                     Player.Orb.Add(.5f);
 
+                if (_attacker == Butterfly.i.MarkTarget)
+                {
+                    Butterfly.i.MarkTime = Butterfly.i.MarkTimeMax.Final;
+                }
+                else if (!Butterfly.i.isAppear)
+                {
+                    Butterfly.i.Appear();
+                    Butterfly.i.MarkTarget = _attacker;
+                    Butterfly.i.transform.parent = null;
+
+                    AerutaDebug.i.Feedback.MarkCount++;
+                }
+
+                if (NowAction.DisplayName == "BurstCharge1")
+                {
+                    ActionMarkChargeObj BurstCharge1 = (ActionMarkChargeObj)NowAction;
+                    BurstCharge1.BlockSuccess = true;
+                }
 
                 //µê®z
 
