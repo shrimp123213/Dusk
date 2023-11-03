@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Gun",
+                    "name": "Ult",
                     "type": "Button",
                     "id": "5e4750b0-ffb2-417e-9f72-97579b409077",
                     "expectedControlType": "Button",
@@ -234,11 +234,11 @@
                 {
                     "name": "",
                     "id": "2e9a5312-952d-4f0c-b9f1-bd9afad8270e",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Gun",
+                    "action": "Ult",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -249,7 +249,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Gun",
+                    "action": "Ult",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -311,7 +311,7 @@
                 {
                     "name": "",
                     "id": "6589a437-ad50-4ae4-9f18-a14ed0a67d3c",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

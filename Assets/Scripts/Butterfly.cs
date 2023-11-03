@@ -66,6 +66,8 @@ public class Butterfly : MonoBehaviour
         }
     }
 
+    public float TimeScale;
+
     private void Awake()
     {
         i = this;
@@ -101,7 +103,7 @@ public class Butterfly : MonoBehaviour
 
     private void CalculatMarkTime()
     {
-        MarkTime = Mathf.Clamp(MarkTime - Time.deltaTime, 0f, MarkTimeMax.Final);
+        MarkTime = Mathf.Clamp(MarkTime - Time.deltaTime * TimeScale, 0f, MarkTimeMax.Final);
 
         //if(onTarget)
         //玩家打擊敵人後增加MarkTime

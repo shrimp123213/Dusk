@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Evade
   m_EditorClassIdentifier: 
   Id: Evade
-  PreviousId: Claw2
+  PreviousId: Claw3
   DisplayName: Evade
   AnimationKey: Evade
   InterruptLevel: 0
@@ -24,9 +24,10 @@ MonoBehaviour:
   HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 0
+  CanTriggerMark: 0
   Links: []
   Moves:
-  - KeyFrame: 10
+  - KeyFrame: 0
     Power_ZTime: {x: 40, y: 0, z: 0.4}
     XCurve:
       serializedVersion: 2
@@ -61,13 +62,21 @@ MonoBehaviour:
     CanEvade: 1
     StartEvadeFrame: 0
     EndEvadeFrame: 25
+  Toggles: []
+  Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
-  UsePopup: 1
+  UsePopup: 0
   TimeSlowAmount: 0
+  NeedButterfly: 0
+  MarkTimeRecovery: 0
   OrbCost: 0
   OrbRecovery: 0
+  OrbRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1
+  IsTriggered: 
+  IsTeleported: 
+  IsHeavyAttack: 0

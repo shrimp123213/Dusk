@@ -8,7 +8,7 @@ public enum InputKey
     Evade,
     Claw,
     Burst,
-    Gun,
+    Ult,
     BurstRelease,
     Heal,
     Mark,

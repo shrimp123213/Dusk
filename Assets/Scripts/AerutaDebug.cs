@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using BehaviorDesigner.Runtime;
+using TheKiwiCoder;
 
 public class AerutaDebug : MonoBehaviour
 {
@@ -18,6 +20,14 @@ public class AerutaDebug : MonoBehaviour
     public Feedback Feedback = new Feedback();
     public GameObject Statistics;
     private float startSceneTime;
+
+    public GameObject BlockEffect;
+    public GameObject BloodEffect;
+    public GameObject PenetrateTrail;
+
+    public ParticleSystem Leaf;
+
+    public Character Boss1;
 
     private void Awake()
     {

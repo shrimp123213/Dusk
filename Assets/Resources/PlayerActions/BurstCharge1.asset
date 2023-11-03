@@ -9,79 +9,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd8bc06466398f45a9320e9ce7f8e40, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bfd98a5ca5f79342b91933399d3ff8d, type: 3}
   m_Name: BurstCharge1
   m_EditorClassIdentifier: 
   Id: BurstCharge1
-  PreviousId: Claw1
+  PreviousId: BurstCharge1
   DisplayName: BurstCharge1
   AnimationKey: BurstCharge1Success
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 0
+  DamageRatio: 1
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 36
-    KeyFrameEnd: 54
-    Offset: {x: 1, y: 0.05, z: 0}
-    Range: {x: 2.5, y: 0.5}
-  HitMax: 0
+  - KeyFrameFrom: 0
+    KeyFrameEnd: 16
+    Offset: {x: 1, y: 0.5, z: 0}
+    Range: {x: 5.5, y: 2}
+  HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 1
   Links:
   - Frame: 0
-    LifeTime: 0.5
+    LifeTime: 0.75
     Key1: 9
     KeyArrow: 0
     LinkActionId: Burst1
     CanChangeFace: 0
-    PreviousId: Claw1
-  - Frame: 0
-    LifeTime: 0.5
-    Key1: 9
+    PreviousId: 
+  - Frame: 54
+    LifeTime: -1
+    Key1: 8
     KeyArrow: 0
-    LinkActionId: Burst2
+    LinkActionId: Penetrate
     CanChangeFace: 0
-    PreviousId: Claw2
-  - Frame: 0
-    LifeTime: 0.5
-    Key1: 9
-    KeyArrow: 0
-    LinkActionId: Burst2
-    CanChangeFace: 0
-    PreviousId: Claw2sp
-  - Frame: 0
-    LifeTime: 0.5
-    Key1: 9
-    KeyArrow: 0
-    LinkActionId: Burst3
-    CanChangeFace: 0
-    PreviousId: Claw3
-  - Frame: 0
-    LifeTime: 0.5
-    Key1: 9
-    KeyArrow: 0
-    LinkActionId: Burst3
-    CanChangeFace: 0
-    PreviousId: Claw3sp
-  - Frame: 0
-    LifeTime: 0.5
-    Key1: 9
-    KeyArrow: 0
-    LinkActionId: Burst4
-    CanChangeFace: 0
-    PreviousId: Claw4
-  - Frame: 0
-    LifeTime: 0.5
-    Key1: 9
-    KeyArrow: 0
-    LinkActionId: Burst4
-    CanChangeFace: 0
-    PreviousId: Claw4sp
+    PreviousId: 
   Moves:
-  - KeyFrame: 36
-    Power_ZTime: {x: 42, y: 0, z: 0.4}
+  - KeyFrame: 0
+    Power_ZTime: {x: 20, y: 0, z: 0.3}
     XCurve:
       serializedVersion: 2
       m_Curve:
@@ -114,25 +79,29 @@ MonoBehaviour:
       m_RotationOrder: 4
     CanEvade: 0
     StartEvadeFrame: 0
-    EndEvadeFrame: 0
+    EndEvadeFrame: 10
   Toggles: []
   Teleports: []
-  ApplyForce: {x: 2, y: 0}
+  ApplyForce: {x: 4, y: 0}
   ForceBasedByPos: 0
-  UsePopup: 1
+  UsePopup: 0
   TimeSlowAmount: 0
   NeedButterfly: 0
   MarkTimeRecovery: 0
   OrbCost: 0
   OrbRecovery: 0
-  OrbRecoveryAdditionalByMark: 2
+  OrbRecoveryAdditionalByMark: 0.5
   EvadeEnergyRecovery: 0
-  EndActionFloatTime: 0.05
+  EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 1
+  IsTriggered: 
+  IsTeleported: 
   IsHeavyAttack: 0
-  AnimationKeyCharging: 
-  ExtendPreviousAnimation: 1
+  AnimationKeyCharging: Charging
+  ExtendPreviousAnimation: 0
   ChargeSpeed: 1
-  ChargeSuccessTime: 0.5
+  ChargeSuccessTime: 0.75
   ChargingStopMoving: 1
+  BlockStartFrame: 0
+  BlockEndFrame: 8

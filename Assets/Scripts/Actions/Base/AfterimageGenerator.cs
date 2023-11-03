@@ -29,6 +29,11 @@ public class AfterimageGenerator : MonoBehaviour
 
     public Vector3 Offset = new Vector3(0f, 0f, 0.15f);
 
+    public bool IsSprite;
+
+    public bool UnscaleedTime;
+
+    public Vector3 EulerAngles = Vector3.zero;
 
     private void Awake()
     {
@@ -46,23 +51,31 @@ public class AfterimageGenerator : MonoBehaviour
             if (emitLeft <= 0f)
             {
                 //Debug.Log("spawnEffect");
-                GameObject obj = new GameObject();
-                SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = base.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+                
+                if (IsSprite)
+                {
+                    GameObject obj = new GameObject();
 
-                spriteRenderer.sortingLayerName = "Middle";
-                spriteRenderer.sortingOrder = 1;
+                    obj.transform.eulerAngles = EulerAngles;
 
-                spriteRenderer.color = NewColor;
-                DOTween.Sequence().SetDelay(DelayFadeTime).Append(spriteRenderer.DOFade(0f, FadeTime));
+                    SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
+                    spriteRenderer.sprite = base.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite;
 
-                obj.transform.position = base.transform.position + Offset;
-                DOTween.Sequence().SetDelay(DelayMoveTime).Append(spriteRenderer.transform.DOMove(obj.transform.position + MovePosition, MoveTime));
+                    spriteRenderer.sortingLayerName = "Middle";
+                    spriteRenderer.sortingOrder = 1;
 
-                obj.transform.localScale = base.transform.GetChild(0).localScale;
-                DOTween.Sequence().SetDelay(DelayScaleTime).Append(spriteRenderer.transform.DOScale(obj.transform.localScale * ScaleMultiply, ScaleTime));
+                    spriteRenderer.color = NewColor;
+                    DOTween.Sequence().SetDelay(DelayFadeTime).Append(spriteRenderer.DOFade(0f, FadeTime)).SetUpdate(UnscaleedTime);
 
-                Object.Destroy(obj, DelayFadeTime + DelayMoveTime + DelayScaleTime + FadeTime + MoveTime + ScaleTime);
+                    obj.transform.position = base.transform.position + Offset;
+                    DOTween.Sequence().SetDelay(DelayMoveTime).Append(spriteRenderer.transform.DOMove(obj.transform.position + MovePosition, MoveTime)).SetUpdate(UnscaleedTime);
+
+                    obj.transform.localScale = base.transform.GetChild(0).localScale;
+                    DOTween.Sequence().SetDelay(DelayScaleTime).Append(spriteRenderer.transform.DOScale(obj.transform.localScale * ScaleMultiply, ScaleTime)).SetUpdate(UnscaleedTime);
+
+                    Object.Destroy(obj, DelayFadeTime + DelayMoveTime + DelayScaleTime + FadeTime + MoveTime + ScaleTime);
+                }
+                
                 emitLeft = EmitReset;
             }
             emitLeft -= Time.deltaTime;

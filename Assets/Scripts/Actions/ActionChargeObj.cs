@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 [CreateAssetMenu(fileName = "ActionCharge", menuName = "Actions/Charge")]
 public class ActionChargeObj : ActionBaseObj, IActionCharge
@@ -33,7 +34,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         return DamageRatio * 1.5f;
     }
 
-    public void Charge(Character _m)
+    public virtual void Charge(Character _m)
     {
         ActionPeformStateCharge actionPeformStateCharge = (ActionPeformStateCharge)_m.ActionState;
         if (actionPeformStateCharge.Charging)
@@ -54,16 +55,19 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                     _m.Ani.Update(0f);
                     _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
                     _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
+
+                    _m.Inputs.Remove(InputKey.BurstRelease);
                 }
                 else
                 {
                     foreach (InputKey inputKey in _m.Inputs)
                     {
-                        Debug.Log(inputKey);
+                        //Debug.Log(inputKey);
                     }
 
-                    Debug.Log(_m.TryLink(PreviousId, true));
+                    //Debug.Log(_m.TryLink(PreviousId, true));
 
+                    _m.Inputs.Remove(InputKey.BurstRelease);
                 }
             }
             else
@@ -119,9 +123,9 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         base.Init(_m);
     }
 
-    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
+    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        base.HitSuccess(_m, _hitted, IHitable);
+        base.HitSuccess(_m, _hitted, IHitable, _ClosestPoint);
 
     }
 }

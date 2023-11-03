@@ -64,7 +64,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Gun"",
+                    ""name"": ""Ult"",
                     ""type"": ""Button"",
                     ""id"": ""5e4750b0-ffb2-417e-9f72-97579b409077"",
                     ""expectedControlType"": ""Button"",
@@ -256,11 +256,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2e9a5312-952d-4f0c-b9f1-bd9afad8270e"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Gun"",
+                    ""action"": ""Ult"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -271,7 +271,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Gun"",
+                    ""action"": ""Ult"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -333,7 +333,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6589a437-ad50-4ae4-9f18-a14ed0a67d3c"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -386,7 +386,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Claw = m_Player.FindAction("Claw", throwIfNotFound: true);
         m_Player_Burst = m_Player.FindAction("Burst", throwIfNotFound: true);
-        m_Player_Gun = m_Player.FindAction("Gun", throwIfNotFound: true);
+        m_Player_Ult = m_Player.FindAction("Ult", throwIfNotFound: true);
         m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
@@ -456,7 +456,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Claw;
     private readonly InputAction m_Player_Burst;
-    private readonly InputAction m_Player_Gun;
+    private readonly InputAction m_Player_Ult;
     private readonly InputAction m_Player_Evade;
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
@@ -469,7 +469,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Claw => m_Wrapper.m_Player_Claw;
         public InputAction @Burst => m_Wrapper.m_Player_Burst;
-        public InputAction @Gun => m_Wrapper.m_Player_Gun;
+        public InputAction @Ult => m_Wrapper.m_Player_Ult;
         public InputAction @Evade => m_Wrapper.m_Player_Evade;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
@@ -495,9 +495,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Burst.started += instance.OnBurst;
             @Burst.performed += instance.OnBurst;
             @Burst.canceled += instance.OnBurst;
-            @Gun.started += instance.OnGun;
-            @Gun.performed += instance.OnGun;
-            @Gun.canceled += instance.OnGun;
+            @Ult.started += instance.OnUlt;
+            @Ult.performed += instance.OnUlt;
+            @Ult.canceled += instance.OnUlt;
             @Evade.started += instance.OnEvade;
             @Evade.performed += instance.OnEvade;
             @Evade.canceled += instance.OnEvade;
@@ -526,9 +526,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Burst.started -= instance.OnBurst;
             @Burst.performed -= instance.OnBurst;
             @Burst.canceled -= instance.OnBurst;
-            @Gun.started -= instance.OnGun;
-            @Gun.performed -= instance.OnGun;
-            @Gun.canceled -= instance.OnGun;
+            @Ult.started -= instance.OnUlt;
+            @Ult.performed -= instance.OnUlt;
+            @Ult.canceled -= instance.OnUlt;
             @Evade.started -= instance.OnEvade;
             @Evade.performed -= instance.OnEvade;
             @Evade.canceled -= instance.OnEvade;
@@ -582,7 +582,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnClaw(InputAction.CallbackContext context);
         void OnBurst(InputAction.CallbackContext context);
-        void OnGun(InputAction.CallbackContext context);
+        void OnUlt(InputAction.CallbackContext context);
         void OnEvade(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);

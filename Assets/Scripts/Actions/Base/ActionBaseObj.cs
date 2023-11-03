@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
@@ -83,9 +84,9 @@ public class ActionBaseObj : ScriptableObject
 
     public bool ResetCanAttack;
 
-    private bool[] IsTriggered;
+    public bool[] IsTriggered;
 
-    private bool[] IsTeleported;
+    public bool[] IsTeleported;
 
     public bool IsHeavyAttack;
 
@@ -105,6 +106,7 @@ public class ActionBaseObj : ScriptableObject
                     Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
+                Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true;
                 Afterimage.SetLifeTime(StartDelay, Duration);
 
             }
@@ -157,7 +159,7 @@ public class ActionBaseObj : ScriptableObject
         }
     }
 
-    public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
+    public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
         if (_hitted == Butterfly.i.MarkTarget) 
         {
@@ -167,11 +169,13 @@ public class ActionBaseObj : ScriptableObject
                 TriggerMark(_m, _hitted, IHitable);
         }
 
+        Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
     {
         Butterfly.i.Blast();
+        Butterfly.i.transform.parent = null;
 
         _m.TriggerMark();
 
@@ -261,7 +265,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -272,7 +276,7 @@ public class ActionBaseObj : ScriptableObject
                         return;
                     }
                     Character component = collider2D.GetComponent<Character>();
-                    HitSuccess(_m, component, IHitable);
+                    HitSuccess(_m, component, IHitable, collider2D.ClosestPoint(_m.transform.position + vector));
                     float y = 0f;
                     if (SuckEffect)
                     {

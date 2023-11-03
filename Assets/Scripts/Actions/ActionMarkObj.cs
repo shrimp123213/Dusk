@@ -13,7 +13,7 @@ public class ActionMarkObj : ActionBaseObj
         return base.StartAction(_m);
     }
 
-    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable)
+    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
         if (!Butterfly.i.isAppear)
             Butterfly.i.Appear();

@@ -42,6 +42,7 @@ public class ActionHealObj : ActionBaseObj
             float Duration = 1f;
 
             Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
+            Afterimage.IsSprite = true;
             Afterimage.EmitReset = 10f;
             Afterimage.DelayFadeTime = 0f;
             Afterimage.MoveTime = Afterimage.FadeTime;

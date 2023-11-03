@@ -48,6 +48,8 @@ public class Character : MonoBehaviour, IHitable
 
     public bool ImmuneInterruptAction;
 
+    public bool ImmuneStunAction;
+
     public float LowGravityTime;//¨ü¶Ë«á´îºC?
 
     //public float ThinkCD;
@@ -177,7 +179,7 @@ public class Character : MonoBehaviour, IHitable
 
         TransSkillPopup = GameObject.Find("SkillPopup").transform;
         Health = HealthMax.Final;
-        Debug.Log(Ani);
+        //Debug.Log(Ani);
     }
 
     private void Update()
@@ -232,7 +234,7 @@ public class Character : MonoBehaviour, IHitable
 
     public virtual void StartAction(ActionBaseObj _actionBaseObj)
     {
-        string previousId = NowAction == null ? _actionBaseObj.Id == "Gun1" ? "" : _actionBaseObj.Id : NowAction.Id == "Gun1" ? NowAction.PreviousId : NowAction.Id;
+        string previousId = NowAction == null ? _actionBaseObj.Id : NowAction.Id;
         //Debug.Log(previousId);
         NowAction?.EndAction(this);
         NowAction = _actionBaseObj;
@@ -331,6 +333,10 @@ public class Character : MonoBehaviour, IHitable
             LadderMove();
             return;
         }
+        if (HitEffect.HitStun > 0)
+        {
+            StopMove();
+        }
         int num = (isMovable ? 1 : 0);
         float num2 = (isLocal ? 1f : HitEffector.GlobalMoveTimeScale);
         Vector2 velocity = Rigid.velocity;
@@ -339,10 +345,12 @@ public class Character : MonoBehaviour, IHitable
         bool value = false;
         if (isKnockback)
         {
-            if (velocity.y <= 0f && isGround)
+            if (/*velocity.y <= 0f && isGround LowGravityTime <= 0f || isGround*/true)
             {
                 isKnockback = false;
                 Rigid.drag = 0f;
+
+                LowGravityTime = 0f;
             }
             else
             {
@@ -448,7 +456,7 @@ public class Character : MonoBehaviour, IHitable
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }
 
-    public bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false)
+    public bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default))
     {
         if (isDead)
         {
@@ -461,12 +469,24 @@ public class Character : MonoBehaviour, IHitable
                 OnEvading();
                 return false;
             }
+            if (Blocking)
+            {
+                Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.identity, null);
+                AerutaDebug.i.Feedback.BlockCount++;
+                if ((bool)Player)
+                    Player.Orb.Add(.5f);
+
+
+                //µê®z
+
+                return false;
+            }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             //DOTween.Sequence().Append(component.DOFade(1.75f, 0.1f));//.Append(component.DOFade(1f, 0.15f));
             //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
-            Debug.Log("Hit : " + base.gameObject.name);
+            //Debug.Log("Hit : " + base.gameObject.name);
             LowGravityTime = 0.665f;
-            HitEffect.SetHitStun(isActionInterrupted);
+            HitEffect.SetHitStun(isActionInterrupted, ImmuneStunAction);
             //if ((bool)AITree)
             //{
             //    AITree.SendEvent("Attacked", (object)_attacker.transform);
@@ -478,8 +498,7 @@ public class Character : MonoBehaviour, IHitable
             if ((bool)Player)
                 AerutaDebug.i.Feedback.HittedCount++;
         }
-        if (!Blocking)
-            Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
+        Health = Mathf.Clamp(Health - _damage.Amount, 0f, HealthMax.Final);
         if (Health <= 0f)
         {
             if ((bool)_attacker)
@@ -524,6 +543,11 @@ public class Character : MonoBehaviour, IHitable
         if (isActing && canInterruptAction && !ImmuneInterruptAction)
         {
             NowAction.EndAction(this);
+
+            if (StoredMoves.Count > 0)
+            {
+                StoredMoves.Clear();
+            }
         }
         if (!isGround)
         {
@@ -537,7 +561,7 @@ public class Character : MonoBehaviour, IHitable
             Rigid.AddForce(_Force * Rigid.mass, ForceMode2D.Impulse);
             if (_Force.y > 0f)
             {
-                Airbrone = true;
+                //Airbrone = true;
             }
             //Debug.Log(string.Concat(Rigid.velocity, isActing.ToString()));
         }
@@ -595,5 +619,5 @@ public enum CharacterStates
 
 public interface IHitable
 {
-    bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false);
+    bool TakeDamage(Damage _damage, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default));
 }

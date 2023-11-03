@@ -14,6 +14,7 @@ public class Boss1 : Character
 
     public override void OnAwake()
     {
+        HealthMax = new CharacterStat(500f);
         base.OnAwake();
         SilderHealth = GameObject.Find("BossHealthBar").GetComponent<Slider>();
     }

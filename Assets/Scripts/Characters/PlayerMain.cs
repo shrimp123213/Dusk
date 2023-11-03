@@ -35,6 +35,12 @@ public class PlayerMain : Character
 
     public GameObject Platform;
 
+    public bool CanInput;
+
+    public float EvadeCooldown;
+
+    public List<Image> Potions;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -55,7 +61,7 @@ public class PlayerMain : Character
         OrbUser.Local = Orb;
         //Swinger = GetComponent<PlayerSwing>();
         //Swinger.Main = this;
-        ActionLinkTime = GameObject.Find("ActionLinkTime").GetComponent<Slider>();
+        //ActionLinkTime = GameObject.Find("ActionLinkTime").GetComponent<Slider>();
         SilderHealth = GameObject.Find("HealthBar").GetComponent<Slider>();
         TextInput = GameObject.Find("Input").GetComponent<TextMeshProUGUI>();
         Application.targetFrameRate = 120;
@@ -94,18 +100,23 @@ public class PlayerMain : Character
         //    }
         //    Inputs.Clear();
         //}
+        if (HitEffect.HitStun > 0)
+        {
+            Inputs.Clear();
+            return;
+        }
         if (Inputs.Contains(InputKey.Evade))
         {
             if (base.isActing && NowAction.Id != "Evade")
             {
-                if (Orb.OrbCount > 0)
+                if (Orb.OrbCount > 0||true)//°{Á×§ó·s
                 {
                     if (Xinput != 0f)
                     {
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
                     StartAction(ActionLoader.i.Actions["Evade"]);
-                    Orb.Consume();
+                    //Orb.Consume();
                     CanDash = false;
                     Inputs.Clear();
                 }
@@ -132,22 +143,32 @@ public class PlayerMain : Character
                     StartAction(ActionLoader.i.Actions["Mark"]);
                 Inputs.Clear();
             }
+            if (Inputs.Contains(InputKey.Burst)&& CanAttack)
+            {
+                StartAction(ActionLoader.i.Actions["BurstCharge1"]);
+                Inputs.Clear();
+            }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions["Claw1"]);
                 Inputs.Clear();
             }
-            if (Inputs.Contains(InputKey.Gun) && CanAttack)
+            if (Inputs.Contains(InputKey.Ult) && CanAttack)
             {
-                if (TryCastAction(ActionLoader.i.Actions["Gun1"]))
-                    StartAction(ActionLoader.i.Actions["Gun1"]);
+                if (TryCastAction(ActionLoader.i.Actions["Penetrate"]))
+                    StartAction(ActionLoader.i.Actions["Penetrate"]);
 
                 Inputs.Clear();
             }
             if (Inputs.Contains(InputKey.Heal))
             {
                 if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                {
                     StartAction(ActionLoader.i.Actions["Heal"]);
+                    Potions[Potions.Count - 1].enabled = false;
+                    Potions.RemoveAt(Potions.Count - 1);
+                    AerutaDebug.i.Feedback.HealCount++;
+                }
                 Inputs.Clear();
             }
         }
@@ -191,11 +212,17 @@ public class PlayerMain : Character
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
-        if (flag && _actionBaseObj.OrbCost > 0f && Orb.TotalOrb < _actionBaseObj.OrbCost)
+        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.OrbCost > 0f && Orb.TotalOrb < _actionBaseObj.OrbCost) 
         {
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Energy !");
+        }
+        if (flag && _actionBaseObj.Id == "Heal" && _actionBaseObj.OrbCost > 0f && Potions.Count < _actionBaseObj.OrbCost)
+        {
+            flag = false;
+            if (isShowMessage)
+                SkillPopup.i.ShowMessage("No Potions !");
         }
 
         if (flag && _actionBaseObj.NeedButterfly && Butterfly.i.Cooldown > 0f)
@@ -287,9 +314,18 @@ public class PlayerMain : Character
         //{
         //    return;
         //}
-        if (!CanDash && !base.isActing)
+        //if (!CanDash && !base.isActing)
+        //{
+        //    CanDash = base.isGround;
+        //}
+        if (!CanDash)
         {
-            CanDash = base.isGround;
+            EvadeCooldown -= Time.deltaTime;
+            if (EvadeCooldown < 0f)
+            {
+                EvadeCooldown = 1f;
+                CanDash = true;
+            }
         }
         if (!CanAttack && !base.isActing)
         {
@@ -312,7 +348,7 @@ public class PlayerMain : Character
                 TryInput(InputKey.Claw);
             //}
         }
-        if (playerAct.FindAction("Evade").WasPressedThisFrame())
+        if (playerAct.FindAction("Evade").WasPressedThisFrame() && (EvadeCooldown < .1f|| EvadeCooldown==1f))
         {
             TryInput(InputKey.Evade);
         }
@@ -320,13 +356,14 @@ public class PlayerMain : Character
         {
             TryInput(InputKey.Burst);
         }
-        if (playerAct.FindAction("Gun").WasPressedThisFrame())
+        if (playerAct.FindAction("Ult").WasPressedThisFrame())
         {
-            TryInput(InputKey.Gun);
+            TryInput(InputKey.Ult);
         }
         if (playerAct.FindAction("Burst").WasReleasedThisFrame())
         {
             TryInput(InputKey.BurstRelease);
+            Inputs.Remove(InputKey.Burst);
         }
         if (playerAct.FindAction("Heal").WasPressedThisFrame())
         {
@@ -339,19 +376,24 @@ public class PlayerMain : Character
         Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
         {
-            if (NowAction.Links.Count <= 0)
+            if (ActionLinkTime != null)
             {
-                ActionLinkTime.value = 0f;
+                if (NowAction.Links.Count <= 0)
+                {
+                    ActionLinkTime.value = 0f;
+                }
+                else
+                {
+                    ActionLinkTime.maxValue = ActionState.TotalFrame;// - NowAction.Links[0].Frame;
+                    ActionLinkTime.value = ActionState.Frame;// - NowAction.Links[0].Frame;
+                }
             }
-            else
-            {
-                ActionLinkTime.maxValue = ActionState.TotalFrame;// - NowAction.Links[0].Frame;
-                ActionLinkTime.value = ActionState.Frame;// - NowAction.Links[0].Frame;
-            }
+            
         }
         else
         {
-            ActionLinkTime.value = 0f;
+            if (ActionLinkTime != null)
+                ActionLinkTime.value = 0f;
         }
         SilderHealth.value = base.Health / HealthMax.Final;
     }
