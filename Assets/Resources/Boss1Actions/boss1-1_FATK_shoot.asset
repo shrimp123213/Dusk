@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
   m_Name: boss1-1_FATK_shoot
   m_EditorClassIdentifier: 
-  Id: 
-  PreviousId: 
-  DisplayName: 
-  AnimationKey: 
+  Id: boss1-1_FATK_shoot
+  PreviousId: boss1-1_FATK_shoot
+  DisplayName: boss1-1_FATK_shoot
+  AnimationKey: boss1-1_FATK_shoot
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0
@@ -23,8 +23,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 132
     KeyFrameEnd: 140
-    Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
+    Offset: {x: 25, y: 2, z: 0}
+    Range: {x: 50, y: 4}
   HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 0
