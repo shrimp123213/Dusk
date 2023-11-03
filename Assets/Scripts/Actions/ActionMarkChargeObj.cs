@@ -16,9 +16,22 @@ public class ActionMarkChargeObj : ActionChargeObj
     private Vector2 originOffset;
     private Vector2 originSize;
 
+    private bool hitSuccess;
+
+    public bool BlockSuccess;
+
+    private Character _hitted;
+    private IHitable IHitable;
+    private Vector2 _ClosestPoint;
 
     public override ActionPeformState StartAction(Character _m)
     {
+        hitSuccess = false;
+        BlockSuccess = false;
+        _hitted = null;
+        IHitable = null;
+        _ClosestPoint = Vector2.zero;
+
         collider = _m.GetComponent<BoxCollider2D>();
 
         originOffset = collider.offset;
@@ -29,78 +42,99 @@ public class ActionMarkChargeObj : ActionChargeObj
 
     public override void Charge(Character _m)
     {
-        base.Charge(_m);
-
         ActionPeformStateCharge actionPeformStateCharge = (ActionPeformStateCharge)_m.ActionState;
-        if (!actionPeformStateCharge.Charging)
+        if (actionPeformStateCharge.Charging)
         {
-            ActionPeformState actionState = _m.ActionState;
-            foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
+            actionPeformStateCharge.ChargeAmount = Mathf.Clamp(Time.deltaTime * ChargeSpeed + actionPeformStateCharge.ChargeAmount, 0f, 1f);
+            actionPeformStateCharge.Charging = _m.Charging;
+            if (!actionPeformStateCharge.Charging)
             {
-                if (actionState.IsWithinFrame(attackSpot.KeyFrameFrom, attackSpot.KeyFrameEnd))
+                foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
                 {
-                    if (actionState.IsWithinFrame(BlockStartFrame, BlockEndFrame))
+                    if (actionPeformStateCharge.IsWithinFrame(attackSpot.KeyFrameFrom, attackSpot.KeyFrameEnd))
                     {
-                        _m.Blocking = true;
-
-                        if (_m.Facing == 1)
+                        if (actionPeformStateCharge.IsWithinFrame(BlockStartFrame, BlockEndFrame))
                         {
-                            collider.offset = attackSpot.Offset;
-                            collider.size = attackSpot.Range;
-                        }
-                        else
-                        {
-                            collider.offset = new Vector2(-attackSpot.Offset.x, attackSpot.Offset.y);
-                            collider.size = attackSpot.Range;
-                        }
+                            _m.Blocking = true;
 
-                        _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.magenta;
+                            if (_m.Facing == 1)
+                            {
+                                collider.offset = attackSpot.Offset;
+                                collider.size = attackSpot.Range;
+                            }
+                            else
+                            {
+                                collider.offset = new Vector2(-attackSpot.Offset.x, attackSpot.Offset.y);
+                                collider.size = attackSpot.Range;
+                            }
+
+                            _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.magenta;
+                        }
                     }
                 }
+
+                _m.HitEffect.SetTimeSlow(TimeSlowAmount);
+                actionPeformStateCharge.Success = actionPeformStateCharge.ChargeAmount > ChargeSuccessTime;
+                if (actionPeformStateCharge.Success)
+                {
+                    SkillCharge.i.SetAmount(0f);
+
+                    //©ñ¶}®É¼½BurstCharge1Success
+                    _m.Ani.Rebind();
+                    _m.Ani.Play(AnimationKey);
+                    _m.Ani.Update(0f);
+                    _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+                    _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
+
+                    _m.Inputs.Remove(InputKey.BurstRelease);
+                }
+                else
+                {
+                    foreach (InputKey inputKey in _m.Inputs)
+                    {
+                        //Debug.Log(inputKey);
+                    }
+
+                    //Debug.Log(_m.TryLink(PreviousId, true));
+
+                    actionPeformStateCharge.Linked = _m.TryLink(PreviousId);
+
+                    _m.Inputs.Remove(InputKey.BurstRelease);
+                }
+            }
+            else
+            {
+                SkillCharge.i.SetAmount(actionPeformStateCharge.ChargeAmount / 1f);
+
+                _m.Blocking = false;
+
+                collider.offset = originOffset;
+                collider.size = originSize;
+
+                _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             }
         }
-        else
-        {
-            _m.Blocking = false;
 
-            collider.offset = originOffset;
-            collider.size = originSize;
-
-            _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-        }
     }
 
     public override void ProcessAction(Character _m)
     {
+        ActionPeformStateCharge actionPeformStateCharge = (ActionPeformStateCharge)_m.ActionState;
+        if (hitSuccess && !_m.Blocking && !BlockSuccess && actionPeformStateCharge.IsAfterFrame(BlockEndFrame))
+        {
+            base.HitSuccess(_m, _hitted, IHitable, _ClosestPoint);
+        }
+
         base.ProcessAction(_m);
     }
 
     public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        if (_m.Blocking)
-        {
-            if (_hitted == Butterfly.i.MarkTarget)
-            {
-                Butterfly.i.MarkTime = Butterfly.i.MarkTimeMax.Final;
-            }
-            else if(!Butterfly.i.isAppear)
-            {
-                Butterfly.i.Appear();
-                Butterfly.i.MarkTarget = _hitted;
-                Butterfly.i.transform.parent = null;
-
-                AerutaDebug.i.Feedback.MarkCount++;
-            }
-
-            Instantiate(AerutaDebug.i.BlockEffect, _ClosestPoint, Quaternion.identity, null);
-        }
-        else
-            base.HitSuccess(_m, _hitted, IHitable, _ClosestPoint);
+        hitSuccess = true;
     }
 
     public override void EndAction(Character _m)
     {
-        base.EndAction(_m);
 
         _m.Blocking = false;
 
@@ -108,6 +142,9 @@ public class ActionMarkChargeObj : ActionChargeObj
         collider.size = originSize;
 
         _m.Ani.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+
+        base.EndAction(_m);
+
     }
 
     //private void InBlock

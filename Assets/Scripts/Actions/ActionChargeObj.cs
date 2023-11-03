@@ -67,6 +67,8 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
                     //Debug.Log(_m.TryLink(PreviousId, true));
 
+                    actionPeformStateCharge.Linked = _m.TryLink(PreviousId);
+
                     _m.Inputs.Remove(InputKey.BurstRelease);
                 }
             }
