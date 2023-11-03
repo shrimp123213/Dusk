@@ -10,10 +10,13 @@ public class ReverseAnimation : EnemyActionBase
 
     public override TaskStatus OnUpdate()
     {
-        Animator Ani =this.transform.GetComponentInChildren<Animator>();
-        Ani.Play(ReverseAnimationName);
-        if(Ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            return TaskStatus.Success;
+        if (!(this.SelfCharacter.Value.isActing))
+        {
+            Animator Ani =this.transform.GetComponentInChildren<Animator>();
+            Ani.Play(ReverseAnimationName);
+            if(Ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                return TaskStatus.Success;
+        }
         
         return TaskStatus.Running;
     }

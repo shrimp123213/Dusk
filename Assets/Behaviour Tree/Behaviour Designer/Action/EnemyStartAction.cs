@@ -33,19 +33,12 @@ public class EnemyStartAction : EnemyActionBase
         {
             return TaskStatus.Running;
         }
-        /*if (this.SelfCharacter.Value.NowAction == null && ReverseAnimationName != "")
-        {
-            Animator Ani =this.transform.GetComponentInChildren<Animator>();
-            Ani.Play(ReverseAnimationName);
-            if(Ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-                return TaskStatus.Success;
-        }*/
         return TaskStatus.Success;
     }
 
     public override void OnEnd()
     {
-        if (Flip)
+        if (Flip && !(this.SelfCharacter.Value.isActing))
         {
             this.SelfCharacter.Value.Facing *= -1;
         }
