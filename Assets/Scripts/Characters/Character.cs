@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using System;
-using TheKiwiCoder;
+using BehaviorDesigner.Runtime;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -78,8 +78,8 @@ public class Character : MonoBehaviour, IHitable
     public CharacterStat Attack = new CharacterStat(10f);
 
     [HideInInspector]
-    public BehaviourTreeInstance AITree;
-    public BlackboardKey<Vector2> TeleportKeyReference;
+    public BehaviorTree AITree;
+    public Vector2 TeleportKeyReference;
 
     public TextMeshProUGUI TextInput;
 
@@ -168,9 +168,9 @@ public class Character : MonoBehaviour, IHitable
         HitEffect = GetComponent<HitEffector>();
         HitEffect.CallAwake(Ani);
 
-        AITree = GetComponent<BehaviourTreeInstance>();
+        AITree = GetComponent<BehaviorTree>();
         if ((bool)AITree)
-            TeleportKeyReference = AITree.FindBlackboardKey<Vector2>("TeleportTargetPos");
+            //TeleportKeyReference = AITree.GetVariable("TeleportTargetPos");
         //AITree = GetComponent<BehaviorTree>();
         //if ((bool)AITree)
         //{
