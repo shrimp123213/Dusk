@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using BehaviorDesigner.Runtime;
-using TheKiwiCoder;
+
 
 public class AerutaDebug : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class AerutaDebug : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void CallEffect(int num)//Åã¥Ü¥´¤¤À»­¸¼Ä¤H¡B°{Á×¦¨¥\µ¥UI
+    public void CallEffect(int num)//ï¿½ï¿½Ü¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¤Hï¿½Bï¿½{ï¿½×¦ï¿½ï¿½\ï¿½ï¿½UI
     {
         if (Sequences[num] != null && Sequences[num].active)
         {
@@ -134,14 +134,14 @@ public class Feedback
 
     public string LeftText()
     {
-        return "¬D¾Ô®É¶¡¡G\r\n" + PlayTime + "\r\n\r\n¼Ð°O¦¸¼Æ¡G\r\n" + MarkCount + "\r\n\r\nÄ²µo¼Ð°O¦¸¼Æ¡G\r\n" + MarkTriggerCount + "\r\n\r\n¨¾¿m¦¸¼Æ¡G\r\n" + BlockCount;
+        return "ï¿½Dï¿½Ô®É¶ï¿½ï¿½G\r\n" + PlayTime + "\r\n\r\nï¿½Ð°Oï¿½ï¿½ï¿½Æ¡G\r\n" + MarkCount + "\r\n\r\nÄ²ï¿½oï¿½Ð°Oï¿½ï¿½ï¿½Æ¡G\r\n" + MarkTriggerCount + "\r\n\r\nï¿½ï¿½ï¿½mï¿½ï¿½ï¿½Æ¡G\r\n" + BlockCount;
     }
     public string MiddleText()
     {
-        return "¤j©Û¦¸¼Æ¡G\r\n" + UltimateCount + "\r\n\r\n»´§ðÀ»¦¸¼Æ¡G\r\n" + LightAttackCount + "\r\n\r\n­«§ðÀ»¦¸¼Æ¡G\r\n" + HeavyAttackCount + "\r\n\r\n»W¤O­«§ðÀ»¦¸¼Æ¡G\r\n" + ChargeAttackCount;
+        return "ï¿½jï¿½Û¦ï¿½ï¿½Æ¡G\r\n" + UltimateCount + "\r\n\r\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡G\r\n" + LightAttackCount + "\r\n\r\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡G\r\n" + HeavyAttackCount + "\r\n\r\nï¿½Wï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡G\r\n" + ChargeAttackCount;
     }
     public string RightText()
     {
-        return "¯à¶q¦^´_¶q¡G\r\n" + EnergyRecoveryCount + "\r\n\r\nªvÀø¦¸¼Æ¡G\r\n" + HealCount + "\r\n\r\n³QÀ»¤¤¦¸¼Æ¡G\r\n" + HittedCount + "\r\n\r\n\r\n";
+        return "ï¿½ï¿½qï¿½^ï¿½_ï¿½qï¿½G\r\n" + EnergyRecoveryCount + "\r\n\r\nï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Æ¡G\r\n" + HealCount + "\r\n\r\nï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡G\r\n" + HittedCount + "\r\n\r\n\r\n";
     }
 }
