@@ -474,7 +474,7 @@ public class Character : MonoBehaviour, IHitable
                 Instantiate(AerutaDebug.i.BlockEffect, _ClosestPoint, Quaternion.identity, null);
                 AerutaDebug.i.Feedback.BlockCount++;
                 if ((bool)Player)
-                    Player.Orb.Add(.5f);
+                    Player.Morph.Add(.5f);
 
                 if (_attacker == Butterfly.i.MarkTarget)
                 {

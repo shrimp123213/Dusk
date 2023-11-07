@@ -16,7 +16,7 @@ public class PlayerMain : Character
     public static PlayerMain i;
 
     [HideInInspector]
-    public OrbUser Orb;
+    public MorphUser Morph;
 
     //[HideInInspector]
     //public PlayerSwing Swinger;
@@ -57,8 +57,8 @@ public class PlayerMain : Character
         i = this;
         isLocal = true;
         //MyInteracter = GetComponentInChildren<Interacter>();
-        Orb = GetComponent<OrbUser>();
-        OrbUser.Local = Orb;
+        Morph = GetComponent<MorphUser>();
+        MorphUser.Local = Morph;
         //Swinger = GetComponent<PlayerSwing>();
         //Swinger.Main = this;
         //ActionLinkTime = GameObject.Find("ActionLinkTime").GetComponent<Slider>();
@@ -72,13 +72,13 @@ public class PlayerMain : Character
 
     private void Start()
     {
-        OrbListDisplayer.i.Target = Orb;
+        MorphListDisplayer.i.Target = Morph;
         //Debug.Log(Input.GetJoystickNames().Length);
     }
 
     public override void ProcessInput()
     {
-        //if (Inputs.Contains(InputKey.Burst))
+        //if (Inputs.Contains(InputKey.Burst))//方向攻擊
         //{
         //    ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
         //    switch (InputUtli.GetHighestAxis(Xinput, Yinput))
@@ -109,14 +109,14 @@ public class PlayerMain : Character
         {
             if (base.isActing && NowAction.Id != "Evade")
             {
-                if (Orb.OrbCount > 0||true)//閃避更新
+                if (Morph.MorphCount > 0||true)//閃避更新
                 {
                     if (Xinput != 0f)
                     {
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
                     StartAction(ActionLoader.i.Actions["Evade"]);
-                    //Orb.Consume();
+                    //Morph.Consume();
                     CanDash = false;
                     Inputs.Clear();
                 }
@@ -137,29 +137,18 @@ public class PlayerMain : Character
         }
         if (!base.isActing)
         {
-            if (Inputs.Contains(InputKey.Mark) && CanAttack)
-            {
-                if (TryCastAction(ActionLoader.i.Actions["Mark"]))
-                    StartAction(ActionLoader.i.Actions["Mark"]);
-                Inputs.Clear();
-            }
-            if (Inputs.Contains(InputKey.Burst)&& CanAttack)
-            {
-                StartAction(ActionLoader.i.Actions["BurstCharge1"]);
-                Inputs.Clear();
-            }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions["Claw1"]);
                 Inputs.Clear();
             }
-            if (Inputs.Contains(InputKey.Ult) && CanAttack)
-            {
-                if (TryCastAction(ActionLoader.i.Actions["Penetrate"]))
-                    StartAction(ActionLoader.i.Actions["Penetrate"]);
-
-                Inputs.Clear();
-            }
+            //if (Inputs.Contains(InputKey.Ult) && CanAttack)
+            //{
+            //    if (TryCastAction(ActionLoader.i.Actions["Penetrate"]))
+            //        StartAction(ActionLoader.i.Actions["Penetrate"]);
+            //
+            //    Inputs.Clear();
+            //}
             if (Inputs.Contains(InputKey.Heal))
             {
                 if (TryCastAction(ActionLoader.i.Actions["Heal"]))
@@ -172,10 +161,6 @@ public class PlayerMain : Character
                 Inputs.Clear();
             }
         }
-        //if (Swinger.isSwinging && KeyJumpJust)
-        //{
-        //    Swinger.CutHook();
-        //}
     }
 
     public override void TriggerMark()
@@ -183,8 +168,8 @@ public class PlayerMain : Character
         base.TriggerMark();
         if (base.isActing)
         {
-            Orb.Add(NowAction.OrbRecoveryAdditionalByMark);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.OrbRecoveryAdditionalByMark;
+            Morph.Add(NowAction.MorphRecoveryAdditionalByMark);
+            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecoveryAdditionalByMark;
         }
     }
 
@@ -193,8 +178,8 @@ public class PlayerMain : Character
         base.AttackLand();
         if (base.isActing)
         {
-            Orb.Add(NowAction.OrbRecovery);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.OrbRecovery;
+            Morph.Add(NowAction.MorphRecovery);
+            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecovery;
         }
     }
 
@@ -204,7 +189,7 @@ public class PlayerMain : Character
         AerutaDebug.i.CallEffect(2);
         if (base.isActing)
         {
-            Orb.Add(NowAction.EvadeEnergyRecovery);
+            Morph.Add(NowAction.EvadeEnergyRecovery);
         }
     }
 
@@ -212,13 +197,13 @@ public class PlayerMain : Character
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
-        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.OrbCost > 0f && Orb.TotalOrb < _actionBaseObj.OrbCost) 
+        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
         {
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Energy !");
         }
-        if (flag && _actionBaseObj.Id == "Heal" && _actionBaseObj.OrbCost > 0f && Potions.Count < _actionBaseObj.OrbCost)
+        if (flag && _actionBaseObj.Id == "Heal" && _actionBaseObj.MorphCost > 0f && Potions.Count < _actionBaseObj.MorphCost)
         {
             flag = false;
             if (isShowMessage)
@@ -264,7 +249,7 @@ public class PlayerMain : Character
         //{
         //    CanAttack = false;
         //}
-        Orb.Consume(_actionBaseObj.OrbCost);
+        //Morph.Consume(_actionBaseObj.MorphCost, true);
     }
 
     public override void Dead()
@@ -339,7 +324,7 @@ public class PlayerMain : Character
         }
         Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
         Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
-        Orb.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
+        Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
         if (playerAct.FindAction("Claw").WasPressedThisFrame())
         {
             //bool buttonDown = Input.GetButtonDown("Attack");

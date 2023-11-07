@@ -67,11 +67,11 @@ public class ActionBaseObj : ScriptableObject
 
     public float MarkTimeRecovery;
 
-    public float OrbCost;
+    public float MorphCost;
 
-    public float OrbRecovery;
+    public float MorphRecovery;
 
-    public float OrbRecoveryAdditionalByMark;
+    public float MorphRecoveryAdditionalByMark;
 
     public float EvadeEnergyRecovery;
 

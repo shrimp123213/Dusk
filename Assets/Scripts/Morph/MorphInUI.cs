@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OrbInUI : MonoBehaviour
+public class MorphInUI : MonoBehaviour
 {
     public float TargetAmount;
 
@@ -28,7 +28,7 @@ public class OrbInUI : MonoBehaviour
             {
                 Setted = true;
                 //ImgBack.color = Color.clear;
-                ImgBack.color = new Color(0.125f, 0.125f, 0.5f, 0.5f);
+                ImgBack.color = new Color(0.125f, 0.125f, .85f, 0.5f);
                 ImgFront.color = Color.clear;
                 ImgFront.fillAmount = 0f;
                 Amount = 0f;
