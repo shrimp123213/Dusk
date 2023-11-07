@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -210,12 +211,6 @@ public class PlayerMain : Character
                 SkillPopup.i.ShowMessage("No Potions !");
         }
 
-        if (flag && _actionBaseObj.NeedButterfly && Butterfly.i.Cooldown > 0f)
-        {
-            flag = false;
-            if (isShowMessage)
-                SkillPopup.i.ShowMessage("Butterfly Not Ready !");
-        }
         //if (flag && !_actionBaseObj.TryNewConditionPossible(this))有新的使用條件再用
         //{
         //    flag = false;
@@ -266,30 +261,29 @@ public class PlayerMain : Character
         }
     }
 
-    public override bool TryLink(string _Id, bool _forceSuccess)
+    public override bool TryLink(ActionLink link, bool _forceSuccess = false)
     {
-        bool result = false;
-        foreach (ActionLink link in NowAction.Links)
+        if (!ActionState.IsInLifeTime(link.Frame, link.LifeTime) || StoredMoves.Count > 0)
         {
-            if (link.PreviousId != "" && link.PreviousId != _Id)
-                continue;
-            if (((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1)) || _forceSuccess)
-            {
-                if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
-                    continue;
-
-                StartAction(ActionLoader.i.Actions[link.LinkActionId]);
-                result = true;
-                Inputs.Clear();
-                if (link.CanChangeFace && Xinput != 0f)
-                {
-                    Facing = ((Xinput > 0f) ? 1 : (-1));
-                }
-                //AerutaDebug.i.CallEffect(1);
-                break;
-            }
+            return false;
         }
-        return result;
+
+        if (Inputs.Contains(link.Key1) || _forceSuccess)
+        {
+            if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
+                return false;
+
+            StartAction(ActionLoader.i.Actions[link.LinkActionId]);
+            
+            Inputs.Clear();
+            if (link.CanChangeFace && Xinput != 0f)
+            {
+                Facing = ((Xinput > 0f) ? 1 : (-1));
+            }
+            //AerutaDebug.i.CallEffect(1);
+            return true;
+        }
+        return false;
     }
 
     public override void OnUpdate()
@@ -384,6 +378,22 @@ public class PlayerMain : Character
             if (ActionLinkTime != null)
                 ActionLinkTime.value = 0f;
         }
+
+        Debug.Log(TimedLinks.Count);
+        if (TimedLinks.Count > 0)
+        {
+            bool _Marked = false;
+            foreach (var _link in TimedLinks.OrderBy(w => w.Base.KeyArrow != InputKey.None)) 
+            {
+                if (TryLink(_link.Base)) { _Marked = false; break; }
+                if (Mathf.Approximately(_link.Base.LifeTime, -1)) { continue; }
+                if (NowAction == null) { _link.LifeTimePassed += Time.fixedDeltaTime; }
+                if (_link.LifeTimePassed >= _link.Base.LifeTime)  { _Marked = true; }
+            }
+            Debug.Log(_Marked);
+            if (_Marked) { TimedLinks.RemoveAll(w => w.LifeTimePassed >= w.Base.LifeTime); }
+        }
+        
         SilderHealth.value = base.Health / HealthMax.Final;
     }
 

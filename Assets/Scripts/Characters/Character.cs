@@ -96,6 +96,8 @@ public class Character : MonoBehaviour, IHitable
 
     public bool isKnockback;
 
+    public List<TimedLink> TimedLinks;
+
     public float Health
     {
         get
@@ -110,13 +112,46 @@ public class Character : MonoBehaviour, IHitable
 
     public bool isActing => NowAction != null;
 
-    public bool isMovable
+    public bool isMovableX
     {
         get
         {
             if (isActing)
             {
-                return NowAction.Movable(this);
+                return NowAction.MovableX(this);
+            }
+            return true;
+        }
+    }
+    public bool isMovableY
+    {
+        get
+        {
+            if (isActing)
+            {
+                return NowAction.MovableY(this);
+            }
+            return true;
+        }
+    }
+    public bool canChangeFacingWhenActing
+    {
+        get
+        {
+            if (isActing)
+            {
+                return NowAction.CanChangeFacing(this);
+            }
+            return true;
+        }
+    }
+    public bool canJumpWhenActing
+    {
+        get
+        {
+            if (isActing)
+            {
+                return NowAction.CanJump(this);
             }
             return true;
         }
@@ -197,7 +232,7 @@ public class Character : MonoBehaviour, IHitable
 
     private void FixedUpdate()
     {
-        if (Xinput != 0f && isMovable)
+        if (Xinput != 0f && isMovableX && canChangeFacingWhenActing)
         {
             Facing = ((Xinput > 0f) ? 1 : (-1));
         }
@@ -238,7 +273,6 @@ public class Character : MonoBehaviour, IHitable
         //Debug.Log(previousId);
         NowAction?.EndAction(this);
         NowAction = _actionBaseObj;
-        NowAction.PreviousId = previousId;
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
@@ -262,7 +296,7 @@ public class Character : MonoBehaviour, IHitable
         HitEffect.SetAttackStun();
     }
 
-    public virtual bool TryLink(string _Id, bool _forceSuccess = false)
+    public virtual bool TryLink(ActionLink link, bool _forceSuccess = false)
     {
         return false;
     }
@@ -337,7 +371,8 @@ public class Character : MonoBehaviour, IHitable
         {
             StopMove();
         }
-        int num = (isMovable ? 1 : 0);
+        int numX = (isMovableX ? 1 : 0);
+        int numY = (isMovableY ? 1 : 0);
         float num2 = (isLocal ? 1f : HitEffector.GlobalMoveTimeScale);
         Vector2 velocity = Rigid.velocity;
         RigidbodyConstraints2D rigidbodyConstraints2D = RigidbodyConstraints2D.None;
@@ -360,7 +395,7 @@ public class Character : MonoBehaviour, IHitable
         else if (Xinput != 0f && !Airbrone)
         {
             value = true;
-            velocity.x = Speed.Final * (float)num * num2 * TryIsNotBlockedByCharacter() * SpeedFactor * ((Mathf.Abs(Xinput) > 0.25f) ? 1f : 0.5f) * (float)((Xinput > 0f) ? 1 : (-1));
+            velocity.x = Speed.Final * (float)numX * num2 * TryIsNotBlockedByCharacter() * SpeedFactor * ((Mathf.Abs(Xinput) > 0.25f) ? 1f : 0.5f) * (float)((Xinput > 0f) ? 1 : (-1));
         }
         else
         {
@@ -379,7 +414,7 @@ public class Character : MonoBehaviour, IHitable
         if (KeyJumpJust)
         {
             KeyJumpJust = false;
-            if (isGround && !isActing)
+            if (isGround && canJumpWhenActing)
             {
                 CanLongJump = true;
                 LowGravityTime = 0f;
@@ -393,20 +428,20 @@ public class Character : MonoBehaviour, IHitable
         Vector2 vector = ((LowGravityTime > 0f) ? new Vector2(-0.25f, 0.5f) : Vector2.one);
         if (Rigid.velocity.y < 0f)
         {
-            velocity.y = Physics2D.gravity.y * vector.x * 5.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
+            velocity.y = Physics2D.gravity.y * vector.x * 5.25f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
             Ani.SetFloat("VelocityY", velocity.y);
         }
         else if (Rigid.velocity.y > 0f && KeyJump && CanLongJump)
         {
-            velocity.y = Physics2D.gravity.y * vector.y * 2.25f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
+            velocity.y = Physics2D.gravity.y * vector.y * 2.25f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
             Ani.SetFloat("VelocityY", velocity.y);
         }
         else if (Rigid.velocity.y > 0f)
         {
-            velocity.y = Physics2D.gravity.y * vector.y * 5.5f * Time.fixedDeltaTime * (float)num + velocity.y * (float)num * num2;
+            velocity.y = Physics2D.gravity.y * vector.y * 5.5f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
             Ani.SetFloat("VelocityY", velocity.y);
         }
-        if (num == 0 || LowGravityTime > 0f)
+        if (numY == 0 || LowGravityTime > 0f)
         {
             Rigid.gravityScale = 0f;
         }
@@ -469,43 +504,11 @@ public class Character : MonoBehaviour, IHitable
                 OnEvading();
                 return false;
             }
-            if (Blocking)
-            {
-                Instantiate(AerutaDebug.i.BlockEffect, _ClosestPoint, Quaternion.identity, null);
-                AerutaDebug.i.Feedback.BlockCount++;
-                if ((bool)Player)
-                    Player.Morph.Add(.5f);
 
-                if (_attacker == Butterfly.i.MarkTarget)
-                {
-                    Butterfly.i.MarkTime = Butterfly.i.MarkTimeMax.Final;
-                }
-                else 
-                {
-                    if (!Butterfly.i.isAppear)
-                        Butterfly.i.Appear();
-                    Butterfly.i.MarkTarget = _attacker;
-                    Butterfly.i.transform.parent = null;
+            //¨¾¿m¦¨¥\®É¶¡¼È°±
+            //HitEffect.SetHitStun(false, false, .5f, false);
+            //_attacker.HitEffect.SetHitStun(false, false, .5f, false);
 
-                    AerutaDebug.i.Feedback.MarkCount++;
-                }
-
-                Debug.Log("¨¾¿m");
-                if (NowAction.DisplayName == "BurstCharge1")
-                {
-                    Debug.Log("¨¾¿m2");
-                    ActionMarkChargeObj BurstCharge1 = (ActionMarkChargeObj)NowAction;
-                    BurstCharge1.BlockSuccess = true;
-                }
-
-                //¨¾¿m¦¨¥\®É¶¡¼È°±
-                HitEffect.SetHitStun(false, false, .5f, false);
-                _attacker.HitEffect.SetHitStun(false, false, .5f, false);
-
-                //µê®z
-
-                return true;
-            }
             SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             //DOTween.Sequence().Append(component.DOFade(1.75f, 0.1f));//.Append(component.DOFade(1f, 0.15f));
             //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
@@ -650,4 +653,18 @@ public enum CharacterStates
 public interface IHitable
 {
     bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default));
+}
+
+[Serializable]
+public class TimedLink
+{
+    public ActionLink Base;
+
+    public float LifeTimePassed;
+
+    public TimedLink(ActionLink _base, float _lifeTimePassed = 0f)
+    {
+        Base = _base;
+        LifeTimePassed = _lifeTimePassed;
+    }
 }

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Claw4
   m_EditorClassIdentifier: 
   Id: Claw4
-  PreviousId: Claw3
   DisplayName: Claw4
   AnimationKey: Claw4
   InterruptLevel: 0
@@ -21,8 +20,8 @@ MonoBehaviour:
   DamageRatio: 0.2
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 11
-    KeyFrameEnd: 21
+  - KeyFrameFrom: 4
+    KeyFrameEnd: 12
     Offset: {x: 0.7, y: 0.15, z: 0}
     Range: {x: 2, y: 1.5}
   HitMax: 1
@@ -32,95 +31,36 @@ MonoBehaviour:
   Links:
   - Frame: 32
     LifeTime: -1
-    Key1: 7
+    Key1: 6
     KeyArrow: 0
-    LinkActionId: BurstCharge1
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 32
-    LifeTime: -1
-    Key1: 8
+    LinkActionId: Claw1
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 6
     KeyArrow: 0
-    LinkActionId: Penetrate
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 32
-    LifeTime: -1
-    Key1: 11
-    KeyArrow: 0
-    LinkActionId: Mark
-    CanChangeFace: 0
-    PreviousId: 
-  Moves:
-  - KeyFrame: 11
-    Power_ZTime: {x: 3, y: 0, z: 0.1}
-    XCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    YCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    CanEvade: 0
-    StartEvadeFrame: 0
-    EndEvadeFrame: 0
+    LinkActionId: Claw1
+    CanChangeFace: 1
+  Moves: []
   Toggles: []
   Teleports: []
-  ApplyForce: {x: 2, y: 0}
+  ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
-  NeedButterfly: 0
   MarkTimeRecovery: 0.5
-  OrbCost: 0
-  OrbRecovery: 0.02
-  OrbRecoveryAdditionalByMark: 0
+  MorphCost: 0
+  MorphRecovery: 0.0625
+  MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
-  EndActionFloatTime: 0.05
+  EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
   IsHeavyAttack: 0
   HitStun: 0.1
+  IsMovableX: 1
+  IsMovableY: 1
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 1

@@ -4,12 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Butterfly : MonoBehaviour
+public class Pieta : MonoBehaviour
 {
     public GameObject BlastEffect;
     public GameObject AppearEffect;
-    [SerializeField]
-    private GameObject TraceEffect;
 
     public Character MarkTarget;
 
@@ -21,7 +19,7 @@ public class Butterfly : MonoBehaviour
 
     private Animator Ani;
 
-    public static Butterfly i;
+    public static Pieta i;
 
     private Slider SliderMarkTime;
 
@@ -146,7 +144,6 @@ public class Butterfly : MonoBehaviour
 
         isAppear = true;
 
-        TraceEffect.SetActive(true);
     }
 
     public void Disappear()
@@ -161,7 +158,6 @@ public class Butterfly : MonoBehaviour
 
         isAppear = false;
 
-        TraceEffect.SetActive(false);
     }
 
     public void Blast()

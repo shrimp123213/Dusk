@@ -68,6 +68,10 @@ public class ActionPeformState
             //Debug.Log(TotalFrame);
             return IsWithinFrame(_frame, TotalFrame);
         }
+        else if (_frame == -1)
+        {
+            return !IsWithinFrame(_frame, TotalFrame);
+        }
         else
         {
             //Debug.Log(_frame);
@@ -87,7 +91,7 @@ public class ActionPeformState
         return false;
     }
 
-    public bool IsInFrame(int _frame)
+    public bool IsAtFrame(int _frame)
     {
         return Frame == _frame;
     }

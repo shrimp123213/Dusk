@@ -8,8 +8,6 @@ public class ActionBaseObj : ScriptableObject
 {
     public string Id;
 
-    public string PreviousId;
-
     public string DisplayName;
 
     [Header("動畫")]
@@ -63,8 +61,6 @@ public class ActionBaseObj : ScriptableObject
 
     public float TimeSlowAmount;
     
-    public bool NeedButterfly;
-
     public float MarkTimeRecovery;
 
     public float MorphCost;
@@ -88,6 +84,13 @@ public class ActionBaseObj : ScriptableObject
     public bool IsHeavyAttack;
 
     public float HitStun;
+
+    public bool IsMovableX;
+    public bool IsMovableY;
+
+    public bool CanChangeFacingWhenActing;
+
+    public bool CanJumpWhenActing;
 
     public virtual void Init(Character _m)
     {
@@ -115,9 +118,21 @@ public class ActionBaseObj : ScriptableObject
         IsTeleported = new bool[_m.NowAction.Teleports.Count];
     }
 
-    public virtual bool Movable(Character _m)
+    public virtual bool MovableX(Character _m)
     {
-        return false;
+        return IsMovableX;
+    }
+    public virtual bool MovableY(Character _m)
+    {
+        return IsMovableY;
+    }
+    public virtual bool CanChangeFacing(Character _m)
+    {
+        return CanChangeFacingWhenActing;
+    }
+    public virtual bool CanJump(Character _m)
+    {
+        return CanJumpWhenActing;
     }
 
     //public virtual bool TryNewConditionPossible(Character _m)有新的使用條件再用
@@ -140,6 +155,12 @@ public class ActionBaseObj : ScriptableObject
             _m.HitEffect.SetTimeSlow(TimeSlowAmount);
         }
 
+        _m.TimedLinks.Clear();
+        foreach (ActionLink link in Links)
+        {
+            _m.TimedLinks.Add(new TimedLink(link));
+        }
+
         if (!IsHeavyAttack)
             AerutaDebug.i.Feedback.LightAttackCount++;
         else
@@ -160,21 +181,20 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        if (_hitted == Butterfly.i.MarkTarget) 
-        {
-            Butterfly.i.MarkTime += MarkTimeRecovery;
-
-            if (CanTriggerMark && Butterfly.i.onTarget) 
-                TriggerMark(_m, _hitted, IHitable);
-        }
+        //if (_hitted == Butterfly.i.MarkTarget) 
+        //{
+        //    Butterfly.i.MarkTime += MarkTimeRecovery;
+        //
+        //    if (CanTriggerMark && Butterfly.i.onTarget) 
+        //        TriggerMark(_m, _hitted, IHitable);
+        //}
 
         Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
     {
-        Butterfly.i.Blast();
-        Butterfly.i.transform.parent = null;
+        //Butterfly.i.Blast();
 
         _m.TriggerMark();
 
@@ -286,29 +306,10 @@ public class ActionBaseObj : ScriptableObject
                 }
             }
         }
-        if (AnimationKey == "Claw4sp")
-        {
-            _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, -45f * _m.Facing);
-        }
-        if (AnimationKey == "Evade")
-        {
-            _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
-        }
         TryRegisterMove(_m, actionState.YinputWhenAction);
-        if (!actionState.Linked && _m.NowAction.Links.Count > 0 && actionState.IsInLifeTime(_m.NowAction.Links[0].Frame, _m.NowAction.Links[0].LifeTime) && _m.StoredMoves.Count <= 0) 
-        {
-            if (AnimationKey == "Claw4sp")
-            {
-                _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
-            }
-            actionState.Linked = _m.TryLink(PreviousId);
-        }
+        //oldLinks
         if (actionState.ActionTime >= 1f && !actionState.Linked)
         {
-            if (AnimationKey == "Claw4sp")
-            {
-                _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
-            }
             EndAction(_m);
             _m.NowAction = null;
             _m.Ani.Rebind();
@@ -365,8 +366,6 @@ public class ActionLink
     public string LinkActionId;
 
     public bool CanChangeFace;
-
-    public string PreviousId;
 }
 
 
