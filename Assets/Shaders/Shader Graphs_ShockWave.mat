@@ -59,11 +59,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distance: 0
+    - _Distance: -0.1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 0
-    - _Strength: 0
+    - _Size: 0.1
+    - _Speed: 2
+    - _Strength: -0.1
+    - _XSizeRatio: 1
     m_Colors:
     - _RingSpawnPosition: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
