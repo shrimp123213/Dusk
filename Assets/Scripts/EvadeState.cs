@@ -18,6 +18,11 @@ public class EvadeState : MonoBehaviour
 
     public GameObject EvadeFinishCooldownEffect;
 
+    private void Start()
+    {
+        EvadeDistanceEffect.Stop();
+    }
+
     private void Update()
     {
         if (!CanEvade)

@@ -403,19 +403,19 @@ public class PlayerMain : Character
         SilderHealth.value = base.Health / HealthMax.Final;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         //if (collision.CompareTag("Lava"))
         //{
         //    //RoomManager.i.TeleportToSafePoint();
         //}
 
-        Debug.Log(collision.gameObject.name);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox"))
+        {
+            Character _attacker = collision.transform.parent.GetComponent<Character>();
+            TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction, collision.ClosestPoint(_attacker.transform.position));
+            TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+        }
     }
 
     public void ResetDash()

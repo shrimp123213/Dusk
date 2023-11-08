@@ -529,7 +529,6 @@ public class Character : MonoBehaviour, IHitable
                 Player.Morph.Consume(Player.Morph.MorphProgress);
             }
 
-
             if (isActing && isActionInterrupted)
             {
                 NowAction.EndAction(this);
@@ -628,18 +627,18 @@ public class Character : MonoBehaviour, IHitable
         if (raycastHit2D.Length <= 1)//只有射到自己
             return 1;
 
-        foreach (RaycastHit2D hit in raycastHit2D)
-        {
-            if (hit.collider.name != component.name)
-            {
-                if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
-                {
-                    Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
-                    return 0;
-                }
-            }
-        }
-        
+        //foreach (RaycastHit2D hit in raycastHit2D)要用StopMoveBox來讓NPC擋住玩家時才會用到，有碰撞傷害的話用不到
+        //{
+        //    if (hit.collider.name != component.name)
+        //    {
+        //        if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
+        //        {
+        //            Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
+        //            return 0;
+        //        }
+        //    }
+        //}
+
         Debug.DrawLine(component.bounds.center, component.bounds.center + (component.bounds.extents.x + .1f) * Vector3.right * Facing, Color.green, 2f);
         return 1;
     }

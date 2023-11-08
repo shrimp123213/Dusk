@@ -291,26 +291,24 @@ public class ActionBaseObj : ScriptableObject
             Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.magenta);
             Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.magenta);
             Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.magenta);
-            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("HurtBox"));
+            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
             foreach (Collider2D collider2D in array)
             {
-                GameObject hitted = collider2D.transform.parent.gameObject;
-
-                if (!(hitted != _m.gameObject) || _m.isMaxHit(hitted, _m.NowAction.HitMax))
+                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(collider2D.gameObject, _m.NowAction.HitMax))
                 {
                     continue;
                 }
-                bool num = hitted.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !hitted.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
-                _m.RegisterHit(hitted);
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
+                _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
                     _m.AttackLand();
                     //CameraManager.i.GenerateImpulse(DamageRatio);
-                    if (hitted.CompareTag("Breakable"))
+                    if (collider2D.gameObject.CompareTag("Breakable"))
                     {
                         return;
                     }
-                    Character component = hitted.GetComponent<Character>();
+                    Character component = collider2D.GetComponent<Character>();
                     HitSuccess(_m, component, IHitable, collider2D.ClosestPoint(_m.transform.position + vector));
                     float y = 0f;
                     if (SuckEffect)
