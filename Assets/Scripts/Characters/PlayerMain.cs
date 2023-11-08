@@ -19,6 +19,9 @@ public class PlayerMain : Character
     [HideInInspector]
     public MorphUser Morph;
 
+    [HideInInspector]
+    public EvadeState EvadeState;
+
     //[HideInInspector]
     //public PlayerSwing Swinger;
 
@@ -38,7 +41,7 @@ public class PlayerMain : Character
 
     public bool CanInput;
 
-    public float EvadeCooldown;
+    public float DashCooldown;
 
     public List<Image> Potions;
 
@@ -57,6 +60,7 @@ public class PlayerMain : Character
         base.OnAwake();
         i = this;
         isLocal = true;
+        EvadeState = GetComponent<EvadeState>();
         //MyInteracter = GetComponentInChildren<Interacter>();
         Morph = GetComponent<MorphUser>();
         MorphUser.Local = Morph;
@@ -106,9 +110,9 @@ public class PlayerMain : Character
             Inputs.Clear();
             return;
         }
-        if (Inputs.Contains(InputKey.Evade))
+        if (Inputs.Contains(InputKey.Dash))
         {
-            if (base.isActing && NowAction.Id != "Evade")
+            if (base.isActing && NowAction.Id != "Dash")
             {
                 if (Morph.MorphCount > 0||true)//°{Á×§ó·s
                 {
@@ -116,9 +120,11 @@ public class PlayerMain : Character
                     {
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
-                    StartAction(ActionLoader.i.Actions["Evade"]);
+
+                    StartAction(ActionLoader.i.Actions["Dash"]);
                     //Morph.Consume();
                     CanDash = false;
+
                     Inputs.Clear();
                 }
                 else
@@ -130,8 +136,9 @@ public class PlayerMain : Character
             if (CanDash)
             {
                 CanDash = false;
+
                 CanAttack = true;
-                StartAction(ActionLoader.i.Actions["Evade"]);
+                StartAction(ActionLoader.i.Actions["Dash"]);
                 Inputs.Clear();
                 return;
             }
@@ -299,10 +306,10 @@ public class PlayerMain : Character
         //}
         if (!CanDash)
         {
-            EvadeCooldown -= Time.deltaTime;
-            if (EvadeCooldown < 0f)
+            DashCooldown -= Time.deltaTime;
+            if (DashCooldown < 0f)
             {
-                EvadeCooldown = 1f;
+                DashCooldown = 1f;
                 CanDash = true;
             }
         }
@@ -327,9 +334,9 @@ public class PlayerMain : Character
                 TryInput(InputKey.Claw);
             //}
         }
-        if (playerAct.FindAction("Evade").WasPressedThisFrame() && (EvadeCooldown < .1f|| EvadeCooldown==1f))
+        if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f|| DashCooldown==1f))
         {
-            TryInput(InputKey.Evade);
+            TryInput(InputKey.Dash);
         }
         if (playerAct.FindAction("Burst").WasPressedThisFrame())
         {
@@ -379,7 +386,6 @@ public class PlayerMain : Character
                 ActionLinkTime.value = 0f;
         }
 
-        Debug.Log(TimedLinks.Count);
         if (TimedLinks.Count > 0)
         {
             bool _Marked = false;
@@ -390,7 +396,7 @@ public class PlayerMain : Character
                 if (NowAction == null) { _link.LifeTimePassed += Time.fixedDeltaTime; }
                 if (_link.LifeTimePassed >= _link.Base.LifeTime)  { _Marked = true; }
             }
-            Debug.Log(_Marked);
+
             if (_Marked) { TimedLinks.RemoveAll(w => w.LifeTimePassed >= w.Base.LifeTime); }
         }
         
@@ -403,6 +409,13 @@ public class PlayerMain : Character
         //{
         //    //RoomManager.i.TeleportToSafePoint();
         //}
+
+        Debug.Log(collision.gameObject.name);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 
     public void ResetDash()

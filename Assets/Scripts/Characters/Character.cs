@@ -524,7 +524,10 @@ public class Character : MonoBehaviour, IHitable
             //    Invoke("ResumeAI", 0.75f);
             //}
             if ((bool)Player)
+            {
                 AerutaDebug.i.Feedback.HittedCount++;
+                Player.Morph.Consume(Player.Morph.MorphProgress);
+            }
 
 
             if (isActing && isActionInterrupted)

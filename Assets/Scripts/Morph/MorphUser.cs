@@ -4,11 +4,13 @@ public class MorphUser : MonoBehaviour
 {
     public static MorphUser Local;
 
+    public float[] MorphProgressFactor;
+
     public float MorphProgress;
 
     public int MorphCount;
 
-    public int MorphMax = 5;
+    public int MorphMax = 3;
 
     public bool Drive;
 
@@ -28,9 +30,9 @@ public class MorphUser : MonoBehaviour
         {
             DelayTime -= Time.deltaTime;
         }
-        else if (TotalMorph > 0)
+        else if (MorphProgress > 0)
         {
-            Consume(Time.deltaTime * 0.01f);
+            Consume(Mathf.Clamp(Time.deltaTime * 0.01f, 0, MorphProgress));
         }
     }
 
@@ -47,7 +49,7 @@ public class MorphUser : MonoBehaviour
 
     public void Add(float _progress)
     {
-        MorphProgress += _progress;
+        MorphProgress += _progress * MorphProgressFactor[MorphCount];
         if (MorphProgress >= 1f)
         {
             MorphCount = Mathf.Clamp(MorphCount + (int)Mathf.Floor(MorphProgress), 0, MorphMax);

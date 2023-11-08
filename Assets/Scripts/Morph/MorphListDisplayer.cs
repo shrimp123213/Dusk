@@ -10,7 +10,7 @@ public class MorphListDisplayer : MonoBehaviour
 
     public Transform TransList;
 
-    public MorphInUI MorphUI;
+    public MorphInUI[] MorphUI;
 
     public CanvasGroup CanvasGroup;
 
@@ -27,10 +27,21 @@ public class MorphListDisplayer : MonoBehaviour
 
     private void Update()
     {
-        if (Target.MorphCount == 3) 
-            MorphUI.SetFill(1f, Target.Drive);
-        else
-            MorphUI.SetFill(Target.MorphProgress, Target.Drive);
+        for (int i = 0; i < MorphUI.Length; i++) 
+        {
+            if (Target.MorphMax <= i || Target.MorphCount < i)
+            {
+                MorphUI[i].SetFill(0f);
+            }
+            else if (Target.MorphCount > i)
+            {
+                MorphUI[i].SetFill(1f, Target.Drive);
+            }
+            else
+            {
+                MorphUI[i].SetFill(Target.MorphProgress, Target.Drive);
+            }
+        }
 
         MarkLevelImage.sprite = MarkSprites[Target.MorphCount];
         MarkLevelImagePlayer.sprite = MarkSprites[Target.MorphCount];

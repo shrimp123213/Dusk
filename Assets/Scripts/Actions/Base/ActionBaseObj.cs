@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
@@ -96,7 +97,7 @@ public class ActionBaseObj : ScriptableObject
     {
         foreach (ActionMovement movement in _m.NowAction.Moves) 
         {
-            if (movement.CanEvade)
+            if (movement.CanEvade && _m.Evading)
             {
                 ActionPeformState actionState = _m.ActionState;
 
@@ -166,6 +167,20 @@ public class ActionBaseObj : ScriptableObject
         else
             AerutaDebug.i.Feedback.HeavyAttackCount++;
 
+
+        foreach (ActionMovement movement in Moves)
+        {
+            if (movement.CanEvade)
+            {
+                if ((bool)_m.Player && _m.Player.EvadeState.CanEvade)
+                {
+                    _m.Player.EvadeState.UseEvade(_m);
+                    break;
+                }
+            }
+        }
+        
+
         return new ActionPeformState();
     }
 
@@ -176,6 +191,12 @@ public class ActionBaseObj : ScriptableObject
         if (EndActionFloatTime > 0f)
         {
             _m.LowGravityTime = EndActionFloatTime;
+        }
+
+        _m.Evading = false;
+        if ((bool)_m.Player)
+        {
+            _m.Player.EvadeState.EvadeDistanceEffect.Stop();
         }
     }
 
@@ -222,7 +243,7 @@ public class ActionBaseObj : ScriptableObject
         {
             return;
         }
-        _m.Evading = false;
+        
         if (_m.NowAction.Toggles.Count > 0)
         {
             int i = 0;
@@ -249,14 +270,7 @@ public class ActionBaseObj : ScriptableObject
                 i++;
             }
         }
-        foreach (ActionMovement movement in _m.NowAction.Moves)
-        {
-            if (movement.CanEvade && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
-            {
-                _m.Evading = true;
-                break;
-            }
-        }
+        
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
         {
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
@@ -277,24 +291,26 @@ public class ActionBaseObj : ScriptableObject
             Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.magenta);
             Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.magenta);
             Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.magenta);
-            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
+            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("HurtBox"));
             foreach (Collider2D collider2D in array)
             {
-                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(collider2D.gameObject, _m.NowAction.HitMax))
+                GameObject hitted = collider2D.transform.parent.gameObject;
+
+                if (!(hitted != _m.gameObject) || _m.isMaxHit(hitted, _m.NowAction.HitMax))
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
-                _m.RegisterHit(collider2D.gameObject);
+                bool num = hitted.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !hitted.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
+                _m.RegisterHit(hitted);
                 if (num)
                 {
                     _m.AttackLand();
                     //CameraManager.i.GenerateImpulse(DamageRatio);
-                    if (collider2D.CompareTag("Breakable"))
+                    if (hitted.CompareTag("Breakable"))
                     {
                         return;
                     }
-                    Character component = collider2D.GetComponent<Character>();
+                    Character component = hitted.GetComponent<Character>();
                     HitSuccess(_m, component, IHitable, collider2D.ClosestPoint(_m.transform.position + vector));
                     float y = 0f;
                     if (SuckEffect)

@@ -73,7 +73,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Evade"",
+                    ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""168a1565-04b6-43fe-961d-008bfcbf5e98"",
                     ""expectedControlType"": ""Button"",
@@ -291,7 +291,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Evade"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -302,7 +302,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Evade"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -418,7 +418,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Claw = m_Player.FindAction("Claw", throwIfNotFound: true);
         m_Player_Burst = m_Player.FindAction("Burst", throwIfNotFound: true);
         m_Player_Ult = m_Player.FindAction("Ult", throwIfNotFound: true);
-        m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         m_Player_Mark = m_Player.FindAction("Mark", throwIfNotFound: true);
@@ -489,7 +489,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Claw;
     private readonly InputAction m_Player_Burst;
     private readonly InputAction m_Player_Ult;
-    private readonly InputAction m_Player_Evade;
+    private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
     private readonly InputAction m_Player_Mark;
@@ -503,7 +503,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Claw => m_Wrapper.m_Player_Claw;
         public InputAction @Burst => m_Wrapper.m_Player_Burst;
         public InputAction @Ult => m_Wrapper.m_Player_Ult;
-        public InputAction @Evade => m_Wrapper.m_Player_Evade;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputAction @Mark => m_Wrapper.m_Player_Mark;
@@ -532,9 +532,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Ult.started += instance.OnUlt;
             @Ult.performed += instance.OnUlt;
             @Ult.canceled += instance.OnUlt;
-            @Evade.started += instance.OnEvade;
-            @Evade.performed += instance.OnEvade;
-            @Evade.canceled += instance.OnEvade;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
             @Hint_Energy.started += instance.OnHint_Energy;
             @Hint_Energy.performed += instance.OnHint_Energy;
             @Hint_Energy.canceled += instance.OnHint_Energy;
@@ -566,9 +566,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Ult.started -= instance.OnUlt;
             @Ult.performed -= instance.OnUlt;
             @Ult.canceled -= instance.OnUlt;
-            @Evade.started -= instance.OnEvade;
-            @Evade.performed -= instance.OnEvade;
-            @Evade.canceled -= instance.OnEvade;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
             @Hint_Energy.started -= instance.OnHint_Energy;
             @Hint_Energy.performed -= instance.OnHint_Energy;
             @Hint_Energy.canceled -= instance.OnHint_Energy;
@@ -623,7 +623,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnClaw(InputAction.CallbackContext context);
         void OnBurst(InputAction.CallbackContext context);
         void OnUlt(InputAction.CallbackContext context);
-        void OnEvade(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnMark(InputAction.CallbackContext context);
