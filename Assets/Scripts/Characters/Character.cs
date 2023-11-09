@@ -98,6 +98,8 @@ public class Character : MonoBehaviour, IHitable
 
     public List<TimedLink> TimedLinks;
 
+    public GameObject HurtEffect;
+
     public float Health
     {
         get
@@ -497,6 +499,10 @@ public class Character : MonoBehaviour, IHitable
         {
             return false;
         }
+        if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)
+        {
+            return false;
+        }
         if (_damage.Type != DamageType.Heal)
         {
             if (Evading)
@@ -527,6 +533,11 @@ public class Character : MonoBehaviour, IHitable
             {
                 AerutaDebug.i.Feedback.HittedCount++;
                 Player.Morph.Consume(Player.Morph.MorphProgress);
+
+                Instantiate(HurtEffect, transform.position, Quaternion.identity, transform);
+                HitEffect.SetGlobalSlow(.5f, 0);
+
+                Player.InvincibleState.Invincible();
             }
 
             if (isActing && isActionInterrupted)
@@ -627,14 +638,17 @@ public class Character : MonoBehaviour, IHitable
         if (raycastHit2D.Length <= 1)//只有射到自己
             return 1;
 
-        //foreach (RaycastHit2D hit in raycastHit2D)要用StopMoveBox來讓NPC擋住玩家時才會用到，有碰撞傷害的話用不到
+        //if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)阻止玩家無敵時走過敵人
         //{
-        //    if (hit.collider.name != component.name)
+        //    foreach (RaycastHit2D hit in raycastHit2D)
         //    {
-        //        if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
+        //        if (hit.collider.name != component.name)
         //        {
-        //            Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
-        //            return 0;
+        //            if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
+        //            {
+        //                Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
+        //                return 0;
+        //            }
         //        }
         //    }
         //}

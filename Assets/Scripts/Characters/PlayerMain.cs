@@ -22,6 +22,9 @@ public class PlayerMain : Character
     [HideInInspector]
     public EvadeState EvadeState;
 
+    [HideInInspector]
+    public InvincibleState InvincibleState;
+
     //[HideInInspector]
     //public PlayerSwing Swinger;
 
@@ -61,6 +64,7 @@ public class PlayerMain : Character
         i = this;
         isLocal = true;
         EvadeState = GetComponent<EvadeState>();
+        InvincibleState = GetComponent<InvincibleState>();
         //MyInteracter = GetComponentInChildren<Interacter>();
         Morph = GetComponent<MorphUser>();
         MorphUser.Local = Morph;
@@ -194,10 +198,13 @@ public class PlayerMain : Character
     public override void OnEvading()
     {
         base.OnEvading();
-        AerutaDebug.i.CallEffect(2);
-        if (base.isActing)
+        //AerutaDebug.i.CallEffect(2);
+        if (base.isActing && !EvadeState.IsDamageAvoided)
         {
+            EvadeState.IsDamageAvoided = true;
             Morph.Add(NowAction.EvadeEnergyRecovery);
+            Instantiate(EvadeState.EvadeSuccessEffect, transform.position, Quaternion.identity, transform); 
+            HitEffect.SetGlobalSlow(.5f, 1);
         }
     }
 
@@ -217,13 +224,6 @@ public class PlayerMain : Character
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Potions !");
         }
-
-        //if (flag && !_actionBaseObj.TryNewConditionPossible(this))有新的使用條件再用
-        //{
-        //    flag = false;
-        //    if (isShowMessage)
-        //        SkillPopup.i.ShowMessage("Butterfly Not Ready !");
-        //}
 
         //if (flag && base.isActing)
         //{
@@ -410,11 +410,11 @@ public class PlayerMain : Character
         //    //RoomManager.i.TeleportToSafePoint();
         //}
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox") && !Evading)
         {
             Character _attacker = collision.transform.parent.GetComponent<Character>();
-            TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction, collision.ClosestPoint(_attacker.transform.position));
-            TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction, collision.ClosestPoint(_attacker.transform.position));
+            if(num) TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
         }
     }
 

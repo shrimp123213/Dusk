@@ -6,6 +6,8 @@ public class EvadeState : MonoBehaviour
 {
     public bool CanEvade;
 
+    public bool IsDamageAvoided;
+
     public float EvadeCooldown;
 
     public float EvadeCooldownMax;
@@ -17,6 +19,8 @@ public class EvadeState : MonoBehaviour
     public ParticleSystem EvadeDistanceEffect;
 
     public GameObject EvadeFinishCooldownEffect;
+
+    public GameObject EvadeSuccessEffect;
 
     private void Start()
     {
@@ -47,6 +51,7 @@ public class EvadeState : MonoBehaviour
     public void UseEvade(Character _m)
     {
         CanEvade = false;
+        IsDamageAvoided = false;
 
         //Instantiate(EvadeUseEffect, transform.position, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180), transform);
 

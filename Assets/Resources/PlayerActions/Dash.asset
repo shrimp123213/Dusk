@@ -71,12 +71,13 @@ MonoBehaviour:
   MorphCost: 0
   MorphRecovery: 0
   MorphRecoveryAdditionalByMark: 0
-  EvadeEnergyRecovery: 0
+  EvadeEnergyRecovery: 0.5
   EndActionFloatTime: 0.05
   GroundOnly: 0
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
+  IsLightAttack: 0
   IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0

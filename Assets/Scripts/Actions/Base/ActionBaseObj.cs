@@ -82,6 +82,7 @@ public class ActionBaseObj : ScriptableObject
 
     public bool[] IsTeleported;
 
+    public bool IsLightAttack;
     public bool IsHeavyAttack;
 
     public float HitStun;
@@ -136,11 +137,6 @@ public class ActionBaseObj : ScriptableObject
         return CanJumpWhenActing;
     }
 
-    //public virtual bool TryNewConditionPossible(Character _m)有新的使用條件再用
-    //{
-    //    return true;
-    //}
-
     public virtual ActionPeformState StartAction(Character _m)
     {
         if (ResetCanAttack && (bool)_m.Player)
@@ -162,9 +158,9 @@ public class ActionBaseObj : ScriptableObject
             _m.TimedLinks.Add(new TimedLink(link));
         }
 
-        if (!IsHeavyAttack)
+        if (IsLightAttack)
             AerutaDebug.i.Feedback.LightAttackCount++;
-        else
+        if (IsHeavyAttack)
             AerutaDebug.i.Feedback.HeavyAttackCount++;
 
 
@@ -202,21 +198,11 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        //if (_hitted == Butterfly.i.MarkTarget) 
-        //{
-        //    Butterfly.i.MarkTime += MarkTimeRecovery;
-        //
-        //    if (CanTriggerMark && Butterfly.i.onTarget) 
-        //        TriggerMark(_m, _hitted, IHitable);
-        //}
-
         Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
     {
-        //Butterfly.i.Blast();
-
         _m.TriggerMark();
 
         IHitable.TakeDamage(new Damage(10, DamageType.Mark), 0f, _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
@@ -252,7 +238,7 @@ public class ActionBaseObj : ScriptableObject
                 if (!IsTriggered[i] && actionState.IsAfterFrame(toggle.KeyFrame))
                 {
                     IsTriggered[i] = true;
-                    _m.Collider.enabled = toggle.IsActive;
+                    _m.GetComponentInChildren<Collider2D>().enabled = toggle.IsActive;
                 }
                 i++;
             }
