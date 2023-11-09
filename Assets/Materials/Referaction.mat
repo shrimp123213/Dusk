@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: 36648b8e99fea3545bc08d4648cb2846, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16d574e53541bba44a84052fa38778df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
@@ -63,14 +63,19 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _Distance: 0.494
     - _NoiceInterensity: 0
     - _NoiseInterensity: 1
     - _NormalScale: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Size: 0.05
+    - _Strength: -0.05
+    - _XSizeRatio: 1.777
     m_Colors:
     - _Color0: {r: 0.9339623, g: 0.66522783, b: 0.66522783, a: 0.4745098}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _NoiceSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _NoiseSpeed: {r: 1, g: 0, b: 0, a: 0}
+    - _RingSpawnPosition: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
