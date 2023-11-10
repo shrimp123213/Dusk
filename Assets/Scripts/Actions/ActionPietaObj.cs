@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ActionPenetrate", menuName = "Actions/Penetrate")]
-public class ActionPenetrateObj : ActionBaseObj
+[CreateAssetMenu(fileName = "ActionPieta", menuName = "Actions/Pieta")]
+public class ActionPietaObj : ActionBaseObj
 {
-    private GameObject trail;
+    public GameObject PietaEffect;
 
-    private bool trailColorChanged;
+    public GameObject SliceEffect;
 
     public override void Init(Character _m)
     {
@@ -25,65 +25,42 @@ public class ActionPenetrateObj : ActionBaseObj
                     Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
-                Afterimage.EulerAngles = new Vector3(0, 0, 40 * _m.Facing);
                 Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true;
                 Afterimage.SetLifeTime(StartDelay, Duration);
             }
-
-            trail = Instantiate(AerutaDebug.i.PenetrateTrail, _m.transform.position, Quaternion.identity, _m.transform);
-            trail.SetActive(false);
         }
 
         base.IsTriggered = new bool[_m.NowAction.Toggles.Count];
         base.IsTeleported = new bool[_m.NowAction.Teleports.Count];
-        
     }
 
     public override ActionPeformState StartAction(Character _m)
     {
-        AerutaDebug.i.Leaf.Pause();
-
-        AerutaDebug.i.Boss1.Ani.speed = 0f;
-        AerutaDebug.i.Boss1.AITree.enabled = false;
-
         AerutaDebug.i.Feedback.UltimateCount++;
 
-        trailColorChanged = false;
+        Instantiate(PietaEffect, _m.transform.position, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180), _m.transform);
 
         return base.StartAction(_m);
     }
 
     public override void ProcessAction(Character _m)
     {
-        ActionPeformState actionState = _m.ActionState;
-        foreach (ActionMovement movement in _m.NowAction.Moves)
+        List<MarkedTarget> triggeredTargetList = new List<MarkedTarget>();
+        foreach (MarkedTarget markedTarget in Pieta.i.CanPietaList)
         {
-            if (actionState.IsAfterFrame(movement.KeyFrame) && trail != null)
+            if (_m.Facing * (markedTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
             {
-                trail.SetActive(true);
-                break;
+                triggeredTargetList.Add(markedTarget);
+                Instantiate(SliceEffect, markedTarget.Collider2D.GetComponent<Character>().SlicePos, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), markedTarget.Collider2D.transform);
+                //³y¦¨¶Ë®`
             }
         }
-        foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
+
+        if(triggeredTargetList.Count > 0)
         {
-            
-            if (actionState.IsAfterFrame(attackSpot.KeyFrameFrom) && trail != null && !trailColorChanged)
+            foreach (MarkedTarget markedTarget in triggeredTargetList)
             {
-                trailColorChanged = true;
-
-                trail.GetComponent<TrailRenderer>().startColor = Color.white;
-                trail.GetComponent<TrailRenderer>().endColor = Color.white;
-
-                AerutaDebug.i.Leaf.Play();
-
-                AerutaDebug.i.Boss1.Ani.speed = 1f;
-                AerutaDebug.i.Boss1.AITree.enabled = true;
-
-                break;
-            }
-            if (actionState.IsAfterFrame(attackSpot.KeyFrameEnd) && trail != null)
-            {
-                Destroy(trail);
+                Pieta.i.CanPietaList.Remove(markedTarget);
             }
         }
 
@@ -95,5 +72,13 @@ public class ActionPenetrateObj : ActionBaseObj
     {
         base.HitSuccess(_m, _hitted, IHitable, _ClosestPoint);
 
+
+    }
+
+    public override void EndAction(Character _m)
+    {
+        _m.Player.EvadeState.EvadeReady(true);
+
+        base.EndAction(_m);
     }
 }

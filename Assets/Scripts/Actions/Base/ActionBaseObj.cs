@@ -62,8 +62,6 @@ public class ActionBaseObj : ScriptableObject
 
     public float TimeSlowAmount;
     
-    public float MarkTimeRecovery;
-
     public float MorphCost;
 
     public float MorphRecovery;

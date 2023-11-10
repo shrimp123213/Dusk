@@ -12,8 +12,6 @@ public class EvadeState : MonoBehaviour
 
     public float EvadeCooldownMax;
 
-    public GameObject EvadeUseEffect;
-
     public ParticleSystem EvadeCanUseEffect;
 
     public ParticleSystem EvadeDistanceEffect;
@@ -34,26 +32,28 @@ public class EvadeState : MonoBehaviour
             EvadeCooldown -= Time.deltaTime;
             if (EvadeCooldown < 0f)
             {
-                EvadeCooldown = EvadeCooldownMax;
-                CanEvade = true;
-
-                Instantiate(EvadeFinishCooldownEffect, transform.position, Quaternion.identity, transform);
-
-                EvadeCanUseEffect.Stop();
-                var main = EvadeCanUseEffect.main;
-                main.loop = true;
-                EvadeCanUseEffect.Play();
-
+                EvadeReady(true);
             }
         }
+    }
+
+    public void EvadeReady(bool spawnEffect)
+    {
+        EvadeCooldown = EvadeCooldownMax;
+        CanEvade = true;
+
+        if(spawnEffect) Instantiate(EvadeFinishCooldownEffect, transform.position, Quaternion.identity, transform);
+
+        EvadeCanUseEffect.Stop();
+        var main = EvadeCanUseEffect.main;
+        main.loop = true;
+        EvadeCanUseEffect.Play();
     }
 
     public void UseEvade(Character _m)
     {
         CanEvade = false;
         IsDamageAvoided = false;
-
-        //Instantiate(EvadeUseEffect, transform.position, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180), transform);
 
         EvadeCanUseEffect.Stop();
         var main = EvadeCanUseEffect.main;

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Pieta;
 
 public class PlayerMain : Character
 {
@@ -125,7 +126,16 @@ public class PlayerMain : Character
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
 
-                    StartAction(ActionLoader.i.Actions["Dash"]);
+                    if (Morph.MorphCount > 0 && Pieta.i.CheckPietaAttack())
+                    {
+                        Morph.Consume(1f, true);
+                        EvadeState.EvadeReady(false);
+                        EvadeState.UseEvade(this);
+                        StartAction(ActionLoader.i.Actions["Pieta"]);
+                    }
+                    else
+                        StartAction(ActionLoader.i.Actions["Dash"]);
+
                     //Morph.Consume();
                     CanDash = false;
 
@@ -142,7 +152,17 @@ public class PlayerMain : Character
                 CanDash = false;
 
                 CanAttack = true;
-                StartAction(ActionLoader.i.Actions["Dash"]);
+
+                if (Morph.MorphCount > 0 && Pieta.i.CheckPietaAttack())
+                {
+                    Morph.Consume(1f, true);
+                    EvadeState.EvadeReady(false);
+                    EvadeState.UseEvade(this);
+                    StartAction(ActionLoader.i.Actions["Pieta"]);
+                }
+                else
+                    StartAction(ActionLoader.i.Actions["Dash"]);
+
                 Inputs.Clear();
                 return;
             }
