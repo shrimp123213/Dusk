@@ -40,6 +40,9 @@ public class ActionPietaObj : ActionBaseObj
 
         Instantiate(PietaEffect, _m.transform.position, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180), _m.transform);
 
+        _m.Player.EvadeState.EvadeReady(false);
+        _m.Player.EvadeState.UseEvade(_m);
+
         return base.StartAction(_m);
     }
 
@@ -51,7 +54,8 @@ public class ActionPietaObj : ActionBaseObj
             if (_m.Facing * (markedTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
             {
                 triggeredTargetList.Add(markedTarget);
-                Instantiate(SliceEffect, markedTarget.Collider2D.GetComponent<Character>().SlicePos, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), markedTarget.Collider2D.transform);
+                Transform slice = Instantiate(SliceEffect, new Vector3(markedTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f), _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), markedTarget.Collider2D.transform).transform;
+                slice.localScale *= markedTarget.Collider2D.GetComponent<Character>().SliceMultiply;
                 //³y¦¨¶Ë®`
             }
         }

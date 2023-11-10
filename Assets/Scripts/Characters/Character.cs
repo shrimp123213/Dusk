@@ -19,7 +19,7 @@ public class Character : MonoBehaviour, IHitable
     public Collider2D Collider;
 
     public Vector2 MarkPos;
-    public Vector2 SlicePos;
+    public float SliceMultiply = 1f;
 
     public float SpeedFactor = 1f;
 

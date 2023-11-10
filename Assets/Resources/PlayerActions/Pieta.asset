@@ -27,7 +27,7 @@ MonoBehaviour:
   Links: []
   Moves:
   - KeyFrame: -1
-    Power_ZTime: {x: 40, y: 0, z: 0.4}
+    Power_ZTime: {x: 80, y: 0, z: 0.4}
     XCurve:
       serializedVersion: 2
       m_Curve:
@@ -67,10 +67,10 @@ MonoBehaviour:
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
-  MorphCost: 0
+  MorphCost: 1
   MorphRecovery: 0
   MorphRecoveryAdditionalByMark: 0
-  EvadeEnergyRecovery: 0
+  EvadeEnergyRecovery: 0.5
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 1

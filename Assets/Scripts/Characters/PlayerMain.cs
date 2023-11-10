@@ -126,11 +126,9 @@ public class PlayerMain : Character
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
 
-                    if (Morph.MorphCount > 0 && Pieta.i.CheckPietaAttack())
+                    if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
                     {
                         Morph.Consume(1f, true);
-                        EvadeState.EvadeReady(false);
-                        EvadeState.UseEvade(this);
                         StartAction(ActionLoader.i.Actions["Pieta"]);
                     }
                     else
@@ -153,11 +151,9 @@ public class PlayerMain : Character
 
                 CanAttack = true;
 
-                if (Morph.MorphCount > 0 && Pieta.i.CheckPietaAttack())
+                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
                 {
                     Morph.Consume(1f, true);
-                    EvadeState.EvadeReady(false);
-                    EvadeState.UseEvade(this);
                     StartAction(ActionLoader.i.Actions["Pieta"]);
                 }
                 else
@@ -243,6 +239,11 @@ public class PlayerMain : Character
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Potions !");
+        }
+
+        if (flag && _actionBaseObj.Id == "Pieta" && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack()))
+        {
+            flag = false;
         }
 
         //if (flag && base.isActing)
