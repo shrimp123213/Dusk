@@ -228,7 +228,7 @@ public class PlayerMain : Character
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
-        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
+        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.Id != "Pieta" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
         {
             flag = false;
             if (isShowMessage)
@@ -434,7 +434,7 @@ public class PlayerMain : Character
         if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox") && !Evading)
         {
             Character _attacker = collision.transform.parent.GetComponent<Character>();
-            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction, collision.ClosestPoint(_attacker.transform.position));
+            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction);
             if(num) TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
         }
     }

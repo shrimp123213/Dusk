@@ -17,7 +17,7 @@ MonoBehaviour:
   AnimationKey: Pieta
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 0
+  DamageRatio: 1
   DamageType: 0
   AttackSpots: []
   HitMax: 0
@@ -27,37 +27,32 @@ MonoBehaviour:
   Links: []
   Moves:
   - KeyFrame: -1
-    Power_ZTime: {x: 80, y: 0, z: 0.4}
-    XCurve:
+    Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: -2.8325496
-        outSlope: -2.8325496
+        value: 0
+        inSlope: 20.012821
+        outSlope: 20.012821
         tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.040760867
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.013586956
       - serializedVersion: 3
         time: 1
-        value: -0.0023498535
-        inSlope: -0.07471288
-        outSlope: -0.07471288
+        value: 1
+        inSlope: 0.075472765
+        outSlope: 0.075472765
         tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.107142866
+        weightedMode: 3
+        inWeight: 0.8117236
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    YCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 0
-      m_PostInfinity: 0
-      m_RotationOrder: 4
+    TargetDistance: {x: 5, y: 0}
+    FinishTime: 0.3
     CanEvade: 1
     StartEvadeFrame: 0
     EndEvadeFrame: 25

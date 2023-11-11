@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: boss1-1_FATK_warp
   m_EditorClassIdentifier: 
   Id: boss1-1_FATK_warp
-  PreviousId: boss1-1_FATK_warp
   DisplayName: boss1-1_FATK_warp
   AnimationKey: boss1-1_FATK_warp
   InterruptLevel: 0
@@ -32,55 +31,32 @@ MonoBehaviour:
   Links: []
   Moves:
   - KeyFrame: 78
-    Power_ZTime: {x: 45, y: -2, z: 0.3}
-    XCurve:
+    Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.99975586
-        inSlope: 0.064425424
-        outSlope: 0.064425424
+        value: 0
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.45184135
-      - serializedVersion: 3
-        time: 1.0054016
-        value: 0.0002746582
-        inSlope: -0.07013554
-        outSlope: -0.07013554
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.5309729
         outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    YCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.0036226623
-        value: 2.0147023
-        inSlope: -3.5660653
-        outSlope: -3.5660653
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.03807461
       - serializedVersion: 3
         time: 1
-        value: 1.001709
-        inSlope: -0.044252444
-        outSlope: -0.044252444
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.44903418
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    TargetDistance: {x: 0, y: 0}
+    FinishTime: 0
     CanEvade: 1
     StartEvadeFrame: 0
     EndEvadeFrame: 0
@@ -94,16 +70,19 @@ MonoBehaviour:
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
-  NeedButterfly: 0
-  MarkTimeRecovery: 0
-  OrbCost: 0
-  OrbRecovery: 0
-  OrbRecoveryAdditionalByMark: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
   IsTriggered: 0101
   IsTeleported: 
+  IsLightAttack: 0
   IsHeavyAttack: 0
   HitStun: 0.25
+  IsMovableX: 0
+  IsMovableY: 0
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 0

@@ -61,8 +61,8 @@ public class AfterimageGenerator : MonoBehaviour
                     SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
                     spriteRenderer.sprite = base.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite;
 
-                    spriteRenderer.sortingLayerName = "Middle";
-                    spriteRenderer.sortingOrder = 1;
+                    spriteRenderer.sortingLayerName = "Middle2";
+                    spriteRenderer.sortingOrder = 9;
 
                     spriteRenderer.color = NewColor;
                     DOTween.Sequence().SetDelay(DelayFadeTime).Append(spriteRenderer.DOFade(0f, FadeTime)).SetUpdate(UnscaleedTime);
