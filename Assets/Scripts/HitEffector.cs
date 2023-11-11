@@ -22,7 +22,8 @@ public class HitEffector : MonoBehaviour
 
     public float GlobalSlow;
 
-    public AnimationCurve GlobalSlowCurve;
+    public AnimationCurve[] GlobalSlowCurve;
+    private int currentCurve = 0;
 
     private bool isImmuneStunAction;
 
@@ -31,6 +32,7 @@ public class HitEffector : MonoBehaviour
     private void Awake()
     {
         GlobalMoveTimeScale = 1f;
+        currentCurve = 0;
         //Time.timeScale = 1f;
     }
 
@@ -44,8 +46,8 @@ public class HitEffector : MonoBehaviour
     {
         if (GlobalSlow > 0f)
         {
-            GlobalSlow -= Time.unscaledDeltaTime * 5f;
-            Time.timeScale = GlobalSlowCurve.Evaluate(1f - GlobalSlow);
+            GlobalSlow -= Time.unscaledDeltaTime;
+            Time.timeScale = GlobalSlowCurve[currentCurve].Evaluate(1f - GlobalSlow);
             if (GlobalSlow <= 0f)
             {
                 Time.timeScale = 1f;
@@ -126,9 +128,10 @@ public class HitEffector : MonoBehaviour
         TimeSlow = _Time;
     }
 
-    public void SetGlobalSlow()
+    public void SetGlobalSlow(float _Time, int _currentCurve)
     {
-        GlobalSlow = 1f;
+        GlobalSlow = _Time;
+        currentCurve = _currentCurve;
         Time.timeScale = 0.01f;
     }
 }

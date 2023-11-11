@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Pieta;
 
 public class PlayerMain : Character
 {
@@ -16,7 +18,13 @@ public class PlayerMain : Character
     public static PlayerMain i;
 
     [HideInInspector]
-    public OrbUser Orb;
+    public MorphUser Morph;
+
+    [HideInInspector]
+    public EvadeState EvadeState;
+
+    [HideInInspector]
+    public InvincibleState InvincibleState;
 
     //[HideInInspector]
     //public PlayerSwing Swinger;
@@ -37,7 +45,7 @@ public class PlayerMain : Character
 
     public bool CanInput;
 
-    public float EvadeCooldown;
+    public float DashCooldown;
 
     public List<Image> Potions;
 
@@ -56,9 +64,11 @@ public class PlayerMain : Character
         base.OnAwake();
         i = this;
         isLocal = true;
+        EvadeState = GetComponent<EvadeState>();
+        InvincibleState = GetComponent<InvincibleState>();
         //MyInteracter = GetComponentInChildren<Interacter>();
-        Orb = GetComponent<OrbUser>();
-        OrbUser.Local = Orb;
+        Morph = GetComponent<MorphUser>();
+        MorphUser.Local = Morph;
         //Swinger = GetComponent<PlayerSwing>();
         //Swinger.Main = this;
         //ActionLinkTime = GameObject.Find("ActionLinkTime").GetComponent<Slider>();
@@ -72,13 +82,13 @@ public class PlayerMain : Character
 
     private void Start()
     {
-        OrbListDisplayer.i.Target = Orb;
+        MorphListDisplayer.i.Target = Morph;
         //Debug.Log(Input.GetJoystickNames().Length);
     }
 
     public override void ProcessInput()
     {
-        //if (Inputs.Contains(InputKey.Burst))
+        //if (Inputs.Contains(InputKey.Burst))//方向攻擊
         //{
         //    ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
         //    switch (InputUtli.GetHighestAxis(Xinput, Yinput))
@@ -105,19 +115,28 @@ public class PlayerMain : Character
             Inputs.Clear();
             return;
         }
-        if (Inputs.Contains(InputKey.Evade))
+        if (Inputs.Contains(InputKey.Dash))
         {
-            if (base.isActing && NowAction.Id != "Evade")
+            if (base.isActing && NowAction.Id != "Dash")
             {
-                if (Orb.OrbCount > 0||true)//閃避更新
+                if (Morph.MorphCount > 0||true)//閃避更新
                 {
                     if (Xinput != 0f)
                     {
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
-                    StartAction(ActionLoader.i.Actions["Evade"]);
-                    //Orb.Consume();
+
+                    if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
+                    {
+                        Morph.Consume(1f, true);
+                        StartAction(ActionLoader.i.Actions["Pieta"]);
+                    }
+                    else
+                        StartAction(ActionLoader.i.Actions["Dash"]);
+
+                    //Morph.Consume();
                     CanDash = false;
+
                     Inputs.Clear();
                 }
                 else
@@ -129,37 +148,35 @@ public class PlayerMain : Character
             if (CanDash)
             {
                 CanDash = false;
+
                 CanAttack = true;
-                StartAction(ActionLoader.i.Actions["Evade"]);
+
+                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
+                {
+                    Morph.Consume(1f, true);
+                    StartAction(ActionLoader.i.Actions["Pieta"]);
+                }
+                else
+                    StartAction(ActionLoader.i.Actions["Dash"]);
+
                 Inputs.Clear();
                 return;
             }
         }
         if (!base.isActing)
         {
-            if (Inputs.Contains(InputKey.Mark) && CanAttack)
-            {
-                if (TryCastAction(ActionLoader.i.Actions["Mark"]))
-                    StartAction(ActionLoader.i.Actions["Mark"]);
-                Inputs.Clear();
-            }
-            if (Inputs.Contains(InputKey.Burst)&& CanAttack)
-            {
-                StartAction(ActionLoader.i.Actions["BurstCharge1"]);
-                Inputs.Clear();
-            }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions["Claw1"]);
                 Inputs.Clear();
             }
-            if (Inputs.Contains(InputKey.Ult) && CanAttack)
-            {
-                if (TryCastAction(ActionLoader.i.Actions["Penetrate"]))
-                    StartAction(ActionLoader.i.Actions["Penetrate"]);
-
-                Inputs.Clear();
-            }
+            //if (Inputs.Contains(InputKey.Ult) && CanAttack)
+            //{
+            //    if (TryCastAction(ActionLoader.i.Actions["Penetrate"]))
+            //        StartAction(ActionLoader.i.Actions["Penetrate"]);
+            //
+            //    Inputs.Clear();
+            //}
             if (Inputs.Contains(InputKey.Heal))
             {
                 if (TryCastAction(ActionLoader.i.Actions["Heal"]))
@@ -172,10 +189,6 @@ public class PlayerMain : Character
                 Inputs.Clear();
             }
         }
-        //if (Swinger.isSwinging && KeyJumpJust)
-        //{
-        //    Swinger.CutHook();
-        //}
     }
 
     public override void TriggerMark()
@@ -183,8 +196,8 @@ public class PlayerMain : Character
         base.TriggerMark();
         if (base.isActing)
         {
-            Orb.Add(NowAction.OrbRecoveryAdditionalByMark);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.OrbRecoveryAdditionalByMark;
+            Morph.Add(NowAction.MorphRecoveryAdditionalByMark);
+            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecoveryAdditionalByMark;
         }
     }
 
@@ -193,18 +206,21 @@ public class PlayerMain : Character
         base.AttackLand();
         if (base.isActing)
         {
-            Orb.Add(NowAction.OrbRecovery);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.OrbRecovery;
+            Morph.Add(NowAction.MorphRecovery);
+            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecovery;
         }
     }
 
     public override void OnEvading()
     {
         base.OnEvading();
-        AerutaDebug.i.CallEffect(2);
-        if (base.isActing)
+        //AerutaDebug.i.CallEffect(2);
+        if (base.isActing && !EvadeState.IsDamageAvoided)
         {
-            Orb.Add(NowAction.EvadeEnergyRecovery);
+            EvadeState.IsDamageAvoided = true;
+            Morph.Add(NowAction.EvadeEnergyRecovery);
+            Instantiate(EvadeState.EvadeSuccessEffect, transform.position, Quaternion.identity, transform); 
+            HitEffect.SetGlobalSlow(.5f, 1);
         }
     }
 
@@ -212,31 +228,23 @@ public class PlayerMain : Character
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
-        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.OrbCost > 0f && Orb.TotalOrb < _actionBaseObj.OrbCost) 
+        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
         {
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Energy !");
         }
-        if (flag && _actionBaseObj.Id == "Heal" && _actionBaseObj.OrbCost > 0f && Potions.Count < _actionBaseObj.OrbCost)
+        if (flag && _actionBaseObj.Id == "Heal" && _actionBaseObj.MorphCost > 0f && Potions.Count < _actionBaseObj.MorphCost)
         {
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Potions !");
         }
 
-        if (flag && _actionBaseObj.NeedButterfly && Butterfly.i.Cooldown > 0f)
+        if (flag && _actionBaseObj.Id == "Pieta" && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack()))
         {
             flag = false;
-            if (isShowMessage)
-                SkillPopup.i.ShowMessage("Butterfly Not Ready !");
         }
-        //if (flag && !_actionBaseObj.TryNewConditionPossible(this))有新的使用條件再用
-        //{
-        //    flag = false;
-        //    if (isShowMessage)
-        //        SkillPopup.i.ShowMessage("Butterfly Not Ready !");
-        //}
 
         //if (flag && base.isActing)
         //{
@@ -264,7 +272,7 @@ public class PlayerMain : Character
         //{
         //    CanAttack = false;
         //}
-        Orb.Consume(_actionBaseObj.OrbCost);
+        //Morph.Consume(_actionBaseObj.MorphCost, true);
     }
 
     public override void Dead()
@@ -281,30 +289,29 @@ public class PlayerMain : Character
         }
     }
 
-    public override bool TryLink(string _Id, bool _forceSuccess)
+    public override bool TryLink(ActionLink link, bool _forceSuccess = false)
     {
-        bool result = false;
-        foreach (ActionLink link in NowAction.Links)
+        if (!ActionState.IsInLifeTime(link.Frame, link.LifeTime) || StoredMoves.Count > 0)
         {
-            if (link.PreviousId != "" && link.PreviousId != _Id)
-                continue;
-            if (((link.KeyArrow == InputKey.None || link.KeyArrow != InputKey.Up || playerAct.FindAction("Movement").ReadValue<Vector2>().y > 0.35f) && Inputs.Contains(link.Key1)) || _forceSuccess)
-            {
-                if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
-                    continue;
-
-                StartAction(ActionLoader.i.Actions[link.LinkActionId]);
-                result = true;
-                Inputs.Clear();
-                if (link.CanChangeFace && Xinput != 0f)
-                {
-                    Facing = ((Xinput > 0f) ? 1 : (-1));
-                }
-                //AerutaDebug.i.CallEffect(1);
-                break;
-            }
+            return false;
         }
-        return result;
+
+        if (Inputs.Contains(link.Key1) || _forceSuccess)
+        {
+            if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
+                return false;
+
+            StartAction(ActionLoader.i.Actions[link.LinkActionId]);
+            
+            Inputs.Clear();
+            if (link.CanChangeFace && Xinput != 0f)
+            {
+                Facing = ((Xinput > 0f) ? 1 : (-1));
+            }
+            //AerutaDebug.i.CallEffect(1);
+            return true;
+        }
+        return false;
     }
 
     public override void OnUpdate()
@@ -320,10 +327,10 @@ public class PlayerMain : Character
         //}
         if (!CanDash)
         {
-            EvadeCooldown -= Time.deltaTime;
-            if (EvadeCooldown < 0f)
+            DashCooldown -= Time.deltaTime;
+            if (DashCooldown < 0f)
             {
-                EvadeCooldown = 1f;
+                DashCooldown = 1f;
                 CanDash = true;
             }
         }
@@ -339,7 +346,7 @@ public class PlayerMain : Character
         }
         Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
         Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
-        Orb.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
+        Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
         if (playerAct.FindAction("Claw").WasPressedThisFrame())
         {
             //bool buttonDown = Input.GetButtonDown("Attack");
@@ -348,9 +355,9 @@ public class PlayerMain : Character
                 TryInput(InputKey.Claw);
             //}
         }
-        if (playerAct.FindAction("Evade").WasPressedThisFrame() && (EvadeCooldown < .1f|| EvadeCooldown==1f))
+        if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f|| DashCooldown==1f))
         {
-            TryInput(InputKey.Evade);
+            TryInput(InputKey.Dash);
         }
         if (playerAct.FindAction("Burst").WasPressedThisFrame())
         {
@@ -399,15 +406,37 @@ public class PlayerMain : Character
             if (ActionLinkTime != null)
                 ActionLinkTime.value = 0f;
         }
+
+        if (TimedLinks.Count > 0)
+        {
+            bool _Marked = false;
+            foreach (var _link in TimedLinks.OrderBy(w => w.Base.KeyArrow != InputKey.None)) 
+            {
+                if (TryLink(_link.Base)) { _Marked = false; break; }
+                if (Mathf.Approximately(_link.Base.LifeTime, -1)) { continue; }
+                if (NowAction == null) { _link.LifeTimePassed += Time.fixedDeltaTime; }
+                if (_link.LifeTimePassed >= _link.Base.LifeTime)  { _Marked = true; }
+            }
+
+            if (_Marked) { TimedLinks.RemoveAll(w => w.LifeTimePassed >= w.Base.LifeTime); }
+        }
+        
         SilderHealth.value = base.Health / HealthMax.Final;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         //if (collision.CompareTag("Lava"))
         //{
         //    //RoomManager.i.TeleportToSafePoint();
         //}
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox") && !Evading)
+        {
+            Character _attacker = collision.transform.parent.GetComponent<Character>();
+            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction, collision.ClosestPoint(_attacker.transform.position));
+            if(num) TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+        }
     }
 
     public void ResetDash()

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Claw1
   m_EditorClassIdentifier: 
   Id: Claw1
-  PreviousId: Claw1
   DisplayName: Claw1
   AnimationKey: Claw1
   InterruptLevel: 0
@@ -23,41 +22,25 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 4
     KeyFrameEnd: 12
-    Offset: {x: 0.7, y: 0.15, z: 0}
-    Range: {x: 2, y: 1.5}
+    Offset: {x: 1.1, y: 0.15, z: 0}
+    Range: {x: 2.3, y: 1.5}
   HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
   Links:
-  - Frame: 17
-    LifeTime: -1
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: BurstCharge1
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 17
-    LifeTime: -1
-    Key1: 8
-    KeyArrow: 0
-    LinkActionId: Penetrate
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 17
+  - Frame: 32
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
     LinkActionId: Claw2
-    CanChangeFace: 0
-    PreviousId: 
-  - Frame: 17
-    LifeTime: -1
-    Key1: 11
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 6
     KeyArrow: 0
-    LinkActionId: Mark
-    CanChangeFace: 0
-    PreviousId: 
+    LinkActionId: Claw2
+    CanChangeFace: 1
   Moves: []
   Toggles: []
   Teleports: []
@@ -65,16 +48,20 @@ MonoBehaviour:
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
-  NeedButterfly: 0
   MarkTimeRecovery: 0.5
-  OrbCost: 0
-  OrbRecovery: 0.02
-  OrbRecoveryAdditionalByMark: 0
+  MorphCost: 0
+  MorphRecovery: 0.0625
+  MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
-  EndActionFloatTime: 0.05
+  EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
+  IsLightAttack: 1
   IsHeavyAttack: 0
   HitStun: 0.1
+  IsMovableX: 1
+  IsMovableY: 1
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 1

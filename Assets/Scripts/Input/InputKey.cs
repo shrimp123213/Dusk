@@ -5,7 +5,7 @@ public enum InputKey
     Down,
     Left,
     Right,
-    Evade,
+    Dash,
     Claw,
     Burst,
     Ult,

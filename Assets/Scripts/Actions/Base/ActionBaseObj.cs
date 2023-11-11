@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
 {
     public string Id;
-
-    public string PreviousId;
 
     public string DisplayName;
 
@@ -63,15 +62,11 @@ public class ActionBaseObj : ScriptableObject
 
     public float TimeSlowAmount;
     
-    public bool NeedButterfly;
+    public float MorphCost;
 
-    public float MarkTimeRecovery;
+    public float MorphRecovery;
 
-    public float OrbCost;
-
-    public float OrbRecovery;
-
-    public float OrbRecoveryAdditionalByMark;
+    public float MorphRecoveryAdditionalByMark;
 
     public float EvadeEnergyRecovery;
 
@@ -85,15 +80,23 @@ public class ActionBaseObj : ScriptableObject
 
     public bool[] IsTeleported;
 
+    public bool IsLightAttack;
     public bool IsHeavyAttack;
 
     public float HitStun;
+
+    public bool IsMovableX;
+    public bool IsMovableY;
+
+    public bool CanChangeFacingWhenActing;
+
+    public bool CanJumpWhenActing;
 
     public virtual void Init(Character _m)
     {
         foreach (ActionMovement movement in _m.NowAction.Moves) 
         {
-            if (movement.CanEvade)
+            if (movement.CanEvade && _m.Evading)
             {
                 ActionPeformState actionState = _m.ActionState;
 
@@ -115,15 +118,22 @@ public class ActionBaseObj : ScriptableObject
         IsTeleported = new bool[_m.NowAction.Teleports.Count];
     }
 
-    public virtual bool Movable(Character _m)
+    public virtual bool MovableX(Character _m)
     {
-        return false;
+        return IsMovableX;
     }
-
-    //public virtual bool TryNewConditionPossible(Character _m)有新的使用條件再用
-    //{
-    //    return true;
-    //}
+    public virtual bool MovableY(Character _m)
+    {
+        return IsMovableY;
+    }
+    public virtual bool CanChangeFacing(Character _m)
+    {
+        return CanChangeFacingWhenActing;
+    }
+    public virtual bool CanJump(Character _m)
+    {
+        return CanJumpWhenActing;
+    }
 
     public virtual ActionPeformState StartAction(Character _m)
     {
@@ -140,10 +150,30 @@ public class ActionBaseObj : ScriptableObject
             _m.HitEffect.SetTimeSlow(TimeSlowAmount);
         }
 
-        if (!IsHeavyAttack)
+        _m.TimedLinks.Clear();
+        foreach (ActionLink link in Links)
+        {
+            _m.TimedLinks.Add(new TimedLink(link));
+        }
+
+        if (IsLightAttack)
             AerutaDebug.i.Feedback.LightAttackCount++;
-        else
+        if (IsHeavyAttack)
             AerutaDebug.i.Feedback.HeavyAttackCount++;
+
+
+        foreach (ActionMovement movement in Moves)
+        {
+            if (movement.CanEvade)
+            {
+                if ((bool)_m.Player && _m.Player.EvadeState.CanEvade)
+                {
+                    _m.Player.EvadeState.UseEvade(_m);
+                    break;
+                }
+            }
+        }
+        
 
         return new ActionPeformState();
     }
@@ -156,26 +186,21 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.LowGravityTime = EndActionFloatTime;
         }
+
+        _m.Evading = false;
+        if ((bool)_m.Player)
+        {
+            _m.Player.EvadeState.EvadeDistanceEffect.Stop();
+        }
     }
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        if (_hitted == Butterfly.i.MarkTarget) 
-        {
-            Butterfly.i.MarkTime += MarkTimeRecovery;
-
-            if (CanTriggerMark && Butterfly.i.onTarget) 
-                TriggerMark(_m, _hitted, IHitable);
-        }
-
         Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
     {
-        Butterfly.i.Blast();
-        Butterfly.i.transform.parent = null;
-
         _m.TriggerMark();
 
         IHitable.TakeDamage(new Damage(10, DamageType.Mark), 0f, _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
@@ -202,7 +227,7 @@ public class ActionBaseObj : ScriptableObject
         {
             return;
         }
-        _m.Evading = false;
+        
         if (_m.NowAction.Toggles.Count > 0)
         {
             int i = 0;
@@ -211,7 +236,7 @@ public class ActionBaseObj : ScriptableObject
                 if (!IsTriggered[i] && actionState.IsAfterFrame(toggle.KeyFrame))
                 {
                     IsTriggered[i] = true;
-                    _m.Collider.enabled = toggle.IsActive;
+                    _m.GetComponentInChildren<Collider2D>().enabled = toggle.IsActive;
                 }
                 i++;
             }
@@ -229,14 +254,7 @@ public class ActionBaseObj : ScriptableObject
                 i++;
             }
         }
-        foreach (ActionMovement movement in _m.NowAction.Moves)
-        {
-            if (movement.CanEvade && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
-            {
-                _m.Evading = true;
-                break;
-            }
-        }
+        
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
         {
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
@@ -270,7 +288,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     _m.AttackLand();
                     //CameraManager.i.GenerateImpulse(DamageRatio);
-                    if (collider2D.CompareTag("Breakable"))
+                    if (collider2D.gameObject.CompareTag("Breakable"))
                     {
                         return;
                     }
@@ -286,29 +304,10 @@ public class ActionBaseObj : ScriptableObject
                 }
             }
         }
-        if (AnimationKey == "Claw4sp")
-        {
-            _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, -45f * _m.Facing);
-        }
-        if (AnimationKey == "Evade")
-        {
-            _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
-        }
         TryRegisterMove(_m, actionState.YinputWhenAction);
-        if (!actionState.Linked && _m.NowAction.Links.Count > 0 && actionState.IsInLifeTime(_m.NowAction.Links[0].Frame, _m.NowAction.Links[0].LifeTime) && _m.StoredMoves.Count <= 0) 
-        {
-            if (AnimationKey == "Claw4sp")
-            {
-                _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
-            }
-            actionState.Linked = _m.TryLink(PreviousId);
-        }
+        //oldLinks
         if (actionState.ActionTime >= 1f && !actionState.Linked)
         {
-            if (AnimationKey == "Claw4sp")
-            {
-                _m.transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, 0f);
-            }
             EndAction(_m);
             _m.NowAction = null;
             _m.Ani.Rebind();
@@ -365,8 +364,6 @@ public class ActionLink
     public string LinkActionId;
 
     public bool CanChangeFace;
-
-    public string PreviousId;
 }
 
 

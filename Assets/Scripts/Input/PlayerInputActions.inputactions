@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Evade",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "168a1565-04b6-43fe-961d-008bfcbf5e98",
                     "expectedControlType": "Button",
@@ -269,7 +269,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Evade",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -280,7 +280,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Evade",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -36,7 +36,8 @@ public class AerutaDebug : MonoBehaviour
     {
         i = this;
 
-        Time.timeScale = 0f;
+        if (ControlGamepad.enabled || ControlKeyboard.enabled)
+            Time.timeScale = 0f;
     }
 
     public void CallEffect(int num)//��ܥ��������ĤH�B�{�צ��\��UI
@@ -60,7 +61,7 @@ public class AerutaDebug : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            PlayerMain.i.Orb.Add(10f);
+            PlayerMain.i.Morph.Add(10f);
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {

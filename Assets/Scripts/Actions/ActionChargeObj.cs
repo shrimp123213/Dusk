@@ -15,7 +15,15 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
     public bool ChargingStopMoving;
 
-    public override bool Movable(Character _m)
+    public override bool MovableX(Character _m)
+    {
+        if (((ActionPeformStateCharge)_m.ActionState).Charging && !ChargingStopMoving)
+        {
+            return true;
+        }
+        return false;
+    }
+    public override bool MovableY(Character _m)
     {
         if (((ActionPeformStateCharge)_m.ActionState).Charging && !ChargingStopMoving)
         {
@@ -67,7 +75,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
                     //Debug.Log(_m.TryLink(PreviousId, true));
 
-                    actionPeformStateCharge.Linked = _m.TryLink(PreviousId);
+                    //actionPeformStateCharge.Linked = _m.TryLink(PreviousId);
 
                     _m.Inputs.Remove(InputKey.BurstRelease);
                 }
