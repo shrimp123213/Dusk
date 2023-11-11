@@ -11,10 +11,13 @@ public class ForceMovement
 
     public Vector3 ExternalPower;
 
-    public ForceMovement(ActionMovement _base, Vector3 _externalPower)
+    public Vector3 StartPosition;
+
+    public ForceMovement(ActionMovement _base, Vector3 _externalPower, Vector3 _startPosition)
     {
         Base = _base;
         TimeUsed = 0f;
         ExternalPower = _externalPower;
+        StartPosition = _startPosition;
     }
 }

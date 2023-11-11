@@ -282,7 +282,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
                 _m.RegisterHit(collider2D.gameObject);
                 if (num)
                 {
@@ -330,7 +330,7 @@ public class ActionBaseObj : ScriptableObject
         ActionPeformState actionState = _m.ActionState;
         if (actionState.CurrMoveIndex < _m.NowAction.Moves.Count && actionState.IsAfterFrame(_m.NowAction.Moves[actionState.CurrMoveIndex].KeyFrame))
         {
-            _m.StoredMoves.Add(new ForceMovement(_m.NowAction.Moves[actionState.CurrMoveIndex], new Vector3(0f, _verticalPower)));
+            _m.StoredMoves.Add(new ForceMovement(_m.NowAction.Moves[actionState.CurrMoveIndex], new Vector3(0f, _verticalPower), _m.transform.position));
             actionState.CurrMoveIndex++;
         }
     }

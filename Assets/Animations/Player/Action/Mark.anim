@@ -59,15 +59,15 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: -38976104, guid: a62d40c9f259439408344fb670d4733c, type: 3}
-    - time: 0.19
+    - time: 0.18333334
       value: {fileID: -530341668, guid: a62d40c9f259439408344fb670d4733c, type: 3}
-    - time: 0.37
+    - time: 0.36666667
       value: {fileID: 1012698930, guid: a62d40c9f259439408344fb670d4733c, type: 3}
-    - time: 0.53
+    - time: 0.51666665
       value: {fileID: 21300000, guid: fc8547862376ea24f9f8f605d7169c00, type: 3}
-    - time: 0.95
+    - time: 0.93333334
       value: {fileID: 1698619897, guid: a62d40c9f259439408344fb670d4733c, type: 3}
-    - time: 1.01
+    - time: 1
       value: {fileID: 1698619897, guid: a62d40c9f259439408344fb670d4733c, type: 3}
     attribute: m_Sprite
     path: Sprite Render
@@ -76,15 +76,15 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - time: 0.53
+    - time: 0.51666665
       value: {fileID: 2100000, guid: 09ddc834ab397f845bc7116e296818e7, type: 2}
-    - time: 0.95
+    - time: 0.93333334
       value: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     attribute: m_Materials.Array.data[0]
     path: Sprite Render
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 100
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -134,7 +134,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.02
+    m_StopTime: 1.0166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

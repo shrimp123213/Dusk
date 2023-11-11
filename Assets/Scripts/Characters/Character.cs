@@ -6,6 +6,8 @@ using DG.Tweening;
 using TMPro;
 using System;
 using BehaviorDesigner.Runtime;
+using DG.Tweening.Core.Easing;
+using System.Security.Cryptography;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -235,7 +237,7 @@ public class Character : MonoBehaviour, IHitable
 
     private void FixedUpdate()
     {
-        if (Xinput != 0f && isMovableX && canChangeFacingWhenActing)
+        if (Xinput != 0f && isMovableX && canChangeFacingWhenActing && StoredMoves.Count <= 0)
         {
             Facing = ((Xinput > 0f) ? 1 : (-1));
         }
@@ -459,9 +461,15 @@ public class Character : MonoBehaviour, IHitable
             for (int i = 0; i < StoredMoves.Count; i++)
             {
                 ForceMovement forceMovement = StoredMoves[i];
-                Vector3 vector2 = Vector3Utli.CacuFacing(Vector3Utli.CacuVector2Curve(forceMovement.Base.Power_ZTime, forceMovement.Base.XCurve, forceMovement.Base.YCurve, forceMovement.TimeUsed / forceMovement.Base.Power_ZTime.z), Facing);
+
+                forceMovement.TimeUsed += Time.fixedDeltaTime * num2;
+
+                float targetTime = forceMovement.Base.Curve.Evaluate(forceMovement.TimeUsed / forceMovement.Base.FinishTime);
+
+                Vector3 vector2 = Vector3.Lerp(forceMovement.StartPosition, forceMovement.StartPosition + Vector3Utli.CacuFacing(forceMovement.Base.TargetDistance, Facing), targetTime);
                 zero += vector2;
-                if (forceMovement.TimeUsed >= forceMovement.Base.Power_ZTime.z)
+
+                if (forceMovement.TimeUsed >= forceMovement.Base.FinishTime)
                 {
                     if (list == null)
                     {
@@ -469,7 +477,7 @@ public class Character : MonoBehaviour, IHitable
                     }
                     list.Add(forceMovement);
                 }
-                forceMovement.TimeUsed += Time.fixedDeltaTime * num2;
+                
             }
             if (list != null)
             {
@@ -478,7 +486,8 @@ public class Character : MonoBehaviour, IHitable
                     StoredMoves.Remove(item);
                 }
             }
-            Rigid.MovePosition(base.transform.position + zero * Time.fixedDeltaTime * num2);
+            //Rigid.MovePosition(base.transform.position + zero * Time.fixedDeltaTime * num2);
+            Rigid.MovePosition(zero);
             if (zero.x != 0f)
             {
                 rigidbodyConstraints2D = RigidbodyConstraints2D.None;
@@ -494,7 +503,7 @@ public class Character : MonoBehaviour, IHitable
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }
 
-    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default))
+    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false)
     {
         if (isDead)
         {
@@ -669,7 +678,7 @@ public enum CharacterStates
 
 public interface IHitable
 {
-    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = (default));
+    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false);
 }
 
 [Serializable]

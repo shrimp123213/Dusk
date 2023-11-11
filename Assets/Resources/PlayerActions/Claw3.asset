@@ -20,7 +20,7 @@ MonoBehaviour:
   DamageRatio: 0.2
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 4
+  - KeyFrameFrom: 3
     KeyFrameEnd: 12
     Offset: {x: 1.1, y: 0.15, z: 0}
     Range: {x: 2.3, y: 1.5}
@@ -29,7 +29,7 @@ MonoBehaviour:
   CanInterruptAction: 1
   CanTriggerMark: 0
   Links:
-  - Frame: 32
+  - Frame: 28
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
@@ -48,7 +48,6 @@ MonoBehaviour:
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
-  MarkTimeRecovery: 0.5
   MorphCost: 0
   MorphRecovery: 0.0625
   MorphRecoveryAdditionalByMark: 0
