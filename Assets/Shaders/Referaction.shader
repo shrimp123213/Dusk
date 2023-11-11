@@ -416,10 +416,11 @@ Shader "Referaction"
 				float2 uv_NormalTex = IN.ase_texcoord4.xy * _NormalTex_ST.xy + _NormalTex_ST.zw;
 				half3 unpack26 = UnpackNormalScale( tex2D( _NormalTex, uv_NormalTex ), _NormalScale );
 				unpack26.z = lerp( 1, unpack26.z, saturate(_NormalScale) );
+				half3 temp_output_28_0 = ( half3( (ase_grabScreenPosNorm).xy ,  0.0 ) + unpack26 );
 				
 				float3 BakedAlbedo = 0;
 				float3 BakedEmission = 0;
-				float3 Color = tex2D( _AfterPostProcessTexture, ( half3( (ase_grabScreenPosNorm).xy ,  0.0 ) + unpack26 ).xy ).rgb;
+				float3 Color = tex2D( _AfterPostProcessTexture, temp_output_28_0.xy ).rgb;
 				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
@@ -1570,6 +1571,7 @@ Node;AmplifyShaderEditor.TextureCoordinatesNode;32;-3227.264,1109.246;Inherit;Fa
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;40;-2171.713,1092.591;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LengthOpNode;43;-1583.716,1151.591;Inherit;True;1;0;FLOAT2;0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;42;-1894.714,1124.591;Inherit;True;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ScreenColorNode;56;-259.8969,-207.1626;Inherit;False;Global;_GrabScreen0;Grab Screen 0;10;0;Create;True;0;0;0;False;0;False;Object;-1;False;False;False;False;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 WireConnection;28;0;6;0
 WireConnection;28;1;26;0
 WireConnection;6;0;4;0
@@ -1602,5 +1604,6 @@ WireConnection;40;1;39;0
 WireConnection;43;0;42;0
 WireConnection;42;0;40;0
 WireConnection;42;1;39;1
+WireConnection;56;0;28;0
 ASEEND*/
-//CHKSM=DD44CF075E42065523B3D0ECC16E18E4219FAC44
+//CHKSM=0083C6D785EB77539E80DB24F429D550543F218F

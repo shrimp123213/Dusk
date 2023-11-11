@@ -8,27 +8,31 @@ public class ShockWaveManager : MonoBehaviour
 {
     [SerializeField] private float _shockWaveTime = 0.75f;
     
-
+    private ParticleSystem _particleSystem;
     
     private Coroutine _shockWaveCoroutine;
     
     private Material _material;
     
-    private static int _waveDistanceFromCenterId = Shader.PropertyToID("_WaveDistanceFromCenter");
+    private static int _waveDistanceFromCenterId = Shader.PropertyToID("_Distance");
 
     private void Awake()
     {
-        _material = GetComponent<SpriteRenderer>().material;
+        _particleSystem = GetComponent<ParticleSystem>();
+        _material = GetComponent<Renderer>().material;
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        CallShockWave();
+        if(_particleSystem.isEmitting)
+            StartCoroutine(ShockWaveAction(-0.1f,1f));
     }
+
 
     public void CallShockWave()
     {
         _shockWaveCoroutine = StartCoroutine(ShockWaveAction(-0.1f,1f));
+        
     }
     
     private IEnumerator ShockWaveAction(float startPos, float endPos)
