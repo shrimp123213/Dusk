@@ -25,7 +25,9 @@ public class ActionHealObj : ActionBaseObj
     {
         base.ProcessAction(_m);
         Debug.Log(Healed);
+
         ActionPeformState actionState = _m.ActionState;
+        Debug.Log(actionState.IsAfterFrame(KeyFrame));
         if (!Healed && actionState.IsAfterFrame(KeyFrame))
         {
             Healed = true;

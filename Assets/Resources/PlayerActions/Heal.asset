@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   Id: Heal
-  PreviousId: Heal
   DisplayName: Heal
   AnimationKey: Heal
   InterruptLevel: 0
@@ -33,18 +32,21 @@ MonoBehaviour:
   ForceBasedByPos: 0
   UsePopup: 0
   TimeSlowAmount: 0
-  NeedButterfly: 0
-  MarkTimeRecovery: 0
-  OrbCost: 0
-  OrbRecovery: 0
-  OrbRecoveryAdditionalByMark: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
   GroundOnly: 1
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsLightAttack: 0
   IsHeavyAttack: 0
   HitStun: 0
+  IsMovableX: 0
+  IsMovableY: 0
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 0
   HealAmount: 50
-  KeyFrame: 82
+  KeyFrame: 50
