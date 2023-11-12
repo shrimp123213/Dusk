@@ -12,15 +12,15 @@ public class EnemyStartAction : EnemyActionBase
 
     public bool Flip;
     
-    //public string ReverseAnimationName;
-   
     private bool Fail;
     
     public override void OnStart()
     {
         this.Fail=(this.SelfCharacter.Value.Airbrone || this.SelfCharacter.Value.isDead);
-        if(!this.Fail)
+        if (!this.Fail)
+        {
             this.SelfCharacter.Value.StartAction(this.Action);
+        }
     }
 
     public override TaskStatus OnUpdate()

@@ -26,15 +26,15 @@ MonoBehaviour:
     Range: {x: 8, y: 3}
   - KeyFrameFrom: 151
     KeyFrameEnd: 158
-    Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
+    Offset: {x: -3, y: 2, z: 0}
+    Range: {x: 5, y: 3}
   HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
   Links: []
   Moves:
-  - KeyFrame: 87
+  - KeyFrame: 80
     Curve:
       serializedVersion: 2
       m_Curve:

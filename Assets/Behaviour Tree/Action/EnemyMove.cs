@@ -14,14 +14,14 @@ public class EnemyMove : EnemyActionBase
     public string AnimationName;
     
     private float timePassed;
-    public float speed = 0.7f;
+    private float speed;
     private int way = 1;
     
     public override void OnStart()
     {
         this.timePassed = 0f;
         this.way=(Random.Range(0, 100) > 50) ? 1 : -1 ;
-        //this.speed = this.Target.Value == null ? Random.Range(0.3f, 0.5f) : 1f;
+        this.speed = this.Target.Value == null ? Random.Range(0.3f, 0.5f) : 1f;
     }
     
     public override void OnEnd()

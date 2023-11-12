@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 992cf2ba14bb3db4c84a0be3cca794b9, type: 3}
   m_Name: boss1-1_ATK_swave_backjumpWarp_wo
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_swave_backjumpWarp_wo
@@ -42,8 +42,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -56,40 +56,8 @@ MonoBehaviour:
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
-  - KeyFrame: 39
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    TargetDistance: {x: -5, y: 0}
-    FinishTime: 0.01
-    CanEvade: 0
-    StartEvadeFrame: 0
-    EndEvadeFrame: 0
   Toggles:
   - KeyFrame: 0
-    IsActive: 0
-  - KeyFrame: 39
     IsActive: 0
   - KeyFrame: 40
     IsActive: 1
@@ -105,7 +73,7 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 010101
+  IsTriggered: 
   IsTeleported: 
   IsLightAttack: 0
   IsHeavyAttack: 0
