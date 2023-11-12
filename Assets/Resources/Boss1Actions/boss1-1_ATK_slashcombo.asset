@@ -130,8 +130,8 @@ MonoBehaviour:
     EndEvadeFrame: 0
   Toggles: []
   Teleports: []
-  ApplyForce: {x: 0, y: 0}
-  ForceBasedByPos: 0
+  ApplyForce: {x: -1, y: 0}
+  ForceBasedByPos: 1
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0

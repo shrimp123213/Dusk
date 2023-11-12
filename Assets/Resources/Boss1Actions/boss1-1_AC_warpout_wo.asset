@@ -28,9 +28,9 @@ MonoBehaviour:
   Moves: []
   Toggles:
   - KeyFrame: 0
-    IsActive: 1
-  - KeyFrame: 70
     IsActive: 0
+  - KeyFrame: 70
+    IsActive: 1
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
