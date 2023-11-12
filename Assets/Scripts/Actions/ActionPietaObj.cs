@@ -11,6 +11,8 @@ public class ActionPietaObj : ActionBaseObj
 
     public GameObject SliceEffect;
 
+    private float damageFactor;
+
     public override void Init(Character _m)
     {
         foreach (ActionMovement movement in _m.NowAction.Moves)
@@ -45,6 +47,8 @@ public class ActionPietaObj : ActionBaseObj
         _m.Player.EvadeState.EvadeReady(false);
         _m.Player.EvadeState.UseEvade(_m);
 
+        damageFactor = _m.Player.Morph.GetMorphLevelDamageFactor();
+        _m.Player.Morph.Consume(1f, true);
 
         //增加距離至安全位置
         float endPosSafeZoneRadius = 2f;
@@ -81,8 +85,6 @@ public class ActionPietaObj : ActionBaseObj
         Pieta.i.CanPietaList.Clear();
         foreach (RaycastHit2D hit in ray)
         {
-            Debug.Log(hit.collider.name);
-
             if (hit.collider != _m.Collider)
             {
                 MarkedTarget markedTarget = new MarkedTarget(hit.collider);
@@ -101,9 +103,41 @@ public class ActionPietaObj : ActionBaseObj
     public override void ProcessAction(Character _m)
     {
         List<MarkedTarget> triggeredTargetList = new List<MarkedTarget>();
-        foreach (MarkedTarget markedTarget in Pieta.i.CanPietaList)
+        //foreach (MarkedTarget markedTarget in Pieta.i.CanPietaList)經過就觸發
+        //{
+        //    if (_m.Facing * (markedTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
+        //    {
+        //        triggeredTargetList.Add(markedTarget);
+        //        Vector3 hitPoint = new Vector3(markedTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
+        //        Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), markedTarget.Collider2D.transform).transform;
+        //        slice.localScale *= markedTarget.Collider2D.GetComponent<Character>().SliceMultiply;
+        //
+        //        //造成傷害
+        //        bool num = markedTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !markedTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+        //        _m.RegisterHit(markedTarget.Collider2D.gameObject);
+        //        if (num)
+        //        {
+        //            _m.AttackLand();
+        //            //CameraManager.i.GenerateImpulse(DamageRatio);
+        //            if (markedTarget.Collider2D.gameObject.CompareTag("Breakable"))
+        //            {
+        //                return;
+        //            }
+        //            Character component = markedTarget.Collider2D.GetComponent<Character>();
+        //            HitSuccess(_m, component, IHitable, hitPoint);
+        //            float y = 0f;
+        //            if (SuckEffect)
+        //            {
+        //                y = _m.transform.position.y - component.transform.position.y;
+        //            }
+        //            component.TakeForce(Vector3Utli.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utli.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
+        //            _ = (component.transform.position - _m.transform.position).normalized;
+        //        }
+        //    }
+        //}
+        if (Pieta.i.CanPietaList.Count > 0 && _m.Facing * (Pieta.i.CanPietaList[Pieta.i.CanPietaList.Count - 1].SlicePos.x - _m.transform.position.x) <= 0f) //經過最後一隻才觸發
         {
-            if (_m.Facing * (markedTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
+            foreach (MarkedTarget markedTarget in Pieta.i.CanPietaList)
             {
                 triggeredTargetList.Add(markedTarget);
                 Vector3 hitPoint = new Vector3(markedTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
@@ -111,7 +145,7 @@ public class ActionPietaObj : ActionBaseObj
                 slice.localScale *= markedTarget.Collider2D.GetComponent<Character>().SliceMultiply;
 
                 //造成傷害
-                bool num = markedTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !markedTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+                bool num = markedTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !markedTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
                 _m.RegisterHit(markedTarget.Collider2D.gameObject);
                 if (num)
                 {
@@ -133,8 +167,9 @@ public class ActionPietaObj : ActionBaseObj
                 }
             }
         }
+        
 
-        if(triggeredTargetList.Count > 0)
+        if (triggeredTargetList.Count > 0)
         {
             foreach (MarkedTarget markedTarget in triggeredTargetList)
             {

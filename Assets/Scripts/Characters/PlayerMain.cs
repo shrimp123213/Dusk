@@ -117,6 +117,11 @@ public class PlayerMain : Character
             Inputs.Clear();
             return;
         }
+        //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) 攻擊時向後走可以取消攻擊，bug
+        //{
+        //    NowAction.EndAction(this);
+        //    Inputs.Remove(InputKey.Claw);
+        //}
         if (Inputs.Contains(InputKey.Dash))
         {
             if (base.isActing && NowAction.Id != "Dash")
@@ -130,7 +135,6 @@ public class PlayerMain : Character
 
                     if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
                     {
-                        Morph.Consume(1f, true);
                         StartAction(ActionLoader.i.Actions["Pieta"]);
                     }
                     else
@@ -155,7 +159,6 @@ public class PlayerMain : Character
 
                 if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
                 {
-                    Morph.Consume(1f, true);
                     StartAction(ActionLoader.i.Actions["Pieta"]);
                 }
                 else
