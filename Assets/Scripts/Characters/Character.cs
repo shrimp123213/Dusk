@@ -197,6 +197,7 @@ public class Character : MonoBehaviour, IHitable
     private void Awake()
     {
         OnAwake();
+
     }
 
     public virtual void OnAwake()

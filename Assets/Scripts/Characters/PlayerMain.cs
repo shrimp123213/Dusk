@@ -243,7 +243,7 @@ public class PlayerMain : Character
                 SkillPopup.i.ShowMessage("No Potions !");
         }
 
-        if (flag && _actionBaseObj.Id == "Pieta" && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack()))
+        if (flag && _actionBaseObj.Id == "Pieta" && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack(this)))
         {
             flag = false;
         }
