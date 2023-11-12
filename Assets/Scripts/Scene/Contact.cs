@@ -15,6 +15,7 @@ public class Contact : MonoBehaviour
     void Start()
     {
         ani = AITree.GetComponentInChildren<Animator>();
+        ani.Play("boss1-1_ST_sit_idle");
     }
 
     private void Update()
@@ -42,7 +43,7 @@ public class Contact : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             AITree.enabled = true;
-
+            //ani.Play("boss1-1_ST_start");
             AerutaDebug.i.StartGameTime = Time.unscaledTime;
         }
     }
