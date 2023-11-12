@@ -26,6 +26,8 @@ public class PlayerMain : Character
     [HideInInspector]
     public InvincibleState InvincibleState;
 
+    public ShockWaveManager shockWaveManager;
+
     //[HideInInspector]
     //public PlayerSwing Swinger;
 

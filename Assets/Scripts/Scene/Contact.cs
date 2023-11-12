@@ -19,7 +19,7 @@ public class Contact : MonoBehaviour
 
     private void Update()
     {
-        if (ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start") 
+        if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 && ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start") 
         {
             if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 285f / 501f) 
             {
