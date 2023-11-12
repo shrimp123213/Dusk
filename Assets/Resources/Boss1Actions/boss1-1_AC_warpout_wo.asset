@@ -31,10 +31,7 @@ MonoBehaviour:
     IsActive: 1
   - KeyFrame: 70
     IsActive: 0
-  Teleports:
-  - KeyFrame: 99
-    Local: 0
-    Pos: {x: 6, y: -7.18, z: 0}
+  Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
   UsePopup: 0
