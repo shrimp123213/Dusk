@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9ae244a7348184b4f8db6998ca1b1771
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ShaderScene_Light.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 0
     path: Assets/Scenes/ShaderScene_AI.unity
-    guid: 9cfa6648a1ace0b42bb18036c17ed170
+    guid: 5b1e49a516939584f8a78ce177b19a3c
+  - enabled: 1
+    path: Assets/Scenes/ShaderScene_UI.unity
+    guid: a6d6540da567b754fa00251525583e73
   m_configObjects: {}
