@@ -78,4 +78,18 @@ public class MorphUser : MonoBehaviour
         //    MorphSpinner.i.SetMorph(MorphCount);
         //}
     }
+
+    public float GetMorphLevelDamageFactor()
+    {
+        float baseHitNeed = 1 / (MorphProgressFactor[0] * ActionLoader.i.Actions["Claw1"].MorphRecovery);
+        
+        float currentHitNeed = 1 / (MorphProgressFactor[MorphCount - 1] * ActionLoader.i.Actions["Claw1"].MorphRecovery);
+        
+        float hitNeedDiff = currentHitNeed - baseHitNeed;
+        
+        float progressNeedDiff = hitNeedDiff/ baseHitNeed;
+
+        float multiply = 2f;
+        return 1 + progressNeedDiff * multiply;
+    }
 }

@@ -299,7 +299,7 @@ public class Character : MonoBehaviour, IHitable
 
     public virtual void AttackLand()
     {
-        HitEffect.SetAttackStun();
+        //HitEffect.SetAttackStun();
     }
 
     public virtual bool TryLink(ActionLink link, bool _forceSuccess = false)

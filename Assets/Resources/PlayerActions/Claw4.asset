@@ -20,8 +20,8 @@ MonoBehaviour:
   DamageRatio: 0.2
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 3
-    KeyFrameEnd: 12
+  - KeyFrameFrom: 2
+    KeyFrameEnd: 7
     Offset: {x: 1.1, y: 0.15, z: 0}
     Range: {x: 2.3, y: 1.5}
   HitMax: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
   CanInterruptAction: 1
   CanTriggerMark: 0
   Links:
-  - Frame: 28
+  - Frame: 18
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
