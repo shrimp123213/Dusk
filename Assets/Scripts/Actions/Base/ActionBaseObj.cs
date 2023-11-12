@@ -325,7 +325,7 @@ public class ActionBaseObj : ScriptableObject
         }
     }
 
-    public void TryRegisterMove(Character _m, float _verticalPower = 0f)
+    public virtual void TryRegisterMove(Character _m, float _verticalPower = 0f)
     {
         ActionPeformState actionState = _m.ActionState;
         if (actionState.CurrMoveIndex < _m.NowAction.Moves.Count && actionState.IsAfterFrame(_m.NowAction.Moves[actionState.CurrMoveIndex].KeyFrame))

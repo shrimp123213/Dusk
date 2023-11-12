@@ -25,7 +25,9 @@ public class Pieta : MonoBehaviour
     private PlayerMain Player;
 
     public List<MarkedTarget> CanPietaList;
-    public float PietaEndDis;
+    public Vector2 PietaEndDis;
+
+    public Collider2D FarestTargetCollider2D;
 
     private void Awake()
     {
@@ -33,7 +35,8 @@ public class Pieta : MonoBehaviour
         Player = GetComponent<PlayerMain>();
         MarkedTargets = new List<MarkedTarget>();
         CanPietaList = new List<MarkedTarget>();
-        PietaEndDis = 0f;
+        PietaEndDis = Vector2.zero;
+        FarestTargetCollider2D = null;
     }
 
     private void Update()
@@ -41,12 +44,10 @@ public class Pieta : MonoBehaviour
         MarkNearbyEnemys();
     }
 
-    private RaycastHit2D[] CanPietaRange()
+    public RaycastHit2D[] CanPietaRange(float _dis)
     {
         BoxCollider2D component = Player.GetComponent<BoxCollider2D>();
-        RaycastHit2D[] raycastHit2D = Physics2D.BoxCastAll(component.bounds.center, component.size, 0f, Vector2.right * Player.Facing, nearDis / 2, LayerMask.GetMask("Character"));
-
-        Debug.DrawLine(component.bounds.center, component.bounds.center + nearDis / 2 * Vector3.right * Player.Facing, Color.yellow);
+        RaycastHit2D[] raycastHit2D = Physics2D.BoxCastAll(component.bounds.center, component.size, 0f, Vector2.right * Player.Facing, _dis, LayerMask.GetMask("Character"));
 
         return raycastHit2D;
     }
@@ -109,7 +110,7 @@ public class Pieta : MonoBehaviour
             if(!hasTarget) MarkedTargets.Add(new MarkedTarget(target, Appear(target.transform, HintPrefab)));
         }
 
-        RaycastHit2D[] FacingTargets = CanPietaRange();
+        RaycastHit2D[] FacingTargets = CanPietaRange(nearDis / 2);
 
         List<MarkedTarget> disappearList = new List<MarkedTarget>();
 
@@ -157,7 +158,7 @@ public class Pieta : MonoBehaviour
         }
     }
 
-    public bool CheckPietaAttack()
+    public bool CheckPietaAttack(Character _m)
     {
         CanPietaList = new List<MarkedTarget>();
 
@@ -171,23 +172,28 @@ public class Pieta : MonoBehaviour
             }
         }
 
-        PietaEndDis = 0f;
+        PietaEndDis = Vector2.zero;
+        FarestTargetCollider2D = null;
 
         if (CanPietaList.Count <= 0)
             return false;
 
-        //取最遠可聖殤目標距離
+        //取最遠可聖殤目標
+        float dis = 0;
         foreach (MarkedTarget markedTarget in CanPietaList)
         {
             float newDis = Vector2.Distance(Player.transform.position, markedTarget.Collider2D.transform.position);
-            if (PietaEndDis < newDis) 
+            if (dis < newDis) 
             {
-                PietaEndDis = newDis;
+                dis = newDis;
+                FarestTargetCollider2D = markedTarget.Collider2D;
             }
         }
 
         return true;
     }
+
+
 }
 
 public class MarkedTarget
@@ -198,7 +204,7 @@ public class MarkedTarget
 
     public Vector2 SlicePos;
 
-    public MarkedTarget(Collider2D _collider2D, SpriteRenderer _Hint)
+    public MarkedTarget(Collider2D _collider2D, SpriteRenderer _Hint = null)
     {
         Collider2D = _collider2D;
         Hint = _Hint;
