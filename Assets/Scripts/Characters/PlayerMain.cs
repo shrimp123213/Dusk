@@ -131,7 +131,7 @@ public class PlayerMain : Character
         //}
         if (Inputs.Contains(InputKey.Dash))
         {
-            if (base.isActing && NowAction.Id != "Dash")
+            if (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta")
             {
                 if (Morph.MorphCount > 0||true)//°{Á×§ó·s
                 {
@@ -140,12 +140,7 @@ public class PlayerMain : Character
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
 
-                    if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
-                    {
-                        StartAction(ActionLoader.i.Actions["Pieta"]);
-                    }
-                    else
-                        StartAction(ActionLoader.i.Actions["Dash"]);
+                    StartAction(ActionLoader.i.Actions["Dash"]);
 
                     //Morph.Consume();
                     CanDash = false;
@@ -164,12 +159,7 @@ public class PlayerMain : Character
 
                 CanAttack = true;
 
-                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
-                {
-                    StartAction(ActionLoader.i.Actions["Pieta"]);
-                }
-                else
-                    StartAction(ActionLoader.i.Actions["Dash"]);
+                StartAction(ActionLoader.i.Actions["Dash"]);
 
                 Inputs.Clear();
                 return;
@@ -177,6 +167,14 @@ public class PlayerMain : Character
         }
         if (!base.isActing)
         {
+            if (Inputs.Contains(InputKey.Pieta))
+            {
+                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
+                {
+                    StartAction(ActionLoader.i.Actions["Pieta"]);
+                }
+                Inputs.Clear();
+            }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions["Claw1"]);
@@ -209,7 +207,6 @@ public class PlayerMain : Character
         if (base.isActing)
         {
             Morph.Add(NowAction.MorphRecoveryAdditionalByMark);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecoveryAdditionalByMark;
         }
     }
 
@@ -219,7 +216,6 @@ public class PlayerMain : Character
         if (base.isActing)
         {
             Morph.Add(NowAction.MorphRecovery);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecovery;
         }
     }
 
@@ -233,6 +229,7 @@ public class PlayerMain : Character
             Morph.Add(NowAction.EvadeEnergyRecovery);
             Instantiate(EvadeState.EvadeSuccessEffect, transform.position, Quaternion.identity, transform); 
             HitEffect.SetGlobalSlow(.5f, 1);
+            AerutaDebug.i.Feedback.EvadeCount++;
         }
     }
 
@@ -373,32 +370,19 @@ public class PlayerMain : Character
             {
                 TryInput(InputKey.Dash);
             }
-            if (playerAct.FindAction("Burst").WasPressedThisFrame())
+            if (playerAct.FindAction("Pieta").WasPressedThisFrame())
             {
-                TryInput(InputKey.Burst);
-            }
-            if (playerAct.FindAction("Ult").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Ult);
-            }
-            if (playerAct.FindAction("Burst").WasReleasedThisFrame())
-            {
-                TryInput(InputKey.BurstRelease);
-                Inputs.Remove(InputKey.Burst);
+                TryInput(InputKey.Pieta);
             }
             if (playerAct.FindAction("Heal").WasPressedThisFrame())
             {
                 TryInput(InputKey.Heal);
             }
-            if (playerAct.FindAction("Mark").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Mark);
-            }
             if (playerAct.FindAction("UI").WasPressedThisFrame())
             {
                 AerutaDebug.i.CloseUI();
             }
-            Charging = playerAct.FindAction("Burst").IsPressed();
+            //Charging = playerAct.FindAction("Burst").IsPressed();
         }
         
         if (base.isActing)
@@ -479,8 +463,9 @@ public class PlayerMain : Character
         if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox") && !Evading)
         {
             Character _attacker = collision.transform.parent.GetComponent<Character>();
-            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction);
+            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Collision), .25f, _attacker, !ImmuneInterruptAction);
             if(num) TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+
         }
     }
 

@@ -40,8 +40,6 @@ public class ActionPietaObj : ActionBaseObj
 
     public override ActionPeformState StartAction(Character _m)
     {
-        AerutaDebug.i.Feedback.UltimateCount++;
-
         Instantiate(PietaEffect, _m.transform.position, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180), _m.transform);
 
         _m.Player.EvadeState.EvadeReady(false);
@@ -63,7 +61,12 @@ public class ActionPietaObj : ActionBaseObj
             //Debug.Log("while");
             debug++;
             if (debug == 50)
+            {
                 Debug.LogError("µL­­°j°é");
+                Debug.LogError(array.Length);
+                Debug.LogError(array[0].name);
+            }
+
 
             array = Physics2D.OverlapBoxAll(endPos, _m.Collider.bounds.size + Vector3.right * 1.5f * endPosSafeZoneRadius, 0f, LayerMask.GetMask("Character"));
             foreach (Collider2D collider2D in array)
@@ -197,7 +200,8 @@ public class ActionPietaObj : ActionBaseObj
     public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
         Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
-
+        
+        AerutaDebug.i.Feedback.PietaCount++;
     }
 
     public override void EndAction(Character _m)

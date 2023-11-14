@@ -49,6 +49,10 @@ public class Character : MonoBehaviour, IHitable
 
     public bool CanLongJump;
 
+    public bool CanDoubleJump;
+
+    private bool DoubleJumped;
+
     public bool ImmuneInterruptAction;
 
     public bool ImmuneStunAction;
@@ -102,6 +106,8 @@ public class Character : MonoBehaviour, IHitable
     public List<TimedLink> TimedLinks;
 
     public GameObject HurtEffect;
+
+    public GameObject DoubleJumpEffect;
 
     public float Health
     {
@@ -253,6 +259,11 @@ public class Character : MonoBehaviour, IHitable
         {
             LowGravityTime -= Time.fixedDeltaTime;
         }
+        if(DoubleJumped)
+        {
+            DoubleJumped = !isGround;
+        }
+
     }
 
     public virtual void TryInput(InputKey _InputKey)
@@ -430,7 +441,23 @@ public class Character : MonoBehaviour, IHitable
             {
                 CanLongJump = true;
                 LowGravityTime = 0f;
-                velocity.y = 10f;
+                velocity.y = 20f;
+            }
+            else if (!isGround && canJumpWhenActing && CanDoubleJump && !DoubleJumped)
+            {
+                CanLongJump = true;
+                LowGravityTime = 0f;
+                velocity.y = 20f;
+
+                if (!isActing)
+                {
+                    Ani.Rebind();
+                    Ani.Play("Jump up");
+                    Ani.Update(0f);
+                }
+
+                DoubleJumped = true;
+                Instantiate(DoubleJumpEffect, transform.position, Quaternion.identity, null);
             }
         }
         if (CanLongJump && !KeyJump)
@@ -438,19 +465,24 @@ public class Character : MonoBehaviour, IHitable
             CanLongJump = false;
         }
         Vector2 vector = ((LowGravityTime > 0f) ? new Vector2(-0.25f, 0.5f) : Vector2.one);
-        if (Rigid.velocity.y < 0f)
+        if (Rigid.velocity.y < -5f)//落下
         {
             velocity.y = Physics2D.gravity.y * vector.x * 5.25f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
             Ani.SetFloat("VelocityY", velocity.y);
         }
-        else if (Rigid.velocity.y > 0f && KeyJump && CanLongJump)
+        else if (Rigid.velocity.y <= 5f)//上升轉落下，延長滯空時間
         {
-            velocity.y = Physics2D.gravity.y * vector.y * 2.25f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
+            velocity.y = Physics2D.gravity.y * vector.x * 2.25f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
             Ani.SetFloat("VelocityY", velocity.y);
         }
-        else if (Rigid.velocity.y > 0f)
+        else if (Rigid.velocity.y > 5f && KeyJump && CanLongJump)//上升時按住跳
         {
-            velocity.y = Physics2D.gravity.y * vector.y * 5.5f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
+            velocity.y = Physics2D.gravity.y * vector.y * 5f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
+            Ani.SetFloat("VelocityY", velocity.y);
+        }
+        else if (Rigid.velocity.y > 5f)//上升
+        {
+            velocity.y = Physics2D.gravity.y * vector.y * 15f * Time.fixedDeltaTime * (float)numY + velocity.y * (float)numY * num2;
             Ani.SetFloat("VelocityY", velocity.y);
         }
         if (numY == 0 || LowGravityTime > 0f)
@@ -516,10 +548,7 @@ public class Character : MonoBehaviour, IHitable
         {
             return false;
         }
-        if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)
-        {
-            return false;
-        }
+
         if (_damage.Type != DamageType.Heal)
         {
             if (Evading)
@@ -527,6 +556,11 @@ public class Character : MonoBehaviour, IHitable
                 OnEvading();
                 return false;
             }
+            if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)
+            {
+                return false;
+            }
+            
 
             //防禦成功時間暫停
             //HitEffect.SetHitStun(false, false, .5f, false);
@@ -548,7 +582,11 @@ public class Character : MonoBehaviour, IHitable
             //}
             if ((bool)Player)
             {
-                AerutaDebug.i.Feedback.HittedCount++;
+                if (_damage.Type == DamageType.Normal)
+                    AerutaDebug.i.Feedback.HittedCount++;
+                if (_damage.Type == DamageType.Collision)
+                    AerutaDebug.i.Feedback.CollisionCount++;
+
                 Player.Morph.Consume(Player.Morph.MorphProgress);
 
                 Instantiate(HurtEffect, transform.position, Quaternion.identity, transform);
