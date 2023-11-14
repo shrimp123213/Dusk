@@ -90,7 +90,11 @@ MonoBehaviour:
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
-  Toggles: []
+  Toggles:
+  - KeyFrame: 0
+    IsActive: 0
+  - KeyFrame: 40
+    IsActive: 1
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
@@ -103,7 +107,7 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 
+  IsTriggered: 0101
   IsTeleported: 
   IsLightAttack: 0
   IsHeavyAttack: 0

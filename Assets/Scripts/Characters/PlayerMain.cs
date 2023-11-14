@@ -33,13 +33,7 @@ public class PlayerMain : Character
 
     private Slider ActionLinkTime;
 
-    private Slider SliderHealthTop;
-    private Slider SliderHealthBottom;
-
-    private float topLerpTime;
-    private float bottomLerpTime;
-
-    private float lastHealth;
+    private Slider SilderHealth;
 
     private bool CanDash;
 
@@ -80,8 +74,7 @@ public class PlayerMain : Character
         //Swinger = GetComponent<PlayerSwing>();
         //Swinger.Main = this;
         //ActionLinkTime = GameObject.Find("ActionLinkTime").GetComponent<Slider>();
-        SliderHealthTop = GameObject.Find("HealthTop").GetComponent<Slider>();
-        SliderHealthBottom = GameObject.Find("HealthBottom").GetComponent<Slider>();
+        SilderHealth = GameObject.Find("HealthBar").GetComponent<Slider>();
         TextInput = GameObject.Find("Input").GetComponent<TextMeshProUGUI>();
         Application.targetFrameRate = 120;
 
@@ -246,7 +239,7 @@ public class PlayerMain : Character
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Energy !");
         }
-        if (flag && _actionBaseObj.Id == "Heal" && Potions.Count <= 0)
+        if (flag && _actionBaseObj.Id == "Heal" && _actionBaseObj.MorphCost > 0f && Potions.Count < _actionBaseObj.MorphCost)
         {
             flag = false;
             if (isShowMessage)
@@ -350,57 +343,53 @@ public class PlayerMain : Character
         {
             CanAttack = base.isGround;
         }
-        if (CanInput)
+        KeyJump = playerAct.FindAction("Jump").IsPressed();
+        bool flag = Ani.GetCurrentAnimatorStateInfo(0).IsTag("Immobile");
+        if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
         {
-            KeyJump = playerAct.FindAction("Jump").IsPressed();
-            bool flag = Ani.GetCurrentAnimatorStateInfo(0).IsTag("Immobile");
-            if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
-            {
-                KeyJumpJust = true;
-            }
-            Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
-            Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
-            Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
-            if (playerAct.FindAction("Claw").WasPressedThisFrame())
-            {
-                //bool buttonDown = Input.GetButtonDown("Attack");
-                //if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)
-                //{
-                TryInput(InputKey.Claw);
-                //}
-            }
-            if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f || DashCooldown == 1f))
-            {
-                TryInput(InputKey.Dash);
-            }
-            if (playerAct.FindAction("Burst").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Burst);
-            }
-            if (playerAct.FindAction("Ult").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Ult);
-            }
-            if (playerAct.FindAction("Burst").WasReleasedThisFrame())
-            {
-                TryInput(InputKey.BurstRelease);
-                Inputs.Remove(InputKey.Burst);
-            }
-            if (playerAct.FindAction("Heal").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Heal);
-            }
-            if (playerAct.FindAction("Mark").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Mark);
-            }
-            if (playerAct.FindAction("UI").WasPressedThisFrame())
-            {
-                AerutaDebug.i.CloseUI();
-            }
-            Charging = playerAct.FindAction("Burst").IsPressed();
+            KeyJumpJust = true;
         }
-        
+        Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
+        Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
+        Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
+        if (playerAct.FindAction("Claw").WasPressedThisFrame())
+        {
+            //bool buttonDown = Input.GetButtonDown("Attack");
+            //if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)
+            //{
+                TryInput(InputKey.Claw);
+            //}
+        }
+        if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f|| DashCooldown==1f))
+        {
+            TryInput(InputKey.Dash);
+        }
+        if (playerAct.FindAction("Burst").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Burst);
+        }
+        if (playerAct.FindAction("Ult").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Ult);
+        }
+        if (playerAct.FindAction("Burst").WasReleasedThisFrame())
+        {
+            TryInput(InputKey.BurstRelease);
+            Inputs.Remove(InputKey.Burst);
+        }
+        if (playerAct.FindAction("Heal").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Heal);
+        }
+        if (playerAct.FindAction("Mark").WasPressedThisFrame())
+        {
+            TryInput(InputKey.Mark);
+        }
+        if (playerAct.FindAction("UI").WasPressedThisFrame())
+        {
+            AerutaDebug.i.CloseUI();
+        }
+        Charging = playerAct.FindAction("Burst").IsPressed();
         if (base.isActing)
         {
             if (ActionLinkTime != null)
@@ -436,37 +425,8 @@ public class PlayerMain : Character
 
             if (_Marked) { TimedLinks.RemoveAll(w => w.LifeTimePassed >= w.Base.LifeTime); }
         }
-
-        if (lastHealth != base.Health)
-            HealthChenged();
-
-        if (topLerpTime < 1)
-            topLerpTime += Time.deltaTime;
-        if (bottomLerpTime < 1)
-            bottomLerpTime += Time.deltaTime;
-
-        SliderHealthTop.value = Mathf.Lerp(SliderHealthTop.value, base.Health / HealthMax.Final, topLerpTime);
-        SliderHealthBottom.value = Mathf.Lerp(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomLerpTime);
-
-    }
-
-    public void HealthChenged()
-    {
-
-        if ((float)SliderHealthTop.value > (float)(base.Health / HealthMax.Final))
-            topLerpTime = 1;
-        else
-            topLerpTime -= (base.Health-lastHealth)/ base.Health;
-
-        if ((float)SliderHealthBottom.value < (float)(base.Health / HealthMax.Final))
-            bottomLerpTime = 1;
-        else
-            bottomLerpTime = 0;
-
-        lastHealth = base.Health;
-
-        Debug.Log(topLerpTime);
-        Debug.Log(bottomLerpTime);
+        
+        SilderHealth.value = base.Health / HealthMax.Final;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
