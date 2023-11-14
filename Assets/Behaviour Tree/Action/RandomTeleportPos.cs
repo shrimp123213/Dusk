@@ -6,10 +6,14 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class RandomTeleportPos : EnemyActionBase
 {
+    public SharedTransform Target;
+    
     public Vector2 RandomPos;
     
     public float MinX;
     public float MaxX;
+
+    public float LowestX;
 
     public bool Local;
 
@@ -17,13 +21,22 @@ public class RandomTeleportPos : EnemyActionBase
     {
         float selfY = this.transform.position.y;
         float selfX = this.transform.position.x;
+        float targetX = Target.Value.transform.position.x;
+        
+        LowestX = (targetX > 0) ? LowestX : -LowestX ;
+        
         if (!Local)
         {
-            RandomPos = new Vector2(Random.Range(MinX, MaxX), selfY);
+            RandomPos = new Vector2(Random.Range(MinX+LowestX, MaxX), selfY);
         }
         else
         {
-            RandomPos = new Vector2(Random.Range(MinX+selfX, MaxX+selfX), selfY);
+            RandomPos = new Vector2(Random.Range(LowestX+targetX, MaxX), selfY);
+            
+            if (LowestX+targetX >= MaxX || LowestX+targetX <= MinX)
+            {
+                RandomPos.x = targetX - LowestX;
+            }
         }
         Debug.Log(this.SelfCharacter.Value.transform.position);
         this.SelfCharacter.Value.TeleportKeyReference = this.RandomPos;
