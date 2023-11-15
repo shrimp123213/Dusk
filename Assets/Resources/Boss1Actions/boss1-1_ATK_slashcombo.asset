@@ -21,17 +21,17 @@ MonoBehaviour:
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 36
-    KeyFrameEnd: 46
+    KeyFrameEnd: 40
     Offset: {x: 3, y: 2, z: 0}
     Range: {x: 5, y: 4}
   - KeyFrameFrom: 59
     KeyFrameEnd: 69
-    Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
+    Offset: {x: 3, y: 2, z: 0}
+    Range: {x: 5, y: 4}
   - KeyFrameFrom: 80
     KeyFrameEnd: 90
-    Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
+    Offset: {x: 4, y: 2, z: 0}
+    Range: {x: 6, y: 4}
   HitMax: 1
   SuckEffect: 0
   CanInterruptAction: 1
