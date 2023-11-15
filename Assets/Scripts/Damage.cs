@@ -14,6 +14,6 @@ public class Damage
 public enum DamageType
 {
     Normal,
-    Mark,
+    Collision,
     Heal,
 }

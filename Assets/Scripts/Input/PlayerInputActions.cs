@@ -55,18 +55,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Burst"",
+                    ""name"": ""Pieta"",
                     ""type"": ""Button"",
                     ""id"": ""33707063-bb7f-43a3-9ba4-fc6637d09c16"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Ult"",
-                    ""type"": ""Button"",
-                    ""id"": ""5e4750b0-ffb2-417e-9f72-97579b409077"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -94,15 +85,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Heal"",
                     ""type"": ""Button"",
                     ""id"": ""5746ea40-fe5c-4d35-b832-fa38699c3b0b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Mark"",
-                    ""type"": ""Button"",
-                    ""id"": ""0065c157-a839-45f0-924a-8f69c343bf1a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -247,7 +229,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Burst"",
+                    ""action"": ""Pieta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -258,29 +240,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Burst"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2e9a5312-952d-4f0c-b9f1-bd9afad8270e"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ult"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7586448f-c34d-4827-a8ee-358f8e7690f1"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Ult"",
+                    ""action"": ""Pieta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -298,7 +258,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""052bfdd9-0f8d-427f-9dd8-c6173cb55ca6"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc48fbdc-d5cf-4b32-87e8-7ca354b07032"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -330,8 +301,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bde867f2-a7b9-405c-81ee-03777d07c28c"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""id"": ""d8f96f03-04d3-4839-add4-9187b0e24eab"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -341,23 +312,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6589a437-ad50-4ae4-9f18-a14ed0a67d3c"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Mark"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0f6c621d-2e4b-4ad5-92c7-8e88e5bac18d"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""bde867f2-a7b9-405c-81ee-03777d07c28c"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Mark"",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -416,12 +376,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Claw = m_Player.FindAction("Claw", throwIfNotFound: true);
-        m_Player_Burst = m_Player.FindAction("Burst", throwIfNotFound: true);
-        m_Player_Ult = m_Player.FindAction("Ult", throwIfNotFound: true);
+        m_Player_Pieta = m_Player.FindAction("Pieta", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
-        m_Player_Mark = m_Player.FindAction("Mark", throwIfNotFound: true);
         m_Player_UI = m_Player.FindAction("UI", throwIfNotFound: true);
     }
 
@@ -487,12 +445,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Claw;
-    private readonly InputAction m_Player_Burst;
-    private readonly InputAction m_Player_Ult;
+    private readonly InputAction m_Player_Pieta;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
-    private readonly InputAction m_Player_Mark;
     private readonly InputAction m_Player_UI;
     public struct PlayerActions
     {
@@ -501,12 +457,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Claw => m_Wrapper.m_Player_Claw;
-        public InputAction @Burst => m_Wrapper.m_Player_Burst;
-        public InputAction @Ult => m_Wrapper.m_Player_Ult;
+        public InputAction @Pieta => m_Wrapper.m_Player_Pieta;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
-        public InputAction @Mark => m_Wrapper.m_Player_Mark;
         public InputAction @UI => m_Wrapper.m_Player_UI;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -526,12 +480,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Claw.started += instance.OnClaw;
             @Claw.performed += instance.OnClaw;
             @Claw.canceled += instance.OnClaw;
-            @Burst.started += instance.OnBurst;
-            @Burst.performed += instance.OnBurst;
-            @Burst.canceled += instance.OnBurst;
-            @Ult.started += instance.OnUlt;
-            @Ult.performed += instance.OnUlt;
-            @Ult.canceled += instance.OnUlt;
+            @Pieta.started += instance.OnPieta;
+            @Pieta.performed += instance.OnPieta;
+            @Pieta.canceled += instance.OnPieta;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -541,9 +492,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Heal.started += instance.OnHeal;
             @Heal.performed += instance.OnHeal;
             @Heal.canceled += instance.OnHeal;
-            @Mark.started += instance.OnMark;
-            @Mark.performed += instance.OnMark;
-            @Mark.canceled += instance.OnMark;
             @UI.started += instance.OnUI;
             @UI.performed += instance.OnUI;
             @UI.canceled += instance.OnUI;
@@ -560,12 +508,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Claw.started -= instance.OnClaw;
             @Claw.performed -= instance.OnClaw;
             @Claw.canceled -= instance.OnClaw;
-            @Burst.started -= instance.OnBurst;
-            @Burst.performed -= instance.OnBurst;
-            @Burst.canceled -= instance.OnBurst;
-            @Ult.started -= instance.OnUlt;
-            @Ult.performed -= instance.OnUlt;
-            @Ult.canceled -= instance.OnUlt;
+            @Pieta.started -= instance.OnPieta;
+            @Pieta.performed -= instance.OnPieta;
+            @Pieta.canceled -= instance.OnPieta;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -575,9 +520,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Heal.started -= instance.OnHeal;
             @Heal.performed -= instance.OnHeal;
             @Heal.canceled -= instance.OnHeal;
-            @Mark.started -= instance.OnMark;
-            @Mark.performed -= instance.OnMark;
-            @Mark.canceled -= instance.OnMark;
             @UI.started -= instance.OnUI;
             @UI.performed -= instance.OnUI;
             @UI.canceled -= instance.OnUI;
@@ -621,12 +563,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnClaw(InputAction.CallbackContext context);
-        void OnBurst(InputAction.CallbackContext context);
-        void OnUlt(InputAction.CallbackContext context);
+        void OnPieta(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
-        void OnMark(InputAction.CallbackContext context);
         void OnUI(InputAction.CallbackContext context);
     }
 }

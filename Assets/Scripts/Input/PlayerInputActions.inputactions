@@ -33,18 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Burst",
+                    "name": "Pieta",
                     "type": "Button",
                     "id": "33707063-bb7f-43a3-9ba4-fc6637d09c16",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Ult",
-                    "type": "Button",
-                    "id": "5e4750b0-ffb2-417e-9f72-97579b409077",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -72,15 +63,6 @@
                     "name": "Heal",
                     "type": "Button",
                     "id": "5746ea40-fe5c-4d35-b832-fa38699c3b0b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Mark",
-                    "type": "Button",
-                    "id": "0065c157-a839-45f0-924a-8f69c343bf1a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -225,7 +207,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Burst",
+                    "action": "Pieta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -236,29 +218,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Burst",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2e9a5312-952d-4f0c-b9f1-bd9afad8270e",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ult",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7586448f-c34d-4827-a8ee-358f8e7690f1",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Ult",
+                    "action": "Pieta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -276,7 +236,18 @@
                 {
                     "name": "",
                     "id": "052bfdd9-0f8d-427f-9dd8-c6173cb55ca6",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc48fbdc-d5cf-4b32-87e8-7ca354b07032",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -308,8 +279,8 @@
                 },
                 {
                     "name": "",
-                    "id": "bde867f2-a7b9-405c-81ee-03777d07c28c",
-                    "path": "<Gamepad>/leftShoulder",
+                    "id": "d8f96f03-04d3-4839-add4-9187b0e24eab",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -319,23 +290,12 @@
                 },
                 {
                     "name": "",
-                    "id": "6589a437-ad50-4ae4-9f18-a14ed0a67d3c",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Mark",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0f6c621d-2e4b-4ad5-92c7-8e88e5bac18d",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "bde867f2-a7b9-405c-81ee-03777d07c28c",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Mark",
+                    "action": "Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

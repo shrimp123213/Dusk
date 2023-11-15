@@ -11,7 +11,7 @@ using static Pieta;
 
 public class PlayerMain : Character
 {
-    //ª±®aInput
+    //ï¿½ï¿½ï¿½aInput
     public InputActionAsset inputActionAsset;
     private InputActionMap playerAct;
 
@@ -90,7 +90,7 @@ public class PlayerMain : Character
 
     public override void ProcessInput()
     {
-        //if (Inputs.Contains(InputKey.Burst))//¤è¦V§ðÀ»
+        //if (Inputs.Contains(InputKey.Burst))//ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½
         //{
         //    ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
         //    switch (InputUtli.GetHighestAxis(Xinput, Yinput))
@@ -117,28 +117,23 @@ public class PlayerMain : Character
             Inputs.Clear();
             return;
         }
-        //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) §ðÀ»®É¦V«á¨«¥i¥H¨ú®ø§ðÀ»¡Abug
+        //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) ï¿½ï¿½ï¿½ï¿½ï¿½É¦Vï¿½á¨«ï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Abug
         //{
         //    NowAction.EndAction(this);
         //    Inputs.Remove(InputKey.Claw);
         //}
         if (Inputs.Contains(InputKey.Dash))
         {
-            if (base.isActing && NowAction.Id != "Dash")
+            if (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta")
             {
-                if (Morph.MorphCount > 0||true)//°{Á×§ó·s
+                if (Morph.MorphCount > 0||true)//ï¿½{ï¿½×§ï¿½s
                 {
                     if (Xinput != 0f)
                     {
                         Facing = ((Xinput > 0f) ? 1 : (-1));
                     }
 
-                    if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
-                    {
-                        StartAction(ActionLoader.i.Actions["Pieta"]);
-                    }
-                    else
-                        StartAction(ActionLoader.i.Actions["Dash"]);
+                    StartAction(ActionLoader.i.Actions["Dash"]);
 
                     //Morph.Consume();
                     CanDash = false;
@@ -157,12 +152,7 @@ public class PlayerMain : Character
 
                 CanAttack = true;
 
-                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
-                {
-                    StartAction(ActionLoader.i.Actions["Pieta"]);
-                }
-                else
-                    StartAction(ActionLoader.i.Actions["Dash"]);
+                StartAction(ActionLoader.i.Actions["Dash"]);
 
                 Inputs.Clear();
                 return;
@@ -170,6 +160,14 @@ public class PlayerMain : Character
         }
         if (!base.isActing)
         {
+            if (Inputs.Contains(InputKey.Pieta))
+            {
+                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
+                {
+                    StartAction(ActionLoader.i.Actions["Pieta"]);
+                }
+                Inputs.Clear();
+            }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
             {
                 StartAction(ActionLoader.i.Actions["Claw1"]);
@@ -202,7 +200,6 @@ public class PlayerMain : Character
         if (base.isActing)
         {
             Morph.Add(NowAction.MorphRecoveryAdditionalByMark);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecoveryAdditionalByMark;
         }
     }
 
@@ -212,7 +209,6 @@ public class PlayerMain : Character
         if (base.isActing)
         {
             Morph.Add(NowAction.MorphRecovery);
-            AerutaDebug.i.Feedback.EnergyRecoveryCount += NowAction.MorphRecovery;
         }
     }
 
@@ -226,6 +222,7 @@ public class PlayerMain : Character
             Morph.Add(NowAction.EvadeEnergyRecovery);
             Instantiate(EvadeState.EvadeSuccessEffect, transform.position, Quaternion.identity, transform); 
             HitEffect.SetGlobalSlow(.5f, 1);
+            AerutaDebug.i.Feedback.EvadeCount++;
         }
     }
 
@@ -260,7 +257,7 @@ public class PlayerMain : Character
         {
             flag = false;
             if (isShowMessage)
-                SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName + "¥u¯à¦b¦a­±¨Ï¥Î !");
+                SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName + "ï¿½uï¿½ï¿½bï¿½aï¿½ï¿½ï¿½Ï¥ï¿½ !");
         }
         return flag;
     }
@@ -358,7 +355,25 @@ public class PlayerMain : Character
             //if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)
             //{
                 TryInput(InputKey.Claw);
-            //}
+                //}
+            }
+            if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f || DashCooldown == 1f))
+            {
+                TryInput(InputKey.Dash);
+            }
+            if (playerAct.FindAction("Pieta").WasPressedThisFrame())
+            {
+                TryInput(InputKey.Pieta);
+            }
+            if (playerAct.FindAction("Heal").WasPressedThisFrame())
+            {
+                TryInput(InputKey.Heal);
+            }
+            if (playerAct.FindAction("UI").WasPressedThisFrame())
+            {
+                AerutaDebug.i.CloseUI();
+            }
+            //Charging = playerAct.FindAction("Burst").IsPressed();
         }
         if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f|| DashCooldown==1f))
         {
@@ -439,8 +454,9 @@ public class PlayerMain : Character
         if (collision.gameObject.layer == LayerMask.NameToLayer("CollisionDamageBox") && !Evading)
         {
             Character _attacker = collision.transform.parent.GetComponent<Character>();
-            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Normal), .25f, _attacker, !ImmuneInterruptAction);
+            bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Collision), .25f, _attacker, !ImmuneInterruptAction);
             if(num) TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+
         }
     }
 

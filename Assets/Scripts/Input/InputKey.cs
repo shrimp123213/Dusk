@@ -7,9 +7,7 @@ public enum InputKey
     Right,
     Dash,
     Claw,
-    Burst,
-    Ult,
-    BurstRelease,
+    Pieta,
     Heal,
-    Mark,
+    UI,
 }

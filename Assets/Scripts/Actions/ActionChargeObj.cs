@@ -64,7 +64,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                     _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
                     _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
 
-                    _m.Inputs.Remove(InputKey.BurstRelease);
+                    //_m.Inputs.Remove(InputKey.BurstRelease);
                 }
                 else
                 {
@@ -77,7 +77,7 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
                     //actionPeformStateCharge.Linked = _m.TryLink(PreviousId);
 
-                    _m.Inputs.Remove(InputKey.BurstRelease);
+                    //_m.Inputs.Remove(InputKey.BurstRelease);
                 }
             }
             else
@@ -107,11 +107,11 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         SkillCharge.i.SetSuccessTime(ChargeSuccessTime);
         //Debug.Log("A ChargeAble Action Started !");
 
-        if (!IsHeavyAttack)
-            AerutaDebug.i.Feedback.LightAttackCount--;
-        else
-            AerutaDebug.i.Feedback.HeavyAttackCount--;
-        AerutaDebug.i.Feedback.ChargeAttackCount++;
+        //if (!IsHeavyAttack)
+        //    AerutaDebug.i.Feedback.LightAttackCount--;
+        //else
+        //    AerutaDebug.i.Feedback.HeavyAttackCount--;
+        //AerutaDebug.i.Feedback.ChargeAttackCount++;
 
         return new ActionPeformStateCharge();
     }

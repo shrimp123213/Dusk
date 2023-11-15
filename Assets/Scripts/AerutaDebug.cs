@@ -122,27 +122,25 @@ public class AerutaDebug : MonoBehaviour
 public class Feedback
 {
     public float PlayTime;
-    public int MarkCount;
-    public int MarkTriggerCount;
-    public int BlockCount;
-    public int UltimateCount;
+    public int EvadeCount;
     public int LightAttackCount;
-    public int HeavyAttackCount;
-    public int ChargeAttackCount;
-    public float EnergyRecoveryCount;
+    public float MorphCount;
+    public float MorphProgress;
+    public int PietaCount;
     public int HealCount;
     public int HittedCount;
+    public int CollisionCount;
 
     public string LeftText()
     {
-        return "�D�Ԯɶ��G\r\n" + PlayTime + "\r\n\r\n�аO���ơG\r\n" + MarkCount + "\r\n\r\nĲ�o�аO���ơG\r\n" + MarkTriggerCount + "\r\n\r\n���m���ơG\r\n" + BlockCount;
+        return "挑戰時間\r\n" + (PlayTime / 60f).ToString("0") + "分 " + (PlayTime % 60f).ToString("0.00") + "秒" + "\r\n\r\n攻擊擊中次數\r\n" + LightAttackCount + "\r\n\r\n聖殤擊中次數\r\n" + PietaCount + "\r\n\r\n閃避次數\r\n" + EvadeCount;
     }
     public string MiddleText()
     {
-        return "�j�ۦ��ơG\r\n" + UltimateCount + "\r\n\r\n���������ơG\r\n" + LightAttackCount + "\r\n\r\n���������ơG\r\n" + HeavyAttackCount + "\r\n\r\n�W�O���������ơG\r\n" + ChargeAttackCount;
+        return "蛻變槽累積量\r\n" + MorphCount + "次滿條 " + (MorphProgress * 100).ToString("0.00") + "%累積量" + "\r\n\r\n治療次數\r\n" + HealCount + "\r\n\r\n被擊中次數\r\n" + HittedCount + "\r\n\r\n被碰撞傷害次數\r\n" + CollisionCount;
     }
     public string RightText()
     {
-        return "��q�^�_�q�G\r\n" + EnergyRecoveryCount + "\r\n\r\n�v�����ơG\r\n" + HealCount + "\r\n\r\n�Q�������ơG\r\n" + HittedCount + "\r\n\r\n\r\n";
+        return "";
     }
 }

@@ -55,11 +55,13 @@ public class MorphUser : MonoBehaviour
             MorphCount = Mathf.Clamp(MorphCount + (int)Mathf.Floor(MorphProgress), 0, MorphMax);
             MorphProgress -= Mathf.Floor(MorphProgress);
             CheckSpin();
+            AerutaDebug.i.Feedback.MorphCount++;
         }
         if (MorphCount >= MorphMax)
         {
             MorphProgress = 0f;
         }
+        AerutaDebug.i.Feedback.MorphProgress = MorphProgress;
 
         DelayTime = MorphDecreaseDelayTimeMax;
     }

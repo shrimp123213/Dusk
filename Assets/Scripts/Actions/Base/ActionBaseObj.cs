@@ -156,11 +156,6 @@ public class ActionBaseObj : ScriptableObject
             _m.TimedLinks.Add(new TimedLink(link));
         }
 
-        if (IsLightAttack)
-            AerutaDebug.i.Feedback.LightAttackCount++;
-        if (IsHeavyAttack)
-            AerutaDebug.i.Feedback.HeavyAttackCount++;
-
 
         foreach (ActionMovement movement in Moves)
         {
@@ -197,17 +192,22 @@ public class ActionBaseObj : ScriptableObject
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
         Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
+
+        if (IsLightAttack)
+            AerutaDebug.i.Feedback.LightAttackCount++;
+        //if (IsHeavyAttack)
+        //    AerutaDebug.i.Feedback.HeavyAttackCount++;
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
     {
         _m.TriggerMark();
 
-        IHitable.TakeDamage(new Damage(10, DamageType.Mark), 0f, _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
+        //IHitable.TakeDamage(new Damage(10, DamageType.Mark), 0f, _m, !_hitted.ImmuneInterruptAction && CanInterruptAction);
 
         //_hitted≤÷øn≈È∑F≠»
 
-        AerutaDebug.i.Feedback.MarkTriggerCount++;
+        //AerutaDebug.i.Feedback.MarkTriggerCount++;
     }
 
     public virtual float GetDamageRatio(Character _m)
