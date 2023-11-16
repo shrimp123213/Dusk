@@ -41,6 +41,18 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: Claw3
     CanChangeFace: 1
+  - Frame: 0
+    LifeTime: -1
+    Key1: 7
+    KeyArrow: 0
+    LinkActionId: Pieta
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 7
+    KeyArrow: 0
+    LinkActionId: Pieta
+    CanChangeFace: 1
   Moves: []
   Toggles: []
   Teleports: []
@@ -49,7 +61,7 @@ MonoBehaviour:
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
-  MorphRecovery: 0.0625
+  MorphRecovery: 0.1
   MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0

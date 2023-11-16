@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using UnityEngine;
+using TMPro;
 
 public class Contact : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Contact : MonoBehaviour
     public BehaviorTree AITree;
     private Animator ani;
 
+    public Transform BossHealthBar;
+    public TMP_Text BossName;
+    private float speed;
 
     void Start()
     {
@@ -26,12 +30,13 @@ public class Contact : MonoBehaviour
             {
                 fences[0].Play("FenceUp");
                 fences[1].Play("FenceUp");
-                
+
+                speed = 1f;
+
             }
             if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 330f / 501f)
             {
                 //AITree.GetComponent<Character>().HitEffect.HitStun = .01f;
-                gameObject.SetActive(false);
 
                 Camcam.i.UseOverride = false;
 
@@ -40,6 +45,18 @@ public class Contact : MonoBehaviour
 ;
         }
         
+        if (speed > 0f)
+        {
+            BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
+
+            if (BossHealthBar.localScale == Vector3.one * .75f)
+            {
+                BossName.color = new Color(1f, 1f, 1f, Mathf.MoveTowards(BossName.color.a, 1f, speed * Time.deltaTime));
+
+                if (BossName.color.a == 1f)
+                    gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

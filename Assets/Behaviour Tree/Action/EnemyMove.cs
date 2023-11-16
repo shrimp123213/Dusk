@@ -33,8 +33,12 @@ public class EnemyMove : EnemyActionBase
     {
         Animator Ani =this.transform.GetComponentInChildren<Animator>();
         
-        if(AnimationName!=null)
+        if (AnimationName != null)
+        {
+            //Ani.Rebind();
             Ani.Play(AnimationName);
+            //Ani.Update(0f);
+        }
         
         if (this.Target.IsShared)
         {
