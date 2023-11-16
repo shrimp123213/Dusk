@@ -41,6 +41,8 @@ public class PlayerMain : Character
 
     private float lastHealth;
 
+    private float waitSliderHealthMove;
+
     private bool CanDash;
 
     public bool CanAttack;
@@ -88,8 +90,8 @@ public class PlayerMain : Character
         inputActionAsset = GetComponent<PlayerInput>().actions;
         playerAct = inputActionAsset.FindActionMap("Player");
 
-        topMoveSpeed = .5f;
-        bottomMoveSpeed = .5f;
+        topMoveSpeed = .2f;
+        bottomMoveSpeed = .2f;
     }
 
     private void Start()
@@ -427,9 +429,13 @@ public class PlayerMain : Character
         if (lastHealth != base.Health)
             HealthChenged();
 
-        SliderHealthTop.value = Mathf.MoveTowards(SliderHealthTop.value, base.Health / HealthMax.Final, topMoveSpeed * Time.deltaTime);
-        SliderHealthBottom.value = Mathf.MoveTowards(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomMoveSpeed * Time.deltaTime);
-
+        if (waitSliderHealthMove <= 0f)
+        {
+            SliderHealthTop.value = Mathf.MoveTowards(SliderHealthTop.value, base.Health / HealthMax.Final, topMoveSpeed * Time.deltaTime);
+            SliderHealthBottom.value = Mathf.MoveTowards(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomMoveSpeed * Time.deltaTime);
+        }
+        else
+            waitSliderHealthMove -= Time.deltaTime;
     }
 
     public void HealthChenged()
@@ -442,8 +448,8 @@ public class PlayerMain : Character
 
         lastHealth = base.Health;
 
-        Debug.Log(topMoveSpeed);
-        Debug.Log(bottomMoveSpeed);
+        if (!(isActing && NowAction.Id == "Heal"))
+            waitSliderHealthMove = .5f;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
