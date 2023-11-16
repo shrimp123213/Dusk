@@ -36,8 +36,8 @@ public class PlayerMain : Character
     private Slider SliderHealthTop;
     private Slider SliderHealthBottom;
 
-    private float topLerpTime;
-    private float bottomLerpTime;
+    private float topMoveSpeed;
+    private float bottomMoveSpeed;
 
     private float lastHealth;
 
@@ -87,6 +87,9 @@ public class PlayerMain : Character
 
         inputActionAsset = GetComponent<PlayerInput>().actions;
         playerAct = inputActionAsset.FindActionMap("Player");
+
+        topMoveSpeed = .5f;
+        bottomMoveSpeed = .5f;
     }
 
     private void Start()
@@ -424,33 +427,23 @@ public class PlayerMain : Character
         if (lastHealth != base.Health)
             HealthChenged();
 
-        if (topLerpTime < 1)
-            topLerpTime += Time.deltaTime;
-        if (bottomLerpTime < 1)
-            bottomLerpTime += Time.deltaTime;
-
-        SliderHealthTop.value = Mathf.Lerp(SliderHealthTop.value, base.Health / HealthMax.Final, topLerpTime);
-        SliderHealthBottom.value = Mathf.Lerp(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomLerpTime);
+        SliderHealthTop.value = Mathf.MoveTowards(SliderHealthTop.value, base.Health / HealthMax.Final, topMoveSpeed * Time.deltaTime);
+        SliderHealthBottom.value = Mathf.MoveTowards(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomMoveSpeed * Time.deltaTime);
 
     }
 
     public void HealthChenged()
     {
-
         if ((float)SliderHealthTop.value > (float)(base.Health / HealthMax.Final))
-            topLerpTime = 1;
-        else
-            topLerpTime -= (base.Health-lastHealth)/ base.Health;
+            SliderHealthTop.value = base.Health / HealthMax.Final;
 
         if ((float)SliderHealthBottom.value < (float)(base.Health / HealthMax.Final))
-            bottomLerpTime = 1;
-        else
-            bottomLerpTime = 0;
+            SliderHealthBottom.value = base.Health / HealthMax.Final;
 
         lastHealth = base.Health;
 
-        Debug.Log(topLerpTime);
-        Debug.Log(bottomLerpTime);
+        Debug.Log(topMoveSpeed);
+        Debug.Log(bottomMoveSpeed);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
