@@ -347,11 +347,6 @@ public class Character : MonoBehaviour, IHitable
     {
         Xinput = 0f;
         Ani.SetBool("Moving", value: false);
-        Rigid.velocity = Vector3.zero;
-        if (isActing)
-        {
-            NowAction.EndAction(this);
-        }
     }
 
     private void LadderMove()
@@ -391,8 +386,7 @@ public class Character : MonoBehaviour, IHitable
         }
         if (HitEffect.HitStun > 0)
         {
-            Xinput = 0f;
-            Ani.SetBool("Moving", value: false);
+            StopMove();
         }
         int numX = (isMovableX ? 1 : 0);
         int numY = (isMovableY ? 1 : 0);

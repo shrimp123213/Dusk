@@ -236,7 +236,7 @@ public class ActionBaseObj : ScriptableObject
                 if (!IsTriggered[i] && actionState.IsAfterFrame(toggle.KeyFrame))
                 {
                     IsTriggered[i] = true;
-                    _m.transform.Find("CollisionDamageBox").GetComponent<Collider2D>().enabled = toggle.IsActive;
+                    _m.GetComponentInChildren<Collider2D>().enabled = toggle.IsActive;
                 }
                 i++;
             }

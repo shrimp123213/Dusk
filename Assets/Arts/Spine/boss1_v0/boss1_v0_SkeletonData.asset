@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ea05ab4b982b904f80bb2a026cbd463, type: 2}
   scale: 0.002
   skeletonJSON: {fileID: 4900000, guid: 8a543653ba2d23a418cb75e74f4cff13, type: 3}
-  isUpgradingBlendModeMaterials: 1
+  isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 0
@@ -27,6 +27,8 @@ MonoBehaviour:
       material: {fileID: 2100000, guid: 770ace27de20f0247a87f6d6a50deb77, type: 2}
     - pageName: boss1_v0.png
       material: {fileID: 2100000, guid: 916eb1d8ea362a541aa0d660a70b18e4, type: 2}
+    - pageName: boss1_v0_3.png
+      material: {fileID: 2100000, guid: 3a9897189cec23c45bd11636e50dd367, type: 2}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []

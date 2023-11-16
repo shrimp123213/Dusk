@@ -11,7 +11,7 @@ using static Pieta;
 
 public class PlayerMain : Character
 {
-    //ª±®aInput
+    //ç©å®¶Input
     public InputActionAsset inputActionAsset;
     private InputActionMap playerAct;
 
@@ -100,7 +100,7 @@ public class PlayerMain : Character
 
     public override void ProcessInput()
     {
-        //if (Inputs.Contains(InputKey.Burst))//¤è¦V§ğÀ»
+        //if (Inputs.Contains(InputKey.Burst))//æ–¹å‘æ”»æ“Š
         //{
         //    ActionBaseObj actionBaseObj = ActionLoader.i.Actions[101u];
         //    switch (InputUtli.GetHighestAxis(Xinput, Yinput))
@@ -127,7 +127,7 @@ public class PlayerMain : Character
             Inputs.Clear();
             return;
         }
-        //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) §ğÀ»®É¦V«á¨«¥i¥H¨ú®ø§ğÀ»¡Abug
+        //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) æ”»æ“Šæ™‚å‘å¾Œèµ°å¯ä»¥å–æ¶ˆæ”»æ“Šï¼Œbug
         //{
         //    NowAction.EndAction(this);
         //    Inputs.Remove(InputKey.Claw);
@@ -136,7 +136,7 @@ public class PlayerMain : Character
         {
             if (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta")
             {
-                if (Morph.MorphCount > 0||true)//°{Á×§ó·s
+                if (Morph.MorphCount > 0||true)//é–ƒé¿æ›´æ–°
                 {
                     if (Xinput != 0f)
                     {
@@ -267,7 +267,7 @@ public class PlayerMain : Character
         {
             flag = false;
             if (isShowMessage)
-                SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName + "¥u¯à¦b¦a­±¨Ï¥Î !");
+                SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName + "åªèƒ½åœ¨åœ°é¢ä½¿ç”¨ !");
         }
         return flag;
     }

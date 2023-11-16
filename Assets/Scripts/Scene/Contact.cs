@@ -11,7 +11,6 @@ public class Contact : MonoBehaviour
     public BehaviorTree AITree;
     private Animator ani;
 
-    
 
     void Start()
     {
@@ -29,14 +28,10 @@ public class Contact : MonoBehaviour
                 fences[1].Play("FenceUp");
                 
             }
-            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 330f / 501f)
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 480f / 501f)
             {
-                //AITree.GetComponent<Character>().HitEffect.HitStun = .01f;
+                AITree.GetComponent<Character>().HitEffect.HitStun = .01f;
                 gameObject.SetActive(false);
-
-                Camcam.i.UseOverride = false;
-
-                PlayerMain.i.CanInput = true;
             }
 ;
         }
@@ -50,12 +45,6 @@ public class Contact : MonoBehaviour
             AITree.enabled = true;
             //ani.Play("boss1-1_ST_start");
             AerutaDebug.i.StartGameTime = Time.unscaledTime;
-
-            Camcam.i.UseOverride = true;
-            Camcam.i.PosOverride = new Vector3(AITree.transform.position.x, -3f, -10f);
-
-            PlayerMain.i.StopMove();
-            PlayerMain.i.CanInput = false;
         }
     }
 }

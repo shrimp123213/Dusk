@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 
 [CreateAssetMenu(fileName = "ActionHeal", menuName = "Actions/Heal")]
@@ -9,14 +8,15 @@ public class ActionHealObj : ActionBaseObj
     [Header("ActionHeal")]
     public float HealAmount;
 
+    public int KeyFrame;
+
     private AfterimageGenerator Afterimage;
 
-    private float lastValue;
+    private bool Healed;
 
     public override ActionPeformState StartAction(Character _m)
     {
-        lastValue = -HealAmount / 2;
-        _m.TakeDamage(new Damage(lastValue, DamageType));
+        Healed = false;
 
         return base.StartAction(_m);
     }
@@ -24,36 +24,41 @@ public class ActionHealObj : ActionBaseObj
     public override void ProcessAction(Character _m)
     {
         base.ProcessAction(_m);
+        Debug.Log(Healed);
 
         ActionPeformState actionState = _m.ActionState;
-
-        float currentValue = Mathf.Lerp(-HealAmount / 2, -HealAmount, actionState.ActionTime);
-
-        _m.TakeDamage(new Damage(currentValue - lastValue, DamageType));
-
-        lastValue = currentValue;
+        Debug.Log(actionState.IsAfterFrame(KeyFrame));
+        if (!Healed && actionState.IsAfterFrame(KeyFrame))
+        {
+            Healed = true;
+            _m.TakeDamage(new Damage(-HealAmount, DamageType));
+            this.Init(_m);
+        }
     }
 
     public override void Init(Character _m)
     {
-        float StartDelay = 0f;
-        float Duration = 1f;
+        if (Healed)
+        {
+            float StartDelay = 0f;
+            float Duration = 1f;
 
-        Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
-        Afterimage.IsSprite = true;
-        Afterimage.EmitReset = 10f;
-        Afterimage.DelayFadeTime = 0f;
-        Afterimage.MoveTime = Afterimage.FadeTime;
-        Afterimage.MovePosition = Vector3.up * 1.25f;
-        Afterimage.ScaleTime = Afterimage.FadeTime;
-        Afterimage.ScaleMultiply = 3f;
-        Afterimage.SetLifeTime(StartDelay, Duration);
+            Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
+            Afterimage.IsSprite = true;
+            Afterimage.EmitReset = 10f;
+            Afterimage.DelayFadeTime = 0f;
+            Afterimage.MoveTime = Afterimage.FadeTime;
+            Afterimage.MovePosition = Vector3.up * 1.25f;
+            Afterimage.ScaleTime = Afterimage.FadeTime;
+            Afterimage.ScaleMultiply = 3f;
+            Afterimage.SetLifeTime(StartDelay, Duration);
+        }
     }
 
     public override void EndAction(Character _m)
     {
-        this.Init(_m);
-
         base.EndAction(_m);
+
+        Destroy(Afterimage);
     }
 }
