@@ -11,6 +11,8 @@ public class EnemyStartAction : EnemyActionBase
     public ActionBaseObj Action;
 
     public bool Flip;
+
+    public bool CheckFacing;
     
     private bool Fail;
     
@@ -21,6 +23,8 @@ public class EnemyStartAction : EnemyActionBase
         {
             this.SelfCharacter.Value.StartAction(this.Action);
         }
+        if(CheckFacing)
+            this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x - this.transform.position.x> 0) ? 1 : -1;
     }
 
     public override TaskStatus OnUpdate()

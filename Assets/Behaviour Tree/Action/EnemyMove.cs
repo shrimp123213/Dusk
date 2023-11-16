@@ -32,7 +32,9 @@ public class EnemyMove : EnemyActionBase
     public override TaskStatus OnUpdate()
     {
         Animator Ani =this.transform.GetComponentInChildren<Animator>();
-        Ani.Play(AnimationName);
+        
+        if(AnimationName!=null)
+            Ani.Play(AnimationName);
         
         if (this.Target.IsShared)
         {
