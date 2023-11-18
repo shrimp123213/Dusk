@@ -13,7 +13,9 @@ public class ReverseAnimation : EnemyActionBase
         if (!(this.SelfCharacter.Value.isActing))
         {
             Animator Ani =this.transform.GetComponentInChildren<Animator>();
+            //Ani.Rebind();
             Ani.Play(ReverseAnimationName);
+            //Ani.Update(0f);
             if(Ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 return TaskStatus.Success;
         }

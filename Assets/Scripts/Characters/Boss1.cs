@@ -10,13 +10,25 @@ using UnityEngine.UI;
 public class Boss1 : Character
 {
 
-    private Slider SilderHealth;
+    private Slider SliderHealthTop;
+    private Slider SliderHealthBottom;
+
+    private float topMoveSpeed;
+    private float bottomMoveSpeed;
+
+    private float lastHealth;
+
+    private float waitSliderHealthMove;
 
     public override void OnAwake()
     {
         HealthMax = new CharacterStat(500f);
         base.OnAwake();
-        SilderHealth = GameObject.Find("BossHealthBar").GetComponent<Slider>();
+        SliderHealthTop = GameObject.Find("BossHealthTop").GetComponent<Slider>();
+        SliderHealthBottom = GameObject.Find("BossHealthBottom").GetComponent<Slider>();
+
+        topMoveSpeed = .05f;
+        bottomMoveSpeed = .05f;
     }
 
     public override void AttackLand()
@@ -38,12 +50,34 @@ public class Boss1 : Character
         base.OnUpdate();
 
 
-        SilderHealth.value = base.Health / HealthMax.Final;
+        if (lastHealth != base.Health)
+            HealthChenged();
+
+        if (waitSliderHealthMove <= 0f)
+        {
+            SliderHealthTop.value = Mathf.MoveTowards(SliderHealthTop.value, base.Health / HealthMax.Final, topMoveSpeed * Time.deltaTime);
+            SliderHealthBottom.value = Mathf.MoveTowards(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomMoveSpeed * Time.deltaTime);
+        }
+        else
+            waitSliderHealthMove -= Time.deltaTime;
+    }
+
+    public void HealthChenged()
+    {
+        if ((float)SliderHealthTop.value > (float)(base.Health / HealthMax.Final))
+            SliderHealthTop.value = base.Health / HealthMax.Final;
+
+        if ((float)SliderHealthBottom.value < (float)(base.Health / HealthMax.Final))
+            SliderHealthBottom.value = base.Health / HealthMax.Final;
+
+        lastHealth = base.Health;
+
+        waitSliderHealthMove = .5f;
     }
 
     public override void Dead()
     {
-        SilderHealth.value = base.Health / HealthMax.Final;
+        SliderHealthBottom.value = base.Health / HealthMax.Final;
         base.Dead();
         AerutaDebug.i.ShowStatistics();
     }
