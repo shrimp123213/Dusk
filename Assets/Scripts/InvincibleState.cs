@@ -16,9 +16,13 @@ public class InvincibleState : MonoBehaviour
     [SerializeField]
     private Material material;
 
+    private bool showEffect;
+
     private void Start()
     {
         Renderer.skeleton.SetColor(Color.white);
+
+        showEffect = true;
     }
 
     private void Update()
@@ -44,15 +48,20 @@ public class InvincibleState : MonoBehaviour
             }
         }
 
-        if (InvincibleTime <= 0)
+        if (InvincibleTime <= 0 || !showEffect)
             Renderer.skeleton.SetColor(Color.white);
         else
             Renderer.skeleton.SetColor(material.color);
     }
 
-    public void Invincible()
+    public void Invincible(float _time = -1f)
     {
-        InvincibleTime = InvincibleTimeMax;
+        InvincibleTime = _time == -1f ? InvincibleTimeMax : _time;
         Interval = 0;
+    }
+
+    public void IsShowEffect(bool _showEffect)
+    {
+        showEffect = _showEffect;
     }
 }

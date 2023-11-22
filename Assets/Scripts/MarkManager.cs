@@ -30,7 +30,8 @@ public class MarkManager : MonoBehaviour
             index = markedTargets.Count - 1;
         }
 
-        markedTargets[index].MarkLevel++;
+        if (markedTargets[index].MarkLevel < MarkLevelSprites.Count())
+            markedTargets[index].MarkLevel++;
 
         markedTargets[index].Renderer.sprite = MarkLevelSprites[markedTargets[index].MarkLevel - 1];
     }

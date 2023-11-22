@@ -144,7 +144,7 @@ public class ActionPietaObj : ActionBaseObj
             {
                 triggeredTargetList.Add(pietaTarget);
                 Vector3 hitPoint = new Vector3(pietaTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
-                Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), pietaTarget.Collider2D.transform).transform;
+                Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.Euler(new Vector3(0, 0, -10)) : Quaternion.Euler(new Vector3(0, 180, -10)), pietaTarget.Collider2D.transform).transform;
                 slice.localScale *= pietaTarget.Collider2D.GetComponent<Character>().SliceMultiply;
 
                 //³y¦¨¶Ë®`
