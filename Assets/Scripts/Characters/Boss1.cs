@@ -77,7 +77,7 @@ public class Boss1 : Character
 
     public override void Dead()
     {
-        SliderHealthBottom.value = base.Health / HealthMax.Final;
+        SliderHealthTop.value = base.Health / HealthMax.Final;
         base.Dead();
         AerutaDebug.i.ShowStatistics();
     }

@@ -59,6 +59,10 @@ public class PlayerMain : Character
 
     public List<Image> Potions;
 
+    public GameObject HurtEffect;
+
+    public GameObject DoubleJumpEffect;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -386,6 +390,11 @@ public class PlayerMain : Character
             if (playerAct.FindAction("UI").WasPressedThisFrame())
             {
                 AerutaDebug.i.CloseUI();
+            }
+            if (playerAct.FindAction("MarkTrigger").WasPressedThisFrame())
+            {
+                //TryInput(InputKey.MarkTrigger);
+                MarkManager.i.TriggerAllMark(this);
             }
             //Charging = playerAct.FindAction("Burst").IsPressed();
         }

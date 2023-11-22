@@ -20,6 +20,7 @@ public class Character : MonoBehaviour, IHitable
     [HideInInspector]
     public Collider2D Collider;
 
+    public Vector2 PietaPos;
     public Vector2 MarkPos;
     public float SliceMultiply = 1f;
 
@@ -104,10 +105,6 @@ public class Character : MonoBehaviour, IHitable
     public bool isKnockback;
 
     public List<TimedLink> TimedLinks;
-
-    public GameObject HurtEffect;
-
-    public GameObject DoubleJumpEffect;
 
     public float Health
     {
@@ -451,7 +448,8 @@ public class Character : MonoBehaviour, IHitable
                 }
 
                 DoubleJumped = true;
-                Instantiate(DoubleJumpEffect, transform.position, Quaternion.identity, null);
+                if ((bool)Player)
+                    Instantiate(Player.DoubleJumpEffect, transform.position, Quaternion.identity, null);
             }
         }
         if (CanLongJump && !KeyJump)
@@ -583,10 +581,12 @@ public class Character : MonoBehaviour, IHitable
 
                 Player.Morph.Consume(Player.Morph.MorphProgress);
 
-                Instantiate(HurtEffect, transform.position, Quaternion.identity, transform);
+                Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlow(.5f, 0);
 
                 Player.InvincibleState.Invincible();
+
+                MarkManager.i.ClearMarkedTargets();
             }
 
             if (isActing && isActionInterrupted)

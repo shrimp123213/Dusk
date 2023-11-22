@@ -14,6 +14,7 @@ public class Contact : MonoBehaviour
 
     public Transform BossHealthBar;
     public TMP_Text BossName;
+    
     private float speed;
 
     void Start()
@@ -72,6 +73,8 @@ public class Contact : MonoBehaviour
 
             PlayerMain.i.StopMove();
             PlayerMain.i.CanInput = false;
+            
+            Camcam.i.Boss = AITree.transform;
         }
     }
 }

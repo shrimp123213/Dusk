@@ -12,7 +12,7 @@ using static Pieta;
 public class Pieta : MonoBehaviour
 {
     
-    private List<MarkedTarget> MarkedTargets;
+    private List<PietaTarget> PietaTargets;
 
     public GameObject HintPrefab;
     public Sprite[] HintSprites;
@@ -24,7 +24,7 @@ public class Pieta : MonoBehaviour
 
     private PlayerMain Player;
 
-    public List<MarkedTarget> CanPietaList;
+    public List<PietaTarget> CanPietaList;
     public Vector2 PietaEndDis;
 
     public Collider2D FarestTargetCollider2D;
@@ -33,8 +33,8 @@ public class Pieta : MonoBehaviour
     {
         i = this;
         Player = GetComponent<PlayerMain>();
-        MarkedTargets = new List<MarkedTarget>();
-        CanPietaList = new List<MarkedTarget>();
+        PietaTargets = new List<PietaTarget>();
+        CanPietaList = new List<PietaTarget>();
         PietaEndDis = Vector2.zero;
         FarestTargetCollider2D = null;
     }
@@ -54,13 +54,13 @@ public class Pieta : MonoBehaviour
 
     public SpriteRenderer Appear(Transform target, GameObject HintPrefab)
     {
-        return Instantiate(HintPrefab, target.position + (Vector3)target.GetComponent<Character>().MarkPos, Quaternion.identity, target).GetComponent<SpriteRenderer>();
+        return Instantiate(HintPrefab, target.position + (Vector3)target.GetComponent<Character>().PietaPos, Quaternion.identity, target).GetComponent<SpriteRenderer>();
     }
 
-    public void Disappear(MarkedTarget markedTarget)
+    public void Disappear(PietaTarget pietaTarget)
     {
-        MarkedTargets.Remove(markedTarget);
-        Destroy(markedTarget.Hint.gameObject);
+        PietaTargets.Remove(pietaTarget);
+        Destroy(pietaTarget.Hint.gameObject);
     }
 
     public void MarkNearbyEnemys()
@@ -92,45 +92,45 @@ public class Pieta : MonoBehaviour
         Collider2D[] far = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * farDis, 0f, LayerMask.GetMask("Character"));
         Collider2D[] near = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * nearDis, 0f, LayerMask.GetMask("Character"));
 
-        //把沒記錄過的加入MarkTargets
+        //把沒記錄過的加入PietaTargets
         foreach (Collider2D target in far)
         {
             if (target == Player.Collider)
                 continue;
 
             bool hasTarget = false;
-            foreach (MarkedTarget markedTarget in MarkedTargets)
+            foreach (PietaTarget pietaTarget in PietaTargets)
             {
-                if (markedTarget.Collider2D == target) 
+                if (pietaTarget.Collider2D == target) 
                 {
                     hasTarget = true;
                     break;
                 }
             }
-            if(!hasTarget) MarkedTargets.Add(new MarkedTarget(target, Appear(target.transform, HintPrefab)));
+            if(!hasTarget) PietaTargets.Add(new PietaTarget(target, Appear(target.transform, HintPrefab)));
         }
 
         RaycastHit2D[] FacingTargets = CanPietaRange(nearDis / 2);
 
-        List<MarkedTarget> disappearList = new List<MarkedTarget>();
+        List<PietaTarget> disappearList = new List<PietaTarget>();
 
         //把離開範圍內的標記刪除、更新標記圖示
-        foreach (MarkedTarget markedTarget in MarkedTargets)
+        foreach (PietaTarget pietaTarget in PietaTargets)
         {
-            if (!far.Contains(markedTarget.Collider2D))
+            if (!far.Contains(pietaTarget.Collider2D))
             {
-                disappearList.Add(markedTarget);
+                disappearList.Add(pietaTarget);
                 continue;
             }
 
-            if (near.Contains(markedTarget.Collider2D))
+            if (near.Contains(pietaTarget.Collider2D))
             {
                 bool Facing = false;
                 if (FacingTargets.Length > 1)//不只射到自己
                 {
                     foreach (RaycastHit2D FacingTarget in FacingTargets)
                     {
-                        if (FacingTarget.collider == markedTarget.Collider2D)
+                        if (FacingTarget.collider == pietaTarget.Collider2D)
                         {
                             Facing = true;
                             break;
@@ -140,35 +140,35 @@ public class Pieta : MonoBehaviour
 
                 if (Facing)
                     //可觸發
-                    markedTarget.Hint.sprite = HintSprites[2];
+                    pietaTarget.Hint.sprite = HintSprites[2];
                 else
                     //近
-                    markedTarget.Hint.sprite = HintSprites[1];
+                    pietaTarget.Hint.sprite = HintSprites[1];
             }
             else
             {
                 //遠
-                markedTarget.Hint.sprite = HintSprites[0];
+                pietaTarget.Hint.sprite = HintSprites[0];
             }
         }
 
-        foreach (MarkedTarget markedTarget in disappearList)
+        foreach (PietaTarget pietaTarget in disappearList)
         {
-            Disappear(markedTarget);
+            Disappear(pietaTarget);
         }
     }
 
     public bool CheckPietaAttack(Character _m)
     {
-        CanPietaList = new List<MarkedTarget>();
+        CanPietaList = new List<PietaTarget>();
 
         //取所有可聖殤目標
-        foreach (MarkedTarget markedTarget in MarkedTargets)
+        foreach (PietaTarget pietaTarget in PietaTargets)
         {
-            if (markedTarget.Hint.sprite == HintSprites[2])
+            if (pietaTarget.Hint.sprite == HintSprites[2])
             {
-                markedTarget.SlicePos = markedTarget.Collider2D.transform.position;
-                CanPietaList.Add(markedTarget);
+                pietaTarget.SlicePos = pietaTarget.Collider2D.transform.position;
+                CanPietaList.Add(pietaTarget);
             }
         }
 
@@ -180,13 +180,13 @@ public class Pieta : MonoBehaviour
 
         //取最遠可聖殤目標
         float dis = 0;
-        foreach (MarkedTarget markedTarget in CanPietaList)
+        foreach (PietaTarget pietaTarget in CanPietaList)
         {
-            float newDis = Vector2.Distance(Player.transform.position, markedTarget.Collider2D.transform.position);
+            float newDis = Vector2.Distance(Player.transform.position, pietaTarget.Collider2D.transform.position);
             if (dis < newDis) 
             {
                 dis = newDis;
-                FarestTargetCollider2D = markedTarget.Collider2D;
+                FarestTargetCollider2D = pietaTarget.Collider2D;
             }
         }
 
@@ -196,7 +196,7 @@ public class Pieta : MonoBehaviour
 
 }
 
-public class MarkedTarget
+public class PietaTarget
 {
     public Collider2D Collider2D;
 
@@ -204,7 +204,7 @@ public class MarkedTarget
 
     public Vector2 SlicePos;
 
-    public MarkedTarget(Collider2D _collider2D, SpriteRenderer _Hint = null)
+    public PietaTarget(Collider2D _collider2D, SpriteRenderer _Hint = null)
     {
         Collider2D = _collider2D;
         Hint = _Hint;

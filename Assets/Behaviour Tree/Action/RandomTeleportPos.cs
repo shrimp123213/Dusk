@@ -16,28 +16,46 @@ public class RandomTeleportPos : EnemyActionBase
     public float LowestX;
 
     public bool Local;
+    public bool NotRamdom;
 
     public override void OnStart()
     {
         float selfY = this.transform.position.y;
         float selfX = this.transform.position.x;
         float targetX = Target.Value.transform.position.x;
-        
-        LowestX = (targetX > 0) ? LowestX : -LowestX ;
-        
-        if (!Local)
+
+        LowestX = (targetX > 0) ? LowestX : -LowestX;
+
+        if (!NotRamdom)
         {
-            RandomPos = new Vector2(Random.Range(MinX+LowestX, MaxX), selfY);
+            if (!Local)
+            {
+                RandomPos = new Vector2(Random.Range(MinX + LowestX, MaxX), selfY);
+            }
+            else
+            {
+                RandomPos = new Vector2(Random.Range(LowestX + targetX, MaxX), selfY);
+
+                if (LowestX + targetX > MaxX || LowestX + targetX < MinX)
+                {
+                    RandomPos.x = targetX - LowestX;
+                }
+            }
         }
         else
         {
-            RandomPos = new Vector2(Random.Range(LowestX+targetX, MaxX), selfY);
+            RandomPos = new Vector2(LowestX, selfY);
             
-            if (LowestX+targetX >= MaxX || LowestX+targetX <= MinX)
+            if (selfX + LowestX > MaxX)
             {
-                RandomPos.x = targetX - LowestX;
+                RandomPos.x = MinX;
+            }
+            else if(selfX + LowestX < MinX)
+            {
+                RandomPos.x = MaxX;
             }
         }
+        
         Debug.Log(this.SelfCharacter.Value.transform.position);
         this.SelfCharacter.Value.TeleportKeyReference = this.RandomPos;
         Debug.Log(RandomPos);

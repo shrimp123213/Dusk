@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 5045045080964243726}
   - component: {fileID: 5045045080964243724}
   - component: {fileID: 5045045080964243722}
+  - component: {fileID: 20331607765208216}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -322,6 +323,7 @@ MonoBehaviour:
   Ani: {fileID: 0}
   Rigid: {fileID: 0}
   Collider: {fileID: 0}
+  PietaPos: {x: 0, y: 0}
   MarkPos: {x: 0, y: 1.25}
   SliceMultiply: 0
   SpeedFactor: 1
@@ -355,15 +357,13 @@ MonoBehaviour:
   OnLadder: 0
   isKnockback: 0
   TimedLinks: []
-  HurtEffect: {fileID: 678518315324238586, guid: e284d30a886628249a232b460d2f1312, type: 3}
-  DoubleJumpEffect: {fileID: 4206865383206891496, guid: 39f14e62ec9d5824d82f94dfcb6f0a0e, type: 3}
   inputActionAsset: {fileID: -944628639613478452, guid: 566886060a401fb41bba845ef3148021, type: 3}
   Morph: {fileID: 0}
   EvadeState: {fileID: 0}
   InvincibleState: {fileID: 0}
   shockWaveManager: {fileID: 0}
   CanAttack: 0
-  RestrictInput: 010000000200000003000000040000000500000006000000070000000800000009000000
+  RestrictInput: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   Platform: {fileID: 0}
   CanInput: 1
   DashCooldown: 0
@@ -371,6 +371,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  HurtEffect: {fileID: 678518315324238586, guid: e284d30a886628249a232b460d2f1312, type: 3}
+  DoubleJumpEffect: {fileID: 4206865383206891496, guid: 39f14e62ec9d5824d82f94dfcb6f0a0e, type: 3}
 --- !u!114 &1254543844293297468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,9 +453,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MorphProgressFactor:
   - 1
-  - 0.6
-  - 0.4
-  - 0.4
+  - 1
+  - 1
+  - 1
   MorphProgress: 0
   MorphCount: 3
   MorphMax: 3
@@ -514,11 +516,28 @@ MonoBehaviour:
   HintSprites:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 21300468, guid: 0bbb4973cb6e355408c55e6857cbc224, type: 3}
+  - {fileID: 21300098, guid: 0bbb4973cb6e355408c55e6857cbc224, type: 3}
   farDis: 10
   nearDis: 8
   PietaEndDis: {x: 0, y: 0}
   FarestTargetCollider2D: {fileID: 0}
+--- !u!114 &20331607765208216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254543844293297419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aeb78f9a73a29f40a8a25a0019583d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkLevelSprites:
+  - {fileID: 21300176, guid: 0bbb4973cb6e355408c55e6857cbc224, type: 3}
+  - {fileID: 21300054, guid: 0bbb4973cb6e355408c55e6857cbc224, type: 3}
+  - {fileID: 21300124, guid: 0bbb4973cb6e355408c55e6857cbc224, type: 3}
+  MarkTriggerEffect: {fileID: 8718073841007454741, guid: 92f54b523da8e704e9f767d1d0f86efa, type: 3}
 --- !u!1 &1254543844355914231
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +614,7 @@ MonoBehaviour:
   shadowDistanceMin: 0.5
   shadowDistanceMax: 1
   shadowTranslucency: 0
-  maskType: 7
+  maskType: 1
   maskLit: 1
   maskPivot: 0
   maskLayer: 1
@@ -611,7 +630,7 @@ MonoBehaviour:
     spriteRenderer: {fileID: 0}
   mainShape:
     shadowType: 1
-    maskType: 7
+    maskType: 1
     maskPivot: 0
     transform: {fileID: 1254543844355914224}
 --- !u!23 &5045045079028308476

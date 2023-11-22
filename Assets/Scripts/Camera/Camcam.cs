@@ -8,9 +8,18 @@ public class Camcam : MonoBehaviour
 
     public Transform Target;
 
+    public Transform Boss;
+
     public Vector3 PosOverride;
 
     public bool UseOverride;
+
+    public bool ChangeFOV;
+    
+    [Header("攝影機縮放控制")]
+    public float minDistance = 5f; // 最小距離
+    public float maxDistance = 10f; // 最大距離
+    public float zoomSpeed = 5f; // 縮放速度
 
     private Vector2 velo;
 
@@ -48,6 +57,24 @@ public class Camcam : MonoBehaviour
                 if (newPos.x != float.NaN && newPos.y != float.NaN && newPos.z != float.NaN)
                     transform.position = newPos;
             }
+            if(ChangeFOV)
+                SetFOV();
+            
+        }
+    }
+    
+    public void SetFOV()
+    {
+        if (Boss != null)
+        {
+            // 計算玩家和BOSS之間的距離
+            float distance = Vector3.Distance(Target.position, Boss.position);
+
+            // 將距離映射到縮放範圍內
+            float targetSize = Mathf.Clamp(distance, minDistance, maxDistance);
+
+            // 平滑地改變攝影機的大小
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
         }
     }
 }

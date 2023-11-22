@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using Unity.VisualScripting;
 
 public class EnemyStartAction : EnemyActionBase
 {
@@ -16,6 +17,7 @@ public class EnemyStartAction : EnemyActionBase
     
     private bool Fail;
     
+    
     public override void OnStart()
     {
         this.Fail=(this.SelfCharacter.Value.Airbrone || this.SelfCharacter.Value.isDead);
@@ -25,6 +27,7 @@ public class EnemyStartAction : EnemyActionBase
         }
         if(CheckFacing)
             this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x - this.transform.position.x> 0) ? 1 : -1;
+        
     }
 
     public override TaskStatus OnUpdate()
