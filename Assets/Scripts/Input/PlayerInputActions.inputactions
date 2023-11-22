@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MarkTrigger",
+                    "type": "Button",
+                    "id": "fbcdf9db-e0d7-424e-888e-4cbf97049e59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -318,6 +327,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "UI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7471cdda-465b-4d37-9e04-fd492c8b9939",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "MarkTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "97217fc2-ed08-4255-977a-13b09f03b6fd",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MarkTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

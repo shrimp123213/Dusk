@@ -10,4 +10,5 @@ public enum InputKey
     Pieta,
     Heal,
     UI,
+    MarkTrigger,
 }

@@ -90,9 +90,9 @@ public class ActionPietaObj : ActionBaseObj
         {
             if (hit.collider != _m.Collider)
             {
-                MarkedTarget markedTarget = new MarkedTarget(hit.collider);
-                markedTarget.SlicePos = markedTarget.Collider2D.transform.position;
-                Pieta.i.CanPietaList.Add(markedTarget);
+                PietaTarget pietaTarget = new PietaTarget(hit.collider);
+                pietaTarget.SlicePos = pietaTarget.Collider2D.transform.position;
+                Pieta.i.CanPietaList.Add(pietaTarget);
             }
         }
 
@@ -105,28 +105,28 @@ public class ActionPietaObj : ActionBaseObj
 
     public override void ProcessAction(Character _m)
     {
-        List<MarkedTarget> triggeredTargetList = new List<MarkedTarget>();
-        //foreach (MarkedTarget markedTarget in Pieta.i.CanPietaList)經過就觸發
+        List<PietaTarget> triggeredTargetList = new List<PietaTarget>();
+        //foreach (PietaTarget pietaTarget in Pieta.i.CanPietaList)經過就觸發
         //{
-        //    if (_m.Facing * (markedTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
+        //    if (_m.Facing * (pietaTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
         //    {
-        //        triggeredTargetList.Add(markedTarget);
-        //        Vector3 hitPoint = new Vector3(markedTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
-        //        Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), markedTarget.Collider2D.transform).transform;
-        //        slice.localScale *= markedTarget.Collider2D.GetComponent<Character>().SliceMultiply;
+        //        triggeredTargetList.Add(pietaTarget);
+        //        Vector3 hitPoint = new Vector3(pietaTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
+        //        Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), pietaTarget.Collider2D.transform).transform;
+        //        slice.localScale *= pietaTarget.Collider2D.GetComponent<Character>().SliceMultiply;
         //
         //        //造成傷害
-        //        bool num = markedTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !markedTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-        //        _m.RegisterHit(markedTarget.Collider2D.gameObject);
+        //        bool num = pietaTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !pietaTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+        //        _m.RegisterHit(pietaTarget.Collider2D.gameObject);
         //        if (num)
         //        {
         //            _m.AttackLand();
         //            //CameraManager.i.GenerateImpulse(DamageRatio);
-        //            if (markedTarget.Collider2D.gameObject.CompareTag("Breakable"))
+        //            if (pietaTarget.Collider2D.gameObject.CompareTag("Breakable"))
         //            {
         //                return;
         //            }
-        //            Character component = markedTarget.Collider2D.GetComponent<Character>();
+        //            Character component = pietaTarget.Collider2D.GetComponent<Character>();
         //            HitSuccess(_m, component, IHitable, hitPoint);
         //            float y = 0f;
         //            if (SuckEffect)
@@ -140,25 +140,25 @@ public class ActionPietaObj : ActionBaseObj
         //}
         if (Pieta.i.CanPietaList.Count > 0 && _m.Facing * (Pieta.i.CanPietaList[Pieta.i.CanPietaList.Count - 1].SlicePos.x - _m.transform.position.x) <= 0f) //經過最後一隻才觸發
         {
-            foreach (MarkedTarget markedTarget in Pieta.i.CanPietaList)
+            foreach (PietaTarget pietaTarget in Pieta.i.CanPietaList)
             {
-                triggeredTargetList.Add(markedTarget);
-                Vector3 hitPoint = new Vector3(markedTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
-                Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), markedTarget.Collider2D.transform).transform;
-                slice.localScale *= markedTarget.Collider2D.GetComponent<Character>().SliceMultiply;
+                triggeredTargetList.Add(pietaTarget);
+                Vector3 hitPoint = new Vector3(pietaTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
+                Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), pietaTarget.Collider2D.transform).transform;
+                slice.localScale *= pietaTarget.Collider2D.GetComponent<Character>().SliceMultiply;
 
                 //造成傷害
-                bool num = markedTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !markedTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(markedTarget.Collider2D.gameObject);
+                bool num = pietaTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !pietaTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+                _m.RegisterHit(pietaTarget.Collider2D.gameObject);
                 if (num)
                 {
                     _m.AttackLand();
                     //CameraManager.i.GenerateImpulse(DamageRatio);
-                    if (markedTarget.Collider2D.gameObject.CompareTag("Breakable"))
+                    if (pietaTarget.Collider2D.gameObject.CompareTag("Breakable"))
                     {
                         return;
                     }
-                    Character component = markedTarget.Collider2D.GetComponent<Character>();
+                    Character component = pietaTarget.Collider2D.GetComponent<Character>();
                     HitSuccess(_m, component, IHitable, hitPoint);
                     float y = 0f;
                     if (SuckEffect)
@@ -174,9 +174,9 @@ public class ActionPietaObj : ActionBaseObj
 
         if (triggeredTargetList.Count > 0)
         {
-            foreach (MarkedTarget markedTarget in triggeredTargetList)
+            foreach (PietaTarget pietaTarget in triggeredTargetList)
             {
-                Pieta.i.CanPietaList.Remove(markedTarget);
+                Pieta.i.CanPietaList.Remove(pietaTarget);
             }
         }
 
@@ -202,6 +202,8 @@ public class ActionPietaObj : ActionBaseObj
         Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
         
         AerutaDebug.i.Feedback.PietaCount++;
+
+        MarkManager.i.MarkLevelUp(_hitted);
     }
 
     public override void EndAction(Character _m)
