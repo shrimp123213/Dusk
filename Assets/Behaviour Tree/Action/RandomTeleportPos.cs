@@ -12,19 +12,23 @@ public class RandomTeleportPos : EnemyActionBase
     
     public float MinX;
     public float MaxX;
-
+    public float TeleportY = 0f;
+    
     public float LowestX;
+    public float HighestX = 13f;
 
     public bool Local;
     public bool NotRamdom;
+    public bool TraceTarget;
 
     public override void OnStart()
     {
         float selfY = this.transform.position.y;
         float selfX = this.transform.position.x;
         float targetX = Target.Value.transform.position.x;
-
-        LowestX = (targetX > 0) ? LowestX : -LowestX;
+        
+        
+        LowestX = (targetX > 0) ? Mathf.Abs(LowestX) : -LowestX;
 
         if (!NotRamdom)
         {
@@ -34,25 +38,33 @@ public class RandomTeleportPos : EnemyActionBase
             }
             else
             {
-                RandomPos = new Vector2(Random.Range(LowestX + targetX, MaxX), selfY);
+                RandomPos = new Vector2(Random.Range(LowestX + targetX, HighestX + targetX), selfY);
 
-                if (LowestX + targetX > MaxX || LowestX + targetX < MinX)
+                if (RandomPos.x > MaxX || RandomPos.x < MinX)
                 {
-                    RandomPos.x = targetX - LowestX;
+                    RandomPos.x = targetX - Random.Range(LowestX, MaxX);
+                    Mathf.Clamp(RandomPos.x, MinX, MaxX);
                 }
             }
         }
         else
         {
-            RandomPos = new Vector2(LowestX, selfY);
-            
-            if (selfX + LowestX > MaxX)
+            if (TraceTarget)
             {
-                RandomPos.x = MinX;
+                RandomPos = new Vector2(targetX, selfY + TeleportY);
             }
-            else if(selfX + LowestX < MinX)
+            else
             {
-                RandomPos.x = MaxX;
+                RandomPos = new Vector2(LowestX, selfY);
+
+                if (selfX + LowestX > MaxX)
+                {
+                    RandomPos.x = MinX;
+                }
+                else if (selfX + LowestX < MinX)
+                {
+                    RandomPos.x = MaxX;
+                }
             }
         }
         
