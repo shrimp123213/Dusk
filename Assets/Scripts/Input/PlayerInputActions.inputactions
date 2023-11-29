@@ -78,7 +78,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MarkTrigger",
+                    "name": "UseButterfly",
                     "type": "Button",
                     "id": "fbcdf9db-e0d7-424e-888e-4cbf97049e59",
                     "expectedControlType": "Button",
@@ -333,11 +333,11 @@
                 {
                     "name": "",
                     "id": "7471cdda-465b-4d37-9e04-fd492c8b9939",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "MarkTrigger",
+                    "action": "UseButterfly",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -348,7 +348,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "MarkTrigger",
+                    "action": "UseButterfly",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

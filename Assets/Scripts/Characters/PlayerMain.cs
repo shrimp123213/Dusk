@@ -63,6 +63,8 @@ public class PlayerMain : Character
 
     public GameObject DoubleJumpEffect;
 
+    public Vector2 ButterflyPos;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -391,10 +393,10 @@ public class PlayerMain : Character
             {
                 AerutaDebug.i.CloseUI();
             }
-            if (playerAct.FindAction("MarkTrigger").WasPressedThisFrame())
+            if (playerAct.FindAction("UseButterfly").WasPressedThisFrame())
             {
-                //TryInput(InputKey.MarkTrigger);
-                MarkManager.i.TriggerAllMark(this);
+                //TryInput(InputKey.UseButterfly);
+                MarkManager.i.StartMove();
             }
             //Charging = playerAct.FindAction("Burst").IsPressed();
         }

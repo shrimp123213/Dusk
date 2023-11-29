@@ -15,10 +15,41 @@ public class MarkManager : MonoBehaviour
 
     public GameObject MarkTriggerEffect;
 
+
+
+    private Animator Ani;
+
+    [SerializeField]
+    private float speedStart;
+    private float speed;
+
+    [SerializeField]
+    private float tolerance;
+    private float targetDistance;
+
+    private bool onTargetPos;
+    private Vector3 targetPos;
+
+    public Transform Butterfly;
+    private enum targetPosState
+    {
+        PlayerPos,
+        PlayerTransform,
+        PlayerButterflyPos,
+    }
+    private targetPosState currentState;
+
     private void Awake()
     {
         i = this;
         markedTargets = new List<MarkedTarget>();
+
+        Ani = GetComponentInChildren<Animator>();
+        speed = speedStart;
+
+        Butterfly.position = PlayerMain.i.transform.position + (Vector3)PlayerMain.i.ButterflyPos;
+        Butterfly.parent = PlayerMain.i.transform;
+        onTargetPos = true;
     }
 
     public void MarkLevelUp(Character _hitted)
@@ -61,6 +92,85 @@ public class MarkManager : MonoBehaviour
         }
 
         ClearMarkedTargets();
+    }
+
+
+    private void Update()
+    {
+        if (!onTargetPos)
+        {
+            MoveToTarget();
+        }
+    }
+
+    public void StartMove()
+    {
+        if (onTargetPos)
+        {
+            onTargetPos = false;
+            Butterfly.parent = null;
+            if (currentState == targetPosState.PlayerPos)
+            {
+                targetPos = PlayerMain.i.transform.position;
+            }
+        }
+        else
+        {
+            if (currentState == targetPosState.PlayerPos)
+            {
+                speed = speedStart;
+                Butterfly.parent = null;
+                currentState = targetPosState.PlayerTransform;
+            }
+            else if (currentState == targetPosState.PlayerButterflyPos)
+            {
+                speed = speedStart;
+                Butterfly.parent = null;
+                targetPos = PlayerMain.i.transform.position;
+                currentState = targetPosState.PlayerPos;
+            }
+        }
+
+
+        
+
+    }
+
+    private void MoveToTarget()
+    {
+        if (currentState == targetPosState.PlayerTransform)
+            targetPos = PlayerMain.i.transform.position;
+        else if (currentState == targetPosState.PlayerButterflyPos)
+            targetPos = PlayerMain.i.transform.position + (Vector3)PlayerMain.i.ButterflyPos;
+
+        Butterfly.position = Vector2.MoveTowards(Butterfly.position, targetPos, speed * Time.deltaTime);
+        //speed -= Time.deltaTime * 100;
+
+        targetDistance = Vector3.Distance(Butterfly.position, targetPos);
+
+        if (targetDistance < tolerance)
+        {
+            Butterfly.position = targetPos;
+
+            speed = speedStart;
+
+            if (currentState == targetPosState.PlayerPos)
+            {
+                onTargetPos = true;
+                currentState = targetPosState.PlayerTransform;
+            }
+            else if (currentState == targetPosState.PlayerTransform) 
+            {
+                StartMove();
+                Butterfly.parent = PlayerMain.i.transform;
+                currentState = targetPosState.PlayerButterflyPos;
+            }
+            else if (currentState == targetPosState.PlayerButterflyPos)
+            {
+                onTargetPos = true;
+                currentState = targetPosState.PlayerPos;
+            }
+        }
     }
 }
 

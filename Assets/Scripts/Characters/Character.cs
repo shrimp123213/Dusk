@@ -579,7 +579,7 @@ public class Character : MonoBehaviour, IHitable
                 if (_damage.Type == DamageType.Collision)
                     AerutaDebug.i.Feedback.CollisionCount++;
 
-                Player.Morph.Consume(Player.Morph.MorphProgress);
+                //Player.Morph.Consume(Player.Morph.MorphProgress);
 
                 Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlow(.5f, 0);

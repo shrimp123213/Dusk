@@ -100,7 +100,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MarkTrigger"",
+                    ""name"": ""UseButterfly"",
                     ""type"": ""Button"",
                     ""id"": ""fbcdf9db-e0d7-424e-888e-4cbf97049e59"",
                     ""expectedControlType"": ""Button"",
@@ -355,11 +355,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7471cdda-465b-4d37-9e04-fd492c8b9939"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""MarkTrigger"",
+                    ""action"": ""UseButterfly"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -370,7 +370,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""MarkTrigger"",
+                    ""action"": ""UseButterfly"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -412,7 +412,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         m_Player_UI = m_Player.FindAction("UI", throwIfNotFound: true);
-        m_Player_MarkTrigger = m_Player.FindAction("MarkTrigger", throwIfNotFound: true);
+        m_Player_UseButterfly = m_Player.FindAction("UseButterfly", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -482,7 +482,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
     private readonly InputAction m_Player_UI;
-    private readonly InputAction m_Player_MarkTrigger;
+    private readonly InputAction m_Player_UseButterfly;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -495,7 +495,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputAction @UI => m_Wrapper.m_Player_UI;
-        public InputAction @MarkTrigger => m_Wrapper.m_Player_MarkTrigger;
+        public InputAction @UseButterfly => m_Wrapper.m_Player_UseButterfly;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -529,9 +529,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started += instance.OnUI;
             @UI.performed += instance.OnUI;
             @UI.canceled += instance.OnUI;
-            @MarkTrigger.started += instance.OnMarkTrigger;
-            @MarkTrigger.performed += instance.OnMarkTrigger;
-            @MarkTrigger.canceled += instance.OnMarkTrigger;
+            @UseButterfly.started += instance.OnUseButterfly;
+            @UseButterfly.performed += instance.OnUseButterfly;
+            @UseButterfly.canceled += instance.OnUseButterfly;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -560,9 +560,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started -= instance.OnUI;
             @UI.performed -= instance.OnUI;
             @UI.canceled -= instance.OnUI;
-            @MarkTrigger.started -= instance.OnMarkTrigger;
-            @MarkTrigger.performed -= instance.OnMarkTrigger;
-            @MarkTrigger.canceled -= instance.OnMarkTrigger;
+            @UseButterfly.started -= instance.OnUseButterfly;
+            @UseButterfly.performed -= instance.OnUseButterfly;
+            @UseButterfly.canceled -= instance.OnUseButterfly;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -608,6 +608,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnUI(InputAction.CallbackContext context);
-        void OnMarkTrigger(InputAction.CallbackContext context);
+        void OnUseButterfly(InputAction.CallbackContext context);
     }
 }
