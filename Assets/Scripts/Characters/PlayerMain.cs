@@ -396,7 +396,7 @@ public class PlayerMain : Character
             if (playerAct.FindAction("UseButterfly").WasPressedThisFrame())
             {
                 //TryInput(InputKey.UseButterfly);
-                MarkManager.i.StartMove();
+                ButterflyManager.i.StartMove();
             }
             //Charging = playerAct.FindAction("Burst").IsPressed();
         }
