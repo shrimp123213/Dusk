@@ -203,7 +203,7 @@ public class ActionPietaObj : ActionBaseObj
         
         AerutaDebug.i.Feedback.PietaCount++;
 
-        MarkManager.i.MarkLevelUp(_hitted);
+        MarkManager.i.TriggerHittedMark(_m, _hitted);
     }
 
     public override void EndAction(Character _m)

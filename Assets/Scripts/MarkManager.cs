@@ -64,7 +64,32 @@ public class MarkManager : MonoBehaviour
         ClearMarkedTargets();
     }
 
+    public void TriggerHittedMark(Character _m, Character _hitted)
+    {
+        foreach (MarkedTarget i in markedTargets)
+        {
+            if (i.Target == _hitted)
+            {
+                Instantiate(MarkTriggerEffect, i.Renderer.transform.position, Quaternion.identity);
 
+                int factor = 0;
+                if (i.MarkLevel == 1)
+                    factor = 1;
+                else if (i.MarkLevel == 2)
+                    factor = 3;
+                else if (i.MarkLevel == 3)
+                    factor = 6;
+
+                bool num = i.Target.TakeDamage(new Damage(_m.Attack.Final * factor, DamageType.Normal), .25f, _m, !i.Target.ImmuneInterruptAction);
+                if (num) i.Target.TakeForce(Vector2.zero, Vector2.zero);
+
+                Destroy(i.Renderer.gameObject);
+                markedTargets.Remove(i);
+
+                break;
+            }
+        }
+    }
 }
 
 public class MarkedTarget
