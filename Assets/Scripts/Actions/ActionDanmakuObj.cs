@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ActionDanmaku", menuName = "Actions/Danmaku")]
 public class ActionDanmakuObj : ActionBaseObj
 {
-    public GameObject prefabBullet;
+    public DanmakuBaseObj danmakuBaseObj;
+    
     public int shootKey;
     
     public override void ProcessAction(Character _m)
@@ -31,11 +32,30 @@ public class ActionDanmakuObj : ActionBaseObj
     private IEnumerator SpawnBullet(Character _m)
     {
         int num;
-        for (int i = 0; i < 3; i = num + 1)
+        for (int i = 0; i < danmakuBaseObj.shotsPerInterval; i = num + 1)
         {
-            Instantiate<GameObject>(this.prefabBullet, _m.transform.position, Quaternion.identity);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
-            yield return new WaitForSeconds(0.1f);
+            foreach (var data in danmakuBaseObj.bulletSpawnData)
+            {
+                Instantiate<GameObject>(danmakuBaseObj.bulletPrefab,danmakuBaseObj.SetBulletSpawnPos(_m, data), data.rotation);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
+                
+            }
+            
+            /*switch (bulletSpawnData.spawnType)
+            {
+                case SpawnType.Base:
+                    Instantiate<GameObject>(danmakuBaseObj.bulletPrefab, _m.transform.position, Quaternion.identity);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
+                    break;
+                case SpawnType.Global:
+                    Instantiate<GameObject>(danmakuBaseObj.bulletPrefab, bulletSpawnData.position, Quaternion.identity);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
+                    break;
+                case SpawnType.Screen:
+                    Instantiate<GameObject>(danmakuBaseObj.bulletPrefab, Camera.main.ScreenToWorldPoint(bulletSpawnData.position), Quaternion.identity);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
+                    break;*/
+            
+            yield return new WaitForSeconds(danmakuBaseObj.timeBetweenShots);
             num = i;
         }
     }
+    
+    
 }
