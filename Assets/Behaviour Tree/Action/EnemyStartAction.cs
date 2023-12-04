@@ -15,6 +15,8 @@ public class EnemyStartAction : EnemyActionBase
 
     public bool CheckFacing;
     
+    public int Facing;
+    
     private bool Fail;
     
     
@@ -26,7 +28,7 @@ public class EnemyStartAction : EnemyActionBase
             this.SelfCharacter.Value.StartAction(this.Action);
         }
         if(CheckFacing)
-            this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x - this.transform.position.x> 0) ? 1 : -1;
+            this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x > this.transform.position.x) ? 1 : -1;
         
     }
 
@@ -49,5 +51,8 @@ public class EnemyStartAction : EnemyActionBase
         {
             this.SelfCharacter.Value.Facing *= -1;
         }
+        if(CheckFacing)
+            this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x > this.transform.position.x) ? 1 : -1;
+
     }
 }

@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 992cf2ba14bb3db4c84a0be3cca794b9, type: 3}
-  m_Name: boss1-1_AC_warpout_wo
+  m_Script: {fileID: 11500000, guid: b642b81af3900234484470c6cec47567, type: 3}
+  m_Name: ActionDanmaku
   m_EditorClassIdentifier: 
-  Id: boss1-1_AC_warpout_wo
-  DisplayName: boss1-1_AC_warpout_wo
-  AnimationKey: boss1-1_AC_warpout_wo
+  Id: 
+  DisplayName: 
+  AnimationKey: 
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0
@@ -22,15 +22,11 @@ MonoBehaviour:
   AttackSpots: []
   HitMax: 0
   SuckEffect: 0
-  CanInterruptAction: 1
+  CanInterruptAction: 0
   CanTriggerMark: 0
   Links: []
   Moves: []
-  Toggles:
-  - KeyFrame: 0
-    IsActive: 0
-  - KeyFrame: 70
-    IsActive: 1
+  Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
@@ -43,12 +39,14 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 0101
+  IsTriggered: 
   IsTeleported: 
   IsLightAttack: 0
   IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0
-  CanChangeFacingWhenActing: 1
+  CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
+  danmakuBaseObj: {fileID: 11400000, guid: 61767b428c262b6499a052b1c89c719b, type: 2}
+  shootKey: 0

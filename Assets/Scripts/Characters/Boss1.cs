@@ -23,6 +23,7 @@ public class Boss1 : Character
     public override void OnAwake()
     {
         HealthMax = new CharacterStat(500f);
+        Speed = new CharacterStat(3f);
         base.OnAwake();
         SliderHealthTop = GameObject.Find("BossHealthTop").GetComponent<Slider>();
         SliderHealthBottom = GameObject.Find("BossHealthBottom").GetComponent<Slider>();
