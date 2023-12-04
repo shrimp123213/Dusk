@@ -23,7 +23,7 @@ MonoBehaviour:
   - KeyFrameFrom: 87
     KeyFrameEnd: 93
     Offset: {x: 4, y: 1, z: 0}
-    Range: {x: 8, y: 3}
+    Range: {x: 7, y: 3}
   - KeyFrameFrom: 151
     KeyFrameEnd: 158
     Offset: {x: -3, y: 2, z: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 0101
+  IsTriggered: 0100
   IsTeleported: 
   IsLightAttack: 0
   IsHeavyAttack: 0
