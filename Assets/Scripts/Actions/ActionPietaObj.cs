@@ -21,12 +21,12 @@ public class ActionPietaObj : ActionBaseObj
             {
                 ActionPeformState actionState = _m.ActionState;
 
-                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame;
+                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame * actionState.Clip.length;
                 float Duration = 0;
                 if (movement.EndEvadeFrame == -1)
-                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
                 else
-                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
                 Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true; 

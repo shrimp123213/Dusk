@@ -142,7 +142,7 @@ public class PlayerMain : Character
         //}
         if (Inputs.Contains(InputKey.Dash))
         {
-            if (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta")
+            if (!base.isActing || (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta"))
             {
                 if (Morph.MorphCount > 0||true)//閃避更新
                 {
@@ -154,25 +154,14 @@ public class PlayerMain : Character
                     StartAction(ActionLoader.i.Actions["Dash"]);
 
                     //Morph.Consume();
-                    CanDash = false;
+                    //CanDash = false;
 
                     Inputs.Clear();
                 }
                 else
                 {
-                    Inputs.Clear();
+                    Inputs.Remove(InputKey.Dash);
                 }
-                return;
-            }
-            if (CanDash)
-            {
-                CanDash = false;
-
-                CanAttack = true;
-
-                StartAction(ActionLoader.i.Actions["Dash"]);
-
-                Inputs.Clear();
                 return;
             }
         }
@@ -234,14 +223,14 @@ public class PlayerMain : Character
     {
         base.OnEvading();
         //AerutaDebug.i.CallEffect(2);
-        if (base.isActing && !EvadeState.IsDamageAvoided)
+        /*if (base.isActing && !EvadeState.IsRewarded)
         {
-            EvadeState.IsDamageAvoided = true;
+            EvadeState.IsRewarded = true;
             Morph.Add(NowAction.EvadeEnergyRecovery);
             Instantiate(EvadeState.EvadeSuccessEffect, transform.position, Quaternion.identity, transform); 
             HitEffect.SetGlobalSlow(.5f, 1);
             AerutaDebug.i.Feedback.EvadeCount++;
-        }
+        }*/
     }
 
     public override bool TryCastAction(ActionBaseObj _actionBaseObj, bool isShowMessage = true)
@@ -345,15 +334,15 @@ public class PlayerMain : Character
         //{
         //    CanDash = base.isGround;
         //}
-        if (!CanDash)
-        {
-            DashCooldown -= Time.deltaTime;
-            if (DashCooldown < 0f)
-            {
-                DashCooldown = 1f;
-                CanDash = true;
-            }
-        }
+        //if (!CanDash)
+        //{
+        //    DashCooldown -= Time.deltaTime;
+        //    if (DashCooldown < 0f)
+        //    {
+        //        //DashCooldown = 1f;
+        //        CanDash = true;
+        //    }
+        //}
         if (!CanAttack && !base.isActing)
         {
             CanAttack = base.isGround;

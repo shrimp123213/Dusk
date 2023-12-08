@@ -8,10 +8,6 @@ public class ActionPeformState
 
     public int CurrAttackTiming;
 
-    public bool TryedLink;
-
-    public bool Linked;
-
     public int CurrMoveIndex;
 
     public float YinputWhenAction;

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -100,12 +102,12 @@ public class ActionBaseObj : ScriptableObject
             {
                 ActionPeformState actionState = _m.ActionState;
 
-                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame;
+                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame * actionState.Clip.length;
                 float Duration = 0;
                 if (movement.EndEvadeFrame == -1)
-                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
                 else
-                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
                 Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true;
@@ -141,6 +143,7 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
+        //AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
         _m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
@@ -175,6 +178,7 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void EndAction(Character _m)
     {
+        Debug.Log("EndAction");
         _m.SetAnimationIdle();
         _m.NowAction = null;
         if (EndActionFloatTime > 0f)
@@ -306,22 +310,10 @@ public class ActionBaseObj : ScriptableObject
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
         //oldLinks
-        if (actionState.ActionTime >= 1f && !actionState.Linked)
+        if (actionState.ActionTime >= 1f)
         {
-            EndAction(_m);
-            _m.NowAction = null;
-            _m.Ani.Rebind();
-            _m.Ani.Play("Idle");
-            _m.Ani.Update(0f);
 
-            if (_m.Inputs.Contains(InputKey.Claw))
-            {
-                _m.Inputs.Remove(InputKey.Claw);
-            }
-            if ((bool)_m.TextInput)
-            {
-                _m.TextInput.text = "";
-            }
+            EndAction(_m);
         }
     }
 

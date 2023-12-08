@@ -6,8 +6,7 @@ using DG.Tweening;
 using TMPro;
 using System;
 using BehaviorDesigner.Runtime;
-using DG.Tweening.Core.Easing;
-using System.Security.Cryptography;
+using System.Reflection;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -105,6 +104,10 @@ public class Character : MonoBehaviour, IHitable
     public bool isKnockback;
 
     public List<TimedLink> TimedLinks;
+
+    private bool setAnimationIdle;
+
+    private AnimatorControllerParameter[] AniParameters;
 
     public float Health
     {
@@ -263,6 +266,19 @@ public class Character : MonoBehaviour, IHitable
 
     }
 
+    private void LateUpdate()
+    {
+        if (setAnimationIdle)
+        {
+            //AnimatorExtensions.RebindAndRetainParameter(Ani);
+            Ani.Rebind();
+            Ani.Play((Xinput != 0f) ? "Run" : "Idle");
+            Ani.Update(0f);
+
+            setAnimationIdle = false;
+        }
+    }
+
     public virtual void TryInput(InputKey _InputKey)
     {
         if (!Inputs.Contains(_InputKey))
@@ -406,10 +422,10 @@ public class Character : MonoBehaviour, IHitable
                 Rigid.drag = Mathf.Lerp(Rigid.drag, 7.5f, Time.fixedDeltaTime * 7.5f);
             }
         }
-        else if (Xinput != 0f && !Airbrone)
+        else if (Xinput != 0f && !Airbrone && isMovableX)
         {
             value = true;
-            velocity.x = Speed.Final * (float)numX * num2 * TryIsNotBlockedByCharacter() * SpeedFactor * ((Mathf.Abs(Xinput) > 0.25f) ? 1f : 0.5f) * (float)((Xinput > 0f) ? 1 : (-1));
+            velocity.x = Speed.Final /* * (float)numX */ * num2 * TryIsNotBlockedByCharacter() * SpeedFactor * ((Mathf.Abs(Xinput) > 0.25f) ? 1f : 0.5f) * (float)((Xinput > 0f) ? 1 : (-1));
         }
         else
         {
@@ -442,6 +458,7 @@ public class Character : MonoBehaviour, IHitable
 
                 if (!isActing)
                 {
+                    //AnimatorExtensions.RebindAndRetainParameter(Ani);
                     Ani.Rebind();
                     Ani.Play("Jump up");
                     Ani.Update(0f);
@@ -600,6 +617,7 @@ public class Character : MonoBehaviour, IHitable
             }
             if (!ImmuneInterruptAction)
             {
+                //AnimatorExtensions.RebindAndRetainParameter(Ani);
                 Ani.Rebind();
                 Ani.Play("Attacked");
                 Ani.Update(0f);
@@ -628,9 +646,7 @@ public class Character : MonoBehaviour, IHitable
 
     public void SetAnimationIdle()
     {
-        Ani.Rebind();
-        Ani.Play((Xinput != 0f) ? "Run" : "Idle");
-        Ani.Update(0f);
+        setAnimationIdle = true;
     }
 
     public virtual void Dead()

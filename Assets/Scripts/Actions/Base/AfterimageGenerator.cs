@@ -7,17 +7,18 @@ public class AfterimageGenerator : MonoBehaviour
 {
     public bool SelfDestory = true;
 
+    [SerializeField]
     private float startDelay = float.MaxValue;
-
+    [SerializeField]
     private float duration;
 
     private float emitLeft;
 
-    public float EmitReset = .025f;
+    public float EmitReset = .0125f;
 
     public float DelayFadeTime = .2f;
     public float FadeTime = .2f;
-    public Color NewColor = new Color(1f, 1f, 1f, 0.35f);
+    public Color NewColor = new Color(1f, 1f, 1f, 0.5f);
 
     public float DelayMoveTime = 0f;
     public float MoveTime = 0f;
@@ -48,6 +49,8 @@ public class AfterimageGenerator : MonoBehaviour
         }
         else
         {
+            duration -= Time.deltaTime;
+
             if (emitLeft <= 0f)
             {
                 //Debug.Log("spawnEffect");
