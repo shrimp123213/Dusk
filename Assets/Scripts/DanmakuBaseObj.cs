@@ -9,7 +9,6 @@ public enum SpawnType { Base, Global, Screen }
 [CreateAssetMenu(fileName = "NewDanmakuData", menuName = "Danmaku/DanmakuData")]
 public class DanmakuBaseObj : ScriptableObject
 {
-    public DanmakuType danmakuType;
     public FireMode fireMode;
     
     [Header("子彈設定")]
@@ -32,21 +31,23 @@ public class DanmakuBaseObj : ScriptableObject
     [Header("子彈生成")]
     public List<BulletSpawnData> bulletSpawnData;
     
-    public virtual Vector3 SetBulletSpawnPos(Character _m, BulletSpawnData data)
+    private Vector3 bulletSpawnPos;
+    
+    public Vector3 SetBulletSpawnPos(Character _m, BulletSpawnData data)
     {
         switch (data.spawnType)
         {
             case SpawnType.Base:
-                data.position += _m.transform.position;
+                bulletSpawnPos =  Vector3Utli.CacuFacing(data.position,_m.Facing) + _m.transform.position;
                 break;
             case SpawnType.Global:
-                data.position = new Vector3(data.position.x, data.position.y);
+                bulletSpawnPos = new Vector3(data.position.x, data.position.y);
                 break;
             case SpawnType.Screen:
-                data.position = Camera.main.WorldToScreenPoint(data.position);
+                bulletSpawnPos = Camera.main.WorldToScreenPoint(data.position);
                 break;
         }
-        return data.position;
+        return bulletSpawnPos;
     }
 }
 
@@ -55,16 +56,18 @@ public class DanmakuBaseObj : ScriptableObject
 [Serializable]
 public class BulletSpawnData
 {
+    public DanmakuType danmakuType;
     public SpawnType spawnType;
     public Vector3 position;
     
     [Space]
     public Quaternion rotation;
     
-    public BulletSpawnData(SpawnType _spawnType, Vector3 _position, Quaternion _rotation)
+    public BulletSpawnData(BulletSpawnData _bulletSpawnData)
     {
-        spawnType = _spawnType;
-        position = _position;
-        rotation = _rotation;
+        danmakuType = _bulletSpawnData.danmakuType;
+        spawnType = _bulletSpawnData.spawnType;
+        position = _bulletSpawnData.position;
+        rotation = _bulletSpawnData.rotation;
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ActionDanmaku", menuName = "Actions/Danmaku")]
 public class ActionDanmakuObj : ActionBaseObj
 {
-    public DanmakuBaseObj danmakuBaseObj;
+    [Header("彈幕設定")]
+    public DanmakuBaseObj danmaku;
     
     public int shootKey;
     
@@ -31,13 +32,14 @@ public class ActionDanmakuObj : ActionBaseObj
 
     private IEnumerator SpawnBullet(Character _m)
     {
-        int num;
-        for (int i = 0; i < danmakuBaseObj.shotsPerInterval; i = num + 1)
+        for (int i = 0; i < danmaku.shotsPerInterval; i++)
         {
-            foreach (var data in danmakuBaseObj.bulletSpawnData)
+            foreach (var data in danmaku.bulletSpawnData)
             {
-                Instantiate<GameObject>(danmakuBaseObj.bulletPrefab,danmakuBaseObj.SetBulletSpawnPos(_m, data), data.rotation);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
+                Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, data), data.rotation)
+                    .GetComponent<Bullet>().SetAwake(_m, new Damage(_m.Attack.Final*DamageRatio,DamageType.Normal), danmaku);
                 
+                yield return new WaitForSeconds(danmaku.timeBetweenShots);
             }
             
             /*switch (bulletSpawnData.spawnType)
@@ -52,8 +54,6 @@ public class ActionDanmakuObj : ActionBaseObj
                     Instantiate<GameObject>(danmakuBaseObj.bulletPrefab, Camera.main.ScreenToWorldPoint(bulletSpawnData.position), Quaternion.identity);//.GetComponent<Bullet>().SetDirection(new Vector2(0f, -1f));
                     break;*/
             
-            yield return new WaitForSeconds(danmakuBaseObj.timeBetweenShots);
-            num = i;
         }
     }
     
