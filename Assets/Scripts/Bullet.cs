@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
     {
         Owner = _owner;
         Damage = _damage;
-        Speed = _danmakuData.bulletSpeed * _danmakuData.speedCurve.Evaluate(1f);
+        Speed = _danmakuData.bulletSpeed * _danmakuData.speedCurve.Evaluate(1f) * Owner.Facing; 
         
         Destroy(gameObject, LifeTime);
         
@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
         if(!Awaked)
             return;
         
-        Rigid.velocity = transform.right * (Speed * Owner.Facing);
+        Rigid.velocity = transform.right * Speed;
     }
 
     private void Death()

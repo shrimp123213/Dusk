@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireMode: 0
   bulletPrefab: {fileID: 4832943090051024778, guid: 51ccfbb44b6b70a449b4be2c011971d0, type: 3}
-  bulletSpeed: 10
+  bulletSpeed: 30
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -42,10 +42,10 @@ MonoBehaviour:
   numberOfBullets: 0
   scatterAngle: 0
   rotationSpeed: 0
-  timeBetweenShots: 0.5
+  timeBetweenShots: 0
   shotsPerInterval: 1
   bulletSpawnData:
   - danmakuType: 0
-    spawnType: 1
-    position: {x: 6, y: -7, z: 0}
+    spawnType: 0
+    position: {x: 1, y: 1, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
