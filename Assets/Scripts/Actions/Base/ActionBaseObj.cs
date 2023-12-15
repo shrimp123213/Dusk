@@ -143,8 +143,8 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
-        //AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
-        _m.Ani.Rebind();
+        AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
+        //_m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
 
@@ -191,6 +191,7 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.EvadeState.EvadeDistanceEffect.Stop();
         }
+        Debug.Log(_m.Ani.GetFloat("VelocityY"));
     }
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)

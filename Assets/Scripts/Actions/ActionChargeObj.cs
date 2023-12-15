@@ -58,7 +58,8 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
                     SkillCharge.i.SetAmount(0f);
 
                     //©ñ¶}®É¼½BurstCharge1Success
-                    _m.Ani.Rebind();
+                    AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
+                    //_m.Ani.Rebind();
                     _m.Ani.Play(AnimationKey);
                     _m.Ani.Update(0f);
                     _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
@@ -99,7 +100,8 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         _m.SpeedFactor = 0.35f;
         if (!ExtendPreviousAnimation)
         {
-            _m.Ani.Rebind();
+            AnimatorExtensions.RebindAndRetainParameter(_m.Ani); 
+            //_m.Ani.Rebind();
             _m.Ani.Play(AnimationKeyCharging);
             _m.Ani.Update(0f);
         }

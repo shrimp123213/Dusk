@@ -7,10 +7,10 @@ using TMPro;
 using System;
 using BehaviorDesigner.Runtime;
 using System.Reflection;
+using Spine.Unity;
 
 public class Character : MonoBehaviour, IHitable
 {
-    
     public Animator Ani;
 
     [HideInInspector]
@@ -264,14 +264,11 @@ public class Character : MonoBehaviour, IHitable
             DoubleJumped = !isGround;
         }
 
-    }
 
-    private void LateUpdate()
-    {
-        if (setAnimationIdle)
+        if (setAnimationIdle && NowAction == null)
         {
-            //AnimatorExtensions.RebindAndRetainParameter(Ani);
-            Ani.Rebind();
+            AnimatorExtensions.RebindAndRetainParameter(Ani);
+            //Ani.Rebind();
             Ani.Play((Xinput != 0f) ? "Run" : "Idle");
             Ani.Update(0f);
 
@@ -301,10 +298,16 @@ public class Character : MonoBehaviour, IHitable
     {
         string previousId = NowAction == null ? _actionBaseObj.Id : NowAction.Id;
         //Debug.Log(previousId);
+        Debug.Log(Ani.GetFloat("VelocityY"));
+
         NowAction?.EndAction(this);
+        Debug.Log(Ani.GetFloat("VelocityY"));
+
         NowAction = _actionBaseObj;
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
+        Debug.Log(Ani.GetFloat("VelocityY"));
+
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
         ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
         //Debug.Log(ActionState.Clip.name);
@@ -315,6 +318,7 @@ public class Character : MonoBehaviour, IHitable
         {
             SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName);
         }
+        Debug.Log(Ani.GetFloat("VelocityY"));
     }
 
     public virtual void TriggerMark()
@@ -458,8 +462,8 @@ public class Character : MonoBehaviour, IHitable
 
                 if (!isActing)
                 {
-                    //AnimatorExtensions.RebindAndRetainParameter(Ani);
-                    Ani.Rebind();
+                    AnimatorExtensions.RebindAndRetainParameter(Ani);
+                    //Ani.Rebind();
                     Ani.Play("Jump up");
                     Ani.Update(0f);
                 }
@@ -617,8 +621,8 @@ public class Character : MonoBehaviour, IHitable
             }
             if (!ImmuneInterruptAction)
             {
-                //AnimatorExtensions.RebindAndRetainParameter(Ani);
-                Ani.Rebind();
+                AnimatorExtensions.RebindAndRetainParameter(Ani);
+                //Ani.Rebind();
                 Ani.Play("Attacked");
                 Ani.Update(0f);
             }
@@ -647,6 +651,7 @@ public class Character : MonoBehaviour, IHitable
     public void SetAnimationIdle()
     {
         setAnimationIdle = true;
+
     }
 
     public virtual void Dead()
