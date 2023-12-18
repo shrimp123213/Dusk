@@ -144,25 +144,17 @@ public class PlayerMain : Character
         {
             if (!base.isActing || (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta"))
             {
-                if (Morph.MorphCount > 0||true)//閃避更新
+                if (Xinput != 0f)
                 {
-                    if (Xinput != 0f)
-                    {
-                        Facing = ((Xinput > 0f) ? 1 : (-1));
-                    }
-
-                    StartAction(ActionLoader.i.Actions["Dash"]);
-
-                    //Morph.Consume();
-                    //CanDash = false;
-
-                    Inputs.Clear();
+                    Facing = ((Xinput > 0f) ? 1 : (-1));
                 }
-                else
-                {
-                    Inputs.Remove(InputKey.Dash);
-                }
-                return;
+
+                StartAction(ActionLoader.i.Actions["Dash"]);
+
+                //Morph.Consume();
+                //CanDash = false;
+
+                Inputs.Clear();
             }
         }
         if (!base.isActing)

@@ -7,6 +7,8 @@ using UnityEngine.UIElements.Experimental;
 [CreateAssetMenu(fileName = "ActionPieta", menuName = "Actions/Pieta")]
 public class ActionPietaObj : ActionBaseObj
 {
+    [Header("ActionPieta")]
+
     public GameObject PietaEffect;
 
     public GameObject SliceEffect;

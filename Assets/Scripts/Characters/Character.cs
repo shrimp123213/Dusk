@@ -562,17 +562,23 @@ public class Character : MonoBehaviour, IHitable
                 OnEvading();
                 return false;
             }
-            if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)
+            if ((bool)Player && Player.InvincibleState.InvincibleTime > 0 && !Blocking)
             {
                 return false;
             }
             
+            if (Blocking)
+            {
+                //防禦成功時間暫停
+                //HitEffect.SetHitStun(false, false, .5f, false);
+                //_attacker.HitEffect.SetHitStun(false, false, .5f, false);
 
-            //防禦成功時間暫停
-            //HitEffect.SetHitStun(false, false, .5f, false);
-            //_attacker.HitEffect.SetHitStun(false, false, .5f, false);
+                ((ActionBlockObj)NowAction).Block(this);
 
-            SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                return true;
+            }
+
+            //SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             //DOTween.Sequence().Append(component.DOFade(1.75f, 0.1f));//.Append(component.DOFade(1f, 0.15f));
             //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
             //Debug.Log("Hit : " + base.gameObject.name);

@@ -5,6 +5,8 @@ using UnityEngine.Windows;
 [CreateAssetMenu(fileName = "ActionCharge", menuName = "Actions/Charge")]
 public class ActionChargeObj : ActionBaseObj, IActionCharge
 {
+    [Header("ActionCharge")]
+
     public string AnimationKeyCharging;
 
     public bool ExtendPreviousAnimation;
