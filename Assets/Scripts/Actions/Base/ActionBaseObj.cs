@@ -98,7 +98,7 @@ public class ActionBaseObj : ScriptableObject
     {
         foreach (ActionMovement movement in _m.NowAction.Moves) 
         {
-            if (movement.CanEvade && _m.Evading)
+            if (movement.CanEvade)
             {
                 ActionPeformState actionState = _m.ActionState;
 
@@ -159,39 +159,51 @@ public class ActionBaseObj : ScriptableObject
             _m.TimedLinks.Add(new TimedLink(link));
         }
 
-
-        foreach (ActionMovement movement in Moves)
-        {
-            if (movement.CanEvade)
-            {
-                if ((bool)_m.Player && _m.Player.EvadeState.CanEvade)
-                {
-                    _m.Player.EvadeState.UseEvade(_m);
-                    break;
-                }
-            }
-        }
-        
-
         return new ActionPeformState();
     }
 
     public virtual void EndAction(Character _m)
     {
-        Debug.Log("EndAction");
         _m.SetAnimationIdle();
         _m.NowAction = null;
         if (EndActionFloatTime > 0f)
         {
             _m.LowGravityTime = EndActionFloatTime;
         }
+    }
 
-        _m.Evading = false;
-        if ((bool)_m.Player)
+    public void TryEvade(Character _m, ActionPeformState actionState)
+    {
+        if (_m.Evading == false && !((bool)_m.Player && _m.Player.EvadeState.CanEvade))//°{Á×µ²§ô
         {
-            _m.Player.EvadeState.EvadeDistanceEffect.Stop();
+            return;
         }
-        Debug.Log(_m.Ani.GetFloat("VelocityY"));
+
+        foreach (ActionMovement movement in Moves)
+        {
+            if (movement.CanEvade)
+            {
+                if ((bool)_m.Player && _m.Player.EvadeState.CanEvade && !actionState.IsAfterFrame(movement.StartEvadeFrame))
+                {
+                    _m.Player.EvadeState.UseEvade(_m);
+                    break;
+                }
+                else if (_m.Evading == true && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
+                {
+                    break;
+                }
+                else
+                {
+                    _m.Evading = false;
+                    if ((bool)_m.Player)
+                    {
+                        _m.Player.EvadeState.EvadeDistanceEffect.Stop();
+                    }
+                    break;
+                }
+            }
+        }
+
     }
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
@@ -232,6 +244,8 @@ public class ActionBaseObj : ScriptableObject
         {
             return;
         }
+
+        TryEvade(_m, actionState);
         
         if (_m.NowAction.Toggles.Count > 0)
         {

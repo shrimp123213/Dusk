@@ -298,16 +298,10 @@ public class Character : MonoBehaviour, IHitable
     {
         string previousId = NowAction == null ? _actionBaseObj.Id : NowAction.Id;
         //Debug.Log(previousId);
-        Debug.Log(Ani.GetFloat("VelocityY"));
-
         NowAction?.EndAction(this);
-        Debug.Log(Ani.GetFloat("VelocityY"));
-
         NowAction = _actionBaseObj;
         Hitted.Clear();
         ActionState = NowAction.StartAction(this);
-        Debug.Log(Ani.GetFloat("VelocityY"));
-
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
         ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
         //Debug.Log(ActionState.Clip.name);
@@ -318,7 +312,6 @@ public class Character : MonoBehaviour, IHitable
         {
             SkillPopup.i.ShowMessage(_actionBaseObj.DisplayName);
         }
-        Debug.Log(Ani.GetFloat("VelocityY"));
     }
 
     public virtual void TriggerMark()
