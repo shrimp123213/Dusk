@@ -6,7 +6,7 @@ public class EvadeState : MonoBehaviour
 {
     public bool CanEvade;
 
-    public bool IsDamageAvoided;
+    public bool IsRewarded;
 
     public float EvadeCooldown;
 
@@ -42,25 +42,25 @@ public class EvadeState : MonoBehaviour
         EvadeCooldown = EvadeCooldownMax;
         CanEvade = true;
 
-        if(spawnEffect) Instantiate(EvadeFinishCooldownEffect, transform.position, Quaternion.identity, transform);
+        //if(spawnEffect) Instantiate(EvadeFinishCooldownEffect, transform.position, Quaternion.identity, transform);
 
         EvadeCanUseEffect.Stop();
-        var main = EvadeCanUseEffect.main;
-        main.loop = true;
-        EvadeCanUseEffect.Play();
+        //var main = EvadeCanUseEffect.main;
+        //main.loop = true;
+        //EvadeCanUseEffect.Play();
     }
 
     public void UseEvade(Character _m)
     {
         CanEvade = false;
-        IsDamageAvoided = false;
-
+        IsRewarded = false;
+        
         EvadeCanUseEffect.Stop();
         var main = EvadeCanUseEffect.main;
         main.loop = false;
-
-        EvadeDistanceEffect.Play();
-        EvadeDistanceEffect.transform.rotation = _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180);
+        
+        //EvadeDistanceEffect.Play();
+        //EvadeDistanceEffect.transform.rotation = _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180);
 
         _m.Evading = true;
     }

@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ActionTriggerMark", menuName = "Actions/TriggerMark")]
 public class ActionTriggerMarkObj : ActionBaseObj
 {
+    [Header("ActionTriggerMark")]
+
     public GameObject SliceEffectWaitTrigger;
 
     private float Interval;

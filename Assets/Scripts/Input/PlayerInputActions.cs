@@ -55,6 +55,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Block"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbcdf9db-e0d7-424e-888e-4cbf97049e59"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Pieta"",
                     ""type"": ""Button"",
                     ""id"": ""33707063-bb7f-43a3-9ba4-fc6637d09c16"",
@@ -94,15 +103,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""UI"",
                     ""type"": ""Button"",
                     ""id"": ""9201e65c-06d2-4739-9ec0-aa50b4c3ba5b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""UseButterfly"",
-                    ""type"": ""Button"",
-                    ""id"": ""fbcdf9db-e0d7-424e-888e-4cbf97049e59"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -234,7 +234,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""34909993-a2db-404a-954b-9a9775ebad55"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -245,7 +245,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2aeb0a4e-5131-472a-a216-7c795a19e33f"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -355,22 +355,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7471cdda-465b-4d37-9e04-fd492c8b9939"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""UseButterfly"",
+                    ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""97217fc2-ed08-4255-977a-13b09f03b6fd"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""UseButterfly"",
+                    ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -407,12 +407,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Claw = m_Player.FindAction("Claw", throwIfNotFound: true);
+        m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Pieta = m_Player.FindAction("Pieta", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         m_Player_UI = m_Player.FindAction("UI", throwIfNotFound: true);
-        m_Player_UseButterfly = m_Player.FindAction("UseButterfly", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,12 +477,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Claw;
+    private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Pieta;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
     private readonly InputAction m_Player_UI;
-    private readonly InputAction m_Player_UseButterfly;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -490,12 +490,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Claw => m_Wrapper.m_Player_Claw;
+        public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Pieta => m_Wrapper.m_Player_Pieta;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputAction @UI => m_Wrapper.m_Player_UI;
-        public InputAction @UseButterfly => m_Wrapper.m_Player_UseButterfly;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -514,6 +514,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Claw.started += instance.OnClaw;
             @Claw.performed += instance.OnClaw;
             @Claw.canceled += instance.OnClaw;
+            @Block.started += instance.OnBlock;
+            @Block.performed += instance.OnBlock;
+            @Block.canceled += instance.OnBlock;
             @Pieta.started += instance.OnPieta;
             @Pieta.performed += instance.OnPieta;
             @Pieta.canceled += instance.OnPieta;
@@ -529,9 +532,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started += instance.OnUI;
             @UI.performed += instance.OnUI;
             @UI.canceled += instance.OnUI;
-            @UseButterfly.started += instance.OnUseButterfly;
-            @UseButterfly.performed += instance.OnUseButterfly;
-            @UseButterfly.canceled += instance.OnUseButterfly;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -545,6 +545,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Claw.started -= instance.OnClaw;
             @Claw.performed -= instance.OnClaw;
             @Claw.canceled -= instance.OnClaw;
+            @Block.started -= instance.OnBlock;
+            @Block.performed -= instance.OnBlock;
+            @Block.canceled -= instance.OnBlock;
             @Pieta.started -= instance.OnPieta;
             @Pieta.performed -= instance.OnPieta;
             @Pieta.canceled -= instance.OnPieta;
@@ -560,9 +563,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started -= instance.OnUI;
             @UI.performed -= instance.OnUI;
             @UI.canceled -= instance.OnUI;
-            @UseButterfly.started -= instance.OnUseButterfly;
-            @UseButterfly.performed -= instance.OnUseButterfly;
-            @UseButterfly.canceled -= instance.OnUseButterfly;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -603,11 +603,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnClaw(InputAction.CallbackContext context);
+        void OnBlock(InputAction.CallbackContext context);
         void OnPieta(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnUI(InputAction.CallbackContext context);
-        void OnUseButterfly(InputAction.CallbackContext context);
     }
 }

@@ -6,12 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ActionTeleport", menuName = "Actions/Teleport")]
 public class ActionTeleportObj : ActionBaseObj
 {
+    [Header("ActionTeleport")]
+
     private Vector2 TeleportTargetPos;
 
     public override ActionPeformState StartAction(Character _m)
     {
         TeleportTargetPos = _m.TeleportKeyReference;
-        Debug.Log(TeleportTargetPos);
+        //Debug.Log(TeleportTargetPos);
 
         return base.StartAction(_m);
     }

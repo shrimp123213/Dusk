@@ -6,6 +6,7 @@ using UnityEngine;
 public class ActionHealObj : ActionBaseObj
 {
     [Header("ActionHeal")]
+
     public float HealAmount;
 
     private AfterimageGenerator Afterimage;

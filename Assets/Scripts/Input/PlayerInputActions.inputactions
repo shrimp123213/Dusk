@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "fbcdf9db-e0d7-424e-888e-4cbf97049e59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Pieta",
                     "type": "Button",
                     "id": "33707063-bb7f-43a3-9ba4-fc6637d09c16",
@@ -72,15 +81,6 @@
                     "name": "UI",
                     "type": "Button",
                     "id": "9201e65c-06d2-4739-9ec0-aa50b4c3ba5b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UseButterfly",
-                    "type": "Button",
-                    "id": "fbcdf9db-e0d7-424e-888e-4cbf97049e59",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -212,7 +212,7 @@
                 {
                     "name": "",
                     "id": "34909993-a2db-404a-954b-9a9775ebad55",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -223,7 +223,7 @@
                 {
                     "name": "",
                     "id": "2aeb0a4e-5131-472a-a216-7c795a19e33f",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -333,22 +333,22 @@
                 {
                     "name": "",
                     "id": "7471cdda-465b-4d37-9e04-fd492c8b9939",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "UseButterfly",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "97217fc2-ed08-4255-977a-13b09f03b6fd",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "UseButterfly",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

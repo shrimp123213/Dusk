@@ -7,6 +7,8 @@ using UnityEngine.UIElements.Experimental;
 [CreateAssetMenu(fileName = "ActionPieta", menuName = "Actions/Pieta")]
 public class ActionPietaObj : ActionBaseObj
 {
+    [Header("ActionPieta")]
+
     public GameObject PietaEffect;
 
     public GameObject SliceEffect;
@@ -21,12 +23,12 @@ public class ActionPietaObj : ActionBaseObj
             {
                 ActionPeformState actionState = _m.ActionState;
 
-                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame;
+                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame * actionState.Clip.length;
                 float Duration = 0;
                 if (movement.EndEvadeFrame == -1)
-                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
                 else
-                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
                 Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true; 
@@ -149,7 +151,7 @@ public class ActionPietaObj : ActionBaseObj
 
                 //³y¦¨¶Ë®`
                 bool num = pietaTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !pietaTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(pietaTarget.Collider2D.gameObject);
+                _m.RegisterHit(new HittedGameObjectKey(0, pietaTarget.Collider2D.gameObject));
                 if (num)
                 {
                     _m.AttackLand();

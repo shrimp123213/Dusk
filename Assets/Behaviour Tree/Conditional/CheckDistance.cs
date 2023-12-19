@@ -28,14 +28,14 @@ public class CheckDistance : EnemyConditionalBase
                 case OperatorType.LessThan:
                     if (Vector2.Distance(this.Target.Value.transform.position, this.transform.position) < this.SocialDistance)
                     {
-                        Debug.Log("Less:"+SocialDistance);
+                        //Debug.Log("Less:"+SocialDistance);
                         return TaskStatus.Success;
                     }
                     break;
                 case OperatorType.GreaterThan:
                     if (Vector2.Distance(this.Target.Value.transform.position, this.transform.position) > this.SocialDistance)
                     {
-                        Debug.Log("Greater:"+SocialDistance);
+                        //Debug.Log("Greater:"+SocialDistance);
                         return TaskStatus.Success;
                     }
                     break;

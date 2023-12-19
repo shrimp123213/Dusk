@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a73c55473527a49a1413a7ba265a01, type: 3}
+  m_Name: Block
+  m_EditorClassIdentifier: 
+  Id: Block
+  DisplayName: Block
+  AnimationKey: Block
+  InterruptLevel: 0
+  InterruptSameLevel: 0
+  DamageRatio: 0
+  DamageType: 0
+  AttackSpots: []
+  HitMax: 0
+  SuckEffect: 0
+  CanInterruptAction: 0
+  CanTriggerMark: 0
+  Links: []
+  Moves: []
+  Toggles: []
+  Teleports: []
+  ApplyForce: {x: 0, y: 0}
+  ForceBasedByPos: 0
+  UsePopup: 0
+  TimeSlowAmount: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
+  EvadeEnergyRecovery: 0
+  EndActionFloatTime: 0
+  GroundOnly: 0
+  ResetCanAttack: 1
+  IsTriggered: 
+  IsTeleported: 
+  IsLightAttack: 0
+  IsHeavyAttack: 0
+  HitStun: 0
+  IsMovableX: 0
+  IsMovableY: 0
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 0
+  PerfectFrameStart: 3
+  NormalFrameStart: 9
+  BackswingFrameStart: 24
+  blockReactions:
+  - AnimationKey: BlockPerfect
+    OnlyInterruptByDash: 0
+    Knockback: 0
+    KnockbackMove:
+      KeyFrame: 0
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      TargetDistance: {x: 0, y: 0}
+      FinishTime: 0
+      CanEvade: 0
+      StartEvadeFrame: 0
+      EndEvadeFrame: 0
+  - AnimationKey: BlockNormal
+    OnlyInterruptByDash: 1
+    Knockback: 1
+    KnockbackMove:
+      KeyFrame: 0
+      Curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 20.012821
+          outSlope: 20.012821
+          tangentMode: 0
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0.013586956
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0.075472765
+          outSlope: 0.075472765
+          tangentMode: 0
+          weightedMode: 3
+          inWeight: 0.8117236
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      TargetDistance: {x: 2, y: 0}
+      FinishTime: 0.25
+      CanEvade: 0
+      StartEvadeFrame: 0
+      EndEvadeFrame: 0

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -24,9 +26,6 @@ public class ActionBaseObj : ScriptableObject
 
     [Header("判定點")]
     public List<AttackTiming> AttackSpots;
-
-    [Header("攻擊次數上限")]
-    public int HitMax;
 
     [Header("攻擊成功時將空中的敵人往自己拉")]
     public bool SuckEffect;
@@ -96,16 +95,16 @@ public class ActionBaseObj : ScriptableObject
     {
         foreach (ActionMovement movement in _m.NowAction.Moves) 
         {
-            if (movement.CanEvade && _m.Evading)
+            if (movement.CanEvade)
             {
                 ActionPeformState actionState = _m.ActionState;
 
-                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame;
+                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame * actionState.Clip.length;
                 float Duration = 0;
                 if (movement.EndEvadeFrame == -1)
-                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
                 else
-                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame;
+                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
 
                 var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
                 Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true;
@@ -141,7 +140,8 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.Player.CanAttack = true;
         }
-        _m.Ani.Rebind();
+        AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
+        //_m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
 
@@ -156,20 +156,6 @@ public class ActionBaseObj : ScriptableObject
             _m.TimedLinks.Add(new TimedLink(link));
         }
 
-
-        foreach (ActionMovement movement in Moves)
-        {
-            if (movement.CanEvade)
-            {
-                if ((bool)_m.Player && _m.Player.EvadeState.CanEvade)
-                {
-                    _m.Player.EvadeState.UseEvade(_m);
-                    break;
-                }
-            }
-        }
-        
-
         return new ActionPeformState();
     }
 
@@ -181,12 +167,40 @@ public class ActionBaseObj : ScriptableObject
         {
             _m.LowGravityTime = EndActionFloatTime;
         }
+    }
 
-        _m.Evading = false;
-        if ((bool)_m.Player)
+    public void TryEvade(Character _m, ActionPeformState actionState)
+    {
+        if (_m.Evading == false && !((bool)_m.Player && _m.Player.EvadeState.CanEvade))//閃避結束
         {
-            _m.Player.EvadeState.EvadeDistanceEffect.Stop();
+            return;
         }
+
+        foreach (ActionMovement movement in Moves)
+        {
+            if (movement.CanEvade)
+            {
+                if ((bool)_m.Player && _m.Player.EvadeState.CanEvade && !actionState.IsAfterFrame(movement.StartEvadeFrame))
+                {
+                    _m.Player.EvadeState.UseEvade(_m);
+                    break;
+                }
+                else if (_m.Evading == true && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
+                {
+                    break;
+                }
+                else
+                {
+                    _m.Evading = false;
+                    if ((bool)_m.Player)
+                    {
+                        _m.Player.EvadeState.EvadeDistanceEffect.Stop();
+                    }
+                    break;
+                }
+            }
+        }
+
     }
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
@@ -227,6 +241,8 @@ public class ActionBaseObj : ScriptableObject
         {
             return;
         }
+
+        TryEvade(_m, actionState);
         
         if (_m.NowAction.Toggles.Count > 0)
         {
@@ -254,9 +270,12 @@ public class ActionBaseObj : ScriptableObject
                 i++;
             }
         }
-        
+
+        int currentAttackSpot = -1;
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
         {
+            currentAttackSpot++;
+
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
             Vector2 debugVector = _m.transform.position + vector;
             Vector2 topRight = attackSpot.Range / 2;
@@ -278,12 +297,12 @@ public class ActionBaseObj : ScriptableObject
             Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
             foreach (Collider2D collider2D in array)
             {
-                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(collider2D.gameObject, _m.NowAction.HitMax))
+                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject), attackSpot.HitMax)) 
                 {
                     continue;
                 }
                 bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(collider2D.gameObject);
+                _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject));
                 if (num)
                 {
                     _m.AttackLand();
@@ -306,22 +325,10 @@ public class ActionBaseObj : ScriptableObject
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
         //oldLinks
-        if (actionState.ActionTime >= 1f && !actionState.Linked)
+        if (actionState.ActionTime >= 1f)
         {
-            EndAction(_m);
-            _m.NowAction = null;
-            _m.Ani.Rebind();
-            _m.Ani.Play("Idle");
-            _m.Ani.Update(0f);
 
-            if (_m.Inputs.Contains(InputKey.Claw))
-            {
-                _m.Inputs.Remove(InputKey.Claw);
-            }
-            if ((bool)_m.TextInput)
-            {
-                _m.TextInput.text = "";
-            }
+            EndAction(_m);
         }
     }
 
@@ -347,6 +354,9 @@ public class AttackTiming
     public Vector3 Offset;
 
     public Vector2 Range;
+
+    [Header("本次攻擊擊中敵人次數上限")]
+    public int HitMax;
 }
 
 
