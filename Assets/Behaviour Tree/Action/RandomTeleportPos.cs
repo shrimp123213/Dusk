@@ -56,9 +56,9 @@ public class RandomTeleportPos : EnemyActionBase
             }
         }
         
-        Debug.Log(this.SelfCharacter.Value.transform.position);
+        //Debug.Log(this.SelfCharacter.Value.transform.position);
         this.SelfCharacter.Value.TeleportKeyReference = this.RandomPos;
-        Debug.Log(RandomPos);
+        //Debug.Log(RandomPos);
     }
 
     public override void OnEnd()

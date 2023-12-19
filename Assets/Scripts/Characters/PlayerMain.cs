@@ -144,17 +144,20 @@ public class PlayerMain : Character
         {
             if (!base.isActing || (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta"))
             {
-                if (Xinput != 0f)
+                if (!Blocking)
                 {
-                    Facing = ((Xinput > 0f) ? 1 : (-1));
+                    if (Xinput != 0f)
+                    {
+                        Facing = ((Xinput > 0f) ? 1 : (-1));
+                    }
+
+                    StartAction(ActionLoader.i.Actions["Dash"]);
+
+                    //Morph.Consume();
+                    //CanDash = false;
+
+                    Inputs.Clear();
                 }
-
-                StartAction(ActionLoader.i.Actions["Dash"]);
-
-                //Morph.Consume();
-                //CanDash = false;
-
-                Inputs.Clear();
             }
         }
         if (!base.isActing)
@@ -165,6 +168,11 @@ public class PlayerMain : Character
                 {
                     StartAction(ActionLoader.i.Actions["Pieta"]);
                 }
+                Inputs.Clear();
+            }
+            if (Inputs.Contains(InputKey.Block))
+            {
+                StartAction(ActionLoader.i.Actions["Block"]);
                 Inputs.Clear();
             }
             if (Inputs.Contains(InputKey.Claw) && CanAttack)
@@ -374,14 +382,18 @@ public class PlayerMain : Character
             {
                 AerutaDebug.i.CloseUI();
             }
-            if (playerAct.FindAction("UseButterfly").WasPressedThisFrame())
+            if (playerAct.FindAction("Block").WasPressedThisFrame())
             {
-                //TryInput(InputKey.UseButterfly);
-                ButterflyManager.i.StartMove();
+                TryInput(InputKey.Block);
             }
+            //if (playerAct.FindAction("UseButterfly").WasPressedThisFrame())
+            //{
+            //    //TryInput(InputKey.UseButterfly);
+            //    ButterflyManager.i.StartMove();
+            //}
             //Charging = playerAct.FindAction("Burst").IsPressed();
         }
-        
+
         if (base.isActing)
         {
             if (ActionLinkTime != null)

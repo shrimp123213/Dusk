@@ -40,11 +40,9 @@ public class ActionBlockObj : ActionBaseObj
             return;
         }
 
-        //TryBlocking
-        if (actionState.IsWithinFrame(0, PerfectFrameStart - 1))//Forswing
-        {
 
-        }
+        TrySetBlockState(actionState, _m);
+
 
         TryRegisterMove(_m, actionState.YinputWhenAction);
 
@@ -54,7 +52,7 @@ public class ActionBlockObj : ActionBaseObj
         }
     }
 
-    public void SetBlockState(ActionPeformStateBlock actionState)
+    public void TrySetBlockState(ActionPeformStateBlock actionState, Character _m)
     {
         switch (actionState.blockState)
         {
@@ -62,26 +60,53 @@ public class ActionBlockObj : ActionBaseObj
                 if (!actionState.IsWithinFrame(0, PerfectFrameStart - 1))
                 {
                     actionState.blockState = BlockState.Perfect;
+                    _m.Blocking = true;
                 }
                 break;
+            case BlockState.Perfect:
+                if (!actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
+                {
+                    actionState.blockState = BlockState.Normal;
+                }
+                break;
+            case BlockState.Normal:
+                if (!actionState.IsWithinFrame(NormalFrameStart, BackswingFrameStart - 1))
+                {
+                    actionState.blockState = BlockState.Backswing;
+                    _m.Blocking = false;
+                }
+                break;
+            case BlockState.Backswing:
+                break;
+
+            case BlockState.PerfectBlock:
+                break;
+            case BlockState.NormalBlock:
+                break;
         }
-
-        
-
-
     }
 
     public void Block(Character _m)
     {
+        ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
+
         AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
         //_m.Ani.Rebind();
-        if (_m.ActionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
+        if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
+        {
             _m.Ani.Play(blockReactions[0].AnimationKey);
+            actionState.blockState = BlockState.PerfectBlock;
+            Debug.Log("Perfect");
+        }
         else
+        {
             _m.Ani.Play(blockReactions[1].AnimationKey);
+            actionState.blockState = BlockState.NormalBlock;
+            Debug.Log("Normal");
+        }
         _m.Ani.Update(0f);
 
-
+        _m.Blocking = false;
     }
 }
 
@@ -93,26 +118,11 @@ public class ActionPeformStateBlock : ActionPeformState
         Perfect,
         Normal,
         Backswing,
+        
+        PerfectBlock,
+        NormalBlock,
     }
     public BlockState blockState = BlockState.Forswing;
-
-    public BlockState GetBlockState(int Start, int End)
-    {
-        switch (blockState)
-        {
-            case BlockState.Forswing:
-
-                break;
-        }
-
-        if (IsWithinFrame(Start, End)) 
-        {
-            
-
-        }
-
-        return blockState;
-    }
 }
 
 [Serializable]

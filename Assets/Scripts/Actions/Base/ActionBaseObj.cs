@@ -27,9 +27,6 @@ public class ActionBaseObj : ScriptableObject
     [Header("判定點")]
     public List<AttackTiming> AttackSpots;
 
-    [Header("攻擊次數上限")]
-    public int HitMax;
-
     [Header("攻擊成功時將空中的敵人往自己拉")]
     public bool SuckEffect;
 
@@ -273,9 +270,12 @@ public class ActionBaseObj : ScriptableObject
                 i++;
             }
         }
-        
+
+        int currentAttackSpot = -1;
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
         {
+            currentAttackSpot++;
+
             Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
             Vector2 debugVector = _m.transform.position + vector;
             Vector2 topRight = attackSpot.Range / 2;
@@ -297,12 +297,12 @@ public class ActionBaseObj : ScriptableObject
             Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
             foreach (Collider2D collider2D in array)
             {
-                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(collider2D.gameObject, _m.NowAction.HitMax))
+                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject), attackSpot.HitMax)) 
                 {
                     continue;
                 }
                 bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(collider2D.gameObject);
+                _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject));
                 if (num)
                 {
                     _m.AttackLand();
@@ -354,6 +354,9 @@ public class AttackTiming
     public Vector3 Offset;
 
     public Vector2 Range;
+
+    [Header("本次攻擊擊中敵人次數上限")]
+    public int HitMax;
 }
 
 

@@ -10,5 +10,5 @@ public enum InputKey
     Pieta,
     Heal,
     UI,
-    UseButterfly,
+    Block,
 }

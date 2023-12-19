@@ -151,7 +151,7 @@ public class ActionPietaObj : ActionBaseObj
 
                 //³y¦¨¶Ë®`
                 bool num = pietaTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !pietaTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(pietaTarget.Collider2D.gameObject);
+                _m.RegisterHit(new HittedGameObjectKey(0, pietaTarget.Collider2D.gameObject));
                 if (num)
                 {
                     _m.AttackLand();

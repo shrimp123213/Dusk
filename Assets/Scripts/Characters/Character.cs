@@ -8,6 +8,7 @@ using System;
 using BehaviorDesigner.Runtime;
 using System.Reflection;
 using Spine.Unity;
+using System.Runtime.ConstrainedExecution;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -67,7 +68,7 @@ public class Character : MonoBehaviour, IHitable
 
     public ActionPeformState ActionState;
 
-    public Dictionary<GameObject, uint> Hitted = new Dictionary<GameObject, uint>();
+    public Dictionary<HittedGameObjectKey, uint> Hitted = new Dictionary<HittedGameObjectKey, uint>(new HittedGameObjectKey.EqualityComparer());
 
     public List<ForceMovement> StoredMoves = new List<ForceMovement>();
 
@@ -304,7 +305,7 @@ public class Character : MonoBehaviour, IHitable
         ActionState = NowAction.StartAction(this);
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
         ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
-        //Debug.Log(ActionState.Clip.name);
+        //Debug.Log(ActionState.TotalFrame);
         HurtBoxColor = new Color(UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f), UnityEngine.Random.Range(0.35f, 1f));
         NowAction.Init(this);
         NowAction.Id = _actionBaseObj.Id;
@@ -328,25 +329,26 @@ public class Character : MonoBehaviour, IHitable
         return false;
     }
 
-    public void RegisterHit(GameObject _gameObject)
+    public void RegisterHit(HittedGameObjectKey key)
     {
-        if (Hitted.ContainsKey(_gameObject))
+        if (Hitted.ContainsKey(key))
         {
-            Hitted[_gameObject]++;
+            Hitted[key]++;
         }
         else
         {
-            Hitted.Add(_gameObject, 1u);
+            Hitted.Add(key, 1u);
         }
     }
 
-    public bool isMaxHit(GameObject _gameObject, int _count)
+    public bool isMaxHit(HittedGameObjectKey key, int _count)
     {
-        if (!Hitted.ContainsKey(_gameObject))
+        Debug.Log(key.attackSpot + key.gameObject.ToString());
+        if (!Hitted.ContainsKey(key))
         {
             return false;
         }
-        if (Hitted[_gameObject] >= _count)
+        if (Hitted[key] >= _count)
         {
             return true;
         }
@@ -575,7 +577,7 @@ public class Character : MonoBehaviour, IHitable
 
                 ((ActionBlockObj)NowAction).Block(this);
 
-                return true;
+                return false;
             }
 
             //SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -725,6 +727,7 @@ public class Character : MonoBehaviour, IHitable
         Debug.DrawLine(component.bounds.center, component.bounds.center + (component.bounds.extents.x + .1f) * Vector3.right * Facing, Color.green, 2f);
         return 1;
     }
+
 }
 
 public enum CharacterStates
@@ -752,4 +755,30 @@ public class TimedLink
         Base = _base;
         LifeTimePassed = _lifeTimePassed;
     }
+}
+
+public class HittedGameObjectKey
+{
+    public int attackSpot;
+    public GameObject gameObject;
+
+    public HittedGameObjectKey(int _attackSpot, GameObject _gameObject)
+    {
+        attackSpot = _attackSpot;
+        gameObject = _gameObject;
+    }
+
+    public class EqualityComparer : IEqualityComparer<HittedGameObjectKey>
+    {
+        public bool Equals(HittedGameObjectKey x, HittedGameObjectKey y)
+        {
+            return x.attackSpot == y.attackSpot && x.gameObject == y.gameObject;
+        }
+
+        public int GetHashCode(HittedGameObjectKey x)
+        {
+            return x.attackSpot + x.gameObject.GetHashCode();
+        }
+    }
+
 }
