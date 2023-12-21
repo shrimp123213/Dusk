@@ -86,7 +86,7 @@ public class ActionBlockObj : ActionBaseObj
         }
     }
 
-    public void Block(Character _m)
+    public void Block(Character _m, Vector2 _ClosestPoint)
     {
         ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
 
@@ -96,12 +96,24 @@ public class ActionBlockObj : ActionBaseObj
         {
             _m.Ani.Play(blockReactions[0].AnimationKey);
             actionState.blockState = BlockState.PerfectBlock;
+
+            Instantiate(AerutaDebug.i.BlockEffectPerfect, _ClosestPoint, Quaternion.identity, null);
+
+            if (blockReactions[0].KnockbackMove.TargetDistance.x != 0 || blockReactions[0].KnockbackMove.TargetDistance.y != 0)
+                _m.StoredMoves.Add(new ForceMovement(blockReactions[0].KnockbackMove, new Vector3(0f, 0f), _m.transform.position));
+
             Debug.Log("Perfect");
         }
         else
         {
             _m.Ani.Play(blockReactions[1].AnimationKey);
             actionState.blockState = BlockState.NormalBlock;
+
+            Instantiate(AerutaDebug.i.BlockEffectNormal, _ClosestPoint, Quaternion.identity, null);
+
+            if (blockReactions[1].KnockbackMove.TargetDistance.x != 0 || blockReactions[1].KnockbackMove.TargetDistance.y != 0) 
+                _m.StoredMoves.Add(new ForceMovement(blockReactions[1].KnockbackMove, new Vector3(0f, 0f), _m.transform.position));
+
             Debug.Log("Normal");
         }
         _m.Ani.Update(0f);

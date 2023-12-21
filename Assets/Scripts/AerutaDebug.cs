@@ -22,7 +22,8 @@ public class AerutaDebug : MonoBehaviour
     public float StartGameTime;
 
     public GameObject ChargeEffect;
-    public GameObject BlockEffect;
+    public GameObject BlockEffectNormal;
+    public GameObject BlockEffectPerfect;
     public GameObject BloodEffect;
     public GameObject PenetrateTrail;
 

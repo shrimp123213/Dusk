@@ -343,7 +343,6 @@ public class Character : MonoBehaviour, IHitable
 
     public bool isMaxHit(HittedGameObjectKey key, int _count)
     {
-        Debug.Log(key.attackSpot + key.gameObject.ToString());
         if (!Hitted.ContainsKey(key))
         {
             return false;
@@ -550,7 +549,7 @@ public class Character : MonoBehaviour, IHitable
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }
 
-    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false)
+    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = default)
     {
         if (isDead)
         {
@@ -575,7 +574,7 @@ public class Character : MonoBehaviour, IHitable
                 //HitEffect.SetHitStun(false, false, .5f, false);
                 //_attacker.HitEffect.SetHitStun(false, false, .5f, false);
 
-                ((ActionBlockObj)NowAction).Block(this);
+                ((ActionBlockObj)NowAction).Block(this, _ClosestPoint);
 
                 return false;
             }
@@ -740,7 +739,7 @@ public enum CharacterStates
 
 public interface IHitable
 {
-    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false);
+    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = default);
 }
 
 [Serializable]

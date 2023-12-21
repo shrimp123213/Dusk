@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityParticleSystem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,9 @@ public class ActionBaseObj : ScriptableObject
 
     [Header("是否觸發標記")]
     public bool CanTriggerMark;
+
+    [Header("是否執行開始時清除所有位移")]
+    public bool ClearStoredMoves;
 
     [Header("連技")]
     public List<ActionLink> Links;
@@ -156,6 +160,11 @@ public class ActionBaseObj : ScriptableObject
             _m.TimedLinks.Add(new TimedLink(link));
         }
 
+        if (ClearStoredMoves)
+        {
+            _m.StoredMoves.Clear();
+        }
+
         return new ActionPeformState();
     }
 
@@ -211,6 +220,9 @@ public class ActionBaseObj : ScriptableObject
             AerutaDebug.i.Feedback.LightAttackCount++;
         //if (IsHeavyAttack)
         //    AerutaDebug.i.Feedback.HeavyAttackCount++;
+
+        if (_hitted.name == "Player")
+            Debug.Log(_hitted.Blocking);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
@@ -301,7 +313,7 @@ public class ActionBaseObj : ScriptableObject
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
                 _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject));
                 if (num)
                 {
