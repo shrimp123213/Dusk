@@ -15,6 +15,10 @@ public class ActionBlockObj : ActionBaseObj
 
     public int BackswingFrameStart;
 
+    public float PerfectMorphRecovery;
+
+    public float NormalMorphRecovery;
+
     public BlockReaction[] blockReactions;
 
     public override ActionPeformState StartAction(Character _m)
@@ -49,6 +53,21 @@ public class ActionBlockObj : ActionBaseObj
         if (actionState.ActionTime >= 1f)
         {
             EndAction(_m);
+        }
+    }
+
+    public override void EndAction(Character _m)
+    {
+        ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
+        if (actionState.blockState != BlockState.PerfectBlock)
+        {
+            _m.SetAnimationIdle();
+        }
+
+        _m.NowAction = null;
+        if (EndActionFloatTime > 0f)
+        {
+            _m.LowGravityTime = EndActionFloatTime;
         }
     }
 
@@ -102,6 +121,8 @@ public class ActionBlockObj : ActionBaseObj
             if (blockReactions[0].KnockbackMove.TargetDistance.x != 0 || blockReactions[0].KnockbackMove.TargetDistance.y != 0)
                 _m.StoredMoves.Add(new ForceMovement(blockReactions[0].KnockbackMove, new Vector3(0f, 0f), _m.transform.position));
 
+            _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).PerfectMorphRecovery);
+
             Debug.Log("Perfect");
         }
         else
@@ -114,11 +135,18 @@ public class ActionBlockObj : ActionBaseObj
             if (blockReactions[1].KnockbackMove.TargetDistance.x != 0 || blockReactions[1].KnockbackMove.TargetDistance.y != 0) 
                 _m.StoredMoves.Add(new ForceMovement(blockReactions[1].KnockbackMove, new Vector3(0f, 0f), _m.transform.position));
 
+            _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).NormalMorphRecovery);
+
             Debug.Log("Normal");
         }
         _m.Ani.Update(0f);
 
         _m.Blocking = false;
+
+        if (actionState.blockState == BlockState.PerfectBlock)
+        {
+            EndAction(_m);
+        }
     }
 }
 

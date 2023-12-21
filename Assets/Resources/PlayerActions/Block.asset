@@ -51,6 +51,8 @@ MonoBehaviour:
   PerfectFrameStart: 0
   NormalFrameStart: 6
   BackswingFrameStart: 18
+  PerfectMorphRecovery: 0.0625
+  NormalMorphRecovery: 0.0625
   blockReactions:
   - AnimationKey: BlockPerfect
     OnlyInterruptByDash: 0
