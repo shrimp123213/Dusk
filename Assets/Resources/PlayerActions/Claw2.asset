@@ -24,10 +24,11 @@ MonoBehaviour:
     KeyFrameEnd: 7
     Offset: {x: 1.1, y: 0.15, z: 0}
     Range: {x: 2.3, y: 1.5}
-  HitMax: 1
+    HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links:
   - Frame: 18
     LifeTime: -1
@@ -61,7 +62,7 @@ MonoBehaviour:
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
-  MorphRecovery: 0.125
+  MorphRecovery: 12500
   MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0

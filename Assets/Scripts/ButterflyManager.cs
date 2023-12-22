@@ -134,11 +134,11 @@ public class ButterflyManager : MonoBehaviour
 
     private void MarkCharacterBetweenMoveDistance(Vector3 startPos, Vector3 endPos)
     {
-        RaycastHit2D[] raycastHit2D = Physics2D.LinecastAll(startPos, endPos, LayerMask.GetMask("Character"));
+        RaycastHit2D[] raycastHit2D = Physics2D.LinecastAll(startPos, endPos, LayerMask.GetMask("HurtBox"));
 
         raycastHit2D.ForEach(hit =>
         {
-            Character hitCharacter = hit.transform.GetComponent<Character>();
+            Character hitCharacter = hit.transform.parent.GetComponent<Character>();
             if (hitCharacter != PlayerMain.i) MarkManager.i.MarkLevelUp(hitCharacter);
         });
     }

@@ -467,7 +467,7 @@ public class PlayerMain : Character
         {
             Character _attacker = collision.transform.parent.GetComponent<Character>();
             bool num = TakeDamage(new Damage(_attacker.Attack.Final, DamageType.Collision), .25f, _attacker, !ImmuneInterruptAction);
-            if(num) TakeForce(Vector3Utli.CacuFacing(Vector2.right * 15f, Vector3Utli.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+            if(num) TakeForce(Vector3Utility.CacuFacing(Vector2.right * 15f, Vector3Utility.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
 
         }
     }

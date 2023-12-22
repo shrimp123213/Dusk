@@ -43,7 +43,7 @@ public class EnemyMove : EnemyActionBase
         if (this.Target.IsShared)
         {
             if (Vector2.Distance(this.Target.Value.transform.position, this.transform.position) < this.SocialDistance &&
-                Vector3Utli.IsFacing(this.SelfCharacter.Value.Facing,
+                Vector3Utility.IsFacing(this.SelfCharacter.Value.Facing,
                     this.Target.Value.transform.position.x - this.transform.position.x))
             {
                 return TaskStatus.Success;

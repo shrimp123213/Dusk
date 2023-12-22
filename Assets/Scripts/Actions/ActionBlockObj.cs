@@ -15,9 +15,10 @@ public class ActionBlockObj : ActionBaseObj
 
     public int BackswingFrameStart;
 
-    public float PerfectMorphRecovery;
+    [Header("value/100000")]
+    public int PerfectMorphRecovery;
 
-    public float NormalMorphRecovery;
+    public int NormalMorphRecovery;
 
     public BlockReaction[] blockReactions;
 

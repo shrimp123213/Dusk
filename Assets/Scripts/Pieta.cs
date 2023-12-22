@@ -47,14 +47,14 @@ public class Pieta : MonoBehaviour
     public RaycastHit2D[] CanPietaRange(float _dis)
     {
         BoxCollider2D component = Player.GetComponent<BoxCollider2D>();
-        RaycastHit2D[] raycastHit2D = Physics2D.BoxCastAll(component.bounds.center, component.size, 0f, Vector2.right * Player.Facing, _dis, LayerMask.GetMask("Character"));
+        RaycastHit2D[] raycastHit2D = Physics2D.BoxCastAll(component.bounds.center, component.size, 0f, Vector2.right * Player.Facing, _dis, LayerMask.GetMask("HurtBox"));
 
         return raycastHit2D;
     }
 
     public SpriteRenderer Appear(Transform target, GameObject HintPrefab)
     {
-        return Instantiate(HintPrefab, target.position + (Vector3)target.GetComponent<Character>().PietaPos, Quaternion.identity, target).GetComponent<SpriteRenderer>();
+        return Instantiate(HintPrefab, target.position + (Vector3)target.transform.parent.GetComponent<Character>().PietaPos, Quaternion.identity, target).GetComponent<SpriteRenderer>();
     }
 
     public void Disappear(PietaTarget pietaTarget)
@@ -89,13 +89,13 @@ public class Pieta : MonoBehaviour
         Debug.DrawLine(Player.transform.position + topLeft2, Player.transform.position + bottomLeft2, Color.yellow);
         Debug.DrawLine(Player.transform.position + bottomRight2, Player.transform.position + bottomLeft2, Color.yellow);
 
-        Collider2D[] far = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * farDis, 0f, LayerMask.GetMask("Character"));
-        Collider2D[] near = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * nearDis, 0f, LayerMask.GetMask("Character"));
+        Collider2D[] far = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * farDis, 0f, LayerMask.GetMask("HurtBox"));
+        Collider2D[] near = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * nearDis, 0f, LayerMask.GetMask("HurtBox"));
 
         //把沒記錄過的加入PietaTargets
         foreach (Collider2D target in far)
         {
-            if (target == Player.Collider)
+            if (target == Player.HurtBox)
                 continue;
 
             bool hasTarget = false;
