@@ -38,7 +38,7 @@ public class DanmakuBaseObj : ScriptableObject
         switch (data.spawnType)
         {
             case SpawnType.Base:
-                bulletSpawnPos =  Vector3Utli.CacuFacing(data.position,_m.Facing) + _m.transform.position;
+                bulletSpawnPos = Vector3Utility.CacuFacing(data.position,_m.Facing) + _m.transform.position;
                 break;
             case SpawnType.Global:
                 bulletSpawnPos = new Vector3(data.position.x, data.position.y);
