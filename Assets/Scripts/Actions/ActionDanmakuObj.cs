@@ -36,7 +36,8 @@ public class ActionDanmakuObj : ActionBaseObj
         {
             foreach (var data in danmaku.bulletSpawnData)
             {
-                Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, data), data.rotation)
+                var rotation = _m.Facing > 0 ? data.rotation : -data.rotation;
+                Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, data), Quaternion.Euler(0f, 0f, rotation))
                     .GetComponent<Bullet>().SetAwake(_m, new Damage(_m.Attack.Final*DamageRatio,DamageType.Normal), danmaku);
                 
                 yield return new WaitForSeconds(danmaku.timeBetweenShots);

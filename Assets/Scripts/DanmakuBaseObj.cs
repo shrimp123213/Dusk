@@ -61,7 +61,7 @@ public class BulletSpawnData
     public Vector3 position;
     
     [Space]
-    public Quaternion rotation;
+    public float rotation;
     
     public BulletSpawnData(BulletSpawnData _bulletSpawnData)
     {

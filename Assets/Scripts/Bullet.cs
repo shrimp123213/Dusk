@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
     {
         Owner = _owner;
         Damage = _damage;
-        Speed = _danmakuData.bulletSpeed * _danmakuData.speedCurve.Evaluate(1f) * Owner.Facing; 
+        Speed = _danmakuData.bulletSpeed * Owner.Facing;
         
         Destroy(gameObject, LifeTime);
         
