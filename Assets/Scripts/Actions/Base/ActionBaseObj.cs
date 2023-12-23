@@ -71,7 +71,7 @@ public class ActionBaseObj : ScriptableObject
     public int MorphRecovery;
 
     public int MorphRecoveryAdditionalByMark;
-    [Space(1f)]
+    [Space(10)]
 
     public float EvadeEnergyRecovery;
 
