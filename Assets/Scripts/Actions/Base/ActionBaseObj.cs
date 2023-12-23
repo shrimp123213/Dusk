@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityParticleSystem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +37,9 @@ public class ActionBaseObj : ScriptableObject
     [Header("是否觸發標記")]
     public bool CanTriggerMark;
 
+    [Header("是否執行開始時清除所有位移")]
+    public bool ClearStoredMoves;
+
     [Header("連技")]
     public List<ActionLink> Links;
 
@@ -63,9 +67,11 @@ public class ActionBaseObj : ScriptableObject
     
     public float MorphCost;
 
-    public float MorphRecovery;
+    [Header("value/100000")]
+    public int MorphRecovery;
 
-    public float MorphRecoveryAdditionalByMark;
+    public int MorphRecoveryAdditionalByMark;
+    [Space(1f)]
 
     public float EvadeEnergyRecovery;
 
@@ -156,6 +162,11 @@ public class ActionBaseObj : ScriptableObject
             _m.TimedLinks.Add(new TimedLink(link));
         }
 
+        if (ClearStoredMoves)
+        {
+            _m.StoredMoves.Clear();
+        }
+
         return new ActionPeformState();
     }
 
@@ -205,12 +216,15 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
+        Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform)), _hitted.transform);
 
         if (IsLightAttack)
             AerutaDebug.i.Feedback.LightAttackCount++;
         //if (IsHeavyAttack)
         //    AerutaDebug.i.Feedback.HeavyAttackCount++;
+
+        if (_hitted.name == "Player")
+            Debug.Log(_hitted.Blocking);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)
@@ -276,7 +290,7 @@ public class ActionBaseObj : ScriptableObject
         {
             currentAttackSpot++;
 
-            Vector3 vector = Vector3Utli.CacuFacing(attackSpot.Offset, _m.Facing);
+            Vector3 vector = Vector3Utility.CacuFacing(attackSpot.Offset, _m.Facing);
             Vector2 debugVector = _m.transform.position + vector;
             Vector2 topRight = attackSpot.Range / 2;
             Vector2 topLeft = new Vector2(-attackSpot.Range.x, attackSpot.Range.y) / 2;
@@ -294,31 +308,31 @@ public class ActionBaseObj : ScriptableObject
             Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.magenta);
             Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.magenta);
             Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.magenta);
-            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("Character"));
+            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("HurtBox"));
             foreach (Collider2D collider2D in array)
             {
-                if (!(collider2D.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject), attackSpot.HitMax)) 
+                if (!(collider2D.transform.parent.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject), attackSpot.HitMax)) 
                 {
                     continue;
                 }
-                bool num = collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.gameObject));
+                bool num = collider2D.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.transform.parent.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
+                _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject));
                 if (num)
                 {
                     _m.AttackLand();
                     //CameraManager.i.GenerateImpulse(DamageRatio);
-                    if (collider2D.gameObject.CompareTag("Breakable"))
+                    if (collider2D.transform.parent.gameObject.CompareTag("Breakable"))
                     {
                         return;
                     }
-                    Character component = collider2D.GetComponent<Character>();
+                    Character component = collider2D.transform.parent.GetComponent<Character>();
                     HitSuccess(_m, component, IHitable, collider2D.ClosestPoint(_m.transform.position + vector));
                     float y = 0f;
                     if (SuckEffect)
                     {
                         y = _m.transform.position.y - component.transform.position.y;
                     }
-                    component.TakeForce(Vector3Utli.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utli.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
+                    component.TakeForce(Vector3Utility.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utility.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
                     _ = (component.transform.position - _m.transform.position).normalized;
                 }
             }

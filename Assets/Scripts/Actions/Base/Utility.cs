@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Vector3Utli : MonoBehaviour
+public class Vector3Utility : MonoBehaviour
 {
     public static int GetFacingByPos(Transform _T1, Transform _T2)
     {
@@ -31,7 +31,7 @@ public class Vector3Utli : MonoBehaviour
     }
 }
 
-public class InputUtli : MonoBehaviour
+public class InputUtility : MonoBehaviour
 {
     public static InputKey GetHighestAxis(float x, float y)
     {
@@ -54,5 +54,19 @@ public class InputUtli : MonoBehaviour
             return InputKey.Up;
         }
         return InputKey.Down;
+    }
+}
+
+public class TransformUtility : MonoBehaviour
+{
+    public static Transform FindTransform(Transform parent, string name)
+    {
+        if (parent.name.Equals(name)) return parent;
+        foreach (Transform child in parent)
+        {
+            Transform result = FindTransform(child, name);
+            if (result != null) return result;
+        }
+        return null;
     }
 }

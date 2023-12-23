@@ -9,6 +9,7 @@ using BehaviorDesigner.Runtime;
 using System.Reflection;
 using Spine.Unity;
 using System.Runtime.ConstrainedExecution;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -18,7 +19,9 @@ public class Character : MonoBehaviour, IHitable
     public Rigidbody2D Rigid;
 
     [HideInInspector]
-    public Collider2D Collider;
+    public Collider2D Collider; 
+    [HideInInspector]
+    public Collider2D HurtBox;
 
     public Vector2 PietaPos;
     public Vector2 MarkPos;
@@ -210,6 +213,7 @@ public class Character : MonoBehaviour, IHitable
     public virtual void OnAwake()
     {
         Collider = GetComponent<Collider2D>();
+        HurtBox = TransformUtility.FindTransform(transform, "HurtBox").GetComponent<Collider2D>();
         Rigid = GetComponent<Rigidbody2D>();
         Player = GetComponent<PlayerMain>();
         Ani = GetComponentInChildren<Animator>();
@@ -343,7 +347,6 @@ public class Character : MonoBehaviour, IHitable
 
     public bool isMaxHit(HittedGameObjectKey key, int _count)
     {
-        Debug.Log(key.attackSpot + key.gameObject.ToString());
         if (!Hitted.ContainsKey(key))
         {
             return false;
@@ -513,7 +516,7 @@ public class Character : MonoBehaviour, IHitable
 
                 float targetTime = forceMovement.Base.Curve.Evaluate(forceMovement.TimeUsed / forceMovement.Base.FinishTime);
 
-                Vector3 vector2 = Vector3.Lerp(forceMovement.StartPosition, forceMovement.StartPosition + Vector3Utli.CacuFacing(forceMovement.Base.TargetDistance, Facing), targetTime);
+                Vector3 vector2 = Vector3.Lerp(forceMovement.StartPosition, forceMovement.StartPosition + Vector3Utility.CacuFacing(forceMovement.Base.TargetDistance, Facing), targetTime);
                 zero += vector2;
 
                 if (forceMovement.TimeUsed >= forceMovement.Base.FinishTime)
@@ -550,7 +553,7 @@ public class Character : MonoBehaviour, IHitable
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }
 
-    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false)
+    public bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = default)
     {
         if (isDead)
         {
@@ -575,7 +578,7 @@ public class Character : MonoBehaviour, IHitable
                 //HitEffect.SetHitStun(false, false, .5f, false);
                 //_attacker.HitEffect.SetHitStun(false, false, .5f, false);
 
-                ((ActionBlockObj)NowAction).Block(this);
+                ((ActionBlockObj)NowAction).Block(this, _ClosestPoint);
 
                 return false;
             }
@@ -703,29 +706,36 @@ public class Character : MonoBehaviour, IHitable
 
     public int TryIsNotBlockedByCharacter()
     {
+        int value = 0;
+
         BoxCollider2D component = GetComponent<BoxCollider2D>();
-        RaycastHit2D[] raycastHit2D = Physics2D.RaycastAll(component.bounds.center, Vector2.right * Facing, component.bounds.extents.x + .1f, LayerMask.GetMask("Character"));
+        RaycastHit2D[] raycastHit2D = Physics2D.RaycastAll(component.bounds.center, Vector2.right * Facing, component.bounds.extents.x + .1f, LayerMask.GetMask("CollisionBlockMove"));
 
-        if (raycastHit2D.Length <= 1)//只有射到自己
-            return 1;
-
-        //if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)阻止玩家無敵時走過敵人
+        //if (raycastHit2D.Length <= 1)//只有射到自己，LayerMask是Character才啟用
         //{
-        //    foreach (RaycastHit2D hit in raycastHit2D)
-        //    {
-        //        if (hit.collider.name != component.name)
-        //        {
-        //            if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
-        //            {
-        //                Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
-        //                return 0;
-        //            }
-        //        }
-        //    }
+        //    value = 1;
+        //    return value;
         //}
 
+        //if ((bool)Player && Player.InvincibleState.InvincibleTime > 0)//阻止玩家無敵時走過敵人
+        {
+            foreach (RaycastHit2D hit in raycastHit2D)
+            {
+                if (hit.collider.transform.parent.name != component.name)
+                {
+                    if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
+                    {
+                        Debug.DrawLine(hit.point, component.bounds.center, Color.red, 2f);
+                        value = 0;
+                        return value;
+                    }
+                }
+            }
+        }
+
         Debug.DrawLine(component.bounds.center, component.bounds.center + (component.bounds.extents.x + .1f) * Vector3.right * Facing, Color.green, 2f);
-        return 1;
+        value = 1;
+        return value;
     }
 
 }
@@ -740,7 +750,7 @@ public enum CharacterStates
 
 public interface IHitable
 {
-    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false);
+    bool TakeDamage(Damage _damage, float _HitStun = .25f, Character _attacker = null, bool isActionInterrupted = false, Vector2 _ClosestPoint = default);
 }
 
 [Serializable]

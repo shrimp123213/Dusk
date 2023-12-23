@@ -20,10 +20,10 @@ MonoBehaviour:
   DamageRatio: 0
   DamageType: 0
   AttackSpots: []
-  HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 0
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links: []
   Moves: []
   Toggles: []
@@ -48,9 +48,11 @@ MonoBehaviour:
   IsMovableY: 0
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
-  PerfectFrameStart: 3
-  NormalFrameStart: 9
-  BackswingFrameStart: 24
+  PerfectFrameStart: 0
+  NormalFrameStart: 6
+  BackswingFrameStart: 18
+  PerfectMorphRecovery: 6250
+  NormalMorphRecovery: 6250
   blockReactions:
   - AnimationKey: BlockPerfect
     OnlyInterruptByDash: 0
@@ -97,8 +99,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      TargetDistance: {x: 2, y: 0}
-      FinishTime: 0.25
+      TargetDistance: {x: -5, y: 0}
+      FinishTime: 0.5
       CanEvade: 0
       StartEvadeFrame: 0
       EndEvadeFrame: 0

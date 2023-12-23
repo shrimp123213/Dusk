@@ -53,8 +53,8 @@ public class ActionPietaObj : ActionBaseObj
         //增加距離至安全位置
         float endPosSafeZoneRadius = 2f;
 
-        Vector3 endPos = new Vector3(Pieta.i.FarestTargetCollider2D.bounds.center.x, _m.transform.position.y) + Vector3Utli.CacuFacing(new Vector3(Pieta.i.FarestTargetCollider2D.bounds.extents.x, 0f) + Vector3.right * endPosSafeZoneRadius, _m.Facing);
-        Collider2D[] array = Physics2D.OverlapBoxAll(endPos, _m.Collider.bounds.size + Vector3.right * 1.5f * endPosSafeZoneRadius, 0f, LayerMask.GetMask("Character"));
+        Vector3 endPos = new Vector3(Pieta.i.FarestTargetCollider2D.bounds.center.x, _m.transform.position.y) + Vector3Utility.CacuFacing(new Vector3(Pieta.i.FarestTargetCollider2D.bounds.extents.x, 0f) + Vector3.right * endPosSafeZoneRadius, _m.Facing);
+        Collider2D[] array = Physics2D.OverlapBoxAll(endPos, _m.Collider.bounds.size + Vector3.right * 1.5f * endPosSafeZoneRadius, 0f, LayerMask.GetMask("HurtBox"));
 
         float longestDis = 0;
         int debug = 0;
@@ -70,14 +70,14 @@ public class ActionPietaObj : ActionBaseObj
             }
 
 
-            array = Physics2D.OverlapBoxAll(endPos, _m.Collider.bounds.size + Vector3.right * 1.5f * endPosSafeZoneRadius, 0f, LayerMask.GetMask("Character"));
+            array = Physics2D.OverlapBoxAll(endPos, _m.Collider.bounds.size + Vector3.right * 1.5f * endPosSafeZoneRadius, 0f, LayerMask.GetMask("HurtBox"));
             foreach (Collider2D collider2D in array)
             {
                 float newDis = Vector2.Distance(_m.transform.position, collider2D.transform.position);
-                if (longestDis < newDis && collider2D.gameObject != _m.gameObject)
+                if (longestDis < newDis && collider2D.transform.parent.gameObject != _m.gameObject)
                 {
                     longestDis = newDis;
-                    endPos = new Vector3(collider2D.bounds.center.x, _m.transform.position.y) + Vector3Utli.CacuFacing(new Vector3(collider2D.bounds.extents.x, 0) + Vector3.right * endPosSafeZoneRadius, _m.Facing);
+                    endPos = new Vector3(collider2D.bounds.center.x, _m.transform.position.y) + Vector3Utility.CacuFacing(new Vector3(collider2D.bounds.extents.x, 0) + Vector3.right * endPosSafeZoneRadius, _m.Facing);
                 }
             }
             
@@ -90,7 +90,7 @@ public class ActionPietaObj : ActionBaseObj
         Pieta.i.CanPietaList.Clear();
         foreach (RaycastHit2D hit in ray)
         {
-            if (hit.collider != _m.Collider)
+            if (hit.collider != _m.HurtBox)
             {
                 PietaTarget pietaTarget = new PietaTarget(hit.collider);
                 pietaTarget.SlicePos = pietaTarget.Collider2D.transform.position;
@@ -147,11 +147,11 @@ public class ActionPietaObj : ActionBaseObj
                 triggeredTargetList.Add(pietaTarget);
                 Vector3 hitPoint = new Vector3(pietaTarget.Collider2D.transform.position.x, _m.transform.position.y + .5f);
                 Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.Euler(new Vector3(0, 0, -10)) : Quaternion.Euler(new Vector3(0, 180, -10)), pietaTarget.Collider2D.transform).transform;
-                slice.localScale *= pietaTarget.Collider2D.GetComponent<Character>().SliceMultiply;
+                slice.localScale *= pietaTarget.Collider2D.transform.parent.GetComponent<Character>().SliceMultiply;
 
                 //造成傷害
-                bool num = pietaTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !pietaTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
-                _m.RegisterHit(new HittedGameObjectKey(0, pietaTarget.Collider2D.gameObject));
+                bool num = pietaTarget.Collider2D.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !pietaTarget.Collider2D.transform.parent.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
+                _m.RegisterHit(new HittedGameObjectKey(0, pietaTarget.Collider2D.transform.parent.gameObject));
                 if (num)
                 {
                     _m.AttackLand();
@@ -160,14 +160,14 @@ public class ActionPietaObj : ActionBaseObj
                     {
                         return;
                     }
-                    Character component = pietaTarget.Collider2D.GetComponent<Character>();
+                    Character component = pietaTarget.Collider2D.transform.parent.GetComponent<Character>();
                     HitSuccess(_m, component, IHitable, hitPoint);
                     float y = 0f;
                     if (SuckEffect)
                     {
                         y = _m.transform.position.y - component.transform.position.y;
                     }
-                    component.TakeForce(Vector3Utli.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utli.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
+                    component.TakeForce(Vector3Utility.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utility.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
                     _ = (component.transform.position - _m.transform.position).normalized;
                 }
             }
@@ -201,7 +201,7 @@ public class ActionPietaObj : ActionBaseObj
 
     public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utli.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
+        Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
         
         AerutaDebug.i.Feedback.PietaCount++;
 

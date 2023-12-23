@@ -49,7 +49,7 @@ public class MorphUser : MonoBehaviour
 
     public void Add(float _progress)
     {
-        MorphProgress += _progress * MorphProgressFactor[MorphCount];
+        MorphProgress += _progress / 100000 * MorphProgressFactor[MorphCount];
         if (MorphProgress >= 1f)
         {
             MorphCount = Mathf.Clamp(MorphCount + (int)Mathf.Floor(MorphProgress), 0, MorphMax);

@@ -20,10 +20,10 @@ MonoBehaviour:
   DamageRatio: 0
   DamageType: 0
   AttackSpots: []
-  HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 0
   CanTriggerMark: 0
+  ClearStoredMoves: 1
   Links: []
   Moves:
   - KeyFrame: -1

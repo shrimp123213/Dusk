@@ -20,10 +20,10 @@ MonoBehaviour:
   DamageRatio: 1
   DamageType: 0
   AttackSpots: []
-  HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 0
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links: []
   Moves:
   - KeyFrame: -1
@@ -65,7 +65,7 @@ MonoBehaviour:
   MorphCost: 1
   MorphRecovery: 0
   MorphRecoveryAdditionalByMark: 0
-  EvadeEnergyRecovery: 0.5
+  EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 1
