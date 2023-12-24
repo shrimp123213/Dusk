@@ -141,6 +141,8 @@ public class ActionBlockObj : ActionBaseObj
             Debug.Log("Normal");
         }
         _m.Ani.Update(0f);
+        _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+        _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
 
         _m.Blocking = false;
 

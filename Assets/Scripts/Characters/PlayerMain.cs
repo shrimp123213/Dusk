@@ -300,6 +300,7 @@ public class PlayerMain : Character
 
     public override bool TryLink(ActionLink link, bool _forceSuccess = false)
     {
+        Debug.Log(ActionState.Frame);
         if (!ActionState.IsInLifeTime(link.Frame, link.LifeTime) || StoredMoves.Count > 0)
         {
             return false;
@@ -310,13 +311,15 @@ public class PlayerMain : Character
             if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
                 return false;
 
-            StartAction(ActionLoader.i.Actions[link.LinkActionId]);
-            
-            Inputs.Clear();
             if (link.CanChangeFace && Xinput != 0f)
             {
                 Facing = ((Xinput > 0f) ? 1 : (-1));
             }
+
+            StartAction(ActionLoader.i.Actions[link.LinkActionId]);
+            
+            Inputs.Clear();
+            
             //AerutaDebug.i.CallEffect(1);
             return true;
         }

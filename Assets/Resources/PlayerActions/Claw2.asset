@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 57e3219ad4d48d24c8ff8349bacca98b, type: 3}
   m_Name: Claw2
   m_EditorClassIdentifier: 
   Id: Claw2
@@ -20,10 +20,10 @@ MonoBehaviour:
   DamageRatio: 0.2
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 2
-    KeyFrameEnd: 7
-    Offset: {x: 1.1, y: 0.15, z: 0}
-    Range: {x: 2.3, y: 1.5}
+  - KeyFrameFrom: 8
+    KeyFrameEnd: 14
+    Offset: {x: 1.1, y: 0.25, z: 0}
+    Range: {x: 2.3, y: 2}
     HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
@@ -34,13 +34,13 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkActionId: Claw3
+    LinkActionId: Claw1
     CanChangeFace: 1
   - Frame: -1
     LifeTime: 0.5
     Key1: 6
     KeyArrow: 0
-    LinkActionId: Claw3
+    LinkActionId: Claw1
     CanChangeFace: 1
   - Frame: 0
     LifeTime: -1
@@ -77,3 +77,4 @@ MonoBehaviour:
   IsMovableY: 1
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 1
+  AnimationKeyClawEnd: Claw2End

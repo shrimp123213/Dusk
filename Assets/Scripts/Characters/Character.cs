@@ -543,6 +543,9 @@ public class Character : MonoBehaviour, IHitable
                 rigidbodyConstraints2D = RigidbodyConstraints2D.None;
             }
         }
+        else if((bool)Player)
+            Player.EvadeState.EvadeDistanceEffect.Stop();//°±¤î¦ì²¾®É
+
         Rigid.constraints = rigidbodyConstraints2D | RigidbodyConstraints2D.FreezeRotation;
         Rigid.velocity = velocity;
         LastPos = base.transform.position;
