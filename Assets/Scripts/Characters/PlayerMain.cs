@@ -300,7 +300,6 @@ public class PlayerMain : Character
 
     public override bool TryLink(ActionLink link, bool _forceSuccess = false)
     {
-        Debug.Log(ActionState.Frame);
         if (!ActionState.IsInLifeTime(link.Frame, link.LifeTime) || StoredMoves.Count > 0)
         {
             return false;

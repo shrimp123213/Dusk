@@ -9,6 +9,8 @@ public class ActionClawObj : ActionBaseObj
 
     public string AnimationKeyClawEnd;
 
+    private List<Animator> ClawEffectAnis = new List<Animator>();
+
     public override void ProcessAction(Character _m)
     {
         ActionPeformState actionState = _m.ActionState;
@@ -27,6 +29,24 @@ public class ActionClawObj : ActionBaseObj
         {
             base.ProcessAction(_m);
         }
+    }
+
+    public override void EndAction(Character _m)
+    {
+        ActionPeformState actionState = _m.ActionState;
+        actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+        if (!actionState.IsAfterFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom + 1))
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (ClawEffectAnis[i] != null)
+                    Destroy(ClawEffectAnis[i].gameObject);
+            }
+        }
+        ClawEffectAnis.Clear();
+
+        base.EndAction(_m);
     }
 
     private void ChangeClip(Character _m)
@@ -55,9 +75,16 @@ public class ActionClawObj : ActionBaseObj
         base.Init(_m);
 
         //Vector3 vector = Vector3Utility.CacuFacing(_m.NowAction.AttackSpots[0].Offset, _m.Facing);
-        Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.25f, -.75f), _m.Facing);
-        Animator ani = Instantiate(AerutaDebug.i.ClawEffect, _m.transform.position + vector, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>();
-        ani.Play(AnimationKey);
-        ani.Update(0f);
+        //Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.25f, -.75f), _m.Facing);
+        ClawEffectAnis.Clear();
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.1f + i * .125f, -.75f - i * .0625f), _m.Facing);
+            ClawEffectAnis.Add(Instantiate(AerutaDebug.i.ClawEffect, _m.transform.position + vector, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>());
+            ClawEffectAnis[i].Play(AnimationKey);
+            ClawEffectAnis[i].Update(0f);
+            ClawEffectAnis[i].transform.localScale = new Vector3(1f + i * .25f, 1f + i * .125f, 1f);
+        }
+
     }
 }

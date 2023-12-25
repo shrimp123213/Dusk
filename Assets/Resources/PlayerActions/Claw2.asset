@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Claw2
   DisplayName: Claw2
-  AnimationKey: Claw2
+  AnimationKey: Claw1
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0.2
@@ -22,8 +22,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 8
     KeyFrameEnd: 14
-    Offset: {x: 1.1, y: 0.25, z: 0}
-    Range: {x: 2.3, y: 2}
+    Offset: {x: 1.4, y: 0.25, z: 0}
+    Range: {x: 3, y: 2}
     HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
