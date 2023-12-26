@@ -29,33 +29,33 @@ public class ActionDanmakuObj : ActionBaseObj
         }
     }
 
-    public void BulletCheckHit(Character _m, Collider2D collider2D)
-    {
-        if (!(collider2D.transform.parent.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject), attackSpot.HitMax))
-        {
-            continue;
-        }
-        bool num = collider2D.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.transform.parent.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
-        _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject));
-        if (num)
-        {
-            _m.AttackLand();
-            //CameraManager.i.GenerateImpulse(DamageRatio);
-            if (collider2D.transform.parent.gameObject.CompareTag("Breakable"))
-            {
-                return;
-            }
-            Character component = collider2D.transform.parent.GetComponent<Character>();
-            HitSuccess(_m, component, IHitable, collider2D.ClosestPoint(_m.transform.position + vector));
-            float y = 0f;
-            if (SuckEffect)
-            {
-                y = _m.transform.position.y - component.transform.position.y;
-            }
-            component.TakeForce(Vector3Utility.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utility.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
-            _ = (component.transform.position - _m.transform.position).normalized;
-        }
-    }
+    //public void BulletCheckHit(Character _m, Collider2D collider2D)
+    //{
+    //    if (!(collider2D.transform.parent.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject), attackSpot.HitMax))
+    //    {
+    //        continue;
+    //    }
+    //    bool num = collider2D.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !collider2D.transform.parent.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction, collider2D.ClosestPoint(_m.transform.position + vector));
+    //    _m.RegisterHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject));
+    //    if (num)
+    //    {
+    //        _m.AttackLand();
+    //        //CameraManager.i.GenerateImpulse(DamageRatio);
+    //        if (collider2D.transform.parent.gameObject.CompareTag("Breakable"))
+    //        {
+    //            return;
+    //        }
+    //        Character component = collider2D.transform.parent.GetComponent<Character>();
+    //        HitSuccess(_m, component, IHitable, collider2D.ClosestPoint(_m.transform.position + vector));
+    //        float y = 0f;
+    //        if (SuckEffect)
+    //        {
+    //            y = _m.transform.position.y - component.transform.position.y;
+    //        }
+    //        component.TakeForce(Vector3Utility.CacuFacing(_m.NowAction.ApplyForce, ForceBasedByPos ? Vector3Utility.GetFacingByPos(_m.transform, component.transform) : _m.Facing), new Vector2(0f, y));
+    //        _ = (component.transform.position - _m.transform.position).normalized;
+    //    }
+    //}
 
     private IEnumerator SpawnBullet(Character _m)
     {

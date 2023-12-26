@@ -57,18 +57,22 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.GetContacts(0));
-
-        if (Awaked && other.CompareTag("Player") && other.GetComponent<Character>().TakeDamage(Damage, 0f, Owner))
+        if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            Death();
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+
+            //if (num)
+                Death();
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (Awaked && other.CompareTag("Player") && other.GetComponent<Character>().TakeDamage(Damage, 0f, Owner))
+        if (Awaked && other.transform.parent.CompareTag("Player"))
         {
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+
+            //if (num)
             Death();
         }
     }
