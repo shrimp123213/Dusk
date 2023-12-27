@@ -16,4 +16,5 @@ public enum DamageType
     Normal,
     Collision,
     Heal,
+    Bullet
 }

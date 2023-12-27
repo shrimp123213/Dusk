@@ -10,12 +10,21 @@ public class ActionDanmakuObj : ActionBaseObj
     
     public int shootKey;
     
+    private bool shooted = false;
+    
+    public override ActionPeformState StartAction(Character _m)
+    {
+        shooted = false;
+        return base.StartAction(_m);
+    }
+    
     public override void ProcessAction(Character _m)
     {
         base.ProcessAction(_m);
         ActionPeformState actionState = _m.ActionState;
-        if (actionState.CanDoThingsThisUpdateVirtual() && actionState.IsAtFrame(this.shootKey))
+        if (actionState.IsAfterFrame(this.shootKey) && !shooted)
         {
+            shooted = true;
             Debug.Log(string.Concat(new object[]
             {
                 "Fire in ",
@@ -64,8 +73,10 @@ public class ActionDanmakuObj : ActionBaseObj
             foreach (var data in danmaku.bulletSpawnData)
             {
                 var rotation = _m.Facing > 0 ? data.rotation : -data.rotation;
+                var damage = new Damage(_m.Attack.Final * DamageRatio,DamageType.Bullet);
+                
                 Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, data), Quaternion.Euler(0f, 0f, rotation))
-                    .GetComponent<Bullet>().SetAwake(_m, new Damage(_m.Attack.Final*DamageRatio,DamageType.Normal), danmaku);
+                    .GetComponent<Bullet>().SetAwake(_m, damage, danmaku);
                 
                 yield return new WaitForSeconds(danmaku.timeBetweenShots);
             }
