@@ -610,6 +610,9 @@ public class Character : MonoBehaviour, IHitable
 
                 //Player.Morph.Consume(Player.Morph.MorphProgress);
 
+                if (Player.CatMode)
+                    _damage.Amount *= 2;
+
                 Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlow(.5f, 0);
 

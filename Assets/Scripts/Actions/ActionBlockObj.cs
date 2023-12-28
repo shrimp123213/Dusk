@@ -65,6 +65,8 @@ public class ActionBlockObj : ActionBaseObj
             _m.SetAnimationIdle();
         }
 
+        _m.Blocking = false;
+
         _m.NowAction = null;
         if (EndActionFloatTime > 0f)
         {
