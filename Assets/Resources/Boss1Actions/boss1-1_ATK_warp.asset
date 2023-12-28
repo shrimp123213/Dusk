@@ -22,9 +22,9 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 87
     KeyFrameEnd: 93
-    Offset: {x: 4, y: 1, z: 0}
-    Range: {x: 8, y: 3}
-  - KeyFrameFrom: 151
+    Offset: {x: 4, y: 0.5, z: 0}
+    Range: {x: 7, y: 2}
+  - KeyFrameFrom: 153
     KeyFrameEnd: 158
     Offset: {x: -3, y: 2, z: 0}
     Range: {x: 5, y: 3}

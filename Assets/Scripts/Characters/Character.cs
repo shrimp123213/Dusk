@@ -590,7 +590,8 @@ public class Character : MonoBehaviour, IHitable
             //DOTween.Sequence().Append(component.DOFade(1.75f, 0.1f));//.Append(component.DOFade(1f, 0.15f));
             //DOTween.Sequence().Append(component.DOColor(new Color(1f, 0.675f, 0.675f), 0.1f)).Append(component.DOColor(Color.white, 0.25f));
             //Debug.Log("Hit : " + base.gameObject.name);
-            LowGravityTime = 0.665f;
+            if (_damage.Type != DamageType.Bullet)
+                LowGravityTime = 0.665f;
             HitEffect.SetHitStun(isActionInterrupted, ImmuneStunAction, _HitStun);
             //if ((bool)AITree)
             //{

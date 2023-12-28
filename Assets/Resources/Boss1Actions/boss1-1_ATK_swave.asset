@@ -22,8 +22,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 85
     KeyFrameEnd: 95
-    Offset: {x: 4, y: 4, z: 0}
-    Range: {x: 4, y: 8}
+    Offset: {x: 3.5, y: 4, z: 0}
+    Range: {x: 5, y: 8}
   HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
