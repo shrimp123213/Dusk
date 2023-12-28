@@ -24,15 +24,18 @@ public class Bullet : MonoBehaviour
         Rigid = GetComponent<Rigidbody2D>();
     }
     
-    public void SetAwake(Character _owner, Damage _damage, DanmakuBaseObj _danmakuData)
+    public void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
     {
         Owner = _owner;
         Damage = _damage;
         Speed = _danmakuData.bulletSpeed * Owner.Facing;
         
         Destroy(gameObject, LifeTime);
+        foreach (var data in _danmakuData.bulletSpawnData)
+        {
+            StartCoroutine(ButtleStartUp(_delay));
+        }
         
-        StartCoroutine(ButtleStartUp(_danmakuData.timeBetweenShots));
     }
     
     private void FixedUpdate()
@@ -79,7 +82,8 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator ButtleStartUp(float _delay)
     {
-        yield return new WaitForSeconds(0);
+        Debug.Log("Fire in " + _delay + "s");
+        yield return new WaitForSeconds(_delay);
         Awaked = true;
         yield break;
     }

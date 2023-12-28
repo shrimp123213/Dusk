@@ -22,9 +22,9 @@ public class DanmakuBaseObj : ScriptableObject
     
     [Header("追尾設定")]
     public float rotationSpeed;
-    
+
     [Header("射擊頻率")]
-    public float timeBetweenShots = 0.5f;
+    public float timeBetweenShots = 0f;
     public int shotsPerInterval = 1;
     
     [Space]
@@ -33,12 +33,12 @@ public class DanmakuBaseObj : ScriptableObject
     
     private Vector3 bulletSpawnPos;
     
-    public Vector3 SetBulletSpawnPos(Character _m, BulletSpawnData data)
+    public Vector3 SetBulletSpawnPos(Character _m, Vector3 mPosition, BulletSpawnData data)
     {
         switch (data.spawnType)
         {
             case SpawnType.Base:
-                bulletSpawnPos = Vector3Utility.CacuFacing(data.position,_m.Facing) + _m.transform.position;
+                bulletSpawnPos = Vector3Utility.CacuFacing(data.position,_m.Facing) + mPosition;
                 break;
             case SpawnType.Global:
                 bulletSpawnPos = new Vector3(data.position.x, data.position.y);
@@ -56,15 +56,21 @@ public class DanmakuBaseObj : ScriptableObject
 [Serializable]
 public class BulletSpawnData
 {
+    public int shootKey;
     public DanmakuType danmakuType;
     public SpawnType spawnType;
     public Vector3 position;
+    
+    [Space]
+    public float shotsDelay = 0;
     
     [Space]
     public float rotation;
     
     public BulletSpawnData(BulletSpawnData _bulletSpawnData)
     {
+        shotsDelay = _bulletSpawnData.shotsDelay;
+        shootKey = _bulletSpawnData.shootKey;
         danmakuType = _bulletSpawnData.danmakuType;
         spawnType = _bulletSpawnData.spawnType;
         position = _bulletSpawnData.position;

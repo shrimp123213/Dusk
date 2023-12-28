@@ -8,9 +8,10 @@ public class ActionDanmakuObj : ActionBaseObj
     [Header("彈幕設定")]
     public DanmakuBaseObj danmaku;
     
-    public int shootKey;
+    //private int shootKey;
     
     private bool shooted = false;
+    private Vector3 _mPosition;
     
     public override ActionPeformState StartAction(Character _m)
     {
@@ -22,20 +23,25 @@ public class ActionDanmakuObj : ActionBaseObj
     {
         base.ProcessAction(_m);
         ActionPeformState actionState = _m.ActionState;
-        if (actionState.IsAfterFrame(this.shootKey) && !shooted)
+        foreach (var data in danmaku.bulletSpawnData)
         {
-            shooted = true;
-            Debug.Log(string.Concat(new object[]
+            if (actionState.IsAfterFrame(data.shootKey) && !shooted)
             {
-                "Fire in ",
-                this.shootKey,
-                "/",
-                actionState.Frame,
-                "/",
-                actionState.LastFrame
-            }));
-            _m.StartCoroutine(this.SpawnBullet(_m));
+                shooted = true;
+                _mPosition = _m.transform.position;
+                Debug.Log(string.Concat(new object[]
+                {
+                    "Fire in ",
+                    data.shootKey,
+                    "/",
+                    actionState.Frame,
+                    "/",
+                    actionState.LastFrame
+                }));
+                _m.StartCoroutine(this.SpawnBullet(_m));
+            }
         }
+        
     }
 
     //public void BulletCheckHit(Character _m, Collider2D collider2D)
@@ -74,9 +80,10 @@ public class ActionDanmakuObj : ActionBaseObj
             {
                 var rotation = _m.Facing > 0 ? data.rotation : -data.rotation;
                 var damage = new Damage(_m.Attack.Final * DamageRatio,DamageType.Bullet);
+                var position = _mPosition;
                 
-                Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, data), Quaternion.Euler(0f, 0f, rotation))
-                    .GetComponent<Bullet>().SetAwake(_m, damage, danmaku);
+                Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation))
+                    .GetComponent<Bullet>().SetAwake(_m, data.shotsDelay, damage, danmaku);
                 
                 yield return new WaitForSeconds(danmaku.timeBetweenShots);
             }
