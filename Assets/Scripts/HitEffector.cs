@@ -114,7 +114,7 @@ public class HitEffector : MonoBehaviour
 
     public void SetHitStun(bool _isActionInterrupted, bool _IsImmuneStunAction, float _HitStun = .25f, bool _ShakeCharacter = true)
     {
-        if (!isActionInterrupted)//Á×§K³Q¥´²Ä¤@¦¸¤¤Â_¦æ°Ê«á³Q¥´²Ä¤G¦¸ªº§ğÀ»¨S¦³ªş¥[¤¤Â_¾É­Pµ²§ô·w¯t«á¨S¦³¦^¨ìIdle
+        if (!isActionInterrupted)//é¿å…è¢«æ‰“ç¬¬ä¸€æ¬¡ä¸­æ–·è¡Œå‹•å¾Œè¢«æ‰“ç¬¬äºŒæ¬¡çš„æ”»æ“Šæ²’æœ‰é™„åŠ ä¸­æ–·å°è‡´çµæŸæšˆçœ©å¾Œæ²’æœ‰å›åˆ°Idle
             isActionInterrupted = _isActionInterrupted;
 
         isImmuneStunAction = _IsImmuneStunAction;

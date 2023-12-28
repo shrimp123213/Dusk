@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     public Damage Damage;
     
     private float Speed;
-    private float LifeTime = 3f;
+    public float LifeTime = 3f;
     
     private bool Dead = false;
     private bool Awaked = false;

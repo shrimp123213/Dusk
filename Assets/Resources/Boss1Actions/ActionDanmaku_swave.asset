@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b642b81af3900234484470c6cec47567, type: 3}
-  m_Name: ActionDanmaku
+  m_Name: ActionDanmaku_swave
   m_EditorClassIdentifier: 
-  Id: DanmakuTest
+  Id: ActionDanmaku_swave
   DisplayName: 
   AnimationKey: boss1-1_ATK_swave
   InterruptLevel: 0
@@ -28,6 +28,7 @@ MonoBehaviour:
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links: []
   Moves: []
   Toggles: []
