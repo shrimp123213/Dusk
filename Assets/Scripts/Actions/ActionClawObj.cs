@@ -13,6 +13,15 @@ public class ActionClawObj : ActionBaseObj
 
     private List<Animator> ClawEffectAnis = new List<Animator>();
 
+    private bool soundPlayed;
+
+    public override ActionPeformState StartAction(Character _m)
+    {
+        soundPlayed = false;
+
+        return base.StartAction(_m);
+    }
+
     public override void ProcessAction(Character _m)
     {
         ActionPeformState actionState = _m.ActionState;
@@ -31,20 +40,28 @@ public class ActionClawObj : ActionBaseObj
         {
             base.ProcessAction(_m);
         }
+
+        if (!soundPlayed && actionState.IsAfterFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom - 1))
+        {
+            soundPlayed = true;
+            AudioManager.i.PlaySound("Claw");
+            //Debug.Log("PlaySound");
+        }
     }
 
     public override void EndAction(Character _m)
     {
         ActionPeformState actionState = _m.ActionState;
-        actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        //actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
-        if (!actionState.IsAfterFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom + 1))
+        if (actionState.IsBeforeFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom))
         {
             for (int i = 0; i < ClawEffectCount; i++)
             {
                 if (ClawEffectAnis[i] != null)
                     Destroy(ClawEffectAnis[i].gameObject);
             }
+            //Debug.Log("ClearEffect");
         }
         ClawEffectAnis.Clear();
 

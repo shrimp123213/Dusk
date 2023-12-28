@@ -339,6 +339,7 @@ public class ActionBaseObj : ScriptableObject
                     _ = (component.transform.position - _m.transform.position).normalized;
                 }
             }
+            //Debug.Log("attacking");
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
         //oldLinks

@@ -49,10 +49,10 @@ MonoBehaviour:
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
   PerfectFrameStart: 0
-  NormalFrameStart: 10
+  NormalFrameStart: 12
   BackswingFrameStart: 20
-  PerfectMorphRecovery: 12500
-  NormalMorphRecovery: 12500
+  PerfectMorphRecovery: 16667
+  NormalMorphRecovery: 16667
   blockReactions:
   - AnimationKey: CatBlockPerfect
     OnlyInterruptByDash: 0
