@@ -171,6 +171,9 @@ public class ActionPietaObj : ActionBaseObj
                     _ = (component.transform.position - _m.transform.position).normalized;
                 }
             }
+
+            _m.HitEffect.SetGlobalSlow(.5f, 1);
+
         }
         
 
@@ -211,6 +214,8 @@ public class ActionPietaObj : ActionBaseObj
     public override void EndAction(Character _m)
     {
         _m.Player.EvadeState.EvadeReady(true);
+
+        _m.Player.SwitchMode();
 
         base.EndAction(_m);
     }

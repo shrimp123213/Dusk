@@ -22,8 +22,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 8
     KeyFrameEnd: 14
-    Offset: {x: 1.4, y: 0.25, z: 0}
-    Range: {x: 3, y: 2}
+    Offset: {x: 1.5, y: 0.2, z: 0}
+    Range: {x: 3.1, y: 1.7}
     HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
@@ -54,6 +54,18 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: Pieta
     CanChangeFace: 1
+  - Frame: 18
+    LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
   Moves: []
   Toggles: []
   Teleports: []
@@ -77,4 +89,5 @@ MonoBehaviour:
   IsMovableY: 1
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 1
-  AnimationKeyClawEnd: Claw2End
+  AnimationKeyClawEnd: Claw1End
+  ClawEffectCount: 3

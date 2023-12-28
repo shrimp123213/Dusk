@@ -9,6 +9,8 @@ public class ActionClawObj : ActionBaseObj
 
     public string AnimationKeyClawEnd;
 
+    public int ClawEffectCount;
+
     private List<Animator> ClawEffectAnis = new List<Animator>();
 
     public override void ProcessAction(Character _m)
@@ -38,7 +40,7 @@ public class ActionClawObj : ActionBaseObj
 
         if (!actionState.IsAfterFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom + 1))
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < ClawEffectCount; i++)
             {
                 if (ClawEffectAnis[i] != null)
                     Destroy(ClawEffectAnis[i].gameObject);
@@ -77,7 +79,7 @@ public class ActionClawObj : ActionBaseObj
         //Vector3 vector = Vector3Utility.CacuFacing(_m.NowAction.AttackSpots[0].Offset, _m.Facing);
         //Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.25f, -.75f), _m.Facing);
         ClawEffectAnis.Clear();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < ClawEffectCount; i++)
         {
             Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.1f + i * .125f, -.75f - i * .0625f), _m.Facing);
             ClawEffectAnis.Add(Instantiate(AerutaDebug.i.ClawEffect, _m.transform.position + vector, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>());
