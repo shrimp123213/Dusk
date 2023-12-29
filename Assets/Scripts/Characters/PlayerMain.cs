@@ -489,6 +489,9 @@ public class PlayerMain : Character
         }
         else
             waitSliderHealthMove -= Time.deltaTime;
+
+        if (CatMode)
+            Morph.Add(Time.deltaTime * .035f * 100000);
     }
 
     public void HealthChenged()

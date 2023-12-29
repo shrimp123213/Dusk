@@ -38,7 +38,7 @@ public class AerutaDebug : MonoBehaviour
     {
         i = this;
 
-        if (ControlGamepad.enabled || ControlKeyboard.enabled)
+        //if (ControlGamepad.enabled || ControlKeyboard.enabled)
             Time.timeScale = 0f;
     }
 
@@ -107,15 +107,26 @@ public class AerutaDebug : MonoBehaviour
 
     public void CloseUI()
     {
-        if (ControlGamepad.enabled && !ControlKeyboard.enabled)
+        //if (ControlGamepad.enabled && !ControlKeyboard.enabled)
+        //{
+        //    ControlGamepad.enabled = false;
+        //    ControlKeyboard.enabled = true;
+        //}
+        //else if (!ControlGamepad.enabled && ControlKeyboard.enabled)
+        //{
+        //    ControlGamepad.enabled = false;
+        //    ControlKeyboard.enabled = false;
+        //    Time.timeScale = 1f;
+        //}
+        if (ControlGamepad.gameObject.activeSelf && !ControlKeyboard.gameObject.activeSelf)
         {
-            ControlGamepad.enabled = false;
-            ControlKeyboard.enabled = true;
+            ControlGamepad.gameObject.SetActive(false);
+            ControlKeyboard.gameObject.SetActive(true);
         }
-        else if (!ControlGamepad.enabled && ControlKeyboard.enabled)
+        else if (!ControlGamepad.gameObject.activeSelf && ControlKeyboard.gameObject.activeSelf)
         {
-            ControlGamepad.enabled = false;
-            ControlKeyboard.enabled = false;
+            ControlGamepad.gameObject.SetActive(false);
+            ControlKeyboard.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
     }
