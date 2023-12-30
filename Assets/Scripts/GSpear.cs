@@ -1,50 +1,26 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class GSpear : Bullet
 {
-    [HideInInspector]
-    public Rigidbody2D Rigid;
-
-    public string ParentActionID;
-
-    public Character Owner;
-    public Damage Damage;
+    Animator anim;
     
-    protected float Speed;
-    public float LifeTime = 3f;
-    
-    public enum Type
+    void Awake()
     {
-        Bullet,
-        GSpear
-    }
-    public Type TypeOfBullet;
-    
-    [SerializeField]
-    protected bool Dead = false;
-    [SerializeField]
-    protected bool Awaked = false;
-
-    private void Awake()
-    {
-        Rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
     
-    public virtual void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
+    public override void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
     {
         Owner = _owner;
         Damage = _damage;
-        Speed = _danmakuData.bulletSpeed * Owner.Facing;
         
         Destroy(gameObject, LifeTime);
         foreach (var data in _danmakuData.bulletSpawnData)
         {
             StartCoroutine(ButtleStartUp(_delay));
         }
-        
     }
     
     private void FixedUpdate()
@@ -60,19 +36,32 @@ public class Bullet : MonoBehaviour
                 break;
             
         }
-        
-    }
 
-    public virtual void Death()
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            Death();
+        }
+    }
+    
+    public override void Death()
     {
         if(Dead)
             return;
         
         Dead = true;
         Awaked = false;
-        Rigid.velocity = Vector2.zero;
-        GetComponent<CapsuleCollider2D>().isTrigger = false;
+        //Rigid.velocity = Vector2.zero;
+        GetComponent<BoxCollider2D>().isTrigger = false;
         Destroy(gameObject);
+    }
+    
+    private IEnumerator ButtleStartUp(float _delay)
+    {
+        Debug.Log("Fire in " + _delay + "s");
+        yield return new WaitForSeconds(_delay);
+        Awaked = true;
+        anim.Play("Action");
+        yield break;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -82,7 +71,7 @@ public class Bullet : MonoBehaviour
             bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
-                Death();
+            Death();
         }
     }
 
@@ -95,13 +84,5 @@ public class Bullet : MonoBehaviour
             //if (num)
             Death();
         }
-    }
-
-    private IEnumerator ButtleStartUp(float _delay)
-    {
-        Debug.Log("Fire in " + _delay + "s");
-        yield return new WaitForSeconds(_delay);
-        Awaked = true;
-        yield break;
     }
 }
