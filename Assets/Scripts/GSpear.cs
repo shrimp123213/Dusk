@@ -64,7 +64,8 @@ public class GSpear : Bullet
             bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
-            Death();
+            if(other.TryGetComponent<Character>(out var character) && !character.Evading)
+                Death();
         }
     }
 
@@ -75,7 +76,8 @@ public class GSpear : Bullet
             bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
-            Death();
+            if(other.TryGetComponent<Character>(out var character) && !character.Evading)
+                Death();
         }
     }
 }
