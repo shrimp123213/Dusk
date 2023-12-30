@@ -52,7 +52,14 @@ public class ActionPeformState
 
     public bool IsAfterFrame(int _frame)
     {
-        return (double)ActionTime > (double)_frame / (double)TotalFrame;
+        //return (double)ActionTime > (double)_frame / (double)TotalFrame;
+        return Frame > _frame;
+    }
+
+    public bool IsBeforeFrame(int _frame)
+    {
+        //return (double)ActionTime > (double)_frame / (double)TotalFrame;
+        return Frame < _frame;
     }
 
     public virtual bool IsInLifeTime(int _frame, float _lifeTime)

@@ -65,6 +65,10 @@ public class PlayerMain : Character
 
     public Vector2 ButterflyPos;
 
+    public bool CatMode;
+
+    [SerializeField] private SpriteRenderer CatModeSprite;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -98,6 +102,8 @@ public class PlayerMain : Character
 
         topMoveSpeed = .2f;
         bottomMoveSpeed = .2f;
+
+        CatMode = false;
     }
 
     private void Start()
@@ -140,65 +146,106 @@ public class PlayerMain : Character
         //    NowAction.EndAction(this);
         //    Inputs.Remove(InputKey.Claw);
         //}
-        if (Inputs.Contains(InputKey.Dash))
+        if (!CatMode)
         {
-            if (!base.isActing || (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta"))
+            if (Inputs.Contains(InputKey.Dash))
             {
-                if (!Blocking)
+                if (!base.isActing || (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta"))
                 {
-                    if (Xinput != 0f)
+                    if (!Blocking)
                     {
-                        Facing = ((Xinput > 0f) ? 1 : (-1));
+                        if (Xinput != 0f)
+                        {
+                            Facing = ((Xinput > 0f) ? 1 : (-1));
+                        }
+
+                        StartAction(ActionLoader.i.Actions["Dash"]);
+
+                        //Morph.Consume();
+                        //CanDash = false;
+
+                        Inputs.Clear();
                     }
-
-                    StartAction(ActionLoader.i.Actions["Dash"]);
-
-                    //Morph.Consume();
-                    //CanDash = false;
-
+                }
+            }
+            if (!base.isActing)
+            {
+                if (Inputs.Contains(InputKey.Pieta))
+                {
+                    if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
+                    {
+                        StartAction(ActionLoader.i.Actions["Pieta"]);
+                    }
+                    Inputs.Clear();
+                }
+                if (Inputs.Contains(InputKey.Block))
+                {
+                    StartAction(ActionLoader.i.Actions["Block"]);
+                    Inputs.Clear();
+                }
+                if (Inputs.Contains(InputKey.Claw) && CanAttack)
+                {
+                    StartAction(ActionLoader.i.Actions["Claw1"]);
+                    Inputs.Clear();
+                }
+                if (Inputs.Contains(InputKey.Heal))
+                {
+                    if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                    {
+                        StartAction(ActionLoader.i.Actions["Heal"]);
+                        Potions[Potions.Count - 1].enabled = false;
+                        Potions.RemoveAt(Potions.Count - 1);
+                        AerutaDebug.i.Feedback.HealCount++;
+                    }
                     Inputs.Clear();
                 }
             }
         }
-        if (!base.isActing)
+        else
         {
-            if (Inputs.Contains(InputKey.Pieta))
+            if (Inputs.Contains(InputKey.Dash))
             {
-                if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
+                if (!base.isActing || (base.isActing && NowAction.Id != "CatDash" && NowAction.Id != "CatPieta"))
                 {
-                    StartAction(ActionLoader.i.Actions["Pieta"]);
+                    if (!Blocking)
+                    {
+                        if (Xinput != 0f)
+                        {
+                            Facing = ((Xinput > 0f) ? 1 : (-1));
+                        }
+
+                        StartAction(ActionLoader.i.Actions["CatDash"]);
+
+                        //Morph.Consume();
+                        //CanDash = false;
+
+                        Inputs.Clear();
+                    }
                 }
-                Inputs.Clear();
             }
-            if (Inputs.Contains(InputKey.Block))
+            if (!base.isActing)
             {
-                StartAction(ActionLoader.i.Actions["Block"]);
-                Inputs.Clear();
-            }
-            if (Inputs.Contains(InputKey.Claw) && CanAttack)
-            {
-                StartAction(ActionLoader.i.Actions["Claw1"]);
-                Inputs.Clear();
-            }
-            //if (Inputs.Contains(InputKey.Ult) && CanAttack)
-            //{
-            //    if (TryCastAction(ActionLoader.i.Actions["Penetrate"]))
-            //        StartAction(ActionLoader.i.Actions["Penetrate"]);
-            //
-            //    Inputs.Clear();
-            //}
-            if (Inputs.Contains(InputKey.Heal))
-            {
-                if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                if (Inputs.Contains(InputKey.Pieta))
                 {
-                    StartAction(ActionLoader.i.Actions["Heal"]);
-                    Potions[Potions.Count - 1].enabled = false;
-                    Potions.RemoveAt(Potions.Count - 1);
-                    AerutaDebug.i.Feedback.HealCount++;
+                    if (TryCastAction(ActionLoader.i.Actions["CatPieta"]))
+                    {
+                        StartAction(ActionLoader.i.Actions["CatPieta"]);
+                    }
+                    Inputs.Clear();
                 }
-                Inputs.Clear();
+                if (Inputs.Contains(InputKey.Block))
+                {
+                    StartAction(ActionLoader.i.Actions["CatBlock"]);
+                    Inputs.Clear();
+                }
+                if (Inputs.Contains(InputKey.Claw) && CanAttack)
+                {
+                    StartAction(ActionLoader.i.Actions["CatClaw1"]);
+                    Inputs.Clear();
+                }
             }
         }
+        
     }
 
     public override void TriggerMark()
@@ -237,7 +284,7 @@ public class PlayerMain : Character
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
-        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.Id != "Pieta" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
+        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.Id != "Pieta" && _actionBaseObj.Id != "CatPieta" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
         {
             flag = false;
             if (isShowMessage)
@@ -250,7 +297,7 @@ public class PlayerMain : Character
                 SkillPopup.i.ShowMessage("No Potions !");
         }
 
-        if (flag && _actionBaseObj.Id == "Pieta" && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack(this)))
+        if (flag && (_actionBaseObj.Id == "Pieta" || _actionBaseObj.Id == "CatPieta") && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack(this)))
         {
             flag = false;
         }
@@ -310,13 +357,15 @@ public class PlayerMain : Character
             if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
                 return false;
 
-            StartAction(ActionLoader.i.Actions[link.LinkActionId]);
-            
-            Inputs.Clear();
             if (link.CanChangeFace && Xinput != 0f)
             {
                 Facing = ((Xinput > 0f) ? 1 : (-1));
             }
+
+            StartAction(ActionLoader.i.Actions[link.LinkActionId]);
+            
+            Inputs.Clear();
+            
             //AerutaDebug.i.CallEffect(1);
             return true;
         }
@@ -440,6 +489,9 @@ public class PlayerMain : Character
         }
         else
             waitSliderHealthMove -= Time.deltaTime;
+
+        if (CatMode)
+            Morph.Add(Time.deltaTime * .035f * 100000);
     }
 
     public void HealthChenged()
@@ -475,5 +527,15 @@ public class PlayerMain : Character
     public void ResetDash()
     {
         CanDash = true;
+    }
+
+    public void SwitchMode()
+    {
+        CatMode = !CatMode;
+        CatModeSprite.enabled = CatMode;
+        if (CatMode)
+            Speed.BaseAdd(2.5f);
+        else
+            Speed.BaseAdd(-2.5f);
     }
 }

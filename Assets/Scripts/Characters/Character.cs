@@ -543,6 +543,9 @@ public class Character : MonoBehaviour, IHitable
                 rigidbodyConstraints2D = RigidbodyConstraints2D.None;
             }
         }
+        else if((bool)Player)
+            Player.EvadeState.EvadeDistanceEffect.Stop();//°±¤î¦ì²¾®É
+
         Rigid.constraints = rigidbodyConstraints2D | RigidbodyConstraints2D.FreezeRotation;
         Rigid.velocity = velocity;
         LastPos = base.transform.position;
@@ -606,6 +609,9 @@ public class Character : MonoBehaviour, IHitable
                     AerutaDebug.i.Feedback.CollisionCount++;
 
                 //Player.Morph.Consume(Player.Morph.MorphProgress);
+
+                if (Player.CatMode)
+                    _damage.Amount *= 2;
 
                 Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlow(.5f, 0);

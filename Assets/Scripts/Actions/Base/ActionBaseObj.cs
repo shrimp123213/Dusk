@@ -71,7 +71,7 @@ public class ActionBaseObj : ScriptableObject
     public int MorphRecovery;
 
     public int MorphRecoveryAdditionalByMark;
-    [Space(1f)]
+    [Space(10)]
 
     public float EvadeEnergyRecovery;
 
@@ -182,7 +182,7 @@ public class ActionBaseObj : ScriptableObject
 
     public void TryEvade(Character _m, ActionPeformState actionState)
     {
-        if (_m.Evading == false && !((bool)_m.Player && _m.Player.EvadeState.CanEvade))//°{Á×µ²§ô
+        if (_m.Evading == false && !((bool)_m.Player && _m.Player.EvadeState.CanEvade))//°{Á×µL¼Äµ²§ô
         {
             return;
         }
@@ -194,18 +194,21 @@ public class ActionBaseObj : ScriptableObject
                 if ((bool)_m.Player && _m.Player.EvadeState.CanEvade && !actionState.IsAfterFrame(movement.StartEvadeFrame))
                 {
                     _m.Player.EvadeState.UseEvade(_m);
+                    _m.Player.EvadeState.EvadingTransparency();
                     break;
                 }
                 else if (_m.Evading == true && actionState.IsWithinFrame(movement.StartEvadeFrame, movement.EndEvadeFrame))
                 {
+                    _m.Player.EvadeState.EvadingTransparency();
                     break;
                 }
                 else
                 {
+                    _m.Player.EvadeState.ReturnTransparency();
                     _m.Evading = false;
                     if ((bool)_m.Player)
                     {
-                        _m.Player.EvadeState.EvadeDistanceEffect.Stop();
+                        //_m.Player.EvadeState.EvadeDistanceEffect.Stop();//°±¤î°{Á×µL¼Ä®É
                     }
                     break;
                 }
@@ -336,6 +339,7 @@ public class ActionBaseObj : ScriptableObject
                     _ = (component.transform.position - _m.transform.position).normalized;
                 }
             }
+            //Debug.Log("attacking");
         }
         TryRegisterMove(_m, actionState.YinputWhenAction);
         //oldLinks

@@ -1,3 +1,4 @@
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class EvadeState : MonoBehaviour
     public GameObject EvadeFinishCooldownEffect;
 
     public GameObject EvadeSuccessEffect;
+
+    public SkeletonMecanim Renderer;
 
     private void Start()
     {
@@ -59,9 +62,21 @@ public class EvadeState : MonoBehaviour
         var main = EvadeCanUseEffect.main;
         main.loop = false;
         
-        //EvadeDistanceEffect.Play();
-        //EvadeDistanceEffect.transform.rotation = _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180);
+        EvadeDistanceEffect.Play();
+        EvadeDistanceEffect.transform.rotation = _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180);
 
         _m.Evading = true;
+    }
+
+    public void EvadingTransparency()
+    {
+        Color currentColor = Renderer.skeleton.GetColor();
+        Renderer.skeleton.SetColor(new Color(currentColor.r, currentColor.g, currentColor.b, .5f));
+    }
+
+    public void ReturnTransparency()
+    {
+        Color currentColor = Renderer.skeleton.GetColor();
+        Renderer.skeleton.SetColor(new Color(currentColor.r, currentColor.g, currentColor.b, 1f));
     }
 }
