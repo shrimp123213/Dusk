@@ -65,7 +65,8 @@ MonoBehaviour:
         Animation","Instant":true,"StringReverseAnimationName":"boss1-1_AC_warpout_wo","SharedCharacterSelfCharacter":{"Type":"SharedCharacter","Name":null}},{"Type":"EnemyStartAction","NodeData":{"Offset":"(-140,110)","Comment":"boss1-1_ATK_warp"},"ID":64,"Name":"Enemy
         Start Action","Instant":true,"SharedTransformTarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},"ActionBaseObjAction":21,"BooleanFlip":false,"BooleanCheckFacing":true,"Int32Facing":0,"SharedCharacterSelfCharacter":{"Type":"SharedCharacter","Name":null}},{"Type":"EnemyStartAction","NodeData":{"Offset":"(0,110)","Comment":"boss1-1_ATK_swave"},"ID":65,"Name":"Enemy
         Start Action","Instant":true,"SharedTransformTarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},"ActionBaseObjAction":22,"BooleanFlip":false,"BooleanCheckFacing":true,"Int32Facing":0,"SharedCharacterSelfCharacter":{"Type":"SharedCharacter","Name":null}}]}]}]}]}]}]},"DetachedTasks":[{"Type":"EnemyShootBullet","NodeData":{"Offset":"(857.430542,1440.93347)"},"ID":66,"Name":"Enemy
-        Shoot Bullet","Instant":true,"List`1BulletSpawnPosition":[],"SingleBulletSpeed":0,"SharedCharacterSelfCharacter":{"Type":"SharedCharacter","Name":null}}],"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},{"Type":"SharedCharacter","Name":"SelfCharacter","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"TeleportTargetPos","IsShared":true,"Vector2mValue":"(0,0)"}]}'
+        Shoot Bullet","Instant":true,"List`1BulletSpawnPosition":[],"SingleBulletSpeed":0,"SharedCharacterSelfCharacter":{"Type":"SharedCharacter","Name":null}},{"Type":"BossAction_Shoot","NodeData":{"Offset":"(-995.8619,1165.83215)"},"ID":67,"Name":"Boss
+        Action   Shoot","Instant":true,"SharedTransformTarget":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},"ActionBaseObjAction":23,"BooleanFlip":false,"BooleanCheckFacing":true,"Int32Facing":0,"SharedCharacterSelfCharacter":{"Type":"SharedCharacter","Name":null}}],"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},{"Type":"SharedCharacter","Name":"SelfCharacter","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector2","Name":"TeleportTargetPos","IsShared":true,"Vector2mValue":"(0,0)"}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -78,7 +79,7 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 7388b17cb6ba7904db327eab9e647c2a, type: 2}
         - {fileID: 11400000, guid: cf7d9467d919e7647a693be756204d8a, type: 2}
         - {fileID: 11400000, guid: 5b147752b4740534b97971a314cdb772, type: 2}
-        - {fileID: 11400000, guid: 4199577578084d641b163ce4957231e4, type: 2}
+        - {fileID: 11400000, guid: 6e4a2012ef7c78c43918e8a5cbd788a0, type: 2}
         - {fileID: 11400000, guid: 9cf0489ed7e91604ab59242216bbb771, type: 2}
         - {fileID: 11400000, guid: 56637b4c25d3c4b439a420650b799b90, type: 2}
         - {fileID: 11400000, guid: d06892a59a4f3f1429138dd7953562e5, type: 2}
@@ -95,6 +96,7 @@ MonoBehaviour:
         - {fileID: 11400000, guid: d06892a59a4f3f1429138dd7953562e5, type: 2}
         - {fileID: 11400000, guid: 5b147752b4740534b97971a314cdb772, type: 2}
         - {fileID: 11400000, guid: 6e4a2012ef7c78c43918e8a5cbd788a0, type: 2}
+        - {fileID: 11400000, guid: 7388b17cb6ba7904db327eab9e647c2a, type: 2}
         byteData: 
         byteDataArray: 
       Version: 1.7.7

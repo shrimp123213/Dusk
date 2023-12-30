@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class GSpear : Bullet
 {
-    Animator anim;
-    
-    void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
-    
     public override void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
     {
         Owner = _owner;
@@ -51,7 +44,7 @@ public class GSpear : Bullet
         Dead = true;
         Awaked = false;
         //Rigid.velocity = Vector2.zero;
-        GetComponent<BoxCollider2D>().isTrigger = false;
+        Collider.isTrigger = false;
         Destroy(gameObject);
     }
     
@@ -68,7 +61,7 @@ public class GSpear : Bullet
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
             Death();
@@ -79,7 +72,7 @@ public class GSpear : Bullet
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
             Death();

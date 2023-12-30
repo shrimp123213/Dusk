@@ -16,6 +16,9 @@ public class Bullet : MonoBehaviour
     protected float Speed;
     public float LifeTime = 3f;
     
+    protected Collider2D Collider;
+    protected Animator anim;
+    
     public enum Type
     {
         Bullet,
@@ -31,6 +34,8 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         Rigid = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
     
     public virtual void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
@@ -38,6 +43,8 @@ public class Bullet : MonoBehaviour
         Owner = _owner;
         Damage = _damage;
         Speed = _danmakuData.bulletSpeed * Owner.Facing;
+        
+        transform.localScale = new Vector3(Owner.Facing, 1, 1);
         
         Destroy(gameObject, LifeTime);
         foreach (var data in _danmakuData.bulletSpawnData)
@@ -58,9 +65,7 @@ public class Bullet : MonoBehaviour
                 break;  
             case Type.GSpear:
                 break;
-            
         }
-        
     }
 
     public virtual void Death()
@@ -71,15 +76,24 @@ public class Bullet : MonoBehaviour
         Dead = true;
         Awaked = false;
         Rigid.velocity = Vector2.zero;
-        GetComponent<CapsuleCollider2D>().isTrigger = false;
+        Collider.isTrigger = false;
         Destroy(gameObject);
+    }
+    
+    private IEnumerator ButtleStartUp(float _delay)
+    {
+        Debug.Log("Fire in " + _delay + "s");
+        yield return new WaitForSeconds(_delay);
+        Awaked = true;
+        anim.Play("Action");
+        yield break;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
                 Death();
@@ -90,18 +104,12 @@ public class Bullet : MonoBehaviour
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
             Death();
         }
     }
 
-    private IEnumerator ButtleStartUp(float _delay)
-    {
-        Debug.Log("Fire in " + _delay + "s");
-        yield return new WaitForSeconds(_delay);
-        Awaked = true;
-        yield break;
-    }
+    
 }
