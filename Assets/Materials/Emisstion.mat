@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Emisstion:
-        m_Texture: {fileID: 2800000, guid: ab206efbeb764794c8573e50212259a7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 60b531d8be8bb2a4f87526bae1d4a433, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 55dc44275a5b47846b4e62d8bf5e6454, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8a52e7441e5d8c344a9618f2b5a08563, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
@@ -33,7 +33,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonTex:
-        m_Texture: {fileID: 2800000, guid: fa8f740c24d491943963236b0fd76bf9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -56,6 +56,6 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     m_Colors:
-    - _Color0: {r: 2.4510016, g: 2.4510016, b: 2.4510016, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
