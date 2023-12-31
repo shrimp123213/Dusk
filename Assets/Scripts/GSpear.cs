@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GSpear : Bullet
 {
+    public GameObject Omen;
+    
     public override void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
     {
         Owner = _owner;
@@ -14,6 +16,8 @@ public class GSpear : Bullet
         {
             StartCoroutine(ButtleStartUp(_delay));
         }
+        Instantiate(Omen,transform.position,Quaternion.Euler(0,0,0));
+        //Destroy(Omen, 0.5f);
     }
     
     private void FixedUpdate()
@@ -54,6 +58,7 @@ public class GSpear : Bullet
         yield return new WaitForSeconds(_delay);
         Awaked = true;
         anim.Play("Action");
+        Destroy(Omen);
         yield break;
     }
     
