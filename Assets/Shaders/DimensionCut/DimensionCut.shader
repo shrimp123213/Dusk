@@ -61,7 +61,7 @@ Shader "DimensionCut"
 			
 			uniform float2 _Pos;
 			uniform float _Angle;
-			float4 _MainTex_TexelSize;
+			float4 MainTex_TexelSize;
 			uniform float _Offset;
 			uniform float _LightScale;
 			uniform float _LightExp;
