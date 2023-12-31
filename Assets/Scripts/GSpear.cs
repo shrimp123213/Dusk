@@ -16,7 +16,7 @@ public class GSpear : Bullet
         {
             StartCoroutine(ButtleStartUp(_delay));
         }
-        Instantiate(Omen,transform.position,Quaternion.Euler(0,0,0));
+        Instantiate(Omen, new Vector3(transform.position.x, -7, 0), Quaternion.Euler(0, 0, 0));
         //Destroy(Omen, 0.5f);
     }
     
@@ -58,7 +58,7 @@ public class GSpear : Bullet
         yield return new WaitForSeconds(_delay);
         Awaked = true;
         anim.Play("Action");
-        Destroy(Omen);
+        //Destroy(Omen);
         yield break;
     }
     

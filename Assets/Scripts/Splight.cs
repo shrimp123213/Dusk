@@ -9,7 +9,7 @@ public class Splight : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         //if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            //Destroy(gameObject,0.5f);
+            Destroy(gameObject,0.5f);
     }
 
     
