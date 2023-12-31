@@ -110,6 +110,7 @@ public class PlayerMain : Character
     {
         MorphListDisplayer.i.Target = Morph;
         //Debug.Log(Input.GetJoystickNames().Length);
+        //Morph.Add(100000);
     }
 
     public override void ProcessInput()

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HitEffector : MonoBehaviour
@@ -29,11 +30,15 @@ public class HitEffector : MonoBehaviour
 
     private bool ShakeCharacter;
 
+    private bool nextFrame;
+
     private void Awake()
     {
         GlobalMoveTimeScale = 1f;
         currentCurve = 0;
         //Time.timeScale = 1f;
+
+        nextFrame = false;
     }
 
     public void CallAwake(Animator ani)
@@ -44,7 +49,7 @@ public class HitEffector : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GlobalSlow > 0f)
+        if (GlobalSlow > 0f && !nextFrame)
         {
             GlobalSlow -= Time.unscaledDeltaTime;
             Time.timeScale = GlobalSlowCurve[currentCurve].Evaluate(1f - GlobalSlow);
@@ -53,6 +58,8 @@ public class HitEffector : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
+        else
+            nextFrame = false;
         if (AttackStunDura > 0f)
         {
             AttackStunDura -= Time.deltaTime;
@@ -88,6 +95,9 @@ public class HitEffector : MonoBehaviour
                     Ani.Play("Idle");
                     Ani.Update(0f);
                     isActionInterrupted = false;
+
+                    if (Main)
+                        Ani.GetComponentInParent<Character>().Player.CanInput = true;
                 }
 
                 Ani.speed = 1f;
@@ -134,5 +144,13 @@ public class HitEffector : MonoBehaviour
         GlobalSlow = _Time;
         currentCurve = _currentCurve;
         Time.timeScale = 0.01f;
+    }
+
+    public void SetGlobalSlowNextFrame(float _Time, int _currentCurve)
+    {
+        GlobalSlow = _Time;
+        currentCurve = _currentCurve;
+        //Time.timeScale = 0.01f;
+        nextFrame = true;
     }
 }

@@ -272,10 +272,13 @@ public class Character : MonoBehaviour, IHitable
 
         if (setAnimationIdle && NowAction == null)
         {
-            AnimatorExtensions.RebindAndRetainParameter(Ani);
-            //Ani.Rebind();
-            Ani.Play((Xinput != 0f) ? "Run" : "Idle");
-            Ani.Update(0f);
+            if (Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Attacked")
+            {
+                AnimatorExtensions.RebindAndRetainParameter(Ani);
+                //Ani.Rebind();
+                Ani.Play((Xinput != 0f) ? "Run" : "Idle");
+                Ani.Update(0f);
+            }
 
             setAnimationIdle = false;
         }
@@ -601,25 +604,7 @@ public class Character : MonoBehaviour, IHitable
             //    CancelInvoke("ResumeAI");
             //    Invoke("ResumeAI", 0.75f);
             //}
-            if ((bool)Player)
-            {
-                if (_damage.Type == DamageType.Normal)
-                    AerutaDebug.i.Feedback.HittedCount++;
-                if (_damage.Type == DamageType.Collision)
-                    AerutaDebug.i.Feedback.CollisionCount++;
-
-                //Player.Morph.Consume(Player.Morph.MorphProgress);
-
-                if (Player.CatMode)
-                    _damage.Amount *= 2;
-
-                Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
-                HitEffect.SetGlobalSlow(.5f, 0);
-
-                Player.InvincibleState.Invincible();
-
-                MarkManager.i.ClearMarkedTargets();
-            }
+            
 
             if (isActing && isActionInterrupted)
             {
@@ -636,6 +621,28 @@ public class Character : MonoBehaviour, IHitable
                 //Ani.Rebind();
                 Ani.Play("Attacked");
                 Ani.Update(0f);
+            }
+
+            if ((bool)Player)
+            {
+                if (_damage.Type == DamageType.Normal)
+                    AerutaDebug.i.Feedback.HittedCount++;
+                if (_damage.Type == DamageType.Collision)
+                    AerutaDebug.i.Feedback.CollisionCount++;
+
+                //Player.Morph.Consume(Player.Morph.MorphProgress);
+
+                if (Player.CatMode)
+                    _damage.Amount *= 2;
+
+                Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
+                HitEffect.SetGlobalSlowNextFrame(.5f, 0);
+
+                Player.InvincibleState.Invincible();
+
+                MarkManager.i.ClearMarkedTargets();
+
+                Player.CanInput = false;
             }
         }
 

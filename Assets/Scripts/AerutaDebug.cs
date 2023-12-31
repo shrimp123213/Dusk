@@ -27,6 +27,9 @@ public class AerutaDebug : MonoBehaviour
     public GameObject BloodEffect;
     public GameObject PenetrateTrail;
     public GameObject ClawEffect;
+    public GameObject BlockFlashYellow;
+    public GameObject BlockFlashBlue;
+    public GameObject EvadeFinishCooldownEffect;
 
     public ParticleSystem Leaf;
 

@@ -81,6 +81,7 @@ public class ActionBlockObj : ActionBaseObj
             case BlockState.Forswing:
                 if (!actionState.IsWithinFrame(0, PerfectFrameStart - 1))
                 {
+                    Instantiate(AerutaDebug.i.BlockFlashYellow, _m.transform.position + new Vector3(.5f * _m.Facing, .5f, 0f), Quaternion.identity, null);
                     actionState.blockState = BlockState.Perfect;
                     _m.Blocking = true;
                 }
@@ -88,6 +89,7 @@ public class ActionBlockObj : ActionBaseObj
             case BlockState.Perfect:
                 if (!actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
                 {
+                    Instantiate(AerutaDebug.i.BlockFlashBlue, _m.transform.position + new Vector3(.5f * _m.Facing, .5f, 0f), Quaternion.identity, null);
                     actionState.blockState = BlockState.Normal;
                 }
                 break;

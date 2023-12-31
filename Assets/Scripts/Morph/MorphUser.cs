@@ -19,6 +19,8 @@ public class MorphUser : MonoBehaviour
     public float MorphDecreaseDelayTimeMax;
     public float DelayTime;
 
+    public ParticleSystem EvadeCanUseEffect;
+
     private void Update()
     {
         if (MorphCount < MorphMax)
@@ -32,7 +34,7 @@ public class MorphUser : MonoBehaviour
         }
         else if (MorphProgress > 0)
         {
-            Consume(Mathf.Clamp(Time.deltaTime * 0.01f, 0, MorphProgress));
+            //Consume(Mathf.Clamp(Time.deltaTime * 0.01f, 0, MorphProgress));
         }
     }
 
@@ -45,6 +47,8 @@ public class MorphUser : MonoBehaviour
 
         if (_delay)
             DelayTime = MorphDecreaseDelayTimeMax;
+
+        EvadeCanUseEffect.Stop();
     }
 
     public void Add(float _progress)
@@ -60,6 +64,14 @@ public class MorphUser : MonoBehaviour
         if (MorphCount >= MorphMax)
         {
             MorphProgress = 0f;
+            if (!EvadeCanUseEffect.isPlaying)
+            {
+                var main = EvadeCanUseEffect.main;
+                main.loop = true;
+
+                EvadeCanUseEffect.Play();
+                Instantiate(AerutaDebug.i.EvadeFinishCooldownEffect, transform.position, Quaternion.identity, transform);
+            }
         }
         AerutaDebug.i.Feedback.MorphProgress = MorphProgress;
 

@@ -49,9 +49,15 @@ public class InvincibleState : MonoBehaviour
         }
 
         if (InvincibleTime <= 0 || !showEffect)
-            Renderer.skeleton.SetColor(Color.white);
-        else
+        {
+            material.DOComplete();
+            material.DOColor(Color.white, 0f);
             Renderer.skeleton.SetColor(material.color);
+        }
+        else
+        {
+            Renderer.skeleton.SetColor(material.color);
+        }
     }
 
     public void Invincible(float _time = -1f)

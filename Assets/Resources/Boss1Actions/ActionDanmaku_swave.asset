@@ -19,12 +19,7 @@ MonoBehaviour:
   InterruptSameLevel: 0
   DamageRatio: 1
   DamageType: 0
-  AttackSpots:
-  - KeyFrameFrom: 85
-    KeyFrameEnd: 95
-    Offset: {x: 3.5, y: 4, z: 0}
-    Range: {x: 5, y: 8}
-    HitMax: 0
+  AttackSpots: []
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -54,4 +49,3 @@ MonoBehaviour:
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
   danmaku: {fileID: 11400000, guid: 61767b428c262b6499a052b1c89c719b, type: 2}
-  shootKey: 85

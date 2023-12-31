@@ -16,11 +16,15 @@ public class Contact : MonoBehaviour
     public TMP_Text BossName;
     
     private float speed;
+    private float waitTime;
+    private float waitTimeMax = .5f;
 
     void Start()
     {
         ani = AITree.GetComponentInChildren<Animator>();
         ani.Play("boss1-1_ST_sit_idle");
+
+        waitTime = 0;
     }
 
     private void Update()
@@ -48,13 +52,27 @@ public class Contact : MonoBehaviour
         
         if (speed > 0f)
         {
-            BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
-
-            if (BossHealthBar.localScale == Vector3.one * .75f)
+            if (waitTime > 0f)
+                waitTime -= Time.deltaTime;
+            else
             {
-                BossName.color = new Color(1f, 1f, 1f, Mathf.MoveTowards(BossName.color.a, 1f, speed * Time.deltaTime));
+                if (BossName.text == "")
+                {
+                    waitTime = waitTimeMax;
+                    BossName.text = "主";
+                }
+                else if (BossName.text == "主")
+                {
+                    waitTime = waitTimeMax;
+                    BossName.text = "主教";
+                }
+            }
 
-                if (BossName.color.a == 1f)
+            if (BossName.text == "主教" && waitTime <= 0f) 
+            {
+                BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
+
+                if (BossHealthBar.localScale.x == .75f)
                     gameObject.SetActive(false);
             }
         }
