@@ -57,27 +57,5 @@ public class GSpear : Bullet
         yield break;
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (Awaked && other.transform.parent.CompareTag("Player"))
-        {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
-            //if (num)
-            if(other.TryGetComponent<Character>(out var character) && !character.Evading)
-                Death();
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (Awaked && other.transform.parent.CompareTag("Player"))
-        {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
-
-            //if (num)
-            if(other.TryGetComponent<Character>(out var character) && !character.Evading)
-                Death();
-        }
-    }
 }
