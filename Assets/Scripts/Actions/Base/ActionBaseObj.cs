@@ -226,8 +226,6 @@ public class ActionBaseObj : ScriptableObject
         //if (IsHeavyAttack)
         //    AerutaDebug.i.Feedback.HeavyAttackCount++;
 
-        if (_hitted.name == "Player")
-            Debug.Log(_hitted.Blocking);
     }
 
     public virtual void TriggerMark(Character _m, Character _hitted, IHitable IHitable)

@@ -128,7 +128,6 @@ public class Contact : MonoBehaviour
                     gameObject.SetActive(false);
             }
         }
-        Debug.Log(ani.speed);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

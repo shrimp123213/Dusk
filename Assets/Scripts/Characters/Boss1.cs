@@ -105,16 +105,14 @@ public class Boss1 : Character
 
         isDead = true;
         base.gameObject.layer = 13;
+        AITree.enabled = false;
+        StartAction(DeadAction);
+        HurtBox.enabled = false;
+        CollisionBlockMove.enabled = false;
+    }
 
-        if(isActing)
-        {
-            NowAction.EndAction(this);
-
-            if (StoredMoves.Count > 0)
-            {
-                StoredMoves.Clear();
-            }
-        }
+    public override void SetAnimationIdle()
+    {
 
     }
 }

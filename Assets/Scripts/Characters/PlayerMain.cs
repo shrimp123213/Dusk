@@ -104,6 +104,8 @@ public class PlayerMain : Character
         bottomMoveSpeed = .2f;
 
         CatMode = false;
+
+        CollisionBlockMove.enabled = false;
     }
 
     private void Start()

@@ -22,6 +22,8 @@ public class Character : MonoBehaviour, IHitable
     public Collider2D Collider; 
     [HideInInspector]
     public Collider2D HurtBox;
+    [HideInInspector]
+    public Collider2D CollisionBlockMove;
 
     public Vector2 PietaPos;
     public Vector2 MarkPos;
@@ -114,6 +116,8 @@ public class Character : MonoBehaviour, IHitable
     private AnimatorControllerParameter[] AniParameters;
 
     public SkeletonMecanim Renderer;
+
+    public ActionBaseObj DeadAction;
 
     public float Health
     {
@@ -216,6 +220,7 @@ public class Character : MonoBehaviour, IHitable
     {
         Collider = GetComponent<Collider2D>();
         HurtBox = TransformUtility.FindTransform(transform, "HurtBox").GetComponent<Collider2D>();
+        CollisionBlockMove = TransformUtility.FindTransform(transform, "CollisionBlockMove").GetComponent<Collider2D>();
         Rigid = GetComponent<Rigidbody2D>();
         Player = GetComponent<PlayerMain>();
         Ani = GetComponentInChildren<Animator>();
@@ -315,6 +320,10 @@ public class Character : MonoBehaviour, IHitable
         NowAction?.EndAction(this);
         NowAction = _actionBaseObj;
         Hitted.Clear();
+        if (StoredMoves.Count > 0)
+        {
+            StoredMoves.Clear();
+        }
         ActionState = NowAction.StartAction(this);
         ActionState.Clip = Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
         ActionState.TotalFrame = Mathf.RoundToInt(ActionState.Clip.length * ActionState.Clip.frameRate);
@@ -672,7 +681,7 @@ public class Character : MonoBehaviour, IHitable
         
     }
 
-    public void SetAnimationIdle()
+    public virtual void SetAnimationIdle()
     {
         setAnimationIdle = true;
 
@@ -685,22 +694,16 @@ public class Character : MonoBehaviour, IHitable
         {
             Renderer.skeleton.SetColor(value);
         });
-        //AITree.enabled = false;
+        AITree.enabled = false;
         base.gameObject.layer = 13;
         for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
         {
             //UnityEngine.Object.Instantiate(GeneralPrefabSO.i.P_HealthShard, base.transform.position + new Vector3(0f, 1.25f), Quaternion.identity);
         }
         //base.gameObject.SetActive(value: false);
-        if (isActing)
-        {
-            NowAction.EndAction(this);
-
-            if (StoredMoves.Count > 0)
-            {
-                StoredMoves.Clear();
-            }
-        }
+        StartAction(DeadAction);
+        HurtBox.enabled = false;
+        CollisionBlockMove.enabled = false;
     }
 
     public void TakeForce(Vector2 _Force, Vector2 _AddiForce)
@@ -752,7 +755,7 @@ public class Character : MonoBehaviour, IHitable
         {
             foreach (RaycastHit2D hit in raycastHit2D)
             {
-                if (hit.collider.transform.parent.name != component.name)
+                if (hit.collider.transform.parent.name != component.name) 
                 {
                     if (hit.point.x >= hit.collider.bounds.max.x || hit.point.x <= hit.collider.bounds.min.x)
                     {

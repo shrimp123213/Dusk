@@ -18,13 +18,6 @@ public class EnemyStartAction : EnemyActionBase
     
     public SharedTransform OmenSpawnPoint;
     public bool OmenSpawnPointWithTarget = true;
-    
-    public enum OmenSpawnType
-    {
-        Start,
-        End
-    }
-    public OmenSpawnType OmenSpawn = OmenSpawnType.Start;
 
     public bool Flip;
 
@@ -32,34 +25,24 @@ public class EnemyStartAction : EnemyActionBase
     
     public int Facing;
     
-    private bool Fail;
+    public bool Fail;
 
     private Vector3 omenPos;
-    
-    
+
+    private bool omenSpawned;
+
     public override void OnStart()
     {
         this.Fail=(this.SelfCharacter.Value.Airbrone || this.SelfCharacter.Value.isDead);
         if (!this.Fail)
         {
             this.SelfCharacter.Value.StartAction(this.Action);
-            if (Omen != null)
-            {
-                Omen.GetComponent<ActionOmen>().SetTarget(OmenSpawnPoint.Value.GameObject());
-                if(OmenSpawn == OmenSpawnType.Start)
-                {
-                    float omenEuler = OmenSpawnEuler;
-                    if(OmenSpawnFlip) omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
-                
-                    omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y+spawnOffsetY, transform.position.z);
-                    GameObject.Instantiate(Omen, omenPos, Quaternion.Euler(0,0,omenEuler));
-                    //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
-                }
-            }
+            
         }
         if(CheckFacing)
             this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x > this.transform.position.x) ? 1 : -1;
-        
+
+        omenSpawned = false;
     }
 
     public override TaskStatus OnUpdate()
@@ -70,9 +53,27 @@ public class EnemyStartAction : EnemyActionBase
         }
         if (this.SelfCharacter.Value.isActing)
         {
+            TrySpawnOmen();
             return TaskStatus.Running;
         }
         return TaskStatus.Success;
+    }
+
+    public virtual void TrySpawnOmen()
+    {
+        ActionPeformState actionState = SelfCharacter.Value.ActionState;
+        if (Omen != null && !omenSpawned && actionState.IsAfterFrame(2))
+        {
+            Omen.GetComponent<ActionOmen>().SetTarget(OmenSpawnPoint.Value.GameObject());
+
+            omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y + spawnOffsetY, transform.position.z);
+            Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
+
+            GameObject.Instantiate(Omen, omenPos, Quaternion.identity, omenTransform);
+            //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
+
+            omenSpawned = true;
+        }
     }
 
     public override void OnEnd()
@@ -83,15 +84,5 @@ public class EnemyStartAction : EnemyActionBase
         }
         if(CheckFacing)
             this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x > this.transform.position.x) ? 1 : -1;
-        if (Omen != null && OmenSpawn == OmenSpawnType.End)
-        {
-            float omenEuler = OmenSpawnEuler;
-            if(OmenSpawnFlip) omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
-            
-            omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y+spawnOffsetY, transform.position.z);
-            GameObject.Instantiate(Omen, omenPos, Quaternion.Euler(0,0,omenEuler));
-            //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
-        }
-
     }
 }
