@@ -24,10 +24,11 @@ MonoBehaviour:
     KeyFrameEnd: 99
     Offset: {x: 3, y: 1, z: 0}
     Range: {x: 5, y: 1}
-  HitMax: 0
+    HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links: []
   Moves:
   - KeyFrame: 15
@@ -111,7 +112,7 @@ MonoBehaviour:
   IsTeleported: 
   IsLightAttack: 0
   IsHeavyAttack: 0
-  HitStun: 0
+  HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
   CanChangeFacingWhenActing: 0

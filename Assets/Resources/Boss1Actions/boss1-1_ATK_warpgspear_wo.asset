@@ -20,10 +20,10 @@ MonoBehaviour:
   DamageRatio: 0
   DamageType: 0
   AttackSpots: []
-  HitMax: 0
   SuckEffect: 0
   CanInterruptAction: 0
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links: []
   Moves: []
   Toggles:
@@ -43,11 +43,11 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 
+  IsTriggered: 0101
   IsTeleported: 
   IsLightAttack: 0
   IsHeavyAttack: 0
-  HitStun: 0
+  HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
   CanChangeFacingWhenActing: 0
