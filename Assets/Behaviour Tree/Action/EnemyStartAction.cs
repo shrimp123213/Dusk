@@ -13,6 +13,8 @@ public class EnemyStartAction : EnemyActionBase
     
     public GameObject Omen;
     public float OmenSpawnEuler = 0;
+    public bool OmenSpawnFlip = false;
+    public float spawnOffsetY = 0;
     public enum OmenSpawnType
     {
         Start,
@@ -38,8 +40,10 @@ public class EnemyStartAction : EnemyActionBase
             if (Omen != null && OmenSpawn == OmenSpawnType.Start)
             {
                 float omenEuler = OmenSpawnEuler;
-                omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
-                GameObject.Instantiate(Omen, this.transform.position, Quaternion.Euler(0,0,omenEuler));
+                if(OmenSpawnFlip) omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
+                
+                Vector3 omenPos = new Vector3(transform.position.x, transform.position.y+spawnOffsetY, transform.position.z);
+                GameObject.Instantiate(Omen, omenPos, Quaternion.Euler(0,0,omenEuler));
                 //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
             }
         }
@@ -72,8 +76,10 @@ public class EnemyStartAction : EnemyActionBase
         if (Omen != null && OmenSpawn == OmenSpawnType.End)
         {
             float omenEuler = OmenSpawnEuler;
-            omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
-            GameObject.Instantiate(Omen, this.transform.position, Quaternion.Euler(0,0,omenEuler));
+            if(OmenSpawnFlip) omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
+            
+            Vector3 omenPos = new Vector3(transform.position.x, transform.position.y+spawnOffsetY, transform.position.z);
+            GameObject.Instantiate(Omen, omenPos, Quaternion.Euler(0,0,omenEuler));
             //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
         }
 
