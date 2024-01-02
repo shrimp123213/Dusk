@@ -113,6 +113,8 @@ public class Character : MonoBehaviour, IHitable
 
     private AnimatorControllerParameter[] AniParameters;
 
+    public SkeletonMecanim Renderer;
+
     public float Health
     {
         get
@@ -232,6 +234,8 @@ public class Character : MonoBehaviour, IHitable
         TransSkillPopup = GameObject.Find("SkillPopup").transform;
         Health = HealthMax.Final;
         //Debug.Log(Ani);
+
+        Renderer = base.gameObject.transform.GetChild(0).GetComponent<SkeletonMecanim>();
     }
 
     private void Update()
@@ -245,6 +249,8 @@ public class Character : MonoBehaviour, IHitable
         {
             NowAction.ProcessAction(this);
         }
+        if (isDead && Renderer.skeleton.GetColor().a <= 0) 
+            base.gameObject.SetActive(value: false);
     }
 
     private void FixedUpdate()
@@ -604,7 +610,7 @@ public class Character : MonoBehaviour, IHitable
             //    CancelInvoke("ResumeAI");
             //    Invoke("ResumeAI", 0.75f);
             //}
-            
+
 
             if (isActing && isActionInterrupted)
             {
@@ -675,15 +681,26 @@ public class Character : MonoBehaviour, IHitable
     public virtual void Dead()
     {
         isDead = true;
-        SpriteRenderer component = base.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        DOTween.Sequence().Append(component.DOFade(0.35f, 0.35f)).Append(component.DOFade(0f, 0.15f));
+        DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 3f, (value) =>
+        {
+            Renderer.skeleton.SetColor(value);
+        });
         //AITree.enabled = false;
-        base.gameObject.layer = 9;
+        base.gameObject.layer = 13;
         for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
         {
             //UnityEngine.Object.Instantiate(GeneralPrefabSO.i.P_HealthShard, base.transform.position + new Vector3(0f, 1.25f), Quaternion.identity);
         }
-        base.gameObject.SetActive(value: false);
+        //base.gameObject.SetActive(value: false);
+        if (isActing)
+        {
+            NowAction.EndAction(this);
+
+            if (StoredMoves.Count > 0)
+            {
+                StoredMoves.Clear();
+            }
+        }
     }
 
     public void TakeForce(Vector2 _Force, Vector2 _AddiForce)

@@ -41,6 +41,7 @@ public class Pieta : MonoBehaviour
 
     private void Update()
     {
+
         MarkNearbyEnemys();
     }
 
@@ -92,11 +93,19 @@ public class Pieta : MonoBehaviour
         Collider2D[] far = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * farDis, 0f, LayerMask.GetMask("HurtBox"));
         Collider2D[] near = Physics2D.OverlapBoxAll(Player.transform.position, Vector2.one * nearDis, 0f, LayerMask.GetMask("HurtBox"));
 
+        List<Collider2D> deadList = new List<Collider2D>();
+
         //把沒記錄過的加入PietaTargets
         foreach (Collider2D target in far)
         {
-            if (target == Player.HurtBox)
+            if (target == Player.HurtBox) 
                 continue;
+
+            if (target.transform.parent.gameObject.layer == 13 || !Player.CanInput)
+            {
+                deadList.Add(target);
+                continue;
+            }
 
             bool hasTarget = false;
             foreach (PietaTarget pietaTarget in PietaTargets)
@@ -117,7 +126,7 @@ public class Pieta : MonoBehaviour
         //把離開範圍內的標記刪除、更新標記圖示
         foreach (PietaTarget pietaTarget in PietaTargets)
         {
-            if (!far.Contains(pietaTarget.Collider2D))
+            if (!far.Contains(pietaTarget.Collider2D) || deadList.Contains(pietaTarget.Collider2D))
             {
                 disappearList.Add(pietaTarget);
                 continue;

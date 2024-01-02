@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Spine.Unity;
+using DG.Tweening;
 
 public class Boss1 : Character
 {
@@ -20,6 +22,8 @@ public class Boss1 : Character
 
     private float waitSliderHealthMove;
 
+    private bool startedFade;
+
     public override void OnAwake()
     {
         HealthMax = new CharacterStat(500f);
@@ -30,6 +34,8 @@ public class Boss1 : Character
 
         topMoveSpeed = .05f;
         bottomMoveSpeed = .05f;
+
+        Renderer = transform.GetChild(0).GetComponent<SkeletonMecanim>();
     }
 
     public override void AttackLand()
@@ -61,6 +67,23 @@ public class Boss1 : Character
         }
         else
             waitSliderHealthMove -= Time.deltaTime;
+
+        if (isDead)
+        {
+            if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_DF_death" && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .8f)
+            {
+                startedFade = true;
+
+                DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 3f, (value) =>
+                {
+                    Renderer.skeleton.SetColor(value);
+                });
+            }
+            if (Renderer.skeleton.GetColor().a <= 0)
+            {
+                AerutaDebug.i.ShowStatistics();
+            }
+        }
     }
 
     public void HealthChenged()
@@ -79,7 +102,19 @@ public class Boss1 : Character
     public override void Dead()
     {
         SliderHealthTop.value = base.Health / HealthMax.Final;
-        base.Dead();
-        AerutaDebug.i.ShowStatistics();
+
+        isDead = true;
+        base.gameObject.layer = 13;
+
+        if(isActing)
+        {
+            NowAction.EndAction(this);
+
+            if (StoredMoves.Count > 0)
+            {
+                StoredMoves.Clear();
+            }
+        }
+
     }
 }

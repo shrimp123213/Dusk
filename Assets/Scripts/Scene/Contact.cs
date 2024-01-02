@@ -80,9 +80,9 @@ public class Contact : MonoBehaviour
             {
                 if (BossNameBackground.rectTransform.rect.size.x <= 3000)
                 {
-                    BossNameBackground.color = BossNameBackground.color + new Color(0f, 0f, 0f, 1.5f * Time.deltaTime);
-                    BossNameBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BossNameBackground.rectTransform.rect.size.x + 6000f * Time.deltaTime);
-                    BossNameBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BossNameBackground.rectTransform.rect.size.y + 6000f * Time.deltaTime);
+                    BossNameBackground.color = BossNameBackground.color + new Color(0f, 0f, 0f, 2f * Time.deltaTime);
+                    BossNameBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BossNameBackground.rectTransform.rect.size.x + 9000f * Time.deltaTime);
+                    BossNameBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BossNameBackground.rectTransform.rect.size.y + 9000f * Time.deltaTime);
                 }
                 else
                 {
