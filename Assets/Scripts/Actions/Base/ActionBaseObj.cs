@@ -101,7 +101,7 @@ public class ActionBaseObj : ScriptableObject
     {
         foreach (ActionMovement movement in _m.NowAction.Moves) 
         {
-            if (movement.CanEvade)
+            //if (movement.CanEvade)
             {
                 ActionPeformState actionState = _m.ActionState;
 

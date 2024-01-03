@@ -69,6 +69,8 @@ public class PlayerMain : Character
 
     [SerializeField] private SpriteRenderer CatModeSprite;
 
+    public int AirClawCount;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -186,9 +188,10 @@ public class PlayerMain : Character
                     StartAction(ActionLoader.i.Actions["Block"]);
                     Inputs.Clear();
                 }
-                if (Inputs.Contains(InputKey.Claw) && CanAttack)
+                if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
-                    StartAction(ActionLoader.i.Actions["Claw1"]);
+                    if (TryCastAction(ActionLoader.i.Actions["Claw1"]))
+                        StartAction(ActionLoader.i.Actions["Claw1"]);
                     Inputs.Clear();
                 }
                 if (Inputs.Contains(InputKey.Heal))
@@ -241,9 +244,10 @@ public class PlayerMain : Character
                     StartAction(ActionLoader.i.Actions["CatBlock"]);
                     Inputs.Clear();
                 }
-                if (Inputs.Contains(InputKey.Claw) && CanAttack)
+                if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 8)
                 {
-                    StartAction(ActionLoader.i.Actions["CatClaw1"]);
+                    if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
+                        StartAction(ActionLoader.i.Actions["CatClaw1"]);
                     Inputs.Clear();
                 }
             }
@@ -303,6 +307,16 @@ public class PlayerMain : Character
         if (flag && (_actionBaseObj.Id == "Pieta" || _actionBaseObj.Id == "CatPieta") && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack(this)))
         {
             flag = false;
+        }
+
+        if (flag && _actionBaseObj.name.Contains("Claw") && !isGround)
+        {
+            if (!CatMode && AirClawCount >= 4)
+                flag = false;
+            else if (CatMode && AirClawCount >= 8)
+                flag = false;
+            else
+                AirClawCount++;
         }
 
         //if (flag && base.isActing)
@@ -395,6 +409,8 @@ public class PlayerMain : Character
         //        CanDash = true;
         //    }
         //}
+        if (AirClawCount > 0 && isGround)
+            AirClawCount = 0;
         if (!CanAttack && !base.isActing)
         {
             CanAttack = base.isGround;

@@ -33,29 +33,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1.8092115
-        outSlope: 1.8092115
+        inSlope: 1.9929243
+        outSlope: 1.9929243
         tangentMode: 0
         weightedMode: 3
         inWeight: 0
-        outWeight: 0.24898785
+        outWeight: 0.30769232
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0.04683793
-        outSlope: 0.04683793
+        inSlope: 0.39684442
+        outSlope: 0.39684442
         tangentMode: 0
         weightedMode: 3
-        inWeight: 0.402834
+        inWeight: 0.46356273
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 5, y: 0}
+    TargetDistance: {x: 3.75, y: 0}
     FinishTime: 0.417
     CanEvade: 1
     StartEvadeFrame: 0
-    EndEvadeFrame: 20
+    EndEvadeFrame: 0
   Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}

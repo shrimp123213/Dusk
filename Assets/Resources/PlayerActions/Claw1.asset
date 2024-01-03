@@ -25,6 +25,8 @@ MonoBehaviour:
     Offset: {x: 1.5, y: 0.2, z: 0}
     Range: {x: 3.1, y: 1.7}
     HitMax: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -86,7 +88,7 @@ MonoBehaviour:
   IsHeavyAttack: 0
   HitStun: 0.1
   IsMovableX: 0
-  IsMovableY: 1
+  IsMovableY: 0
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 1
   AnimationKeyClawEnd: Claw1End
