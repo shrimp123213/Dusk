@@ -373,6 +373,10 @@ public class AttackTiming
 
     [Header("本次攻擊擊中敵人次數上限")]
     public int HitMax;
+
+    [Header("紅眼提示")]
+    public bool SpawnOmen;
+    public int SpawnKeyFrame;
 }
 
 

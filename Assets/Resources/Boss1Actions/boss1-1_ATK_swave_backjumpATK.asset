@@ -25,6 +25,8 @@ MonoBehaviour:
     Offset: {x: 3, y: 1, z: 0}
     Range: {x: 5, y: 1}
     HitMax: 0
+    SpawnOmen: 1
+    SpawnKeyFrame: 64
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0

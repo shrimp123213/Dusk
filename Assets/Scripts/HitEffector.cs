@@ -14,6 +14,7 @@ public class HitEffector : MonoBehaviour
     public float AttackStunDura;
 
     public float HitStun;
+    private float defaultHitStun;
 
     public float HitStunInterval;
 
@@ -103,6 +104,20 @@ public class HitEffector : MonoBehaviour
                 Ani.speed = 1f;
             }
         }
+        if (defaultHitStun > 0)
+        {
+            HitStunInterval -= Time.deltaTime;
+            defaultHitStun -= Time.deltaTime;
+            if (HitStunInterval <= 0f && defaultHitStun > 0f)
+            {
+                HitStunInterval = 0.025f;
+                if (ShakeCharacter)
+                    TransSprite.localPosition = new Vector3((TransSprite.localPosition.x <= 0f) ? Random.Range(0.11f, 0.13f) : (0f - Random.Range(0.11f, 0.13f)), TransSprite.localPosition.y, TransSprite.localPosition.z);
+            }
+            if (defaultHitStun <= 0)
+                TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
+        }
+        
         if (Main && TimeSlow > 0f)
         {
             TimeSlow -= Time.deltaTime;
@@ -132,6 +147,8 @@ public class HitEffector : MonoBehaviour
         ShakeCharacter = _ShakeCharacter;
 
         HitStun += _HitStun;
+        if (_HitStun == 0)
+            defaultHitStun = .1f;
     }
 
     public void SetTimeSlow(float _Time)

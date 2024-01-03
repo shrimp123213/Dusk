@@ -25,6 +25,8 @@ MonoBehaviour:
     Offset: {x: 1, y: 0.2, z: 0}
     Range: {x: 2, y: 1.7}
     HitMax: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -84,7 +86,7 @@ MonoBehaviour:
   IsTeleported: 
   IsLightAttack: 1
   IsHeavyAttack: 0
-  HitStun: 0.1
+  HitStun: 0
   IsMovableX: 0
   IsMovableY: 1
   CanChangeFacingWhenActing: 1

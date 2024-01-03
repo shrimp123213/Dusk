@@ -76,4 +76,8 @@ public class BulletSpawnData
         position = _bulletSpawnData.position;
         rotation = _bulletSpawnData.rotation;
     }
+
+    [Header("紅眼提示")]
+    public bool SpawnOmen;
+    public int SpawnKeyFrame;
 }

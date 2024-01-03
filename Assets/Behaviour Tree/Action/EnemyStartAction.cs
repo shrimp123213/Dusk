@@ -29,7 +29,7 @@ public class EnemyStartAction : EnemyActionBase
 
     private Vector3 omenPos;
 
-    private bool omenSpawned;
+    private bool[] omenSpawned;
 
     public override void OnStart()
     {
@@ -42,7 +42,10 @@ public class EnemyStartAction : EnemyActionBase
         if(CheckFacing)
             this.SelfCharacter.Value.Facing = (this.Target.Value.transform.position.x > this.transform.position.x) ? 1 : -1;
 
-        omenSpawned = false;
+        int count = SelfCharacter.Value.NowAction.AttackSpots.Count;
+        if (SelfCharacter.Value.NowAction.GetType() == typeof(ActionDanmakuObj))
+            count += ((ActionDanmakuObj)SelfCharacter.Value.NowAction).danmaku.bulletSpawnData.Count;
+        omenSpawned = new bool[count];
     }
 
     public override TaskStatus OnUpdate()
@@ -62,17 +65,42 @@ public class EnemyStartAction : EnemyActionBase
     public virtual void TrySpawnOmen()
     {
         ActionPeformState actionState = SelfCharacter.Value.ActionState;
-        if (Omen != null && !omenSpawned && actionState.IsAfterFrame(2))
+
+        List<AttackTiming> _AttackSpots = SelfCharacter.Value.NowAction.AttackSpots;
+        for (int i = 0; i < _AttackSpots.Count; i++) 
         {
-            Omen.GetComponent<ActionOmen>().SetTarget(OmenSpawnPoint.Value.GameObject());
+            if (Omen != null && _AttackSpots[i].SpawnOmen && !omenSpawned[i] && actionState.IsAfterFrame(_AttackSpots[i].SpawnKeyFrame))
+            {
+                Omen.GetComponent<ActionOmen>().SetTarget(OmenSpawnPoint.Value.GameObject());
 
-            omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y + spawnOffsetY, transform.position.z);
-            Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
+                omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y + spawnOffsetY, transform.position.z);
+                Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
 
-            GameObject.Instantiate(Omen, omenPos, Quaternion.identity, omenTransform);
-            //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
+                GameObject.Instantiate(Omen, omenPos, Quaternion.identity, omenTransform);
+                //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
 
-            omenSpawned = true;
+                omenSpawned[i] = true;
+            }
+        }
+
+        if (SelfCharacter.Value.NowAction.GetType() == typeof(ActionDanmakuObj))
+        {
+            List<BulletSpawnData> _bulletSpawnData = ((ActionDanmakuObj)SelfCharacter.Value.NowAction).danmaku.bulletSpawnData;
+            for (int i = 0; i < _bulletSpawnData.Count; i++)
+            {
+                if (Omen != null && _bulletSpawnData[i].SpawnOmen && !omenSpawned[i] && actionState.IsAfterFrame(_bulletSpawnData[i].SpawnKeyFrame))
+                {
+                    Omen.GetComponent<ActionOmen>().SetTarget(OmenSpawnPoint.Value.GameObject());
+
+                    omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y + spawnOffsetY, transform.position.z);
+                    Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
+
+                    GameObject.Instantiate(Omen, omenPos, Quaternion.identity, omenTransform);
+                    //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
+
+                    omenSpawned[i] = true;
+                }
+            }
         }
     }
 

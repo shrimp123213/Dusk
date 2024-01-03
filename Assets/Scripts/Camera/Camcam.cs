@@ -68,7 +68,7 @@ public class Camcam : MonoBehaviour
         if (Boss != null)
         {
             // 計算玩家和BOSS之間的距離
-            float distance = Vector3.Distance(Target.position, Boss.position);
+            float distance = Vector3.Distance(Target.position, Boss.position );
 
             // 將距離映射到縮放範圍內
             float targetSize = Mathf.Clamp(distance, minDistance, maxDistance);

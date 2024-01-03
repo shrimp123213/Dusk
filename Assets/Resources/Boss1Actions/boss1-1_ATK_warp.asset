@@ -24,14 +24,20 @@ MonoBehaviour:
     KeyFrameEnd: 93
     Offset: {x: 4, y: 0.5, z: 0}
     Range: {x: 7, y: 2}
+    HitMax: 0
+    SpawnOmen: 1
+    SpawnKeyFrame: 62
   - KeyFrameFrom: 153
     KeyFrameEnd: 158
     Offset: {x: -3, y: 2, z: 0}
     Range: {x: 5, y: 3}
-  HitMax: 0
+    HitMax: 0
+    SpawnOmen: 1
+    SpawnKeyFrame: 128
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
+  ClearStoredMoves: 0
   Links: []
   Moves:
   - KeyFrame: 80

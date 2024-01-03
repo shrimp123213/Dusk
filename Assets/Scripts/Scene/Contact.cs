@@ -144,7 +144,7 @@ public class Contact : MonoBehaviour
             PlayerMain.i.StopMove();
             PlayerMain.i.CanInput = false;
             
-            Camcam.i.Boss = AITree.transform;
+            Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
 
             triggered = true;
         }

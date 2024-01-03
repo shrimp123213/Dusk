@@ -39,7 +39,7 @@ public class BossAction_Shoot : EnemyStartAction
     private void TrySpawnHint()
     {
         ActionPeformState actionState = SelfCharacter.Value.ActionState;
-        if (!hintSpawned && actionState.IsAfterFrame(1))
+        if (!hintSpawned)
         {
             float omenEuler = OmenSpawnEuler;
             if (HintSpawnFlip) omenEuler += (this.transform.position.x > this.Target.Value.transform.position.x) ? 180 : 0;
