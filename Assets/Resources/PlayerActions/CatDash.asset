@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatDash
   DisplayName: CatDash
-  AnimationKey: CatDash
+  _AnimationKey: CatDash
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0

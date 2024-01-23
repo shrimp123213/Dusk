@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ActionDanmaku_warpgspear_wi
   DisplayName: boss1-1_ATK_warpgspear_wi
-  AnimationKey: boss1-1_ATK_warpgspear_wi
+  _AnimationKey: boss1-1_ATK_warpgspear_wi
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1

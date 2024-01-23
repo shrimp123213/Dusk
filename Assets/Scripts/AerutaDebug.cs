@@ -30,12 +30,15 @@ public class AerutaDebug : MonoBehaviour
     public GameObject BlockFlashYellow;
     public GameObject BlockFlashBlue;
     public GameObject EvadeFinishCooldownEffect;
+    public GameObject TransformationEffect;
 
     public ParticleSystem Leaf;
 
     public Character Boss1;
 
     public Image ControlGamepad, ControlKeyboard;
+
+    public Contact contact;
 
     private void Awake()
     {
@@ -91,6 +94,10 @@ public class AerutaDebug : MonoBehaviour
             AerutaDebug.i.Boss1.AITree.enabled = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            contact.Skip();
+        }
     }
 
     public void InsClap(Vector3 _v3)

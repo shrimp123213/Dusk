@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_swave
   DisplayName: boss1-1_ATK_swave
-  AnimationKey: boss1-1_ATK_swave
+  _AnimationKey: boss1-1_ATK_swave
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1

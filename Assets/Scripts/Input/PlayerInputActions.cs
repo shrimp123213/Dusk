@@ -107,6 +107,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Transformation"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c59331d-7794-4e08-bce4-d8390ccb87b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -266,17 +275,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""052bfdd9-0f8d-427f-9dd8-c6173cb55ca6"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""dc48fbdc-d5cf-4b32-87e8-7ca354b07032"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
@@ -365,12 +363,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""97217fc2-ed08-4255-977a-13b09f03b6fd"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""id"": ""9c4f6e4c-7620-4856-9bae-d7298d2b5db1"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65657d8f-ce35-46dc-9ec3-7b1c24c01b3a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Transformation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e992a306-304d-400e-b559-c7c6a254625b"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Transformation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -413,6 +433,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         m_Player_UI = m_Player.FindAction("UI", throwIfNotFound: true);
+        m_Player_Transformation = m_Player.FindAction("Transformation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -483,6 +504,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
     private readonly InputAction m_Player_UI;
+    private readonly InputAction m_Player_Transformation;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -496,6 +518,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputAction @UI => m_Wrapper.m_Player_UI;
+        public InputAction @Transformation => m_Wrapper.m_Player_Transformation;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -532,6 +555,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started += instance.OnUI;
             @UI.performed += instance.OnUI;
             @UI.canceled += instance.OnUI;
+            @Transformation.started += instance.OnTransformation;
+            @Transformation.performed += instance.OnTransformation;
+            @Transformation.canceled += instance.OnTransformation;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -563,6 +589,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started -= instance.OnUI;
             @UI.performed -= instance.OnUI;
             @UI.canceled -= instance.OnUI;
+            @Transformation.started -= instance.OnTransformation;
+            @Transformation.performed -= instance.OnTransformation;
+            @Transformation.canceled -= instance.OnTransformation;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -609,5 +638,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
         void OnUI(InputAction.CallbackContext context);
+        void OnTransformation(InputAction.CallbackContext context);
     }
 }

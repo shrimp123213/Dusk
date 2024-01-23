@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_AC_warpout_wo
   DisplayName: boss1-1_AC_warpout_wo
-  AnimationKey: boss1-1_AC_warpout_wo
+  _AnimationKey: boss1-1_AC_warpout_wo
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0

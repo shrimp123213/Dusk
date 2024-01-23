@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Pieta;
+using DG.Tweening;
+using Spine.Unity;
 
 public class PlayerMain : Character
 {
@@ -71,6 +73,8 @@ public class PlayerMain : Character
 
     public int AirClawCount;
 
+    private bool startedFade;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -108,6 +112,8 @@ public class PlayerMain : Character
         CatMode = false;
 
         CollisionBlockMove.enabled = false;
+
+        startedFade = false;
     }
 
     private void Start()
@@ -194,6 +200,12 @@ public class PlayerMain : Character
                         StartAction(ActionLoader.i.Actions["Claw1"]);
                     Inputs.Clear();
                 }
+                if (Inputs.Contains(InputKey.Transformation))
+                {
+                    if (TryCastAction(ActionLoader.i.Actions["Transformation"]))
+                        StartAction(ActionLoader.i.Actions["Transformation"]);
+                    Inputs.Clear();
+                }
                 if (Inputs.Contains(InputKey.Heal))
                 {
                     if (TryCastAction(ActionLoader.i.Actions["Heal"]))
@@ -244,10 +256,15 @@ public class PlayerMain : Character
                     StartAction(ActionLoader.i.Actions["CatBlock"]);
                     Inputs.Clear();
                 }
-                if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 8)
+                if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
                     if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
                         StartAction(ActionLoader.i.Actions["CatClaw1"]);
+                    Inputs.Clear();
+                }
+                if (Inputs.Contains(InputKey.Transformation))
+                {
+                    StartAction(ActionLoader.i.Actions["Transformation"]);
                     Inputs.Clear();
                 }
             }
@@ -312,13 +329,25 @@ public class PlayerMain : Character
         if (flag && _actionBaseObj.name.Contains("Claw") && !isGround)
         {
             if (!CatMode && AirClawCount >= 4)
+            {
+                Debug.Log("空中連擊4次");
                 flag = false;
-            else if (CatMode && AirClawCount >= 8)
+            }
+            else if (CatMode && AirClawCount >= 4)
+            {
+                Debug.Log("空中連擊4次");
                 flag = false;
+            }
             else
                 AirClawCount++;
         }
 
+        if (flag && _actionBaseObj.Id == "Transformation" && Morph.TotalMorph < 1)
+        {
+            flag = false;
+            if (isShowMessage)
+                SkillPopup.i.ShowMessage("能量不足");
+        }
         //if (flag && base.isActing)
         //{
         //    flag = (_actionBaseObj.InterruptSameLevel ? (NowAction.InterruptLevel <= _actionBaseObj.InterruptLevel) : (NowAction.InterruptLevel < _actionBaseObj.InterruptLevel));
@@ -350,8 +379,17 @@ public class PlayerMain : Character
 
     public override void Dead()
     {
-        Time.timeScale = 0f;
-        AerutaDebug.i.ShowStatistics();
+        SliderHealthTop.value = base.Health / HealthMax.Final;
+
+        isDead = true;
+        base.gameObject.layer = 13;
+        //AITree.enabled = false;
+        StartAction(DeadAction);
+        HurtBox.enabled = false;
+        CollisionBlockMove.enabled = false;
+
+        CanInput = false;
+        Renderer.skeleton.SetColor(Color.white);
     }
 
     public override void TryInput(InputKey _InputKey)
@@ -454,6 +492,10 @@ public class PlayerMain : Character
             {
                 TryInput(InputKey.Block);
             }
+            if (playerAct.FindAction("Transformation").WasPressedThisFrame())
+            {
+                TryInput(InputKey.Transformation);
+            }
             //if (playerAct.FindAction("UseButterfly").WasPressedThisFrame())
             //{
             //    //TryInput(InputKey.UseButterfly);
@@ -484,19 +526,7 @@ public class PlayerMain : Character
                 ActionLinkTime.value = 0f;
         }
 
-        if (TimedLinks.Count > 0)
-        {
-            bool _Marked = false;
-            foreach (var _link in TimedLinks.OrderBy(w => w.Base.KeyArrow != InputKey.None)) 
-            {
-                if (TryLink(_link.Base)) { _Marked = false; break; }
-                if (Mathf.Approximately(_link.Base.LifeTime, -1)) { continue; }
-                if (NowAction == null) { _link.LifeTimePassed += Time.fixedDeltaTime; }
-                if (_link.LifeTimePassed >= _link.Base.LifeTime)  { _Marked = true; }
-            }
-
-            if (_Marked) { TimedLinks.RemoveAll(w => w.LifeTimePassed >= w.Base.LifeTime); }
-        }
+        
 
         if (lastHealth != base.Health)
             HealthChenged();
@@ -510,7 +540,28 @@ public class PlayerMain : Character
             waitSliderHealthMove -= Time.deltaTime;
 
         if (CatMode)
-            Morph.Add(Time.deltaTime * .035f * 100000);
+            Morph.Consume(Time.deltaTime * .05f);
+
+
+        if (isDead)
+        {
+
+            if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Failed" && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .5f)
+            {
+                startedFade = true;
+
+                DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), .5f, (value) =>
+                {
+                    Renderer.skeleton.SetColor(value);
+                });
+            }
+            if (Renderer.skeleton.GetColor().a <= 0)
+            {
+                AerutaDebug.i.ShowStatistics();
+                //Time.timeScale = 0f;
+            }
+            //Debug.Log(Renderer.skeleton.GetColor());
+        }
     }
 
     public void HealthChenged()

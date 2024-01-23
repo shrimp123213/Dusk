@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: boss1-1_ST_start
   m_EditorClassIdentifier: 
   Id: boss1-1_ST_start
-  DisplayName: 
-  AnimationKey: boss1-1_ST_start
+  DisplayName: boss1-1_ST_start
+  _AnimationKey: boss1-1_ST_start
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0

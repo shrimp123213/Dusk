@@ -42,7 +42,7 @@ public class MorphUser : MonoBehaviour
     {
         float num = (float)MorphCount + MorphProgress - _count;
         MorphCount = Mathf.Clamp((int)num, 0, MorphMax);
-        MorphProgress = num % 1f;
+        MorphProgress = Mathf.Clamp(num % 1f, 0, 1);
         CheckSpin();
 
         if (_delay)

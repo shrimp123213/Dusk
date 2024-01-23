@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatBlock
   DisplayName: CatBlock
-  AnimationKey: CatBlock
+  _AnimationKey: CatBlock
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0

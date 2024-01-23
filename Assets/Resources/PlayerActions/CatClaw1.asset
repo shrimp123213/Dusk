@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatClaw1
   DisplayName: CatClaw1
-  AnimationKey: Claw1
+  _AnimationKey: CatClaw1
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 0.1
+  DamageRatio: 0.4
   DamageType: 0
   AttackSpots:
   - KeyFrameFrom: 8
-    KeyFrameEnd: 12
-    Offset: {x: 1, y: 0.2, z: 0}
-    Range: {x: 2, y: 1.7}
+    KeyFrameEnd: 14
+    Offset: {x: 1.5, y: 0.2, z: 0}
+    Range: {x: 3.1, y: 1.7}
     HitMax: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
@@ -32,7 +33,7 @@ MonoBehaviour:
   CanTriggerMark: 0
   ClearStoredMoves: 0
   Links:
-  - Frame: 11
+  - Frame: 15
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
@@ -56,7 +57,7 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: CatPieta
     CanChangeFace: 1
-  - Frame: 11
+  - Frame: 15
     LifeTime: -1
     Key1: 10
     KeyArrow: 0
@@ -86,10 +87,10 @@ MonoBehaviour:
   IsTeleported: 
   IsLightAttack: 1
   IsHeavyAttack: 0
-  HitStun: 0
+  HitStun: 0.075
   IsMovableX: 0
   IsMovableY: 0
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 1
   AnimationKeyClawEnd: Claw1End
-  ClawEffectCount: 1
+  ClawEffectCount: 3

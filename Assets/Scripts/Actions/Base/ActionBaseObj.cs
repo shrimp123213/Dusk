@@ -15,7 +15,18 @@ public class ActionBaseObj : ScriptableObject
     public string DisplayName;
 
     [Header("°Êµe")]
-    public string AnimationKey;
+    public string _AnimationKey;
+    public string AnimationKey
+    {
+        get
+        {
+            if (EnableJumpVersion && !m.isGround)
+                return _AnimationKey + "_jump";
+            return _AnimationKey;
+        }
+    }
+    public bool EnableJumpVersion;
+    [Space(10f)]
 
     public int InterruptLevel;
 
@@ -93,9 +104,16 @@ public class ActionBaseObj : ScriptableObject
     public bool IsMovableX;
     public bool IsMovableY;
 
+    [Header("VelocityLimit")]
+    public Vector2 LimitX = new Vector2(float.MinValue, float.MaxValue);
+    public Vector2 LimitY = new Vector2(float.MinValue, float.MaxValue);
+    [Space(10f)]
+
     public bool CanChangeFacingWhenActing;
 
     public bool CanJumpWhenActing;
+
+    protected Character m;
 
     public virtual void Init(Character _m)
     {
@@ -131,6 +149,14 @@ public class ActionBaseObj : ScriptableObject
     {
         return IsMovableY;
     }
+    public virtual Vector2 VelocityLimitX(Character _m)
+    {
+        return LimitX;
+    }
+    public virtual Vector2 VelocityLimitY(Character _m)
+    {
+        return LimitY;
+    }
     public virtual bool CanChangeFacing(Character _m)
     {
         return CanChangeFacingWhenActing;
@@ -142,6 +168,8 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual ActionPeformState StartAction(Character _m)
     {
+        m = _m;
+
         if (ResetCanAttack && (bool)_m.Player)
         {
             _m.Player.CanAttack = true;

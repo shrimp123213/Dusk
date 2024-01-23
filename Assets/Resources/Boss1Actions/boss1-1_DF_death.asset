@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: boss1-1_DF_death
   m_EditorClassIdentifier: 
   Id: boss1-1_DF_death
-  DisplayName: 
-  AnimationKey: boss1-1_DF_death
+  DisplayName: boss1-1_DF_death
+  _AnimationKey: boss1-1_DF_death
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0

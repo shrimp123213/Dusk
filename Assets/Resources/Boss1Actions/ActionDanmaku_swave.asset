@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ActionDanmaku_swave
   m_EditorClassIdentifier: 
   Id: ActionDanmaku_swave
-  DisplayName: 
-  AnimationKey: boss1-1_ATK_swave
+  DisplayName: boss1-1_ATK_swave
+  _AnimationKey: boss1-1_ATK_swave
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1

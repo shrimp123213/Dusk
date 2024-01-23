@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Transformation",
+                    "type": "Button",
+                    "id": "1c59331d-7794-4e08-bce4-d8390ccb87b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -244,17 +253,6 @@
                 },
                 {
                     "name": "",
-                    "id": "052bfdd9-0f8d-427f-9dd8-c6173cb55ca6",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "dc48fbdc-d5cf-4b32-87e8-7ca354b07032",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -343,12 +341,34 @@
                 },
                 {
                     "name": "",
-                    "id": "97217fc2-ed08-4255-977a-13b09f03b6fd",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "9c4f6e4c-7620-4856-9bae-d7298d2b5db1",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65657d8f-ce35-46dc-9ec3-7b1c24c01b3a",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Transformation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e992a306-304d-400e-b559-c7c6a254625b",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Transformation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -215,7 +215,7 @@ public class ActionPietaObj : ActionBaseObj
     {
         _m.Player.EvadeState.EvadeReady(true);
 
-        _m.Player.SwitchMode();
+        //_m.Player.SwitchMode();
 
         base.EndAction(_m);
     }

@@ -18,6 +18,8 @@ public class InvincibleState : MonoBehaviour
 
     private bool showEffect;
 
+    public Character _m;
+
     private void Start()
     {
         Renderer.skeleton.SetColor(Color.white);
@@ -48,16 +50,20 @@ public class InvincibleState : MonoBehaviour
             }
         }
 
-        if (InvincibleTime <= 0 || !showEffect)
+        if (!_m.Player.isDead)
         {
-            material.DOComplete();
-            material.DOColor(Color.white, 0f);
-            Renderer.skeleton.SetColor(material.color);
+            if (InvincibleTime <= 0 || !showEffect)
+            {
+                material.DOComplete();
+                material.DOColor(Color.white, 0f);
+                Renderer.skeleton.SetColor(material.color);
+            }
+            else
+            {
+                Renderer.skeleton.SetColor(material.color);
+            }
         }
-        else
-        {
-            Renderer.skeleton.SetColor(material.color);
-        }
+        
     }
 
     public void Invincible(float _time = -1f)

@@ -10,6 +10,7 @@ using System.Reflection;
 using Spine.Unity;
 using System.Runtime.ConstrainedExecution;
 using static UnityEngine.Rendering.DebugUI;
+using System.Linq;
 
 public class Character : MonoBehaviour, IHitable
 {
@@ -155,6 +156,28 @@ public class Character : MonoBehaviour, IHitable
             return true;
         }
     }
+    public Vector2 VelocityLimitX
+    {
+        get
+        {
+            if (isActing)
+            {
+                return NowAction.VelocityLimitX(this);
+            }
+            return new Vector2(float.MinValue, float.MaxValue);
+        }
+    }
+    public Vector2 VelocityLimitY
+    {
+        get
+        {
+            if (isActing)
+            {
+                return NowAction.VelocityLimitY(this);
+            }
+            return new Vector2(float.MinValue, float.MaxValue);
+        }
+    }
     public bool canChangeFacingWhenActing
     {
         get
@@ -264,6 +287,7 @@ public class Character : MonoBehaviour, IHitable
         {
             Facing = ((Xinput > 0f) ? 1 : (-1));
         }
+        ProcessLinks();
         ProcessInput();
         Move();
         CheckFace();
@@ -349,6 +373,23 @@ public class Character : MonoBehaviour, IHitable
     public virtual bool TryLink(ActionLink link, bool _forceSuccess = false)
     {
         return false;
+    }
+
+    public virtual void ProcessLinks()
+    {
+        if (TimedLinks.Count > 0)
+        {
+            bool _Marked = false;
+            foreach (var _link in TimedLinks.OrderBy(w => w.Base.KeyArrow != InputKey.None))
+            {
+                if (TryLink(_link.Base)) { _Marked = false; break; }
+                if (Mathf.Approximately(_link.Base.LifeTime, -1)) { continue; }
+                if (NowAction == null) { _link.LifeTimePassed += Time.fixedDeltaTime; }
+                if (_link.LifeTimePassed >= _link.Base.LifeTime) { _Marked = true; }
+            }
+
+            if (_Marked) { TimedLinks.RemoveAll(w => w.LifeTimePassed >= w.Base.LifeTime); }
+        }
     }
 
     public void RegisterHit(HittedGameObjectKey key)
@@ -553,16 +594,15 @@ public class Character : MonoBehaviour, IHitable
                 {
                     StoredMoves.Remove(item);
                 }
+                rigidbodyConstraints2D = RigidbodyConstraints2D.None;
             }
             //Rigid.MovePosition(base.transform.position + zero * Time.fixedDeltaTime * num2);
             Rigid.MovePosition(zero);
-            if (zero.x != 0f)
-            {
-                rigidbodyConstraints2D = RigidbodyConstraints2D.None;
-            }
         }
         else if((bool)Player)
             Player.EvadeState.EvadeDistanceEffect.Stop();//°±¤î¦ì²¾®É
+
+        velocity = new Vector2(Mathf.Clamp(velocity.x, VelocityLimitX.x, VelocityLimitX.y), Mathf.Clamp(velocity.y, VelocityLimitY.x, VelocityLimitY.y));
 
         Rigid.constraints = rigidbodyConstraints2D | RigidbodyConstraints2D.FreezeRotation;
         Rigid.velocity = velocity;

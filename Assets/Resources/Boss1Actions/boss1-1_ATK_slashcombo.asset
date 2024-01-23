@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_slashcombo
   DisplayName: boss1-1_ATK_slashcombo
-  AnimationKey: boss1-1_ATK_slashcombo
+  _AnimationKey: boss1-1_ATK_slashcombo
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1

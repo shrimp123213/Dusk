@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_warp
   DisplayName: boss1-1_ATK_warp
-  AnimationKey: boss1-1_ATK_warp
+  _AnimationKey: boss1-1_ATK_warp
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1

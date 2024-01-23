@@ -68,6 +68,7 @@ public class Boss1 : Character
         else
             waitSliderHealthMove -= Time.deltaTime;
 
+
         if (isDead)
         {
             if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_DF_death" && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .8f)

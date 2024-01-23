@@ -24,6 +24,8 @@ public class ActionBlockObj : ActionBaseObj
 
     public override ActionPeformState StartAction(Character _m)
     {
+        base.m = _m;
+
         AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
         //_m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
@@ -60,18 +62,10 @@ public class ActionBlockObj : ActionBaseObj
     public override void EndAction(Character _m)
     {
         ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
-        if (actionState.blockState != BlockState.PerfectBlock)
-        {
-            _m.SetAnimationIdle();
-        }
 
         _m.Blocking = false;
 
-        _m.NowAction = null;
-        if (EndActionFloatTime > 0f)
-        {
-            _m.LowGravityTime = EndActionFloatTime;
-        }
+        base.EndAction(_m);
     }
 
     public void TrySetBlockState(ActionPeformStateBlock actionState, Character _m)
@@ -102,11 +96,6 @@ public class ActionBlockObj : ActionBaseObj
                 break;
             case BlockState.Backswing:
                 break;
-
-            case BlockState.PerfectBlock:
-                break;
-            case BlockState.NormalBlock:
-                break;
         }
     }
 
@@ -114,46 +103,30 @@ public class ActionBlockObj : ActionBaseObj
     {
         ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
 
-        AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
-        //_m.Ani.Rebind();
+        _m.Blocking = false;
+
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {
-            _m.Ani.Play(blockReactions[0].AnimationKey);
-            actionState.blockState = BlockState.PerfectBlock;
-
             Instantiate(AerutaDebug.i.BlockEffectPerfect, _ClosestPoint, Quaternion.identity, null);
-
-            if (blockReactions[0].KnockbackMove.TargetDistance.x != 0 || blockReactions[0].KnockbackMove.TargetDistance.y != 0)
-                _m.StoredMoves.Add(new ForceMovement(blockReactions[0].KnockbackMove, new Vector3(0f, 0f), _m.transform.position));
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).PerfectMorphRecovery);
 
             Debug.Log("Perfect");
+
+            _m.StartAction(ActionLoader.i.Actions["BlockPerfect"]);
         }
         else
         {
-            _m.Ani.Play(blockReactions[1].AnimationKey);
-            actionState.blockState = BlockState.NormalBlock;
-
             Instantiate(AerutaDebug.i.BlockEffectNormal, _ClosestPoint, Quaternion.identity, null);
-
-            if (blockReactions[1].KnockbackMove.TargetDistance.x != 0 || blockReactions[1].KnockbackMove.TargetDistance.y != 0) 
-                _m.StoredMoves.Add(new ForceMovement(blockReactions[1].KnockbackMove, new Vector3(0f, 0f), _m.transform.position));
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).NormalMorphRecovery);
 
-            Debug.Log("Normal");
+            Debug.Log("Normal"); 
+            
+            _m.StartAction(ActionLoader.i.Actions["BlockNormal"]);
         }
-        _m.Ani.Update(0f);
-        _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
-        _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
 
-        _m.Blocking = false;
-
-        if (actionState.blockState == BlockState.PerfectBlock)
-        {
-            EndAction(_m);
-        }
+        
     }
 }
 
@@ -165,9 +138,6 @@ public class ActionPeformStateBlock : ActionPeformState
         Perfect,
         Normal,
         Backswing,
-        
-        PerfectBlock,
-        NormalBlock,
     }
     public BlockState blockState = BlockState.Forswing;
 }

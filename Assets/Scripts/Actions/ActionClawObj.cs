@@ -100,7 +100,7 @@ public class ActionClawObj : ActionBaseObj
         {
             Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.1f + i * .125f, -.75f - i * .0625f), _m.Facing);
             ClawEffectAnis.Add(Instantiate(AerutaDebug.i.ClawEffect, _m.transform.position + vector, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>());
-            ClawEffectAnis[i].Play(AnimationKey);
+            ClawEffectAnis[i].Play(Id);
             ClawEffectAnis[i].Update(0f);
             ClawEffectAnis[i].transform.localScale = new Vector3(1f + i * .25f, 1f + i * .125f, 1f);
         }

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Claw2
   DisplayName: Claw2
-  AnimationKey: Claw2
+  _AnimationKey: Claw2
+  EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0.2
@@ -88,7 +89,9 @@ MonoBehaviour:
   IsHeavyAttack: 0
   HitStun: 0.1
   IsMovableX: 0
-  IsMovableY: 0
+  IsMovableY: 1
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -0.25, y: 9}
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 1
   AnimationKeyClawEnd: Claw2End

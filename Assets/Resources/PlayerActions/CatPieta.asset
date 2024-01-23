@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatPieta
   DisplayName: CatPieta
-  AnimationKey: Pieta
+  _AnimationKey: CatPieta
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 3

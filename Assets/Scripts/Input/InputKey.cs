@@ -11,4 +11,5 @@ public enum InputKey
     Heal,
     UI,
     Block,
+    Transformation,
 }

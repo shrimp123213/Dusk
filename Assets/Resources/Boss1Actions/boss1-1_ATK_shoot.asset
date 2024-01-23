@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_shoot
   DisplayName: boss1-1_ATK_shoot
-  AnimationKey: boss1-1_ATK_shoot
+  _AnimationKey: boss1-1_ATK_shoot
+  EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1

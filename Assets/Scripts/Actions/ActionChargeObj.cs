@@ -99,6 +99,8 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
 
     public override ActionPeformState StartAction(Character _m)//«ö¤U®É¼½BurstCharge1
     {
+        base.m = _m;
+
         _m.SpeedFactor = 0.35f;
         if (!ExtendPreviousAnimation)
         {

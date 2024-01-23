@@ -7,7 +7,7 @@ public class HitEffector : MonoBehaviour
 
     private Animator Ani;
 
-    public bool Main;
+    public Character _m;
 
     public static float GlobalMoveTimeScale = 1f;
 
@@ -70,7 +70,7 @@ public class HitEffector : MonoBehaviour
                 Ani.speed = 1f;
             }
         }
-        if (HitStun > 0f)
+        if (HitStun > 0f && !_m.isDead)
         {
             HitStunInterval -= Time.deltaTime;
             HitStun -= Time.deltaTime;
@@ -97,8 +97,8 @@ public class HitEffector : MonoBehaviour
                     Ani.Update(0f);
                     isActionInterrupted = false;
 
-                    if (Main)
-                        Ani.GetComponentInParent<Character>().Player.CanInput = true;
+                    if ((bool)_m.Player)
+                        _m.Player.CanInput = true;
                 }
 
                 Ani.speed = 1f;
@@ -118,7 +118,7 @@ public class HitEffector : MonoBehaviour
                 TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
         }
         
-        if (Main && TimeSlow > 0f)
+        if ((bool)_m.Player && TimeSlow > 0f)
         {
             TimeSlow -= Time.deltaTime;
             if (TimeSlow <= 0f)

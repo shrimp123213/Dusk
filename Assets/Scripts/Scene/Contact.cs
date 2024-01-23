@@ -130,23 +130,55 @@ public class Contact : MonoBehaviour
         }
     }
 
+    public void Skip()
+    {
+        AITree.enabled = true;
+        //ani.Play("boss1-1_ST_start");
+        AerutaDebug.i.StartGameTime = Time.unscaledTime;
+
+        Camcam.i.UseOverride = false;
+
+        PlayerMain.i.StopMove();
+        PlayerMain.i.CanInput = true;
+
+        triggered = true;
+
+
+        fences[0].Play("FenceUp");
+        fences[1].Play("FenceUp");
+
+        BossName.text = "¥D±Ð";
+
+        BossName.rectTransform.DOLocalMove(endPos, 0f);
+        BossName.rectTransform.DOSizeDelta(endSize, 0f);
+
+        BossName.fontSize = endFontSize;
+        BossNameBackground.color = new Color(0f, 0f, 0f, 0f);
+
+        BossHealthBar.localScale = new Vector3(.75f, .75f, .75f);
+
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !triggered)
         {
-            AITree.enabled = true;
-            //ani.Play("boss1-1_ST_start");
-            AerutaDebug.i.StartGameTime = Time.unscaledTime;
+            Skip();
 
-            Camcam.i.UseOverride = true;
-            Camcam.i.PosOverride = new Vector3(AITree.transform.position.x, -3f, -10f);
-
-            PlayerMain.i.StopMove();
-            PlayerMain.i.CanInput = false;
-            
-            Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
-
-            triggered = true;
+            //AITree.enabled = true;
+            ////ani.Play("boss1-1_ST_start");
+            //AerutaDebug.i.StartGameTime = Time.unscaledTime;
+            //
+            //Camcam.i.UseOverride = true;
+            //Camcam.i.PosOverride = new Vector3(AITree.transform.position.x, -3f, -10f);
+            //
+            //PlayerMain.i.StopMove();
+            //PlayerMain.i.CanInput = false;
+            //
+            //Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
+            //
+            //triggered = true;
         }
     }
 }
