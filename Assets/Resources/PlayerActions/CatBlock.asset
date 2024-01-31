@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: CatBlock
   DisplayName: CatBlock
   _AnimationKey: CatBlock
-  EnableJumpVersion: 0
+  EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0
@@ -46,7 +46,9 @@ MonoBehaviour:
   IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0
-  IsMovableY: 0
+  IsMovableY: 1
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
   PerfectFrameStart: 0
@@ -56,8 +58,7 @@ MonoBehaviour:
   NormalMorphRecovery: 16667
   blockReactions:
   - AnimationKey: CatBlockPerfect
-    OnlyInterruptByDash: 0
-    Knockback: 0
+    Knockback: 1
     KnockbackMove:
       KeyFrame: 0
       Curve:
@@ -67,12 +68,11 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       TargetDistance: {x: 0, y: 0}
-      FinishTime: 0
+      FinishTime: 0.25
       CanEvade: 0
       StartEvadeFrame: 0
       EndEvadeFrame: 0
   - AnimationKey: CatBlockNormal
-    OnlyInterruptByDash: 1
     Knockback: 1
     KnockbackMove:
       KeyFrame: 0

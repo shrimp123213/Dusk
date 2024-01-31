@@ -147,7 +147,7 @@ public class BlockReaction
 {
     public string AnimationKey;
 
-    public bool OnlyInterruptByDash;
+    //public bool OnlyInterruptByDash;
 
     public bool Knockback;
 

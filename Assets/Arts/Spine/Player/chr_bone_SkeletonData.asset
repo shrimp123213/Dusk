@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: chr_bone_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 4dc3b638e4ecc0545a6373df2ddf4a88, type: 2}
+  - {fileID: 11400000, guid: 86fc04eab7e5a5e4b87074ca9297b6f9, type: 2}
   scale: 0.0005
-  skeletonJSON: {fileID: 4900000, guid: 2d5ead79e25a2cc4bac1600ab36c5d85, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 63db50b9357c494458b644034ea14244, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 9100000, guid: 51894cabb63186443b742510ae77247c, type: 2}
+  controller: {fileID: 9100000, guid: 762d9faa7024daa49869c95da0772d9c, type: 2}

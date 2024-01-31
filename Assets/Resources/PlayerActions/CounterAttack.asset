@@ -54,5 +54,7 @@ MonoBehaviour:
   HitStun: 0.2
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 0
