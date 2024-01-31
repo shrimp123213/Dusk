@@ -37,10 +37,10 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
-    - _WaveFrequency: 5
-    - _WaveHeight: 0.5
+    - _WaveFrequency: 8
+    - _WaveHeight: 0
     - _WaveIntersity: 0
-    - _WaveStrength: 20
+    - _WaveStrength: 50
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _WaveSpeed: {r: 0, g: 0, b: 0, a: 0}

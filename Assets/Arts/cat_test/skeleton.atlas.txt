@@ -83,15 +83,24 @@ tail3
 bounds:1559,999,444,303
 
 skeleton_2.png
-size:1311,914
+size:2019,1870
 filter:Linear,Linear
 pma:true
 scale:0.5
 body
-bounds:2,2,910,678
+bounds:1322,138,910,678
 offsets:133,155,1045,956
 rotate:90
 bodys_
-bounds:682,55,857,627
+bounds:2,2,857,627
 offsets:149,197,1038,956
 rotate:90
+guard
+bounds:2,861,1007,1000
+rotate:90
+guard-1
+bounds:631,34,689,825
+offsets:0,3,698,828
+guard-2
+bounds:1322,1050,695,818
+offsets:0,0,698,828
