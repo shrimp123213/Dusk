@@ -45,7 +45,7 @@ public class AerutaDebug : MonoBehaviour
     {
         i = this;
 
-        //if (ControlGamepad.enabled || ControlKeyboard.enabled)
+        if (ControlGamepad.enabled || ControlKeyboard.enabled)
             Time.timeScale = 0f;
     }
 

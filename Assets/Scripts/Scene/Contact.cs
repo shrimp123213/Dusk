@@ -88,18 +88,13 @@ public class Contact : MonoBehaviour
                 {
                     if (BossName.text == "")
                     {
-                        waitTime = waitTimeMax;
-                        BossName.text = "主";
-                    }
-                    else if (BossName.text == "主")
-                    {
                         waitTime = waitTimeMax * 2;
-                        BossName.text = "主教";
+                        BossName.text = "棄聖主教-札洛";
                     }
                 }
             }
 
-            if (BossName.text == "主教" && waitTime <= 0f) 
+            if (BossName.text == "棄聖主教-札洛" && waitTime <= 0f) 
             {
                 if (!startedMove)
                 {
@@ -147,7 +142,7 @@ public class Contact : MonoBehaviour
         fences[0].Play("FenceUp");
         fences[1].Play("FenceUp");
 
-        BossName.text = "主教";
+        BossName.text = "棄聖主教-札洛";
 
         BossName.rectTransform.DOLocalMove(endPos, 0f);
         BossName.rectTransform.DOSizeDelta(endSize, 0f);
@@ -164,21 +159,21 @@ public class Contact : MonoBehaviour
     {
         if (other.CompareTag("Player") && !triggered)
         {
-            Skip();
+            //Skip();
 
-            //AITree.enabled = true;
-            ////ani.Play("boss1-1_ST_start");
-            //AerutaDebug.i.StartGameTime = Time.unscaledTime;
-            //
-            //Camcam.i.UseOverride = true;
-            //Camcam.i.PosOverride = new Vector3(AITree.transform.position.x, -3f, -10f);
-            //
-            //PlayerMain.i.StopMove();
-            //PlayerMain.i.CanInput = false;
-            //
-            //Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
-            //
-            //triggered = true;
+            AITree.enabled = true;
+            ani.Play("boss1-1_ST_start");
+            AerutaDebug.i.StartGameTime = Time.unscaledTime;
+            
+            Camcam.i.UseOverride = true;
+            Camcam.i.PosOverride = new Vector3(AITree.transform.position.x, -3f, -10f);
+            
+            PlayerMain.i.StopMove();
+            PlayerMain.i.CanInput = false;
+            
+            Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
+            
+            triggered = true;
         }
     }
 }
