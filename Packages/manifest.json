@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "com.aarthificial.pixelgraphics": "https://github.com/aarthificial/pixelgraphics.git",
+    "com.cammin.ldtkunity": "4.2.2",
+    "com.coffee.softmask-for-ugui": "1.0.2",
+    "com.coffee.ui-effect": "4.0.0-preview.10",
+    "com.coffee.ui-particle": "4.6.0-preview.1",
     "com.esotericsoftware.spine.spine-csharp": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-csharp/src#4.1",
     "com.esotericsoftware.spine.spine-unity": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Assets/Spine#4.1",
     "com.esotericsoftware.spine.timeline": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.timeline#4.1",
@@ -50,5 +54,17 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.cammin.ldtkunity",
+        "com.coffee.ui-effect",
+        "com.coffee.softmask-for-ugui",
+        "com.coffee.ui-particle"
+      ]
+    }
+  ]
 }

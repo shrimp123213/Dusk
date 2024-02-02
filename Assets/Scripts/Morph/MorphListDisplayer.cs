@@ -16,7 +16,7 @@ public class MorphListDisplayer : MonoBehaviour
 
     public Sprite[] MarkSprites;
     public Image MarkLevelImage;
-    public SpriteRenderer MarkLevelImagePlayer;
+    
 
     private void Awake()
     {
@@ -48,6 +48,5 @@ public class MorphListDisplayer : MonoBehaviour
             MorphUI[0].SetFill(Target.MorphProgress, Target.Drive);
 
         MarkLevelImage.sprite = MarkSprites[Target.MorphCount];
-        MarkLevelImagePlayer.sprite = MarkSprites[Target.MorphCount];
     }
 }

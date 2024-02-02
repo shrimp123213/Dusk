@@ -31,6 +31,8 @@ public class EnemyStartAction : EnemyActionBase
 
     private bool[] omenSpawned;
 
+    
+
     public override void OnStart()
     {
         this.Fail=(this.SelfCharacter.Value.Airbrone || this.SelfCharacter.Value.isDead);

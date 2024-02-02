@@ -12,7 +12,7 @@ public class CheckDistance : EnemyConditionalBase
     {
         LessThan,
         GreaterThan,
-
+        EqualTo
     }
 
     public OperatorType operatorType;
@@ -36,6 +36,14 @@ public class CheckDistance : EnemyConditionalBase
                     if (Vector2.Distance(this.Target.Value.transform.position, this.transform.position) > this.SocialDistance)
                     {
                         //Debug.Log("Greater:"+SocialDistance);
+                        return TaskStatus.Success;
+                    }
+                    break;
+                case OperatorType.EqualTo:
+                    if(Vector2.Distance(this.Target.Value.transform.position, this.transform.position) > this.SocialDistance - 1f &&
+                       Vector2.Distance(this.Target.Value.transform.position, this.transform.position) < this.SocialDistance + 1f)
+                    {
+                        //Debug.Log("Equal:"+SocialDistance);
                         return TaskStatus.Success;
                     }
                     break;
