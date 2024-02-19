@@ -93,6 +93,6 @@ MonoBehaviour:
   LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
   LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
-  CanJumpWhenActing: 1
+  CanJumpWhenActing: 0
   _AnimationKeyClawEnd: Claw1End
   ClawEffectCount: 3

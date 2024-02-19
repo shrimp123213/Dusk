@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 57e3219ad4d48d24c8ff8349bacca98b, type: 3}
   m_Name: CounterAttack
   m_EditorClassIdentifier: 
   Id: CounterAttack
   DisplayName: CounterAttack
   _AnimationKey: CounterAttack
-  EnableJumpVersion: 0
+  EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1
@@ -32,7 +32,43 @@ MonoBehaviour:
   CanInterruptAction: 1
   CanTriggerMark: 0
   ClearStoredMoves: 0
-  Links: []
+  Links:
+  - Frame: 20
+    LifeTime: -1
+    Key1: 6
+    KeyArrow: 0
+    LinkActionId: Claw1
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 6
+    KeyArrow: 0
+    LinkActionId: Claw1
+    CanChangeFace: 1
+  - Frame: 0
+    LifeTime: -1
+    Key1: 7
+    KeyArrow: 0
+    LinkActionId: Pieta
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 7
+    KeyArrow: 0
+    LinkActionId: Pieta
+    CanChangeFace: 1
+  - Frame: 20
+    LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
   Moves: []
   Toggles: []
   Teleports: []
@@ -41,7 +77,7 @@ MonoBehaviour:
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
-  MorphRecovery: 0
+  MorphRecovery: 25000
   MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
@@ -53,8 +89,10 @@ MonoBehaviour:
   IsHeavyAttack: 0
   HitStun: 0.2
   IsMovableX: 0
-  IsMovableY: 0
+  IsMovableY: 1
   LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
-  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 0
+  _AnimationKeyClawEnd: CounterAttackEnd
+  ClawEffectCount: 0
