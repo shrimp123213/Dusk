@@ -64,15 +64,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pieta"",
-                    ""type"": ""Button"",
-                    ""id"": ""33707063-bb7f-43a3-9ba4-fc6637d09c16"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""168a1565-04b6-43fe-961d-008bfcbf5e98"",
@@ -242,28 +233,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""34909993-a2db-404a-954b-9a9775ebad55"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Pieta"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2aeb0a4e-5131-472a-a216-7c795a19e33f"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Pieta"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b2c8459e-5f25-4105-b7a8-2a0f7b6d9c2e"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
@@ -428,7 +397,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Claw = m_Player.FindAction("Claw", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
-        m_Player_Pieta = m_Player.FindAction("Pieta", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Hint_Energy = m_Player.FindAction("Hint_Energy", throwIfNotFound: true);
         m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
@@ -499,7 +467,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Claw;
     private readonly InputAction m_Player_Block;
-    private readonly InputAction m_Player_Pieta;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Hint_Energy;
     private readonly InputAction m_Player_Heal;
@@ -513,7 +480,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Claw => m_Wrapper.m_Player_Claw;
         public InputAction @Block => m_Wrapper.m_Player_Block;
-        public InputAction @Pieta => m_Wrapper.m_Player_Pieta;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Hint_Energy => m_Wrapper.m_Player_Hint_Energy;
         public InputAction @Heal => m_Wrapper.m_Player_Heal;
@@ -540,9 +506,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Block.started += instance.OnBlock;
             @Block.performed += instance.OnBlock;
             @Block.canceled += instance.OnBlock;
-            @Pieta.started += instance.OnPieta;
-            @Pieta.performed += instance.OnPieta;
-            @Pieta.canceled += instance.OnPieta;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -574,9 +537,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Block.started -= instance.OnBlock;
             @Block.performed -= instance.OnBlock;
             @Block.canceled -= instance.OnBlock;
-            @Pieta.started -= instance.OnPieta;
-            @Pieta.performed -= instance.OnPieta;
-            @Pieta.canceled -= instance.OnPieta;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -633,7 +593,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnClaw(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
-        void OnPieta(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnHint_Energy(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);

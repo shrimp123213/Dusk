@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static Pieta;
 using DG.Tweening;
 using Spine.Unity;
 
@@ -161,7 +160,7 @@ public class PlayerMain : Character
         {
             if (Inputs.Contains(InputKey.Dash))
             {
-                if (!base.isActing || (base.isActing && NowAction.Id != "Dash" && NowAction.Id != "Pieta"))
+                if (!base.isActing || (base.isActing && NowAction.Id != "Dash"))
                 {
                     if (!Blocking)
                     {
@@ -181,14 +180,6 @@ public class PlayerMain : Character
             }
             if (!base.isActing)
             {
-                if (Inputs.Contains(InputKey.Pieta))
-                {
-                    if (TryCastAction(ActionLoader.i.Actions["Pieta"]))
-                    {
-                        StartAction(ActionLoader.i.Actions["Pieta"]);
-                    }
-                    Inputs.Clear();
-                }
                 if (Inputs.Contains(InputKey.Block))
                 {
                     StartAction(ActionLoader.i.Actions["Block"]);
@@ -223,7 +214,7 @@ public class PlayerMain : Character
         {
             if (Inputs.Contains(InputKey.Dash))
             {
-                if (!base.isActing || (base.isActing && NowAction.Id != "CatDash" && NowAction.Id != "CatPieta"))
+                if (!base.isActing || (base.isActing && NowAction.Id != "CatDash"))
                 {
                     if (!Blocking)
                     {
@@ -243,14 +234,6 @@ public class PlayerMain : Character
             }
             if (!base.isActing)
             {
-                if (Inputs.Contains(InputKey.Pieta))
-                {
-                    if (TryCastAction(ActionLoader.i.Actions["CatPieta"]))
-                    {
-                        StartAction(ActionLoader.i.Actions["CatPieta"]);
-                    }
-                    Inputs.Clear();
-                }
                 if (Inputs.Contains(InputKey.Block))
                 {
                     StartAction(ActionLoader.i.Actions["CatBlock"]);
@@ -264,7 +247,7 @@ public class PlayerMain : Character
                 }
                 if (Inputs.Contains(InputKey.Transformation))
                 {
-                    StartAction(ActionLoader.i.Actions["Transformation"]);
+                    StartAction(ActionLoader.i.Actions["CatTransformation"]);
                     Inputs.Clear();
                 }
             }
@@ -308,7 +291,7 @@ public class PlayerMain : Character
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
         bool flag = true;
-        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.Id != "Pieta" && _actionBaseObj.Id != "CatPieta" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
+        if (flag && _actionBaseObj.Id != "Heal" && _actionBaseObj.MorphCost > 0f && Morph.TotalMorph < _actionBaseObj.MorphCost) 
         {
             flag = false;
             if (isShowMessage)
@@ -319,11 +302,6 @@ public class PlayerMain : Character
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Potions !");
-        }
-
-        if (flag && (_actionBaseObj.Id == "Pieta" || _actionBaseObj.Id == "CatPieta") && _actionBaseObj.MorphCost > 0f && (Morph.MorphCount < _actionBaseObj.MorphCost || !Pieta.i.CheckPietaAttack(this)))
-        {
-            flag = false;
         }
 
         if (flag && _actionBaseObj.name.Contains("Claw") && !isGround)
@@ -475,10 +453,6 @@ public class PlayerMain : Character
             if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f || DashCooldown == 1f))
             {
                 TryInput(InputKey.Dash);
-            }
-            if (playerAct.FindAction("Pieta").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Pieta);
             }
             if (playerAct.FindAction("Heal").WasPressedThisFrame())
             {

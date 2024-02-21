@@ -27,6 +27,7 @@ public class AerutaDebug : MonoBehaviour
     public GameObject BloodEffect;
     public GameObject PenetrateTrail;
     public GameObject ClawEffect;
+    public GameObject CounterAttackEffect;
     public GameObject BlockFlashYellow;
     public GameObject BlockFlashBlue;
     public GameObject EvadeFinishCooldownEffect;
@@ -70,7 +71,7 @@ public class AerutaDebug : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            PlayerMain.i.Morph.Add(10f);
+            PlayerMain.i.Morph.Add(100000f);
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {

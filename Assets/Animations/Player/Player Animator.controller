@@ -234,32 +234,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-5403666279997118046
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Pieta
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -1470042575309666523, guid: ae709d3fffff9084f8bfba5bd03c336f, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &-5392487258965848977
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -627,9 +601,6 @@ AnimatorStateMachine:
     m_State: {fileID: 5732594010649060783}
     m_Position: {x: 390, y: 360, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -5403666279997118046}
-    m_Position: {x: 280, y: -270, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 1678455513286970942}
     m_Position: {x: 940, y: -50, z: 0}
   - serializedVersion: 1
@@ -658,7 +629,7 @@ AnimatorStateMachine:
     m_Position: {x: 490, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8201340128346135484}
-    m_Position: {x: -330, y: -90, z: 0}
+    m_Position: {x: 280, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2874278603484918787}
     m_Position: {x: 940, y: 120, z: 0}
@@ -676,7 +647,7 @@ AnimatorStateMachine:
     m_Position: {x: -410, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5780473970554411807}
-    m_Position: {x: -330, y: -40, z: 0}
+    m_Position: {x: 280, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 370028386320906182}
     m_Position: {x: 730, y: 50, z: 0}

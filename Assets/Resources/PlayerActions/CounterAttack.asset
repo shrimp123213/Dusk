@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e3219ad4d48d24c8ff8349bacca98b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f6924afc04c3bb4d9dfa3b178f63260, type: 3}
   m_Name: CounterAttack
   m_EditorClassIdentifier: 
   Id: CounterAttack
@@ -21,8 +21,8 @@ MonoBehaviour:
   DamageRatio: 1
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 8
-    KeyFrameEnd: 14
+  - KeyFrameFrom: 11
+    KeyFrameEnd: 20
     Offset: {x: 1.5, y: 0.2, z: 0}
     Range: {x: 3.1, y: 1.7}
     HitMax: 0
@@ -44,18 +44,6 @@ MonoBehaviour:
     Key1: 6
     KeyArrow: 0
     LinkActionId: Claw1
-    CanChangeFace: 1
-  - Frame: 0
-    LifeTime: -1
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: Pieta
-    CanChangeFace: 1
-  - Frame: -1
-    LifeTime: 0.5
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: Pieta
     CanChangeFace: 1
   - Frame: 20
     LifeTime: -1
@@ -95,4 +83,4 @@ MonoBehaviour:
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 0
   _AnimationKeyClawEnd: CounterAttackEnd
-  ClawEffectCount: 0
+  ClawEffectCount: 1

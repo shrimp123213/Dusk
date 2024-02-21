@@ -20,7 +20,7 @@ public class ActionClawObj : ActionBaseObj
 
     public int ClawEffectCount;
 
-    private List<Animator> ClawEffectAnis = new List<Animator>();
+    protected List<Animator> ClawEffectAnis = new List<Animator>();
 
     private bool soundPlayed;
 
@@ -102,6 +102,11 @@ public class ActionClawObj : ActionBaseObj
     {
         base.Init(_m);
 
+        SpawnEffect(_m);
+    }
+
+    public virtual void SpawnEffect(Character _m)
+    {
         //Vector3 vector = Vector3Utility.CacuFacing(_m.NowAction.AttackSpots[0].Offset, _m.Facing);
         //Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.25f, -.75f), _m.Facing);
         ClawEffectAnis.Clear();
@@ -113,6 +118,5 @@ public class ActionClawObj : ActionBaseObj
             ClawEffectAnis[i].Update(0f);
             ClawEffectAnis[i].transform.localScale = new Vector3(1f + i * .25f, 1f + i * .125f, 1f);
         }
-
     }
 }

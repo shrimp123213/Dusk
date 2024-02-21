@@ -9,7 +9,9 @@ public class ActionTransformationObj : ActionBaseObj
 
     public override void Init(Character _m)
     {
-        Instantiate(AerutaDebug.i.TransformationEffect, _m.transform.position - Vector3.up, Quaternion.Euler(new Vector3(-10, 0, 0)), _m.transform);
+        Animator ani = Instantiate(AerutaDebug.i.TransformationEffect, _m.transform.position - Vector3.up, Quaternion.Euler(new Vector3(-10, 0, 0)), _m.transform).GetComponentInChildren<Animator>();
+        ani.Play(_AnimationKey);
+        ani.Update(0f);
 
         base.Init(_m);
     }
