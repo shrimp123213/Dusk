@@ -204,7 +204,7 @@ public class ActionPietaObj : ActionBaseObj
 
     public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
     {
-        Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
+        //Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
         
         AerutaDebug.i.Feedback.PietaCount++;
 

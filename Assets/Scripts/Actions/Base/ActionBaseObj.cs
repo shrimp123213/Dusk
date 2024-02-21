@@ -249,8 +249,8 @@ public class ActionBaseObj : ScriptableObject
     {
         if ((bool)_m.Player)
             Instantiate(AerutaDebug.i.PlayerAttackLandEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform)), null);
-        else
-            Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform)), null);
+        //else
+        //    Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform)), null);
 
         if (IsLightAttack)
             AerutaDebug.i.Feedback.LightAttackCount++;

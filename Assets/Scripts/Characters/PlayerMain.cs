@@ -68,11 +68,11 @@ public class PlayerMain : Character
 
     public bool CatMode;
 
-    [SerializeField] private SpriteRenderer CatModeSprite;
-
     public int AirClawCount;
 
     private bool startedFade;
+
+    public SkeletonMecanim CatRenderer;
 
     private void OnEnable()
     {
@@ -113,6 +113,8 @@ public class PlayerMain : Character
         CollisionBlockMove.enabled = false;
 
         startedFade = false;
+
+        CatRenderer = gameObject.transform.GetChild(1).GetComponent<SkeletonMecanim>();
     }
 
     private void Start()
@@ -120,6 +122,20 @@ public class PlayerMain : Character
         MorphListDisplayer.i.Target = Morph;
         //Debug.Log(Input.GetJoystickNames().Length);
         //Morph.Add(100000);
+    }
+
+    public override void CheckFace()
+    {
+        if (!CatMode)
+        {
+            transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
+            EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
+        }
+        else
+        {
+            transform.GetChild(1).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(1).localScale.x) * (float)Facing, base.transform.GetChild(1).localScale.y, 1f);
+            EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
+        }
     }
 
     public override void ProcessInput()
@@ -576,7 +592,7 @@ public class PlayerMain : Character
     public void SwitchMode()
     {
         CatMode = !CatMode;
-        CatModeSprite.enabled = CatMode;
+
         if (CatMode)
             Speed.BaseAdd(2.5f);
         else

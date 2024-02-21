@@ -24,7 +24,7 @@ public class AerutaDebug : MonoBehaviour
     public GameObject ChargeEffect;
     public GameObject BlockEffectNormal;
     public GameObject BlockEffectPerfect;
-    public GameObject BloodEffect;
+    //public GameObject BloodEffect;
     public GameObject PenetrateTrail;
     public GameObject ClawEffect;
     public GameObject CounterAttackEffect;

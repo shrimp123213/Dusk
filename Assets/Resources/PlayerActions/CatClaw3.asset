@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57e3219ad4d48d24c8ff8349bacca98b, type: 3}
-  m_Name: CatClaw2
+  m_Name: CatClaw3
   m_EditorClassIdentifier: 
-  Id: CatClaw2
-  DisplayName: CatClaw2
-  _AnimationKey: Claw2
+  Id: CatClaw3
+  DisplayName: CatClaw3
+  _AnimationKey: Claw3
   EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -37,13 +37,13 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkActionId: CatClaw3
+    LinkActionId: CatClaw4
     CanChangeFace: 1
   - Frame: -1
     LifeTime: 0.5
     Key1: 6
     KeyArrow: 0
-    LinkActionId: CatClaw3
+    LinkActionId: CatClaw4
     CanChangeFace: 1
   - Frame: 15
     LifeTime: -1
@@ -82,5 +82,5 @@ MonoBehaviour:
   LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 0
-  _AnimationKeyClawEnd: Claw2End
+  _AnimationKeyClawEnd: Claw3End
   ClawEffectCount: 1

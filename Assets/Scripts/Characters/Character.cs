@@ -609,7 +609,7 @@ public class Character : MonoBehaviour, IHitable
         LastPos = base.transform.position;
     }
 
-    public void CheckFace()
+    public virtual void CheckFace()
     {
         base.transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
     }

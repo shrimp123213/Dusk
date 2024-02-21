@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatDash
   DisplayName: CatDash
-  _AnimationKey: CatDash
+  _AnimationKey: Dash
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 3.75, y: 0}
+    TargetDistance: {x: 4, y: 0}
     FinishTime: 0.417
     CanEvade: 1
     StartEvadeFrame: 0
@@ -77,5 +77,7 @@ MonoBehaviour:
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
