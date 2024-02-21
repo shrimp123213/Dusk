@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatClaw2
   DisplayName: CatClaw2
-  _AnimationKey: Claw2
+  _AnimationKey: cat_atk2
   EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -94,5 +94,5 @@ MonoBehaviour:
   LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 1
-  _AnimationKeyClawEnd: Claw2End
-  ClawEffectCount: 3
+  _AnimationKeyClawEnd: cat_atk2_end
+  ClawEffectCount: 1

@@ -31,17 +31,23 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
+    - _SpeedScale: 2
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
-    - _WaveFrequency: 8
-    - _WaveHeight: 1
+    - _WaveFrequency: 6
+    - _WaveHeight: 0.5
     - _WaveIntersity: 0
-    - _WaveStrength: 50
+    - _WaveStrength: 30
+    - _smoothness: 0.002
+    - _waveHight: 0.598
+    - _waveIntersity: 0.01
+    - _waveTilling: 10
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _WaveSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _waveIntersity_XminYmax: {r: 0, g: 0.015, b: 0, a: 0}
   m_BuildTextureStacks: []

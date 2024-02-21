@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: cat_spinen_Atlas
+  m_EditorClassIdentifier: 
+  textureLoadingMode: 0
+  onDemandTextureLoader: {fileID: 0}
+  atlasFile: {fileID: 4900000, guid: 4b5d897f04a3b524b8346c6b1e17888e, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 1c36498caef2c4947ac4b741e2871781, type: 2}
+  - {fileID: 2100000, guid: 2552c911635706148a5d0554aa21716b, type: 2}
+  - {fileID: 2100000, guid: 336a38929aa794c4181ea61bc63fd0a6, type: 2}
