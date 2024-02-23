@@ -54,8 +54,10 @@ MonoBehaviour:
   PerfectFrameStart: 0
   NormalFrameStart: 6
   BackswingFrameStart: 18
-  PerfectMorphRecovery: 6250
-  NormalMorphRecovery: 6250
+  PerfectMorphRecovery: 0
+  NormalMorphRecovery: 0
   blockReactionsId:
   - BlockPerfect
   - BlockNormal
+  CatMorphPauseTimeAmount_Perfect: 0
+  CatMorphPauseTimeAmount_Normal: 0

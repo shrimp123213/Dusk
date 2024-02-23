@@ -18,11 +18,13 @@ public class ActionClawObj : ActionBaseObj
         }
     }
 
-    public int ClawEffectCount;
-
-    protected List<Animator> ClawEffectAnis = new List<Animator>();
+    protected Animator EffectAni;
 
     private bool soundPlayed;
+
+    public GameObject Effect;
+
+    public Vector3 offset;
 
     public override ActionPeformState StartAction(Character _m)
     {
@@ -65,14 +67,12 @@ public class ActionClawObj : ActionBaseObj
 
         if (actionState.IsBeforeFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom))
         {
-            for (int i = 0; i < ClawEffectCount; i++)
+            if (EffectAni != null)
             {
-                if (ClawEffectAnis[i] != null)
-                    Destroy(ClawEffectAnis[i].gameObject);
+                Destroy(EffectAni.gameObject);
+                EffectAni = null;
             }
-            //Debug.Log("ClearEffect");
         }
-        ClawEffectAnis.Clear();
 
         base.EndAction(_m);
     }
@@ -107,16 +107,9 @@ public class ActionClawObj : ActionBaseObj
 
     public virtual void SpawnEffect(Character _m)
     {
-        //Vector3 vector = Vector3Utility.CacuFacing(_m.NowAction.AttackSpots[0].Offset, _m.Facing);
-        //Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.25f, -.75f), _m.Facing);
-        ClawEffectAnis.Clear();
-        for (int i = 0; i < ClawEffectCount; i++)
-        {
-            Vector3 vector = Vector3Utility.CacuFacing(new Vector2(.1f + i * .125f, -.75f - i * .0625f), _m.Facing);
-            ClawEffectAnis.Add(Instantiate(AerutaDebug.i.ClawEffect, _m.transform.position + vector, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>());
-            ClawEffectAnis[i].Play(_AnimationKey);
-            ClawEffectAnis[i].Update(0f);
-            ClawEffectAnis[i].transform.localScale = new Vector3(1f + i * .25f, 1f + i * .125f, 1f);
-        }
+        Vector3 offsetFacing = Vector3Utility.CacuFacing(offset, _m.Facing);
+        EffectAni = Instantiate(Effect, _m.transform.position + offsetFacing, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>();
+        EffectAni.Play(_AnimationKey);
+        EffectAni.Update(0f);
     }
 }

@@ -49,7 +49,8 @@ public class MorphInUI : MonoBehaviour
         {
             Setted = false;
             Amount = Mathf.Lerp(Amount, TargetAmount, Time.deltaTime * 15f);
-            ImgFront.fillAmount = Mathf.Lerp(.165f, 0.95f, Amount) / 0.95f;
+            //ImgFront.fillAmount = Mathf.Lerp(.165f, 0.95f, Amount) / 0.95f;
+            ImgFront.fillAmount = Amount;
             ImgBall.fillAmount = Amount;
             ImgBallMask.fillAmount = Amount;
             if (!isDrive)

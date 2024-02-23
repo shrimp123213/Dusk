@@ -65,7 +65,7 @@ MonoBehaviour:
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
-  MorphRecovery: 4000
+  MorphRecovery: 0
   MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
@@ -83,4 +83,5 @@ MonoBehaviour:
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 0
   _AnimationKeyClawEnd: Claw3End
-  ClawEffectCount: 1
+  Effect: {fileID: 2162257730757943036, guid: c0194576c9a398f4cb494f21f5ce851a, type: 3}
+  offset: {x: -0.5, y: -0.75, z: 0}

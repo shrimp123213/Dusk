@@ -22,6 +22,9 @@ public class ActionBlockObj : ActionBaseObj
 
     public string[] blockReactionsId;
 
+    public float CatMorphPauseTimeAmount_Perfect;
+    public float CatMorphPauseTimeAmount_Normal;
+
     public override ActionPeformState StartAction(Character _m)
     {
         base.m = _m;
@@ -111,7 +114,7 @@ public class ActionBlockObj : ActionBaseObj
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).PerfectMorphRecovery);
 
-            Debug.Log("Perfect");
+            _m.Player.CatMorphPauseTime = CatMorphPauseTimeAmount_Perfect;
 
             _m.StartAction(ActionLoader.i.Actions[blockReactionsId[0]]);
         }
@@ -121,8 +124,8 @@ public class ActionBlockObj : ActionBaseObj
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).NormalMorphRecovery);
 
-            Debug.Log("Normal"); 
-            
+            _m.Player.CatMorphPauseTime = CatMorphPauseTimeAmount_Normal;
+
             _m.StartAction(ActionLoader.i.Actions[blockReactionsId[1]]);
         }
 

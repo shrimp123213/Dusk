@@ -74,6 +74,8 @@ public class PlayerMain : Character
 
     public SkeletonMecanim CatRenderer;
 
+    public float CatMorphPauseTime;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -258,7 +260,7 @@ public class PlayerMain : Character
                 if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
                     if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
-                        StartAction(ActionLoader.i.Actions["CatCounterAttack"]);
+                        StartAction(ActionLoader.i.Actions["CatClaw1"]);
                     Inputs.Clear();
                 }
                 if (Inputs.Contains(InputKey.Transformation))
@@ -529,9 +531,10 @@ public class PlayerMain : Character
         else
             waitSliderHealthMove -= Time.deltaTime;
 
-        if (CatMode)
-            Morph.Consume(Time.deltaTime * .05f);
-
+        if (CatMode && CatMorphPauseTime <= 0f)
+            Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
+        else if (CatMorphPauseTime > 0f)
+            CatMorphPauseTime -= Time.deltaTime;
 
         if (isDead)
         {
