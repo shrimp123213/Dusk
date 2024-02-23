@@ -22,9 +22,9 @@ public class MorphInUI : MonoBehaviour
         //ImgBack = GetComponent<Image>();
         //ImgFront = base.transform.GetChild(0).GetComponent<Image>();
 
-        ImgFront = transform.GetChild(1).GetComponent<Image>();
+        ImgFront = transform.GetChild(0).GetComponent<Image>();
         ImgBall = GetComponent<Image>();
-        ImgBallMask = transform.GetChild(0).GetComponent<Image>();
+        //ImgBallMask = transform.GetChild(0).GetComponent<Image>();
     }
 
     public void SetFill(float amoumt, bool isDrive = false)
@@ -40,7 +40,7 @@ public class MorphInUI : MonoBehaviour
                 //ImgFront.color = Color.clear;
                 ImgFront.fillAmount = 0f;
                 ImgBall.fillAmount = 0f;
-                ImgBallMask.fillAmount = 0f;
+                //ImgBallMask.fillAmount = 0f;
                 Amount = 0f;
                 TargetAmount = 0f;
             }
@@ -51,7 +51,7 @@ public class MorphInUI : MonoBehaviour
             Amount = Mathf.Lerp(Amount, TargetAmount, Time.deltaTime * 15f);
             ImgFront.fillAmount = Mathf.Lerp(.165f, 0.95f, Amount) / 0.95f;
             ImgBall.fillAmount = Amount;
-            ImgBallMask.fillAmount = Amount;
+            //ImgBallMask.fillAmount = Amount;
             if (!isDrive)
             {
                 //ImgBack.color = new Color(0.125f, 0.125f, .85f, 0.5f + Amount * 0.5f);
