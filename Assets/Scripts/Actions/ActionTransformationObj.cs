@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ActionTransformation", menuName = "Actions/Transformation")]
 public class ActionTransformationObj : ActionBaseObj
 {
-    private bool startMode;
+    [Header("ActionClaw")]
+
+    public string AnimationKeySecondClip;
 
     public override void Init(Character _m)
     {
@@ -18,24 +20,61 @@ public class ActionTransformationObj : ActionBaseObj
 
     public override ActionPeformState StartAction(Character _m)
     {
-        //startMode = _m.Player.CatMode;
-        //
-        //if (startMode == true)
-        //    _m.Player.SwitchMode();
+        _m.Player.InvincibleState.Invincible(.8f, false);
 
         return base.StartAction(_m);
     }
 
+    public override void ProcessAction(Character _m)
+    {
+        ActionPeformState actionState = _m.ActionState;
+        actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+        if (actionState.ActionTime >= 1f && _m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer." + AnimationKeySecondClip))
+        {
+            ChangeRenderer(_m);
+            ChangeClip(_m);
+        }
+
+        if (_m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash == Animator.StringToHash("Base Layer." + AnimationKeySecondClip))
+        {
+            ProcessSecondClipAnimation(_m);
+        }
+        else
+        {
+            base.ProcessAction(_m);
+        }
+    }
+
     public override void EndAction(Character _m)
     {
-        ChangeRenderer(_m);
-        //if (startMode == false)
-        _m.Player.SwitchMode();
-
- 
-
         base.EndAction(_m);
     }
+
+    private void ChangeClip(Character _m)
+    {
+        AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
+        //_m.Ani.Rebind();
+        _m.Ani.Play(AnimationKeySecondClip);
+        _m.Ani.Update(0f);
+        _m.ActionState.Clip = _m.Ani.GetCurrentAnimatorClipInfo(0)[0].clip;
+        _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
+    }
+
+    private void ProcessSecondClipAnimation(Character _m)
+    {
+        ActionPeformState actionState = _m.ActionState;
+        actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime + 1f);
+
+        if (actionState.ActionTime >= 2f)
+        {
+            EndAction(_m);
+        }
+    }
+
+
+
+
 
     public void ChangeRenderer(Character _m)
     {
@@ -49,6 +88,10 @@ public class ActionTransformationObj : ActionBaseObj
 
             _m.Ani = _m.Renderer.GetComponent<Animator>();
 
+            _m.Player.EvadeState.Renderer = _m.Renderer;
+            _m.Player.InvincibleState.Renderer = _m.Renderer;
+
+            _m.Player.SwitchMode();
             _m.Player.CheckFace();
         }
         else
@@ -61,6 +104,10 @@ public class ActionTransformationObj : ActionBaseObj
 
             _m.Ani = _m.Player.CatRenderer.GetComponent<Animator>();
 
+            _m.Player.EvadeState.Renderer = _m.Player.CatRenderer;
+            _m.Player.InvincibleState.Renderer = _m.Player.CatRenderer;
+
+            _m.Player.SwitchMode();
             _m.Player.CheckFace();
         }
     }

@@ -20,7 +20,7 @@ public class ActionBlockObj : ActionBaseObj
 
     public int NormalMorphRecovery;
 
-    public BlockReaction[] blockReactions;
+    public string[] blockReactionsId;
 
     public override ActionPeformState StartAction(Character _m)
     {
@@ -113,7 +113,7 @@ public class ActionBlockObj : ActionBaseObj
 
             Debug.Log("Perfect");
 
-            _m.StartAction(ActionLoader.i.Actions["BlockPerfect"]);
+            _m.StartAction(ActionLoader.i.Actions[blockReactionsId[0]]);
         }
         else
         {
@@ -123,7 +123,7 @@ public class ActionBlockObj : ActionBaseObj
 
             Debug.Log("Normal"); 
             
-            _m.StartAction(ActionLoader.i.Actions["BlockNormal"]);
+            _m.StartAction(ActionLoader.i.Actions[blockReactionsId[1]]);
         }
 
         
@@ -140,16 +140,4 @@ public class ActionPeformStateBlock : ActionPeformState
         Backswing,
     }
     public BlockState blockState = BlockState.Forswing;
-}
-
-[Serializable]
-public class BlockReaction
-{
-    public string AnimationKey;
-
-    //public bool OnlyInterruptByDash;
-
-    public bool Knockback;
-
-    public ActionMovement KnockbackMove;
 }

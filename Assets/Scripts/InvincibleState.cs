@@ -34,7 +34,7 @@ public class InvincibleState : MonoBehaviour
         if (InvincibleTime > 0)
             InvincibleTime -= Time.deltaTime;
 
-        if (Interval <= 0f && InvincibleTime > 0)
+        if (Interval <= 0f && InvincibleTime > 0 && showEffect)
         {
             Interval = IntervalMax;
 
@@ -66,14 +66,11 @@ public class InvincibleState : MonoBehaviour
         
     }
 
-    public void Invincible(float _time = -1f)
+    public void Invincible(float _time = -1f, bool _showEffect = true)
     {
         InvincibleTime = _time == -1f ? InvincibleTimeMax : _time;
         Interval = 0;
-    }
 
-    public void IsShowEffect(bool _showEffect)
-    {
         showEffect = _showEffect;
     }
 }

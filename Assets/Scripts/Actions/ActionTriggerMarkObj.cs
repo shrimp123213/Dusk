@@ -16,8 +16,7 @@ public class ActionTriggerMarkObj : ActionBaseObj
     {
         _m.HitEffect.SetGlobalSlow(99999f, 1);
 
-        _m.Player.InvincibleState.IsShowEffect(false);
-        _m.Player.InvincibleState.Invincible(99999f);
+        _m.Player.InvincibleState.Invincible(99999f, false);
 
 
 
@@ -51,8 +50,7 @@ public class ActionTriggerMarkObj : ActionBaseObj
     {
         _m.HitEffect.SetGlobalSlow(0f, 1);
 
-        _m.Player.InvincibleState.IsShowEffect(true);
-        _m.Player.InvincibleState.Invincible(0f);
+        _m.Player.InvincibleState.Invincible(0f, true);
 
         base.EndAction(_m);
     }

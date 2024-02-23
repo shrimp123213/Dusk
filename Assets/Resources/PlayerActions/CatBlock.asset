@@ -56,52 +56,6 @@ MonoBehaviour:
   BackswingFrameStart: 20
   PerfectMorphRecovery: 16667
   NormalMorphRecovery: 16667
-  blockReactions:
-  - AnimationKey: CatBlockPerfect
-    Knockback: 1
-    KnockbackMove:
-      KeyFrame: 0
-      Curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      TargetDistance: {x: 0, y: 0}
-      FinishTime: 0.25
-      CanEvade: 0
-      StartEvadeFrame: 0
-      EndEvadeFrame: 0
-  - AnimationKey: CatBlockNormal
-    Knockback: 1
-    KnockbackMove:
-      KeyFrame: 0
-      Curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 20.012821
-          outSlope: 20.012821
-          tangentMode: 0
-          weightedMode: 3
-          inWeight: 0
-          outWeight: 0.013586956
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0.075472765
-          outSlope: 0.075472765
-          tangentMode: 0
-          weightedMode: 3
-          inWeight: 0.8117236
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      TargetDistance: {x: -3.75, y: 0}
-      FinishTime: 0.375
-      CanEvade: 0
-      StartEvadeFrame: 0
-      EndEvadeFrame: 0
+  blockReactionsId:
+  - CatBlockPerfect
+  - CatBlockNormal

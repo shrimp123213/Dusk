@@ -258,7 +258,7 @@ public class PlayerMain : Character
                 if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
                     if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
-                        StartAction(ActionLoader.i.Actions["CatClaw1"]);
+                        StartAction(ActionLoader.i.Actions["CatCounterAttack"]);
                     Inputs.Clear();
                 }
                 if (Inputs.Contains(InputKey.Transformation))

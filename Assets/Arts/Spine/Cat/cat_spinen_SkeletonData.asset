@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: cat_spinen_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: d4450299bac84f84b9885acf0cbe1646, type: 2}
+  - {fileID: 11400000, guid: ad88c4187972e78418d022ed80fd0ce0, type: 2}
   scale: 0.0005
-  skeletonJSON: {fileID: 4900000, guid: 4025cacc3bd081d40836886973561a0a, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: c2160f0e1c3578944ae6cab1f8795c00, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 9100000, guid: 82f3bd515d669804fbc47f37dc90b573, type: 2}
+  controller: {fileID: 9100000, guid: 4fa7c3e993176c8468833f335d314d37, type: 2}
