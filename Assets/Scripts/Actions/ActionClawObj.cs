@@ -23,6 +23,7 @@ public class ActionClawObj : ActionBaseObj
     private bool soundPlayed;
 
     public GameObject Effect;
+    public GameObject Effect_jump;
 
     public Vector3 offset;
 
@@ -107,9 +108,13 @@ public class ActionClawObj : ActionBaseObj
 
     public virtual void SpawnEffect(Character _m)
     {
+        GameObject spawnEffect = Effect;
+        if (EnableJumpVersion && !m.isGround)
+            spawnEffect = Effect_jump;
+
         Vector3 offsetFacing = Vector3Utility.CacuFacing(offset, _m.Facing);
-        EffectAni = Instantiate(Effect, _m.transform.position + offsetFacing, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>();
-        EffectAni.Play(_AnimationKey);
-        EffectAni.Update(0f);
+        EffectAni = Instantiate(spawnEffect, _m.transform.position + offsetFacing, _m.Facing == 1 ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(new Vector3(0, 180, 0)), _m.transform).GetComponent<Animator>();
+        //EffectAni.Play(_AnimationKey);
+        //EffectAni.Update(0f);
     }
 }
