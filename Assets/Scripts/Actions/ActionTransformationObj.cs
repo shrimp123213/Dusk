@@ -90,6 +90,7 @@ public class ActionTransformationObj : ActionBaseObj
 
             _m.Player.EvadeState.Renderer = _m.Renderer;
             _m.Player.InvincibleState.Renderer = _m.Renderer;
+            _m.Player.HitEffect.Ani = _m.Ani;
 
             _m.Player.SwitchMode();
             _m.Player.CheckFace();
@@ -106,6 +107,7 @@ public class ActionTransformationObj : ActionBaseObj
 
             _m.Player.EvadeState.Renderer = _m.Player.CatRenderer;
             _m.Player.InvincibleState.Renderer = _m.Player.CatRenderer;
+            _m.Player.HitEffect.Ani = _m.Ani;
 
             _m.Player.SwitchMode();
             _m.Player.CheckFace();

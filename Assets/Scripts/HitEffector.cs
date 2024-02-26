@@ -5,7 +5,7 @@ public class HitEffector : MonoBehaviour
 {
     private bool isActionInterrupted;
 
-    private Animator Ani;
+    public Animator Ani;
 
     public Character _m;
 
