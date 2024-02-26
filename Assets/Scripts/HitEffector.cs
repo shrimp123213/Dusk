@@ -89,7 +89,7 @@ public class HitEffector : MonoBehaviour
             {
                 TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
 
-                if (isActionInterrupted)
+                if (isActionInterrupted && !_m.isDead)
                 {
                     AnimatorExtensions.RebindAndRetainParameter(Ani);
                     //Ani.Rebind();
