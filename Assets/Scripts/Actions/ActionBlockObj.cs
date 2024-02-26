@@ -20,7 +20,10 @@ public class ActionBlockObj : ActionBaseObj
 
     public int NormalMorphRecovery;
 
-    public BlockReaction[] blockReactions;
+    public string[] blockReactionsId;
+
+    public float CatMorphPauseTimeAmount_Perfect;
+    public float CatMorphPauseTimeAmount_Normal;
 
     public override ActionPeformState StartAction(Character _m)
     {
@@ -111,9 +114,9 @@ public class ActionBlockObj : ActionBaseObj
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).PerfectMorphRecovery);
 
-            Debug.Log("Perfect");
+            _m.Player.CatMorphPauseTime = CatMorphPauseTimeAmount_Perfect;
 
-            _m.StartAction(ActionLoader.i.Actions["BlockPerfect"]);
+            _m.StartAction(ActionLoader.i.Actions[blockReactionsId[0]]);
         }
         else
         {
@@ -121,9 +124,9 @@ public class ActionBlockObj : ActionBaseObj
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).NormalMorphRecovery);
 
-            Debug.Log("Normal"); 
-            
-            _m.StartAction(ActionLoader.i.Actions["BlockNormal"]);
+            _m.Player.CatMorphPauseTime = CatMorphPauseTimeAmount_Normal;
+
+            _m.StartAction(ActionLoader.i.Actions[blockReactionsId[1]]);
         }
 
         
@@ -140,16 +143,4 @@ public class ActionPeformStateBlock : ActionPeformState
         Backswing,
     }
     public BlockState blockState = BlockState.Forswing;
-}
-
-[Serializable]
-public class BlockReaction
-{
-    public string AnimationKey;
-
-    //public bool OnlyInterruptByDash;
-
-    public bool Knockback;
-
-    public ActionMovement KnockbackMove;
 }

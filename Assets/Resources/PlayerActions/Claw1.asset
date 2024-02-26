@@ -45,18 +45,6 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: Claw2
     CanChangeFace: 1
-  - Frame: 0
-    LifeTime: -1
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: Pieta
-    CanChangeFace: 1
-  - Frame: -1
-    LifeTime: 0.5
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: Pieta
-    CanChangeFace: 1
   - Frame: 20
     LifeTime: -1
     Key1: 10
@@ -77,7 +65,7 @@ MonoBehaviour:
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
-  MorphRecovery: 12500
+  MorphRecovery: 3125
   MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
@@ -93,6 +81,8 @@ MonoBehaviour:
   LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
   LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
-  CanJumpWhenActing: 1
+  CanJumpWhenActing: 0
   _AnimationKeyClawEnd: Claw1End
-  ClawEffectCount: 3
+  Effect: {fileID: 1067427740692772649, guid: ced724508b230954ea33dd3ffcfd6a99, type: 3}
+  Effect_jump: {fileID: 1067427740692772649, guid: ced724508b230954ea33dd3ffcfd6a99, type: 3}
+  offset: {x: -0.5, y: -0.75, z: 0}

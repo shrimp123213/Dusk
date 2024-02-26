@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatClaw2
   DisplayName: CatClaw2
-  _AnimationKey: cat_atk2
+  _AnimationKey: Claw2
   EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -37,25 +37,13 @@ MonoBehaviour:
     LifeTime: -1
     Key1: 6
     KeyArrow: 0
-    LinkActionId: CatClaw1
+    LinkActionId: CatClaw3
     CanChangeFace: 1
   - Frame: -1
     LifeTime: 0.5
     Key1: 6
     KeyArrow: 0
-    LinkActionId: CatClaw1
-    CanChangeFace: 1
-  - Frame: 0
-    LifeTime: -1
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: CatPieta
-    CanChangeFace: 1
-  - Frame: -1
-    LifeTime: 0.5
-    Key1: 7
-    KeyArrow: 0
-    LinkActionId: CatPieta
+    LinkActionId: CatClaw3
     CanChangeFace: 1
   - Frame: 15
     LifeTime: -1
@@ -77,7 +65,7 @@ MonoBehaviour:
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
-  MorphRecovery: 4000
+  MorphRecovery: 0
   MorphRecoveryAdditionalByMark: 0
   EvadeEnergyRecovery: 0
   EndActionFloatTime: 0
@@ -93,6 +81,8 @@ MonoBehaviour:
   LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
   LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
-  CanJumpWhenActing: 1
-  _AnimationKeyClawEnd: cat_atk2_end
-  ClawEffectCount: 1
+  CanJumpWhenActing: 0
+  _AnimationKeyClawEnd: Claw2End
+  Effect: {fileID: 3453187475879409936, guid: 5232e6d2e2816944d9789db8716e07bf, type: 3}
+  Effect_jump: {fileID: 2449016553292093339, guid: 675a94d061170e34da116f926a0728fb, type: 3}
+  offset: {x: -0.5, y: -0.75, z: 0}

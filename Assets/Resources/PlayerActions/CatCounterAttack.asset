@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f6924afc04c3bb4d9dfa3b178f63260, type: 3}
   m_Name: CatCounterAttack
   m_EditorClassIdentifier: 
   Id: CatCounterAttack
   DisplayName: CatCounterAttack
-  _AnimationKey: CatCounterAttack
-  EnableJumpVersion: 0
+  _AnimationKey: CounterAttack
+  EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 1
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 8
-    KeyFrameEnd: 14
+  - KeyFrameFrom: 0
+    KeyFrameEnd: 20
     Offset: {x: 1.5, y: 0.2, z: 0}
     Range: {x: 3.1, y: 1.7}
     HitMax: 0
@@ -32,7 +32,31 @@ MonoBehaviour:
   CanInterruptAction: 1
   CanTriggerMark: 0
   ClearStoredMoves: 0
-  Links: []
+  Links:
+  - Frame: 20
+    LifeTime: -1
+    Key1: 6
+    KeyArrow: 0
+    LinkActionId: CatClaw1
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 6
+    KeyArrow: 0
+    LinkActionId: CatClaw1
+    CanChangeFace: 1
+  - Frame: 20
+    LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: CatBlock
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: CatBlock
+    CanChangeFace: 1
   Moves:
   - KeyFrame: 0
     Curve:
@@ -83,8 +107,12 @@ MonoBehaviour:
   IsHeavyAttack: 0
   HitStun: 0.2
   IsMovableX: 0
-  IsMovableY: 0
+  IsMovableY: 1
   LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
-  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -0.1, y: 9}
   CanChangeFacingWhenActing: 1
   CanJumpWhenActing: 0
+  _AnimationKeyClawEnd: CounterAttackEnd
+  Effect: {fileID: 3627706007599537847, guid: 76963c1e55787ac49af4c85762ccc95a, type: 3}
+  Effect_jump: {fileID: 7826544063650101715, guid: a455a846dc1b15842b14e60ecd629f93, type: 3}
+  offset: {x: 1.1, y: 0, z: 0}

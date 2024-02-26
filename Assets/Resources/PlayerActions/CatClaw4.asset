@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e3219ad4d48d24c8ff8349bacca98b, type: 3}
+  m_Name: CatClaw4
+  m_EditorClassIdentifier: 
+  Id: CatClaw4
+  DisplayName: CatClaw4
+  _AnimationKey: Claw4
+  EnableJumpVersion: 1
+  InterruptLevel: 0
+  InterruptSameLevel: 0
+  DamageRatio: 0.4
+  DamageType: 0
+  AttackSpots:
+  - KeyFrameFrom: 8
+    KeyFrameEnd: 14
+    Offset: {x: 1.5, y: 0.2, z: 0}
+    Range: {x: 3.1, y: 1.7}
+    HitMax: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
+  SuckEffect: 0
+  CanInterruptAction: 1
+  CanTriggerMark: 0
+  ClearStoredMoves: 0
+  Links:
+  - Frame: 15
+    LifeTime: -1
+    Key1: 6
+    KeyArrow: 0
+    LinkActionId: CatClaw1
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 6
+    KeyArrow: 0
+    LinkActionId: CatClaw1
+    CanChangeFace: 1
+  - Frame: 15
+    LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: CatBlock
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: CatBlock
+    CanChangeFace: 1
+  Moves: []
+  Toggles: []
+  Teleports: []
+  ApplyForce: {x: 0, y: 0}
+  ForceBasedByPos: 0
+  UsePopup: 0
+  TimeSlowAmount: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
+  EvadeEnergyRecovery: 0
+  EndActionFloatTime: 0
+  GroundOnly: 0
+  ResetCanAttack: 1
+  IsTriggered: 
+  IsTeleported: 
+  IsLightAttack: 1
+  IsHeavyAttack: 0
+  HitStun: 0.075
+  IsMovableX: 0
+  IsMovableY: 1
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -0.1, y: 9}
+  CanChangeFacingWhenActing: 1
+  CanJumpWhenActing: 0
+  _AnimationKeyClawEnd: Claw4End
+  Effect: {fileID: 7890692569181667357, guid: 738255e2d38379846930bdd2ed9c0e5d, type: 3}
+  Effect_jump: {fileID: 8183595572756886113, guid: 0dd1931612cbf5e478425c87c3c7c541, type: 3}
+  offset: {x: -0.5, y: -0.75, z: 0}
