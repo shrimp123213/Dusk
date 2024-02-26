@@ -21,10 +21,10 @@ MonoBehaviour:
   DamageRatio: 1
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 0
-    KeyFrameEnd: 20
-    Offset: {x: 1.5, y: 0.2, z: 0}
-    Range: {x: 3.1, y: 1.7}
+  - KeyFrameFrom: 8
+    KeyFrameEnd: 25
+    Offset: {x: 0.25, y: 0, z: 0}
+    Range: {x: 8, y: 5}
     HitMax: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0

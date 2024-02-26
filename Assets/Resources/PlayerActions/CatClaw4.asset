@@ -23,8 +23,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 8
     KeyFrameEnd: 14
-    Offset: {x: 1.5, y: 0.2, z: 0}
-    Range: {x: 3.1, y: 1.7}
+    Offset: {x: 1, y: 0, z: 0}
+    Range: {x: 3.2, y: 4}
     HitMax: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0

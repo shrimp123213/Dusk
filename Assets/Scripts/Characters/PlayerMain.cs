@@ -260,7 +260,7 @@ public class PlayerMain : Character
                 if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
                     if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
-                        StartAction(ActionLoader.i.Actions["CatClaw1"]);
+                        StartAction(ActionLoader.i.Actions["CatClaw1"]);//CatCounterAttack
                     Inputs.Clear();
                 }
                 if (Inputs.Contains(InputKey.Transformation))
@@ -535,7 +535,11 @@ public class PlayerMain : Character
             waitSliderHealthMove -= Time.deltaTime;
 
         if (CatMode && CatMorphPauseTime <= 0f)
+        {
             Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
+            if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "Transformation")) 
+                StartAction(ActionLoader.i.Actions["Transformation"]);
+        }
         else if (CatMorphPauseTime > 0f)
             CatMorphPauseTime -= Time.deltaTime;
 
