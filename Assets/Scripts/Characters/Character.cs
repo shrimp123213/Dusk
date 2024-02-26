@@ -690,6 +690,8 @@ public class Character : MonoBehaviour, IHitable
                 if (Player.CatMode)
                     _damage.Amount *= 2;
 
+                Instantiate(AerutaDebug.i.PostBlur, _ClosestPoint, Quaternion.identity, null);
+
                 Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlowNextFrame(.5f, 0);
 
