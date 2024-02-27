@@ -16,12 +16,12 @@ GameObject:
   - component: {fileID: 631846734806092614}
   - component: {fileID: 631846734806889890}
   m_Layer: 5
-  m_Name: Basic Dialogue UI
+  m_Name: Basic Bark UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &631846734818917726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 349}
+  m_SizeDelta: {x: 1196, y: 349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &631846734818827080
 CanvasRenderer:
