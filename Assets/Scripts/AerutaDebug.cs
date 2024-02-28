@@ -41,12 +41,18 @@ public class AerutaDebug : MonoBehaviour
 
     public Contact contact;
 
+    public Image FadeImage;
+    public bool StartSceneFadeIn;
+    public bool StartSceneFadeOut;
+
     private void Awake()
     {
         i = this;
 
-        if (ControlGamepad.enabled || ControlKeyboard.enabled)
-            Time.timeScale = 0f;
+        //if (ControlGamepad.enabled || ControlKeyboard.enabled)
+        //    Time.timeScale = 0.001f;
+
+        StartSceneFadeIn = true;
     }
 
     public void CallEffect(int num)//��ܥ��������ĤH�B�{�צ��\��UI
@@ -63,6 +69,12 @@ public class AerutaDebug : MonoBehaviour
 
     private void Update()
     {
+        if (StartSceneFadeIn)
+            SceneFadeIn();
+        if (StartSceneFadeOut)
+            SceneFadeOut();
+
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             RectTransform component = GameObject.Find("TimeDateIMG").GetComponent<RectTransform>();
@@ -139,6 +151,30 @@ public class AerutaDebug : MonoBehaviour
             ControlGamepad.gameObject.SetActive(false);
             ControlKeyboard.gameObject.SetActive(false);
             Time.timeScale = 1f;
+        }
+    }
+
+    private void SceneFadeIn()
+    {
+        FadeImage.color = new Color(0, 0, 0, FadeImage.color.a - 0.02f);
+        if (FadeImage.color.a <= 0)
+        {
+            FadeImage.gameObject.SetActive(false);
+
+            PlayerMain.i.CanInput = true;
+            Camcam.i.FadeIn = false;
+
+            StartSceneFadeIn = false;
+        }
+    }
+
+    public void SceneFadeOut()
+    {
+        FadeImage.gameObject.SetActive(true);
+        FadeImage.color = new Color(0, 0, 0, FadeImage.color.a + 0.02f);
+        if (FadeImage.color.a >= 1)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

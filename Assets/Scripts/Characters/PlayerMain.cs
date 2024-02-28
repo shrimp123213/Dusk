@@ -117,6 +117,8 @@ public class PlayerMain : Character
         startedFade = false;
 
         CatRenderer = gameObject.transform.GetChild(1).GetComponent<SkeletonMecanim>();
+
+        CanInput = false;
     }
 
     private void Start()
@@ -560,7 +562,8 @@ public class PlayerMain : Character
             }
             if (targetRenderer.skeleton.GetColor().a <= 0)
             {
-                AerutaDebug.i.ShowStatistics();
+                AerutaDebug.i.StartSceneFadeOut = true;
+                //AerutaDebug.i.ShowStatistics();
                 //Time.timeScale = 0f;
             }
             //Debug.Log(Renderer.skeleton.GetColor());

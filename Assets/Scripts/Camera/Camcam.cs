@@ -12,7 +12,8 @@ public class Camcam : MonoBehaviour
 
     public Vector3 PosOverride;
 
-    public bool UseOverride;
+    public bool FadeIn;
+    public bool BossShow;
 
     public bool ChangeFOV;
     
@@ -23,10 +24,15 @@ public class Camcam : MonoBehaviour
 
     private Vector2 velo;
 
+    public float bossShowingTime;
+
     private void Awake()
     {
         cam = GetComponent<Camera>();
         i = this;
+
+        bossShowingTime = 0;
+        FadeIn = true;
     }
 
     private void Start()
@@ -41,9 +47,14 @@ public class Camcam : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (UseOverride)
+        if (FadeIn)
         {
+            PosOverride = new Vector3(0, -3f, -10f);
             transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+        }
+        else if (BossShow)
+        {
+            BossShowing();
         }
         else if ((bool)Target)
         {
@@ -76,5 +87,25 @@ public class Camcam : MonoBehaviour
             // 平滑地改變攝影機的大小
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
         }
+    }
+
+    public void BossShowing()
+    {
+        if (bossShowingTime <= 2f)
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 2, Time.deltaTime * zoomSpeed);
+
+            PosOverride = new Vector3(Boss.position.x, -3f, -10f);
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+        }
+        else if (bossShowingTime <= 4f)
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 10, Time.deltaTime * zoomSpeed * 3);
+
+            PosOverride = new Vector3(Boss.position.x, -3f, -10f);
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+        }
+
+        bossShowingTime += Time.unscaledDeltaTime;
     }
 }

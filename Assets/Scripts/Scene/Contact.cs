@@ -67,7 +67,7 @@ public class Contact : MonoBehaviour
         {
             //AITree.GetComponent<Character>().HitEffect.HitStun = .01f;
 
-            Camcam.i.UseOverride = false;
+            Camcam.i.BossShow = false;
 
             PlayerMain.i.CanInput = true;
         }
@@ -131,7 +131,7 @@ public class Contact : MonoBehaviour
         //ani.Play("boss1-1_ST_start");
         AerutaDebug.i.StartGameTime = Time.unscaledTime;
 
-        Camcam.i.UseOverride = false;
+        Camcam.i.BossShow = false;
 
         PlayerMain.i.StopMove();
         PlayerMain.i.CanInput = true;
@@ -166,10 +166,9 @@ public class Contact : MonoBehaviour
             AITree.enabled = true;
             ani.Play("boss1-1_ST_start");
             AerutaDebug.i.StartGameTime = Time.unscaledTime;
-            
-            Camcam.i.UseOverride = true;
-            Camcam.i.PosOverride = new Vector3(AITree.transform.position.x, -3f, -10f);
-            
+
+            Camcam.i.BossShow = false;
+
             PlayerMain.i.StopMove();
             PlayerMain.i.CanInput = false;
             

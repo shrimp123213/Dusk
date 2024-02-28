@@ -396,7 +396,9 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void PlaySoundEffect()
     {
-        if (soundEffectName != "")
+        Debug.Log(soundEffectName);
+
+        if (soundEffectName != "" && soundEffectName != null)
             SoundManager.i.PlaySound(soundEffectName);
     }
 }
