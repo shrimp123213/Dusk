@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CounterAttack
   DisplayName: CounterAttack
+  soundEffectName: Swing
   _AnimationKey: CounterAttack
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -84,4 +85,6 @@ MonoBehaviour:
   CanJumpWhenActing: 0
   _AnimationKeyClawEnd: CounterAttackEnd
   Effect: {fileID: 6550002981404218288, guid: c9ca592c98d758a4b8cb28bdc5fe9512, type: 3}
+  Effect_jump: {fileID: 0}
   offset: {x: 1.1, y: 0.2, z: 0}
+  hitSoundEffectName: CounterAttack

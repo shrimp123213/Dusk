@@ -537,8 +537,8 @@ public class PlayerMain : Character
         if (CatMode && CatMorphPauseTime <= 0f)
         {
             Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
-            if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "Transformation")) 
-                StartAction(ActionLoader.i.Actions["Transformation"]);
+            if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "CatTransformation")) 
+                StartAction(ActionLoader.i.Actions["CatTransformation"]);
         }
         else if (CatMorphPauseTime > 0f)
             CatMorphPauseTime -= Time.deltaTime;
