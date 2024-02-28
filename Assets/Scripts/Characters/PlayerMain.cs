@@ -76,6 +76,9 @@ public class PlayerMain : Character
 
     public float CatMorphPauseTime;
 
+    private float runSoundInverval;
+    public float runSoundInvervalSet;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -463,6 +466,18 @@ public class PlayerMain : Character
                 KeyJumpJust = true;
             }
             Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
+            if (Xinput != 0f)
+            {
+                runSoundInverval -= Time.deltaTime;
+                if (runSoundInverval <= 0f)
+                {
+                    runSoundInverval = runSoundInvervalSet;
+                    if (NowAction == null)
+                        SoundManager.i.PlaySound("Run");
+                }
+            }
+            else
+                runSoundInverval = 0f;
             Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
             Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
             if (playerAct.FindAction("Claw").WasPressedThisFrame())
