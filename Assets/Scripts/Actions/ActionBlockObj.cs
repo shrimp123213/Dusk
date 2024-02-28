@@ -30,10 +30,30 @@ public class ActionBlockObj : ActionBaseObj
     {
         base.m = _m;
 
+        if (ResetCanAttack && (bool)_m.Player)
+        {
+            _m.Player.CanAttack = true;
+        }
         AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
         //_m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
+
+        if (TimeSlowAmount > 0f)
+        {
+            _m.HitEffect.SetTimeSlow(TimeSlowAmount);
+        }
+
+        _m.TimedLinks.Clear();
+        foreach (ActionLink link in Links)
+        {
+            _m.TimedLinks.Add(new TimedLink(link));
+        }
+
+        if (ClearStoredMoves)
+        {
+            _m.StoredMoves.Clear();
+        }
 
         return new ActionPeformStateBlock();
     }

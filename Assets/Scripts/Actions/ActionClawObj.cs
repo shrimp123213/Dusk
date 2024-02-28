@@ -42,7 +42,7 @@ public class ActionClawObj : ActionBaseObj
         ActionPeformState actionState = _m.ActionState;
         actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
-        if (actionState.ActionTime >= 1f && _m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer." + AnimationKeyClawEnd))
+        if (actionState.ActionTime >= .625f && _m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer." + AnimationKeyClawEnd))
         {
             ChangeClip(_m);
         }
