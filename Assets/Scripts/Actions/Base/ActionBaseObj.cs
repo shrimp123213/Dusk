@@ -14,6 +14,9 @@ public class ActionBaseObj : ScriptableObject
 
     public string DisplayName;
 
+    [Header("音效")]
+    public string soundEffectName;
+
     [Header("動畫")]
     public string _AnimationKey;
     public string AnimationKey
@@ -139,6 +142,8 @@ public class ActionBaseObj : ScriptableObject
 
         IsTriggered = new bool[_m.NowAction.Toggles.Count];
         IsTeleported = new bool[_m.NowAction.Teleports.Count];
+
+        PlaySoundEffect();
     }
 
     public virtual bool MovableX(Character _m)
@@ -387,6 +392,12 @@ public class ActionBaseObj : ScriptableObject
             _m.StoredMoves.Add(new ForceMovement(_m.NowAction.Moves[actionState.CurrMoveIndex], new Vector3(0f, _verticalPower), _m.transform.position));
             actionState.CurrMoveIndex++;
         }
+    }
+
+    public virtual void PlaySoundEffect()
+    {
+        if (soundEffectName != "")
+            SoundManager.i.PlaySound(soundEffectName);
     }
 }
 

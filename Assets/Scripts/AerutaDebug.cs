@@ -25,9 +25,10 @@ public class AerutaDebug : MonoBehaviour
     public GameObject BlockEffectNormal;
     public GameObject BlockEffectPerfect;
     //public GameObject BloodEffect;
-    public GameObject PenetrateTrail;
-    public GameObject BlockFlashYellow;
-    public GameObject BlockFlashBlue;
+    public GameObject PostBlur;
+    
+    //public GameObject BlockFlashYellow;
+    //public GameObject BlockFlashBlue;
     public GameObject EvadeFinishCooldownEffect;
     public GameObject TransformationEffect;
     public GameObject PlayerAttackLandEffect;

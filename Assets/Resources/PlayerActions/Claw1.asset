@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Claw1
   DisplayName: Claw1
+  soundEffectName: Swing
   _AnimationKey: Claw1
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -33,6 +34,18 @@ MonoBehaviour:
   CanTriggerMark: 0
   ClearStoredMoves: 0
   Links:
+  - Frame: 0
+    LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.5
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
   - Frame: 20
     LifeTime: -1
     Key1: 6
@@ -44,18 +57,6 @@ MonoBehaviour:
     Key1: 6
     KeyArrow: 0
     LinkActionId: Claw2
-    CanChangeFace: 1
-  - Frame: 20
-    LifeTime: -1
-    Key1: 10
-    KeyArrow: 0
-    LinkActionId: Block
-    CanChangeFace: 1
-  - Frame: -1
-    LifeTime: 0.5
-    Key1: 10
-    KeyArrow: 0
-    LinkActionId: Block
     CanChangeFace: 1
   Moves: []
   Toggles: []
@@ -86,3 +87,4 @@ MonoBehaviour:
   Effect: {fileID: 1067427740692772649, guid: ced724508b230954ea33dd3ffcfd6a99, type: 3}
   Effect_jump: {fileID: 1067427740692772649, guid: ced724508b230954ea33dd3ffcfd6a99, type: 3}
   offset: {x: -0.5, y: -0.75, z: 0}
+  hitSoundEffectName: Claw

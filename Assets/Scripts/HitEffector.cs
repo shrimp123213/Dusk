@@ -31,7 +31,7 @@ public class HitEffector : MonoBehaviour
 
     private bool ShakeCharacter;
 
-    private bool nextFrame;
+    private int framePassed;
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class HitEffector : MonoBehaviour
         currentCurve = 0;
         //Time.timeScale = 1f;
 
-        nextFrame = false;
+        framePassed = 0;
     }
 
     public void CallAwake(Animator ani)
@@ -50,7 +50,7 @@ public class HitEffector : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GlobalSlow > 0f && !nextFrame)
+        if (GlobalSlow > 0f && framePassed >= 2)
         {
             GlobalSlow -= Time.unscaledDeltaTime;
             Time.timeScale = GlobalSlowCurve[currentCurve].Evaluate(1f - GlobalSlow);
@@ -60,7 +60,7 @@ public class HitEffector : MonoBehaviour
             }
         }
         else
-            nextFrame = false;
+            framePassed++;
         if (AttackStunDura > 0f)
         {
             AttackStunDura -= Time.deltaTime;
@@ -72,8 +72,8 @@ public class HitEffector : MonoBehaviour
         }
         if (HitStun > 0f && !_m.isDead)
         {
-            HitStunInterval -= Time.deltaTime;
-            HitStun -= Time.deltaTime;
+            HitStunInterval -= Time.unscaledDeltaTime;
+            HitStun -= Time.unscaledDeltaTime;
             if (HitStunInterval <= 0f && HitStun > 0f)
             {
                 HitStunInterval = 0.025f;
@@ -89,7 +89,7 @@ public class HitEffector : MonoBehaviour
             {
                 TransSprite.localPosition = new Vector3(0f, TransSprite.localPosition.y, TransSprite.localPosition.z);
 
-                if (isActionInterrupted)
+                if (isActionInterrupted && !_m.isDead)
                 {
                     AnimatorExtensions.RebindAndRetainParameter(Ani);
                     //Ani.Rebind();
@@ -106,8 +106,8 @@ public class HitEffector : MonoBehaviour
         }
         if (defaultHitStun > 0)
         {
-            HitStunInterval -= Time.deltaTime;
-            defaultHitStun -= Time.deltaTime;
+            HitStunInterval -= Time.unscaledDeltaTime;
+            defaultHitStun -= Time.unscaledDeltaTime;
             if (HitStunInterval <= 0f && defaultHitStun > 0f)
             {
                 HitStunInterval = 0.025f;
@@ -168,6 +168,6 @@ public class HitEffector : MonoBehaviour
         GlobalSlow = _Time;
         currentCurve = _currentCurve;
         //Time.timeScale = 0.01f;
-        nextFrame = true;
+        framePassed = 0;
     }
 }

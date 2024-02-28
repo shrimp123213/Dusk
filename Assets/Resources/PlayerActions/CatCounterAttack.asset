@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatCounterAttack
   DisplayName: CatCounterAttack
+  soundEffectName: Swing
   _AnimationKey: CounterAttack
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -21,10 +22,10 @@ MonoBehaviour:
   DamageRatio: 1
   DamageType: 0
   AttackSpots:
-  - KeyFrameFrom: 0
-    KeyFrameEnd: 20
-    Offset: {x: 1.5, y: 0.2, z: 0}
-    Range: {x: 3.1, y: 1.7}
+  - KeyFrameFrom: 8
+    KeyFrameEnd: 25
+    Offset: {x: 0.25, y: 0, z: 0}
+    Range: {x: 8, y: 5}
     HitMax: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
@@ -116,3 +117,4 @@ MonoBehaviour:
   Effect: {fileID: 4153393945199537629, guid: fb894439fb8ab004abc02be9dc47e054, type: 3}
   Effect_jump: {fileID: 429768968941993486, guid: 1d461ab015863624b963a82678daa15d, type: 3}
   offset: {x: 1.1, y: 0, z: 0}
+  hitSoundEffectName: CounterAttack

@@ -152,6 +152,8 @@ public class Contact : MonoBehaviour
 
         BossHealthBar.localScale = new Vector3(.75f, .75f, .75f);
 
+        MusicManager.i.Play("Zealot", 46f, 5f);
+
         gameObject.SetActive(false);
     }
 
@@ -174,6 +176,8 @@ public class Contact : MonoBehaviour
             Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
             
             triggered = true;
+
+            MusicManager.i.Play("Zealot", 46f, 5f);
         }
     }
 }

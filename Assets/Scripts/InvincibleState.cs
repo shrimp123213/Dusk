@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Spine.Unity;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InvincibleState : MonoBehaviour
@@ -36,17 +37,21 @@ public class InvincibleState : MonoBehaviour
 
         if (Interval <= 0f && InvincibleTime > 0 && showEffect)
         {
-            Interval = IntervalMax;
+            if (!(bool)_m.Player || _m.Player.HitEffect.GlobalSlow <= 0)
+            {
 
-            if (Renderer.skeleton.GetColor() == Color.white) 
-            {
-                material.DOComplete();
-                material.DOColor(new Color(.3f, .3f, .3f, 1f), IntervalMax);
-            }
-            else
-            {
-                material.DOComplete();
-                material.DOColor(Color.white, IntervalMax);
+                Interval = IntervalMax;
+
+                if (Renderer.skeleton.GetColor() == Color.white)
+                {
+                    material.DOComplete();
+                    material.DOColor(new Color(.3f, .3f, .3f, 1f), IntervalMax);
+                }
+                else
+                {
+                    material.DOComplete();
+                    material.DOColor(Color.white, IntervalMax);
+                }
             }
         }
 

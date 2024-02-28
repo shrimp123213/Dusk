@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ActionPeformStateBlock;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "ActionBlock", menuName = "Actions/Block")]
 public class ActionBlockObj : ActionBaseObj
@@ -29,10 +30,30 @@ public class ActionBlockObj : ActionBaseObj
     {
         base.m = _m;
 
+        if (ResetCanAttack && (bool)_m.Player)
+        {
+            _m.Player.CanAttack = true;
+        }
         AnimatorExtensions.RebindAndRetainParameter(_m.Ani);
         //_m.Ani.Rebind();
         _m.Ani.Play(AnimationKey);
         _m.Ani.Update(0f);
+
+        if (TimeSlowAmount > 0f)
+        {
+            _m.HitEffect.SetTimeSlow(TimeSlowAmount);
+        }
+
+        _m.TimedLinks.Clear();
+        foreach (ActionLink link in Links)
+        {
+            _m.TimedLinks.Add(new TimedLink(link));
+        }
+
+        if (ClearStoredMoves)
+        {
+            _m.StoredMoves.Clear();
+        }
 
         return new ActionPeformStateBlock();
     }
@@ -78,7 +99,7 @@ public class ActionBlockObj : ActionBaseObj
             case BlockState.Forswing:
                 if (!actionState.IsWithinFrame(0, PerfectFrameStart - 1))
                 {
-                    Instantiate(AerutaDebug.i.BlockFlashYellow, _m.transform.position + new Vector3(.5f * _m.Facing, .5f, 0f), Quaternion.identity, null);
+                    //Instantiate(AerutaDebug.i.BlockFlashYellow, _m.transform.position + new Vector3(.5f * _m.Facing, .5f, 0f), Quaternion.identity, null);
                     actionState.blockState = BlockState.Perfect;
                     _m.Blocking = true;
                 }
@@ -86,7 +107,7 @@ public class ActionBlockObj : ActionBaseObj
             case BlockState.Perfect:
                 if (!actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
                 {
-                    Instantiate(AerutaDebug.i.BlockFlashBlue, _m.transform.position + new Vector3(.5f * _m.Facing, .5f, 0f), Quaternion.identity, null);
+                    //Instantiate(AerutaDebug.i.BlockFlashBlue, _m.transform.position + new Vector3(.5f * _m.Facing, .5f, 0f), Quaternion.identity, null);
                     actionState.blockState = BlockState.Normal;
                 }
                 break;
@@ -110,7 +131,10 @@ public class ActionBlockObj : ActionBaseObj
 
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {
-            Instantiate(AerutaDebug.i.BlockEffectPerfect, _ClosestPoint, Quaternion.identity, null);
+            Vector2 direction = (Vector2)_m.transform.position - _ClosestPoint;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            Instantiate(AerutaDebug.i.BlockEffectPerfect, _ClosestPoint, Quaternion.AngleAxis(angle, Vector3.forward), null);
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).PerfectMorphRecovery);
 

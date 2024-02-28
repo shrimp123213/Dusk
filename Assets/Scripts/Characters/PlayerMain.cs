@@ -260,7 +260,7 @@ public class PlayerMain : Character
                 if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
                     if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
-                        StartAction(ActionLoader.i.Actions["CatClaw1"]);
+                        StartAction(ActionLoader.i.Actions["CatClaw1"]);//CatCounterAttack
                     Inputs.Clear();
                 }
                 if (Inputs.Contains(InputKey.Transformation))
@@ -385,7 +385,10 @@ public class PlayerMain : Character
         CollisionBlockMove.enabled = false;
 
         CanInput = false;
-        Renderer.skeleton.SetColor(Color.white);
+        if(!CatMode)
+            Renderer.skeleton.SetColor(Color.white);
+        else
+            CatRenderer.skeleton.SetColor(Color.white);
     }
 
     public override void TryInput(InputKey _InputKey)
@@ -532,23 +535,30 @@ public class PlayerMain : Character
             waitSliderHealthMove -= Time.deltaTime;
 
         if (CatMode && CatMorphPauseTime <= 0f)
+        {
             Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
+            if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "CatTransformation")) 
+                StartAction(ActionLoader.i.Actions["CatTransformation"]);
+        }
         else if (CatMorphPauseTime > 0f)
             CatMorphPauseTime -= Time.deltaTime;
 
         if (isDead)
         {
+            SkeletonMecanim targetRenderer = Renderer;
+            if (CatMode) 
+                targetRenderer = CatRenderer;
 
-            if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Failed" && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .5f)
+            if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Failed") && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .5f)
             {
                 startedFade = true;
 
-                DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), .5f, (value) =>
+                DOVirtual.Color(targetRenderer.skeleton.GetColor(), new Color(1, 1, 1, 0), .49f, (value) =>
                 {
-                    Renderer.skeleton.SetColor(value);
+                    targetRenderer.skeleton.SetColor(value);
                 });
             }
-            if (Renderer.skeleton.GetColor().a <= 0)
+            if (targetRenderer.skeleton.GetColor().a <= 0)
             {
                 AerutaDebug.i.ShowStatistics();
                 //Time.timeScale = 0f;

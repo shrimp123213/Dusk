@@ -27,6 +27,9 @@ public class ActionClawObj : ActionBaseObj
 
     public Vector3 offset;
 
+    [Header("À»¤¤­µ®Ä")]
+    public string hitSoundEffectName;
+
     public override ActionPeformState StartAction(Character _m)
     {
         soundPlayed = false;
@@ -39,7 +42,7 @@ public class ActionClawObj : ActionBaseObj
         ActionPeformState actionState = _m.ActionState;
         actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
-        if (actionState.ActionTime >= 1f && _m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer." + AnimationKeyClawEnd))
+        if (actionState.ActionTime >= .625f && _m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer." + AnimationKeyClawEnd))
         {
             ChangeClip(_m);
         }
@@ -56,7 +59,7 @@ public class ActionClawObj : ActionBaseObj
         if (!soundPlayed && actionState.IsAfterFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom - 1))
         {
             soundPlayed = true;
-            AudioManager.i.PlaySound("Claw");
+            PlaySoundEffect();
             //Debug.Log("PlaySound");
         }
     }
@@ -88,6 +91,13 @@ public class ActionClawObj : ActionBaseObj
         _m.ActionState.TotalFrame = Mathf.RoundToInt(_m.ActionState.Clip.length * _m.ActionState.Clip.frameRate);
     }
 
+    public override void HitSuccess(Character _m, Character _hitted, IHitable IHitable, Vector2 _ClosestPoint)
+    {
+        base.HitSuccess(_m, _hitted, IHitable, _ClosestPoint);
+
+        PlayHitSoundEffect();
+    }
+
     private void ProcessClawEndAnimation(Character _m)
     {
         ActionPeformState actionState = _m.ActionState;
@@ -101,9 +111,36 @@ public class ActionClawObj : ActionBaseObj
 
     public override void Init(Character _m)
     {
-        base.Init(_m);
+        foreach (ActionMovement movement in _m.NowAction.Moves)
+        {
+            //if (movement.CanEvade)
+            {
+                ActionPeformState actionState = _m.ActionState;
+
+                float StartDelay = (float)movement.StartEvadeFrame / (float)actionState.TotalFrame * actionState.Clip.length;
+                float Duration = 0;
+                if (movement.EndEvadeFrame == -1)
+                    Duration = (float)(actionState.TotalFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
+                else
+                    Duration = (float)(movement.EndEvadeFrame - movement.StartEvadeFrame) / (float)actionState.TotalFrame * actionState.Clip.length;
+
+                var Afterimage = _m.gameObject.AddComponent<AfterimageGenerator>();
+                Afterimage.IsSprite = _m.GetComponentInChildren<MeshRenderer>().enabled ? false : true;
+                Afterimage.SetLifeTime(StartDelay, Duration);
+
+            }
+        }
+
+        IsTriggered = new bool[_m.NowAction.Toggles.Count];
+        IsTeleported = new bool[_m.NowAction.Teleports.Count];
 
         SpawnEffect(_m);
+    }
+
+    public virtual void PlayHitSoundEffect()
+    {
+        if (hitSoundEffectName != "")
+            SoundManager.i.PlaySound(hitSoundEffectName);
     }
 
     public virtual void SpawnEffect(Character _m)

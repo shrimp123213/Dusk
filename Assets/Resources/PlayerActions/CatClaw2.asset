@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatClaw2
   DisplayName: CatClaw2
+  soundEffectName: Swing
   _AnimationKey: Claw2
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -23,8 +24,8 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 8
     KeyFrameEnd: 14
-    Offset: {x: 1.5, y: 0.2, z: 0}
-    Range: {x: 3.1, y: 1.7}
+    Offset: {x: 1, y: 0, z: 0}
+    Range: {x: 3.2, y: 4}
     HitMax: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
@@ -45,7 +46,7 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: CatClaw3
     CanChangeFace: 1
-  - Frame: 15
+  - Frame: 0
     LifeTime: -1
     Key1: 10
     KeyArrow: 0
@@ -86,3 +87,4 @@ MonoBehaviour:
   Effect: {fileID: 3453187475879409936, guid: 5232e6d2e2816944d9789db8716e07bf, type: 3}
   Effect_jump: {fileID: 2449016553292093339, guid: 675a94d061170e34da116f926a0728fb, type: 3}
   offset: {x: -0.5, y: -0.75, z: 0}
+  hitSoundEffectName: Claw
