@@ -362,7 +362,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 76224668}
   animationType: 3
-  targetType: 0
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 76224668}
   animationType: 1
-  targetType: 0
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 76224666}
   animationType: 6
-  targetType: 0
+  targetType: 6
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -622,7 +622,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a1010e457f7576a45bb3b1ea9aea00a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -789,7 +789,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a1010e457f7576a45bb3b1ea9aea00a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 118309271}
   animationType: 3
-  targetType: 0
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 118309271}
   animationType: 1
-  targetType: 0
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 118309268}
   animationType: 6
-  targetType: 0
+  targetType: 6
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -3616,7 +3616,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1064951
 --- !u!114 &1260203943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4990,7 +4990,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 1844382606}
   animationType: 3
-  targetType: 0
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -5098,7 +5098,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 1844382606}
   animationType: 1
-  targetType: 0
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -5206,7 +5206,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 1844382611}
   animationType: 6
-  targetType: 0
+  targetType: 6
   forcedTargetType: 0
   autoPlay: 0
   useTargetAsV3: 0
@@ -5250,7 +5250,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a1010e457f7576a45bb3b1ea9aea00a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
