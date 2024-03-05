@@ -8,10 +8,17 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StageScene_0225.unity
     guid: 5245ea38a845fcf43b3d35bf1c592652
-  - enabled: 1
-    path: Assets/Scenes/RXinScene.unity
-    guid: 1ff090a181e7f3e4f9f0e234e871669e
   - enabled: 0
+    path: Assets/Scenes/RXinScene.unity
+    guid: 2345fdf92735f744881a4544f11e4b53
+  - enabled: 1
+    path: Assets/Scenes/Main_menu.unity
+    guid: 5f92c6e5013fb564a89ddae5a80290e5
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 1b6af4cd51b31b3408355c5c19642bc4
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
-    guid: 788cf64dcf1c48444915a66f02d0d602
-  m_configObjects: {}
+    guid: 09607acf82fa6a247bf8f6786f78ba84
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 559236c7890f9d0429227412202d9bea, type: 2}
