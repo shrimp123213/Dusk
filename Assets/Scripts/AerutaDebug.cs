@@ -94,7 +94,7 @@ public class AerutaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("GameScene");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -174,7 +174,7 @@ public class AerutaDebug : MonoBehaviour
         FadeImage.color = new Color(0, 0, 0, FadeImage.color.a + 0.02f);
         if (FadeImage.color.a >= 1)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("GameScene");
         }
     }
 
