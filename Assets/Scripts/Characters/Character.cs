@@ -277,8 +277,8 @@ public class Character : MonoBehaviour, IHitable
         {
             NowAction.ProcessAction(this);
         }
-        if (isDead && Renderer.skeleton.GetColor().a <= 0) 
-            base.gameObject.SetActive(value: false);
+        //if (isDead && Renderer.skeleton.GetColor().a <= 0) 
+            //base.gameObject.SetActive(value: false);
     }
 
     private void FixedUpdate()
@@ -682,8 +682,8 @@ public class Character : MonoBehaviour, IHitable
             {
                 if (_damage.Type == DamageType.Normal)
                     AerutaDebug.i.Feedback.HittedCount++;
-                if (_damage.Type == DamageType.Collision)
-                    AerutaDebug.i.Feedback.CollisionCount++;
+                //if (_damage.Type == DamageType.Collision)
+                    //AerutaDebug.i.Feedback.CollisionCount++;
 
                 //Player.Morph.Consume(Player.Morph.MorphProgress);
 

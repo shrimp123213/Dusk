@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ActionDanmaku_swave
   DisplayName: boss1-1_ATK_swave
+  soundEffectName: 
   _AnimationKey: boss1-1_ATK_swave
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -47,6 +48,8 @@ MonoBehaviour:
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
   danmaku: {fileID: 11400000, guid: 61767b428c262b6499a052b1c89c719b, type: 2}

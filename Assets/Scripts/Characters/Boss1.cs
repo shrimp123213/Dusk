@@ -80,7 +80,7 @@ public class Boss1 : Character
                     Renderer.skeleton.SetColor(value);
                 });
             }
-            if (Renderer.skeleton.GetColor().a <= 0)
+            if (Renderer.skeleton.GetColor().a <= 0 && !AerutaDebug.i.Statistics.activeSelf)
             {
                 AerutaDebug.i.ShowStatistics();
             }

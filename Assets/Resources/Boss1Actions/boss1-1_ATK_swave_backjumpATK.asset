@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_swave_backjumpATK
   DisplayName: boss1-1_ATK_swave_backjumpATK
+  soundEffectName: 
   _AnimationKey: boss1-1_ATK_swave_backjumpATK
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -25,8 +26,9 @@ MonoBehaviour:
     KeyFrameEnd: 99
     Offset: {x: 3, y: 1, z: 0}
     Range: {x: 5, y: 1}
+    Angle: 0
     HitMax: 0
-    SpawnOmen: 1
+    SpawnOmen: 0
     SpawnKeyFrame: 64
   SuckEffect: 0
   CanInterruptAction: 1
@@ -118,5 +120,7 @@ MonoBehaviour:
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0

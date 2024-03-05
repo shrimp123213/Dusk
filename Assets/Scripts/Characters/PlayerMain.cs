@@ -210,13 +210,13 @@ public class PlayerMain : Character
                 }
                 if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
-                    if (TryCastAction(ActionLoader.i.Actions["Claw1"]))
+                    if (TryCastAction(ActionLoader.i.Actions["Claw1"], false))
                         StartAction(ActionLoader.i.Actions["Claw1"]);
                     Inputs.Clear();
                 }
                 if (Inputs.Contains(InputKey.Transformation))
                 {
-                    if (TryCastAction(ActionLoader.i.Actions["Transformation"]))
+                    if (TryCastAction(ActionLoader.i.Actions["Transformation"], false))
                         StartAction(ActionLoader.i.Actions["Transformation"]);
                     Inputs.Clear();
                 }
@@ -227,7 +227,6 @@ public class PlayerMain : Character
                         StartAction(ActionLoader.i.Actions["Heal"]);
                         Potions[Potions.Count - 1].enabled = false;
                         Potions.RemoveAt(Potions.Count - 1);
-                        AerutaDebug.i.Feedback.HealCount++;
                     }
                     Inputs.Clear();
                 }
@@ -264,7 +263,7 @@ public class PlayerMain : Character
                 }
                 if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                 {
-                    if (TryCastAction(ActionLoader.i.Actions["CatClaw1"]))
+                    if (TryCastAction(ActionLoader.i.Actions["CatClaw1"], false))
                         StartAction(ActionLoader.i.Actions["CatClaw1"]);//CatCounterAttack
                     Inputs.Clear();
                 }
@@ -413,7 +412,7 @@ public class PlayerMain : Character
 
         if (Inputs.Contains(link.Key1) || _forceSuccess)
         {
-            if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId]))
+            if (!TryCastAction(ActionLoader.i.Actions[link.LinkActionId], false))
                 return false;
 
             if (link.CanChangeFace && Xinput != 0f)

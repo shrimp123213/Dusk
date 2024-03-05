@@ -99,9 +99,6 @@ public class ActionBaseObj : ScriptableObject
 
     public bool[] IsTeleported;
 
-    public bool IsLightAttack;
-    public bool IsHeavyAttack;
-
     public float HitStun;
 
     public bool IsMovableX;
@@ -256,11 +253,6 @@ public class ActionBaseObj : ScriptableObject
             Instantiate(AerutaDebug.i.PlayerAttackLandEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform)), null);
         //else
         //    Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform)), null);
-
-        if (IsLightAttack)
-            AerutaDebug.i.Feedback.LightAttackCount++;
-        //if (IsHeavyAttack)
-        //    AerutaDebug.i.Feedback.HeavyAttackCount++;
 
     }
 

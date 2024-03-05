@@ -206,8 +206,6 @@ public class ActionPietaObj : ActionBaseObj
     {
         //Instantiate(AerutaDebug.i.BloodEffect, _ClosestPoint, Quaternion.Euler(Vector3.forward * 90 * Vector3Utility.GetFacingByPos(_m.transform, _hitted.transform) * -1), _hitted.transform);
         
-        AerutaDebug.i.Feedback.PietaCount++;
-
         MarkManager.i.TriggerHittedMark(_m, _hitted);
     }
 

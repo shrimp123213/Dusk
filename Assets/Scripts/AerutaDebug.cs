@@ -125,8 +125,7 @@ public class AerutaDebug : MonoBehaviour
         Statistics.SetActive(true);
         Feedback.PlayTime = Time.unscaledTime - StartGameTime;
         Statistics.transform.GetChild(0).GetComponent<TMP_Text>().text = Feedback.LeftText();
-        Statistics.transform.GetChild(1).GetComponent<TMP_Text>().text = Feedback.MiddleText();
-        Statistics.transform.GetChild(2).GetComponent<TMP_Text>().text = Feedback.RightText();
+        Statistics.transform.GetChild(1).GetComponent<TMP_Text>().text = Feedback.RightText();
     }
 
     public void CloseUI()
@@ -195,25 +194,15 @@ public class AerutaDebug : MonoBehaviour
 public class Feedback
 {
     public float PlayTime;
-    public int EvadeCount;
-    public int LightAttackCount;
-    public float MorphCount;
-    public float MorphProgress;
-    public int PietaCount;
-    public int HealCount;
+
     public int HittedCount;
-    public int CollisionCount;
 
     public string LeftText()
     {
-        return "挑戰時間\r\n" + (PlayTime / 60f).ToString("0") + "分 " + (PlayTime % 60f).ToString("0.00") + "秒" + "\r\n\r\n攻擊擊中次數\r\n" + LightAttackCount + "\r\n\r\n聖殤擊中次數\r\n" + PietaCount + "\r\n\r\n閃避次數\r\n" + EvadeCount;
-    }
-    public string MiddleText()
-    {
-        return "蛻變槽累積量\r\n" + MorphCount + "次滿條 " + (MorphProgress * 100).ToString("0.00") + "%累積量" + "\r\n\r\n治療次數\r\n" + HealCount + "\r\n\r\n被擊中次數\r\n" + HittedCount + "\r\n\r\n被碰撞傷害次數\r\n" + CollisionCount;
+        return "挑戰時間\r\n" + (PlayTime / 60f).ToString("0") + "分 " + (PlayTime % 60f).ToString("0.00") + "秒";
     }
     public string RightText()
     {
-        return "";
+        return "被擊中次數\r\n" + HittedCount;
     }
 }

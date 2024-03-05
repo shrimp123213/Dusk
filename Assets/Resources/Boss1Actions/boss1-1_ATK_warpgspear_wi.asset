@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_warpgspear_wi
   DisplayName: boss1-1_ATK_warpgspear_wi
+  soundEffectName: 
   _AnimationKey: boss1-1_ATK_warpgspear_wi
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -25,9 +26,10 @@ MonoBehaviour:
     KeyFrameEnd: 88
     Offset: {x: 0, y: 1, z: 0}
     Range: {x: 2, y: 3}
+    Angle: 0
     HitMax: 0
     SpawnOmen: 1
-    SpawnKeyFrame: 63
+    SpawnKeyFrame: 10
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -88,5 +90,7 @@ MonoBehaviour:
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
