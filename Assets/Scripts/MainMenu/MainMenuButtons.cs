@@ -66,7 +66,7 @@ public class MainMenuButtons : MonoBehaviour
         
         for(int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].GetComponentInChildren<TextMeshProUGUI>().DOFade(0f, .2f); // 當按鈕被點擊時，使其逐漸變為透明
+            buttons[i].GetComponentInChildren<TextMeshProUGUI>().DOFade(0f, 2f); // 當按鈕被點擊時，使其逐漸變為透明
             
             //buttons[i].transform.GetChild(1).GetChild(0).GetComponent<Image>().DOFade(0f, .2f); // 當按鈕被點擊時，使其逐漸變為透明
             //buttons[i].transform.GetChild(1).GetChild(1).GetComponent<Image>().DOFade(0f, .2f); // 當按鈕被點擊時，使其逐漸變為透明
