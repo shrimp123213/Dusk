@@ -327,25 +327,29 @@ public class ActionBaseObj : ScriptableObject
         {
             currentAttackSpot++;
 
+            float angle = attackSpot.Angle * _m.Facing;
+
             Vector3 vector = Vector3Utility.CacuFacing(attackSpot.Offset, _m.Facing);
-            Vector2 debugVector = _m.transform.position + vector;
+            Vector2 attackSpotCenter = _m.transform.position + vector;
             Vector2 topRight = attackSpot.Range / 2;
-            Vector2 topLeft = new Vector2(-attackSpot.Range.x, attackSpot.Range.y) / 2;
-            Vector2 bottomRight = new Vector2(attackSpot.Range.x, -attackSpot.Range.y) / 2;
+            //Vector2 topLeft = new Vector2(-attackSpot.Range.x, attackSpot.Range.y) / 2;
+            //Vector2 bottomRight = new Vector2(attackSpot.Range.x, -attackSpot.Range.y) / 2;
             Vector2 bottomLeft = -attackSpot.Range / 2;
             if (!actionState.IsWithinFrame(attackSpot.KeyFrameFrom, attackSpot.KeyFrameEnd))
             {
-                Debug.DrawLine(debugVector + topRight, debugVector + topLeft, Color.cyan);
-                Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.cyan);
-                Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.cyan);
-                Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.cyan);
+                //Debug.DrawLine(debugVector + topRight, debugVector + topLeft, Color.cyan);
+                //Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.cyan);
+                //Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.cyan);
+                //Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.cyan);
+                DrawRectangle(bottomLeft, topRight, attackSpotCenter, Quaternion.Euler(0f, 0f, angle), Color.cyan);
                 continue;
             }
-            Debug.DrawLine(debugVector + topRight, debugVector + topLeft, Color.magenta);
-            Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.magenta);
-            Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.magenta);
-            Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.magenta);
-            Collider2D[] array = Physics2D.OverlapBoxAll(_m.transform.position + vector, attackSpot.Range, 0f, LayerMask.GetMask("HurtBox"));
+            //Debug.DrawLine(debugVector + topRight, debugVector + topLeft, Color.magenta);
+            //Debug.DrawLine(debugVector + topRight, debugVector + bottomRight, Color.magenta);
+            //Debug.DrawLine(debugVector + topLeft, debugVector + bottomLeft, Color.magenta);
+            //Debug.DrawLine(debugVector + bottomRight, debugVector + bottomLeft, Color.magenta);
+            DrawRectangle(bottomLeft, topRight, attackSpotCenter, Quaternion.Euler(0f, 0f, angle), Color.magenta);
+            Collider2D[] array = Physics2D.OverlapBoxAll(attackSpotCenter, attackSpot.Range, angle, LayerMask.GetMask("HurtBox"));
             foreach (Collider2D collider2D in array)
             {
                 if (!(collider2D.transform.parent.gameObject != _m.gameObject) || _m.isMaxHit(new HittedGameObjectKey(currentAttackSpot, collider2D.transform.parent.gameObject), attackSpot.HitMax)) 
@@ -399,6 +403,34 @@ public class ActionBaseObj : ScriptableObject
         if (soundEffectName != "" && soundEffectName != null)
             SoundManager.i.PlaySound(soundEffectName);
     }
+
+    private void DrawRectangle(Vector2 point1, Vector2 point2, Vector3 origin, Quaternion orientation, Color color)
+    {
+        // Calculate extent as a distance between point1 and point2
+        float extentX = Mathf.Abs(point1.x - point2.x);
+        float extentY = Mathf.Abs(point1.y - point2.y);
+
+        // Calculate rotated axes
+        Vector3 rotatedRight = orientation * Vector3.right;
+        Vector3 rotatedUp = orientation * Vector3.up;
+
+        // Calculate each rectangle point
+        Vector3 pointA = origin + rotatedRight * point1.x + rotatedUp * point1.y;
+        Vector3 pointB = pointA + rotatedRight * extentX;
+        Vector3 pointC = pointB + rotatedUp * extentY;
+        Vector3 pointD = pointA + rotatedUp * extentY;
+
+        // Draw lines between the points
+        DrawLine(pointA, pointB, color);
+        DrawLine(pointB, pointC, color);
+        DrawLine(pointC, pointD, color);
+        DrawLine(pointD, pointA, color);
+    }
+
+    private void DrawLine(Vector3 a, Vector3 b, Color color)
+    {
+        Debug.DrawLine(a, b, color);
+    }
 }
 
 
@@ -412,6 +444,8 @@ public class AttackTiming
     public Vector3 Offset;
 
     public Vector2 Range;
+
+    public float Angle;
 
     [Header("本次攻擊擊中敵人次數上限")]
     public int HitMax;

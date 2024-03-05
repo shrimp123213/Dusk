@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_shoot
   DisplayName: boss1-1_ATK_shoot
+  soundEffectName: 
   _AnimationKey: boss1-1_ATK_shoot
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -23,8 +24,9 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 109
     KeyFrameEnd: 114
-    Offset: {x: 25, y: 2, z: 0}
-    Range: {x: 50, y: 3.5}
+    Offset: {x: 25, y: 0, z: 0}
+    Range: {x: 55, y: 3.5}
+    Angle: -5
     HitMax: 0
     SpawnOmen: 1
     SpawnKeyFrame: 84
@@ -54,5 +56,7 @@ MonoBehaviour:
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0

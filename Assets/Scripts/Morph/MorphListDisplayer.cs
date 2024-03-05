@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static FunkyCode.DayLightCollider2D;
 
 public class MorphListDisplayer : MonoBehaviour
 {
@@ -16,7 +18,10 @@ public class MorphListDisplayer : MonoBehaviour
 
     public Sprite[] MarkSprites;
     public Image MarkLevelImage;
-    
+
+    public float Interval;
+    public float IntervalMax;
+
 
     private void Awake()
     {
@@ -47,6 +52,38 @@ public class MorphListDisplayer : MonoBehaviour
         else
             MorphUI[0].SetFill(Target.MorphProgress, Target.Drive);
 
-        MarkLevelImage.sprite = MarkSprites[Target.MorphCount];
+        if (!PlayerMain.i.CatMode)
+        {
+            if (MarkLevelImage.color != Color.white)
+            {
+                MarkLevelImage.DOComplete();
+                MarkLevelImage.color = Color.white;
+            }
+            MarkLevelImage.sprite = MarkSprites[Target.MorphCount];
+        }
+        else
+        {
+            MarkLevelImage.sprite = MarkSprites[1];
+
+            if (Interval > 0)
+                Interval -= Time.deltaTime;
+
+            if (Interval <= 0f)
+            {
+                Interval = Mathf.Clamp(Target.TotalMorph, .05f, 1f);
+
+                if (MarkLevelImage.color == Color.white)
+                {
+                    MarkLevelImage.DOComplete();
+                    MarkLevelImage.DOColor(new Color(.3f, .3f, .3f, 1f), Target.TotalMorph);
+                }
+                else
+                {
+                    MarkLevelImage.DOComplete();
+                    MarkLevelImage.DOColor(Color.white, Target.TotalMorph);
+                }
+            }
+        }
+            
     }
 }

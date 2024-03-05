@@ -625,8 +625,8 @@ public class PlayerMain : Character
         CatMode = !CatMode;
 
         if (CatMode)
-            Speed.BaseAdd(2.5f);
+            Speed.BaseAdd(5f);
         else
-            Speed.BaseAdd(-2.5f);
+            Speed.BaseAdd(-5f);
     }
 }
