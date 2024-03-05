@@ -34,6 +34,8 @@ public class RegisterMyControls : MonoBehaviour
             InputDeviceManager.RegisterInputAction("Key_Movement", controls.UI.Key_Movement);
             InputDeviceManager.RegisterInputAction("Horizontal", controls.UI.Horizontal);
             InputDeviceManager.RegisterInputAction("Vertical", controls.UI.Vertical);
+            InputDeviceManager.RegisterInputAction("Submit", controls.UI.Submit);
+            InputDeviceManager.RegisterInputAction("Back", controls.UI.Back);
         }
     }
 
@@ -52,6 +54,8 @@ public class RegisterMyControls : MonoBehaviour
             InputDeviceManager.UnregisterInputAction("Key_Movement");
             InputDeviceManager.UnregisterInputAction("Horizontal");
             InputDeviceManager.UnregisterInputAction("Vertical");
+            InputDeviceManager.UnregisterInputAction("Submit");
+            InputDeviceManager.UnregisterInputAction("Back");
         }
     }
 }

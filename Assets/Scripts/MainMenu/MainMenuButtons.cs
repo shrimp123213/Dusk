@@ -145,7 +145,7 @@ public class MainMenuButtons : MonoBehaviour
 
     void IntoGameScene()
     {
-        SceneManagerScript.i.ChangeScene("GameScene");
+        SceneManagerScript.i.ChangeScene("TutorialScene");
     }
 
     void ButtonFadeIn()

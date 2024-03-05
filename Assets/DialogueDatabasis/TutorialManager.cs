@@ -30,14 +30,14 @@ public class TutorialManager : MonoBehaviour
     
     void Update()
     {
-        if (UIAct.FindAction("Pad_Submit").WasPressedThisFrame() && isPanelActive)
+        /*if (UIAct.FindAction("Pad_Submit").WasPressedThisFrame() && isPanelActive)
         {
             tutorialPanel_Pad.SetActive(false);
             tutorialPanel_Keyboard.SetActive(false);
             playerAct.Enable();
             isPanelActive = false;
             Debug.Log("Close Tutorial");
-        }
+        }*/
     }
 
     public void ShowTutorialPanel()
