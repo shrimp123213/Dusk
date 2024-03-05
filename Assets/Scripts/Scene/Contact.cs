@@ -19,6 +19,8 @@ public class Contact : MonoBehaviour
     public TMP_Text BossName;
     public Image BossNameBackground;
 
+    public GameObject playInfo;
+    
     private float speed;
     private float waitTime;
     private float waitTimeMax = .5f;
@@ -131,10 +133,14 @@ public class Contact : MonoBehaviour
                 {
                     ani.speed = 1;
                     BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
+                    playInfo.SetActive(true);
                 }
 
                 if (BossHealthBar.localScale.x == .75f)
+                {
                     gameObject.SetActive(false);
+                }
+                    
             }
         }
     }
@@ -193,6 +199,7 @@ public class Contact : MonoBehaviour
             triggered = true;
 
             MusicManager.i.Play("Zealot", 46f, 5f);
+            playInfo.SetActive(false);
         }
     }
 }
