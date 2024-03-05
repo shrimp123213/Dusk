@@ -6,6 +6,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
+using Spine.Unity;
 
 public class Contact : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Contact : MonoBehaviour
     private bool triggered;
     private bool aniStoped;
 
+    private float afterFencesUpWaitTime;
+
     void Start()
     {
         ani = AITree.GetComponentInChildren<Animator>();
@@ -44,10 +47,18 @@ public class Contact : MonoBehaviour
     {
         if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 && ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start") 
         {
-            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 285f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 435f / 501f) 
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 285f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 318f / 501f) 
             {
                 fences[0].Play("FenceUp");
                 fences[1].Play("FenceUp");
+            }
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 318f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 435f / 501f)
+            {
+                afterFencesUpWaitTime += Time.deltaTime;
+                if (afterFencesUpWaitTime > .5f)
+                    ani.speed = 1;
+                else
+                    ani.speed = 0;
             }
             else if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 435f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 450f / 501f)
             {
@@ -67,9 +78,12 @@ public class Contact : MonoBehaviour
         {
             //AITree.GetComponent<Character>().HitEffect.HitStun = .01f;
 
+            Camcam.i.Boss = TransformUtility.FindTransform(AITree.transform, "Head");
             Camcam.i.BossShow = false;
 
             PlayerMain.i.CanInput = true;
+
+            AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
         }
 
         if (speed > 0f)
@@ -154,6 +168,8 @@ public class Contact : MonoBehaviour
 
         MusicManager.i.Play("Zealot", 46f, 5f);
 
+        AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
+
         gameObject.SetActive(false);
     }
 
@@ -167,7 +183,7 @@ public class Contact : MonoBehaviour
             ani.Play("boss1-1_ST_start");
             AerutaDebug.i.StartGameTime = Time.unscaledTime;
 
-            Camcam.i.BossShow = false;
+            Camcam.i.BossShow = true;
 
             PlayerMain.i.StopMove();
             PlayerMain.i.CanInput = false;

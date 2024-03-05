@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Camcam : MonoBehaviour
@@ -25,6 +26,11 @@ public class Camcam : MonoBehaviour
     private Vector2 velo;
 
     public float bossShowingTime;
+
+    public List<float> stageTime;
+    public List<float> camSize;
+
+    private bool spawnBlur;
 
     private void Awake()
     {
@@ -91,19 +97,83 @@ public class Camcam : MonoBehaviour
 
     public void BossShowing()
     {
-        if (bossShowingTime <= 2f)
+        if (bossShowingTime <= stageTime[0])
         {
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 2, Time.deltaTime * zoomSpeed);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[0], Time.deltaTime * zoomSpeed);
 
-            PosOverride = new Vector3(Boss.position.x, -3f, -10f);
-            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+            PosOverride = Boss.position - Vector3.up * 2.5f;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 2f);
         }
-        else if (bossShowingTime <= 4f)
+        else if (bossShowingTime <= stageTime[1])
         {
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 10, Time.deltaTime * zoomSpeed * 3);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[1], Time.deltaTime * zoomSpeed);
 
-            PosOverride = new Vector3(Boss.position.x, -3f, -10f);
+            Boss = TransformUtility.FindTransform(Boss.parent, "Blade");
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 1f);
+        }
+        else if (bossShowingTime <= stageTime[2])
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[2], Time.deltaTime * zoomSpeed);
+
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 1f);
+        }
+        else if (bossShowingTime <= stageTime[3])
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[3], Time.deltaTime * zoomSpeed);
+
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 10f);
+        }
+        else if (bossShowingTime <= stageTime[4])
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[4], Time.deltaTime * zoomSpeed * 3);
+
+            Boss = TransformUtility.FindTransform(Boss.parent, "Head");
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
             transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+
+            if (!spawnBlur)
+            {
+                spawnBlur = true; 
+                AerutaDebug.i.SpawnPostBlur(Boss.position - Vector3.up * 4f, true);
+            }
+        }
+        else if (bossShowingTime <= stageTime[5])
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[5], Time.deltaTime * zoomSpeed * 1);
+
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+
+            if (!spawnBlur)
+            {
+                spawnBlur = true;
+                AerutaDebug.i.SpawnPostBlur(Boss.position - Vector3.up * 4f, true);
+            }
+        }
+        else if(bossShowingTime <= stageTime[6])
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[6], Time.deltaTime * zoomSpeed * 2);
+
+            Boss = TransformUtility.FindTransform(Boss.parent, "Blade");
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
+        }else
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, camSize[7], Time.deltaTime * zoomSpeed * 3);
+
+            PosOverride = Boss.position;
+            PosOverride.z = -10;
+            transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 10f);
         }
 
         bossShowingTime += Time.unscaledDeltaTime;
