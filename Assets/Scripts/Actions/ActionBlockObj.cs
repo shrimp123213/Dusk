@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static ActionPeformStateBlock;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -128,6 +129,8 @@ public class ActionBlockObj : ActionBaseObj
         ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
 
         _m.Blocking = false;
+
+        AerutaDebug.i.SpawnPostBlur(_ClosestPoint, true);
 
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {

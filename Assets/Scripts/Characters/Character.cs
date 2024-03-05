@@ -690,7 +690,10 @@ public class Character : MonoBehaviour, IHitable
                 if (Player.CatMode)
                     _damage.Amount *= 2;
 
-                Instantiate(AerutaDebug.i.PostBlur, _ClosestPoint, Quaternion.identity, null);
+                Vector3 blurPoint = transform.position + Vector3.up * .5f;
+                if (Player.CatMode)
+                    blurPoint = transform.position + Vector3.up * -.2f + Vector3.right * .3f * Facing;
+                AerutaDebug.i.SpawnPostBlur(blurPoint, false);
 
                 Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlowNextFrame(.5f, 0);

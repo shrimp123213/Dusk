@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PostBlur
+  m_Name: PostBlurWeak
   m_Shader: {fileID: 4800000, guid: f86b88758a427394eb5b94cb4da5c2e9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -47,8 +47,8 @@ Material:
     - _Int1: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _U: 0.51603526
-    - _V: 0.38952306
+    - _U: 0.4531102
+    - _V: 0.31418872
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Vector0: {r: 0, g: 0, b: 0, a: 0}

@@ -466,14 +466,14 @@ public class PlayerMain : Character
                 KeyJumpJust = true;
             }
             Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
-            if (Xinput != 0f)
+            if (Xinput != 0f && isGround)
             {
                 runSoundInverval -= Time.deltaTime;
                 if (runSoundInverval <= 0f)
                 {
                     runSoundInverval = runSoundInvervalSet;
                     if (NowAction == null)
-                        SoundManager.i.PlaySound("Run");
+                        SoundManager.i.PlaySound("Run-" + Random.Range(1, 21));
                 }
             }
             else
