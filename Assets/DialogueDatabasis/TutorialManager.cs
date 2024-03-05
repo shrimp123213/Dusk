@@ -30,7 +30,7 @@ public class TutorialManager : MonoBehaviour
     
     void Update()
     {
-        if (UIAct.FindAction("Submit").WasPressedThisFrame() && isPanelActive)
+        if (UIAct.FindAction("Pad_Submit").WasPressedThisFrame() && isPanelActive)
         {
             tutorialPanel_Pad.SetActive(false);
             tutorialPanel_Keyboard.SetActive(false);
