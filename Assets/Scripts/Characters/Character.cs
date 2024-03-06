@@ -703,6 +703,8 @@ public class Character : MonoBehaviour, IHitable
                 MarkManager.i.ClearMarkedTargets();
 
                 Player.CanInput = false;
+
+                SoundManager.i.PlaySound("Hurt");
             }
         }
 

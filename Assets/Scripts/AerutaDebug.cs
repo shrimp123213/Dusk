@@ -94,7 +94,7 @@ public class AerutaDebug : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("Main_menu");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha0))

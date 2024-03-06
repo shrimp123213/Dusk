@@ -43,12 +43,12 @@ public class MainMenuButtons : MonoBehaviour
         {
             buttonAni[i] = buttons[i].GetComponent<Animator>(); // 獲取每個按鈕的動畫控制器
         }
-        
+
         //buttonSounds.Add("UI_Confirm"); // 將按鈕音效加入按鈕音效清單
         //buttonSounds.Add("UI_Select");
         //buttonSounds.Add("UI_Cancel");
-        
-        MusicManager.i.Play("MainMenu",0f,1f);
+
+        MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
     }
     
     public void StartGame()
