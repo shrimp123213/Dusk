@@ -178,16 +178,16 @@ public class AerutaDebug : MonoBehaviour
         }
     }
 
-    public void SpawnPostBlur(Vector3 center, bool isWeak)
+    public void SpawnPostBlur(Vector3 center, bool isZoomOut)
     {
         //ChangePostBlurCenter
-        ParticleSystemRenderer renderer = isWeak ? PostBlurWeak.GetComponent<ParticleSystemRenderer>() : PostBlur.GetComponent<ParticleSystemRenderer>();
+        ParticleSystemRenderer renderer = isZoomOut ? PostBlurWeak.GetComponent<ParticleSystemRenderer>() : PostBlur.GetComponent<ParticleSystemRenderer>();
         Vector2 point = Camera.main.WorldToScreenPoint(center);
         point = new Vector2(point.x / Camera.main.pixelWidth, point.y / Camera.main.pixelHeight);
         renderer.sharedMaterial.SetFloat("_U", point.x);
         renderer.sharedMaterial.SetFloat("_V", point.y);
 
-        Instantiate(isWeak ? PostBlurWeak : PostBlur, center, Quaternion.identity, null);
+        Instantiate(isZoomOut ? PostBlurWeak : PostBlur, center, Quaternion.identity, null);
     }
 }
 

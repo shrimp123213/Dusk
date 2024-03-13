@@ -152,12 +152,6 @@ public class Camcam : MonoBehaviour
             PosOverride = Boss.position;
             PosOverride.z = -10;
             transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
-
-            if (!spawnBlur)
-            {
-                spawnBlur = true;
-                AerutaDebug.i.SpawnPostBlur(Boss.position - Vector3.up * 4f, true);
-            }
         }
         else if(bossShowingTime <= stageTime[6])
         {

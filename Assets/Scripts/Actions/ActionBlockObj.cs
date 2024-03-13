@@ -56,6 +56,18 @@ public class ActionBlockObj : ActionBaseObj
             _m.StoredMoves.Clear();
         }
 
+        foreach (InputCooldown set in SetCooldowns)
+        {
+            foreach (InputCooldown cooldown in _m.Player.InputCooldowns)
+            {
+                if (cooldown.Key == set.Key)
+                {
+                    cooldown.Time = set.Time;
+                    break;
+                }
+            }
+        }
+
         return new ActionPeformStateBlock();
     }
 
@@ -130,7 +142,7 @@ public class ActionBlockObj : ActionBaseObj
 
         _m.Blocking = false;
 
-        AerutaDebug.i.SpawnPostBlur(_ClosestPoint, true);
+        AerutaDebug.i.SpawnPostBlur(_ClosestPoint, false);
 
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {

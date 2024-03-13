@@ -21,6 +21,17 @@ MonoBehaviour:
   InterruptSameLevel: 0
   DamageRatio: 0
   DamageType: 0
+  SetCooldowns:
+  - Key: 11
+    Time: 1
+  - Key: 6
+    Time: 0.5
+  - Key: 8
+    Time: 0.5
+  - Key: 5
+    Time: 0.5
+  - Key: 10
+    Time: 0.5
   AttackSpots: []
   SuckEffect: 0
   CanInterruptAction: 0
@@ -43,8 +54,6 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0
