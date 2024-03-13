@@ -175,7 +175,7 @@ public class Contact : MonoBehaviour
         MusicManager.i.Play("Zealot", 46f, 5f);
 
         AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
-
+        playInfo.SetActive(true);
         gameObject.SetActive(false);
     }
 

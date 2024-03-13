@@ -52,7 +52,9 @@ public class AerutaDebug : MonoBehaviour
 
         //if (ControlGamepad.enabled || ControlKeyboard.enabled)
         //    Time.timeScale = 0.001f;
-
+        FadeImage.gameObject.SetActive(true);
+        FadeImage.color = new Color(0, 0, 0, 1);
+        
         StartSceneFadeIn = true;
     }
 
