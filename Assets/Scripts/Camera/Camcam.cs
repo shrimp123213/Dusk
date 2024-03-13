@@ -142,7 +142,7 @@ public class Camcam : MonoBehaviour
             if (!spawnBlur)
             {
                 spawnBlur = true; 
-                AerutaDebug.i.SpawnPostBlur(Boss.position - Vector3.up * 4f, true);
+                AerutaDebug.i.SpawnPostBlurZoomOut(Boss.position - Vector3.up * 4f);
             }
         }
         else if (bossShowingTime <= stageTime[5])

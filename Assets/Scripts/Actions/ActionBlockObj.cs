@@ -142,10 +142,13 @@ public class ActionBlockObj : ActionBaseObj
 
         _m.Blocking = false;
 
-        AerutaDebug.i.SpawnPostBlur(_ClosestPoint, false);
+        
 
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {
+            AerutaDebug.i.SpawnPostBlurZoomIn(_ClosestPoint, true);
+            _m.Player.HitEffect.SetGlobalSlow(.5f, 1);
+
             Vector2 direction = (Vector2)_m.transform.position - _ClosestPoint;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -159,6 +162,8 @@ public class ActionBlockObj : ActionBaseObj
         }
         else
         {
+            AerutaDebug.i.SpawnPostBlurZoomOut(_ClosestPoint);
+
             Instantiate(AerutaDebug.i.BlockEffectNormal, _ClosestPoint, Quaternion.identity, null);
 
             _m.Player.Morph.Add(((ActionBlockObj)_m.NowAction).NormalMorphRecovery);

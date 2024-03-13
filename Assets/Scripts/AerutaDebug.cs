@@ -25,8 +25,9 @@ public class AerutaDebug : MonoBehaviour
     public GameObject BlockEffectNormal;
     public GameObject BlockEffectPerfect;
     //public GameObject BloodEffect;
-    public GameObject PostBlur;
-    public GameObject PostBlurWeak;
+    public GameObject PostBlurZoomIn;
+    public GameObject PostBlurZoomInWeak;
+    public GameObject PostBlurZoomOut;
 
     //public GameObject BlockFlashYellow;
     //public GameObject BlockFlashBlue;
@@ -178,17 +179,29 @@ public class AerutaDebug : MonoBehaviour
         }
     }
 
-    public void SpawnPostBlur(Vector3 center, bool isZoomOut)
+    public void SpawnPostBlurZoomIn(Vector3 center, bool isWeak)
     {
         //ChangePostBlurCenter
-        ParticleSystemRenderer renderer = isZoomOut ? PostBlurWeak.GetComponent<ParticleSystemRenderer>() : PostBlur.GetComponent<ParticleSystemRenderer>();
+        ParticleSystemRenderer renderer = isWeak ? PostBlurZoomInWeak.GetComponent<ParticleSystemRenderer>() : PostBlurZoomIn.GetComponent<ParticleSystemRenderer>();
         Vector2 point = Camera.main.WorldToScreenPoint(center);
         point = new Vector2(point.x / Camera.main.pixelWidth, point.y / Camera.main.pixelHeight);
         renderer.sharedMaterial.SetFloat("_U", point.x);
         renderer.sharedMaterial.SetFloat("_V", point.y);
 
-        Instantiate(isZoomOut ? PostBlurWeak : PostBlur, center, Quaternion.identity, null);
+        Instantiate(isWeak ? PostBlurZoomInWeak : PostBlurZoomIn, center, Quaternion.identity, null);
     }
+    public void SpawnPostBlurZoomOut(Vector3 center)
+    {
+        //ChangePostBlurCenter
+        ParticleSystemRenderer renderer = PostBlurZoomOut.GetComponent<ParticleSystemRenderer>();
+        Vector2 point = Camera.main.WorldToScreenPoint(center);
+        point = new Vector2(point.x / Camera.main.pixelWidth, point.y / Camera.main.pixelHeight);
+        renderer.sharedMaterial.SetFloat("_U", point.x);
+        renderer.sharedMaterial.SetFloat("_V", point.y);
+
+        Instantiate(PostBlurZoomOut, center, Quaternion.identity, null);
+    }
+
 }
 
 public class Feedback

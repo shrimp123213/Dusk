@@ -9,6 +9,8 @@ public class ActionCounterAttackObj : ActionClawObj
     {
         _m.Player.InvincibleState.Invincible(999f, false);
 
+        _m.Player.HitEffect.SetGlobalSlow(0.0001f, 1);
+
         return base.StartAction(_m);
     }
 

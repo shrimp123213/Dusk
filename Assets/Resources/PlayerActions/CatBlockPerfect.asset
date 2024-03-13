@@ -43,13 +43,19 @@ MonoBehaviour:
     LinkActionId: CatCounterAttack
     CanChangeFace: 1
   - Frame: -1
-    LifeTime: 0.5
+    LifeTime: 0.2
     Key1: 6
     KeyArrow: 0
     LinkActionId: CatCounterAttack
     CanChangeFace: 1
   - Frame: 0
     LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: CatBlock
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.2
     Key1: 10
     KeyArrow: 0
     LinkActionId: CatBlock

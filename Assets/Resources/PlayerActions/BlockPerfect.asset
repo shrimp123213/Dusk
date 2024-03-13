@@ -43,13 +43,19 @@ MonoBehaviour:
     LinkActionId: CounterAttack
     CanChangeFace: 1
   - Frame: -1
-    LifeTime: 0.5
+    LifeTime: 0.2
     Key1: 6
     KeyArrow: 0
     LinkActionId: CounterAttack
     CanChangeFace: 1
   - Frame: 0
     LifeTime: -1
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: Block
+    CanChangeFace: 1
+  - Frame: -1
+    LifeTime: 0.2
     Key1: 10
     KeyArrow: 0
     LinkActionId: Block
