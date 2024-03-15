@@ -30,13 +30,13 @@ public class TutorialManager : MonoBehaviour
     
     void Update()
     {
-        /*if (UIAct.FindAction("Pad_Submit").WasPressedThisFrame() && isPanelActive)
+        /*if (InputDeviceManager.instance.inputDevice == InputDevice.Joystick)
         {
-            tutorialPanel_Pad.SetActive(false);
-            tutorialPanel_Keyboard.SetActive(false);
-            playerAct.Enable();
-            isPanelActive = false;
-            Debug.Log("Close Tutorial");
+            Test("Joystick");
+        }
+        else
+        {
+            Test("Keyboard");
         }*/
     }
 
@@ -44,7 +44,7 @@ public class TutorialManager : MonoBehaviour
     {
         playerAct.Disable();
         isPanelActive = true;
-        if (InputDeviceManager.currentInputDevice == InputDevice.Joystick)
+        if (InputDeviceManager.instance.inputDevice == InputDevice.Joystick)
         {
             tutorialPanel_Pad.SetActive(true);
             tutorialPanel_Keyboard.SetActive(false);
@@ -54,5 +54,12 @@ public class TutorialManager : MonoBehaviour
             tutorialPanel_Keyboard.SetActive(true);
             tutorialPanel_Pad.SetActive(false);
         }
+        
+        
+    }
+
+    public void Test(string device)
+    {
+        Debug.Log(device);
     }
 }
