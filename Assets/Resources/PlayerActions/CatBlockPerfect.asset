@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0734f316578783347837ac842f9593a5, type: 3}
   m_Name: CatBlockPerfect
   m_EditorClassIdentifier: 
   Id: CatBlockPerfect
@@ -21,6 +21,15 @@ MonoBehaviour:
   InterruptSameLevel: 0
   DamageRatio: 0
   DamageType: 0
+  SetCooldowns:
+  - Key: 10
+    Time: 0
+  - Key: 6
+    Time: 0
+  - Key: 5
+    Time: 0
+  - Key: 11
+    Time: 0
   AttackSpots: []
   SuckEffect: 0
   CanInterruptAction: 0
@@ -34,7 +43,7 @@ MonoBehaviour:
     LinkActionId: CatCounterAttack
     CanChangeFace: 1
   - Frame: -1
-    LifeTime: 0.5
+    LifeTime: 0.2
     Key1: 6
     KeyArrow: 0
     LinkActionId: CatCounterAttack
@@ -45,37 +54,13 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: CatBlock
     CanChangeFace: 1
-  Moves:
-  - KeyFrame: 0
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    TargetDistance: {x: 0, y: 0}
-    FinishTime: 0.25
-    CanEvade: 0
-    StartEvadeFrame: 0
-    EndEvadeFrame: 0
+  - Frame: -1
+    LifeTime: 0.2
+    Key1: 10
+    KeyArrow: 0
+    LinkActionId: CatBlock
+    CanChangeFace: 1
+  Moves: []
   Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}
@@ -91,8 +76,6 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

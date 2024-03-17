@@ -62,6 +62,13 @@ public class InvincibleState : MonoBehaviour
                 material.DOComplete();
                 material.DOColor(Color.white, 0f);
                 Renderer.skeleton.SetColor(material.color);
+
+                if (_m.Renderer.UpdateTiming != UpdateTiming.InUpdate)
+                {
+                    _m.Renderer.UpdateTiming = UpdateTiming.InUpdate;
+                    _m.Player.CatRenderer.UpdateTiming = UpdateTiming.InUpdate;
+                }
+
             }
             else
             {

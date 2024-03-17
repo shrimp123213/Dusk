@@ -1,7 +1,9 @@
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityParticleSystem;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -39,6 +41,9 @@ public class ActionBaseObj : ScriptableObject
 
     public DamageType DamageType;
 
+    [Header("«öÁä§N«o")]
+    public List<InputCooldown> SetCooldowns;
+    
     [Header("§P©wÂI")]
     public List<AttackTiming> AttackSpots;
 
@@ -195,6 +200,18 @@ public class ActionBaseObj : ScriptableObject
         if (ClearStoredMoves)
         {
             _m.StoredMoves.Clear();
+        }
+
+        foreach (InputCooldown set in SetCooldowns)
+        {
+            foreach (InputCooldown cooldown in _m.Player.InputCooldowns)
+            {
+                if (cooldown.Key == set.Key)
+                {
+                    cooldown.Time = set.Time;
+                    break;
+                }
+            }
         }
 
         return new ActionPeformState();
@@ -482,4 +499,3 @@ public class Teleport
 
     public Vector3 Pos;
 }
-

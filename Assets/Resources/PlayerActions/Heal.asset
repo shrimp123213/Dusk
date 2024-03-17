@@ -14,12 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Heal
   DisplayName: Heal
+  soundEffectName: Heal
   _AnimationKey: Heal
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0
   DamageType: 2
+  SetCooldowns:
+  - Key: 8
+    Time: 1.1
+  - Key: 10
+    Time: 1.1
+  - Key: 6
+    Time: 1.1
+  - Key: 5
+    Time: 1.1
+  - Key: 11
+    Time: 1.1
   AttackSpots: []
   SuckEffect: 0
   CanInterruptAction: 0
@@ -42,11 +54,11 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
   HealAmount: 50

@@ -32,6 +32,8 @@ public class Camcam : MonoBehaviour
 
     private bool spawnBlur;
 
+    public bool FocusPlayer;
+
     private void Awake()
     {
         cam = GetComponent<Camera>();
@@ -64,17 +66,34 @@ public class Camcam : MonoBehaviour
         }
         else if ((bool)Target)
         {
-            if (Target.position.y > 7.5f)
+            if (FocusPlayer)
             {
-                transform.position = new Vector3(Mathf.SmoothDamp(transform.position.x, Target.position.x + Target.GetComponent<Character>().Facing * 1.125f, ref velo.x, 0.125f), Mathf.Clamp(Mathf.SmoothDamp(transform.position.y, Target.position.y + 3.5f, ref velo.y, 0.375f), -4.35f, 100f), -10f);
-            }
-            else
-            {
-                Vector3 newPos = new Vector3(Mathf.SmoothDamp(transform.position.x, Target.position.x + Target.GetComponent<Character>().Facing * 1.125f, ref velo.x, 0.125f), Mathf.Clamp(Mathf.SmoothDamp(transform.position.y, Target.position.y, ref velo.y, 0.075f), -4.35f, 100f), -10f);
+                cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 3, Time.deltaTime * zoomSpeed * 6);
+
+                Vector3 newPos = new Vector3(
+                    Mathf.SmoothDamp(transform.position.x, Target.position.x, ref velo.x, 0.125f),
+                    Mathf.Clamp(Mathf.SmoothDamp(transform.position.y, Target.position.y - 4f, ref velo.y, 0.075f), -4.35f, 100f),
+                    -10f);
                 if (newPos.x != float.NaN && newPos.y != float.NaN && newPos.z != float.NaN)
                     transform.position = newPos;
             }
-            if(ChangeFOV)
+            else if (Target.position.y > 7.5f)
+            {
+                transform.position = new Vector3(
+                    Mathf.SmoothDamp(transform.position.x, Target.position.x + Target.GetComponent<Character>().Facing * 1.125f, ref velo.x, 0.125f),
+                    Mathf.Clamp(Mathf.SmoothDamp(transform.position.y, Target.position.y + 3.5f, ref velo.y, 0.375f), -4.35f, 100f),
+                    -10f);
+            }
+            else
+            {
+                Vector3 newPos = new Vector3(
+                    Mathf.SmoothDamp(transform.position.x, Target.position.x + Target.GetComponent<Character>().Facing * 1.125f, ref velo.x, 0.125f), 
+                    Mathf.Clamp(Mathf.SmoothDamp(transform.position.y, Target.position.y, ref velo.y, 0.075f), -4.35f, 100f),
+                    -10f);
+                if (newPos.x != float.NaN && newPos.y != float.NaN && newPos.z != float.NaN)
+                    transform.position = newPos;
+            }
+            if(ChangeFOV && !FocusPlayer)
                 SetFOV();
             
         }
@@ -142,7 +161,7 @@ public class Camcam : MonoBehaviour
             if (!spawnBlur)
             {
                 spawnBlur = true; 
-                AerutaDebug.i.SpawnPostBlur(Boss.position - Vector3.up * 4f, true);
+                AerutaDebug.i.SpawnPostBlurZoomOut(Boss.position - Vector3.up * 4f);
             }
         }
         else if (bossShowingTime <= stageTime[5])
@@ -152,12 +171,6 @@ public class Camcam : MonoBehaviour
             PosOverride = Boss.position;
             PosOverride.z = -10;
             transform.position = Vector3.Lerp(transform.position, PosOverride, Time.fixedDeltaTime * 3f);
-
-            if (!spawnBlur)
-            {
-                spawnBlur = true;
-                AerutaDebug.i.SpawnPostBlur(Boss.position - Vector3.up * 4f, true);
-            }
         }
         else if(bossShowingTime <= stageTime[6])
         {

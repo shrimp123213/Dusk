@@ -21,11 +21,15 @@ MonoBehaviour:
   InterruptSameLevel: 0
   DamageRatio: 1
   DamageType: 0
+  SetCooldowns:
+  - Key: 6
+    Time: 0.25
   AttackSpots:
   - KeyFrameFrom: 11
     KeyFrameEnd: 20
     Offset: {x: 1.5, y: 0.2, z: 0}
     Range: {x: 3.1, y: 1.7}
+    Angle: 0
     HitMax: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
@@ -74,8 +78,6 @@ MonoBehaviour:
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0.2
   IsMovableX: 0
   IsMovableY: 1
@@ -85,6 +87,6 @@ MonoBehaviour:
   CanJumpWhenActing: 0
   _AnimationKeyClawEnd: CounterAttackEnd
   Effect: {fileID: 6550002981404218288, guid: c9ca592c98d758a4b8cb28bdc5fe9512, type: 3}
-  Effect_jump: {fileID: 0}
+  Effect_jump: {fileID: 6550002981404218288, guid: c9ca592c98d758a4b8cb28bdc5fe9512, type: 3}
   offset: {x: 1.1, y: 0.2, z: 0}
   hitSoundEffectName: CounterAttack

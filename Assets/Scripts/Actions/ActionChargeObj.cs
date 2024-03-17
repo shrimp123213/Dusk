@@ -119,6 +119,18 @@ public class ActionChargeObj : ActionBaseObj, IActionCharge
         //    AerutaDebug.i.Feedback.HeavyAttackCount--;
         //AerutaDebug.i.Feedback.ChargeAttackCount++;
 
+        foreach (InputCooldown set in SetCooldowns)
+        {
+            foreach (InputCooldown cooldown in _m.Player.InputCooldowns)
+            {
+                if (cooldown.Key == set.Key)
+                {
+                    cooldown.Time = set.Time;
+                    break;
+                }
+            }
+        }
+
         return new ActionPeformStateCharge();
     }
 

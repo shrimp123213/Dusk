@@ -13,13 +13,13 @@ public class EvadeState : MonoBehaviour
 
     public float EvadeCooldownMax;
 
-    public ParticleSystem EvadeCanUseEffect;
+    //public ParticleSystem EvadeCanUseEffect;
 
     public ParticleSystem EvadeDistanceEffect;
 
-    public GameObject EvadeFinishCooldownEffect;
+    //public GameObject EvadeFinishCooldownEffect;
 
-    public GameObject EvadeSuccessEffect;
+    //public GameObject EvadeSuccessEffect;
 
     public SkeletonMecanim Renderer;
 
@@ -47,7 +47,7 @@ public class EvadeState : MonoBehaviour
 
         //if(spawnEffect) Instantiate(EvadeFinishCooldownEffect, transform.position, Quaternion.identity, transform);
 
-        EvadeCanUseEffect.Stop();
+        //EvadeCanUseEffect.Stop();
         //var main = EvadeCanUseEffect.main;
         //main.loop = true;
         //EvadeCanUseEffect.Play();
@@ -58,9 +58,9 @@ public class EvadeState : MonoBehaviour
         CanEvade = false;
         IsRewarded = false;
         
-        EvadeCanUseEffect.Stop();
-        var main = EvadeCanUseEffect.main;
-        main.loop = false;
+        //EvadeCanUseEffect.Stop();
+        //var main = EvadeCanUseEffect.main;
+        //main.loop = false;
         
         EvadeDistanceEffect.Play();
         EvadeDistanceEffect.transform.rotation = _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180);

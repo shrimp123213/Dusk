@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 using Spine.Unity;
+using Unity.VisualScripting;
 
 public class PlayerMain : Character
 {
@@ -47,6 +48,8 @@ public class PlayerMain : Character
     private bool CanDash;
 
     public bool CanAttack;
+
+    public List<InputCooldown> InputCooldowns = new List<InputCooldown>();
 
     public List<InputKey> RestrictInput = new List<InputKey>();
 
@@ -309,6 +312,13 @@ public class PlayerMain : Character
         }*/
     }
 
+    public bool TryFinishCooldown(InputKey key)
+    {
+        float time = InputCooldowns.Where(k => k.Key == key).Max(t => t.Time);
+
+        return time <= 0;
+    }
+
     public override bool TryCastAction(ActionBaseObj _actionBaseObj, bool isShowMessage = true)
     {
         //Debug.Log("Try Cast " + _actionBaseObj.DisplayName);
@@ -319,11 +329,18 @@ public class PlayerMain : Character
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Energy !");
         }
+
         if (flag && _actionBaseObj.Id == "Heal" && Potions.Count <= 0)
         {
             flag = false;
             if (isShowMessage)
                 SkillPopup.i.ShowMessage("No Potions !");
+        }
+        if (flag && _actionBaseObj.Id == "Heal" && Health >= HealthMax.Final) 
+        {
+            flag = false;
+            if (isShowMessage)
+                SkillPopup.i.ShowMessage("Cant Heal at Full Health !");
         }
 
         if (flag && _actionBaseObj.name.Contains("Claw") && !isGround)
@@ -399,6 +416,9 @@ public class PlayerMain : Character
     {
         if (RestrictInput.Count <= 0 || RestrictInput.Contains(_InputKey))
         {
+            if (!TryFinishCooldown(_InputKey))
+                return;
+
             base.TryInput(_InputKey);
         }
     }
@@ -450,6 +470,12 @@ public class PlayerMain : Character
         //        CanDash = true;
         //    }
         //}
+        foreach (InputCooldown cooldown in InputCooldowns)
+        {
+            if (cooldown.Time > 0)
+                cooldown.Time -= Time.deltaTime;
+        }
+
         if (AirClawCount > 0 && isGround)
             AirClawCount = 0;
         if (!CanAttack && !base.isActing)
@@ -479,7 +505,7 @@ public class PlayerMain : Character
                 runSoundInverval = 0f;
             Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
             Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
-            if (playerAct.FindAction("Claw").WasPressedThisFrame())
+            if (playerAct.FindAction("Claw").IsPressed())
             {
                 //bool buttonDown = Input.GetButtonDown("Attack");
                 //if (!MyInteracter.TryInteract(!buttonDown) && buttonDown)

@@ -49,7 +49,7 @@ public class Contact : MonoBehaviour
     {
         if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 && ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start") 
         {
-            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 285f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 318f / 501f) 
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 280f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 318f / 501f) 
             {
                 fences[0].Play("FenceUp");
                 fences[1].Play("FenceUp");
@@ -172,7 +172,7 @@ public class Contact : MonoBehaviour
 
         BossHealthBar.localScale = new Vector3(.75f, .75f, .75f);
 
-        MusicManager.i.Play("Zealot", 46f, 5f);
+        MusicManager.i.Play("Zealot", 46f, 5f, .5f);
 
         AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
         playInfo.SetActive(true);
@@ -198,7 +198,7 @@ public class Contact : MonoBehaviour
             
             triggered = true;
 
-            MusicManager.i.Play("Zealot", 46f, 5f);
+            MusicManager.i.Play("Zealot", 46f, 5f, .5f);
             playInfo.SetActive(false);
         }
     }
