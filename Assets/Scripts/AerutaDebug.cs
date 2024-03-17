@@ -31,7 +31,7 @@ public class AerutaDebug : MonoBehaviour
 
     //public GameObject BlockFlashYellow;
     //public GameObject BlockFlashBlue;
-    public GameObject EvadeFinishCooldownEffect;
+    //public GameObject EvadeFinishCooldownEffect;
     public GameObject TransformationEffect;
     public GameObject PlayerAttackLandEffect;
 

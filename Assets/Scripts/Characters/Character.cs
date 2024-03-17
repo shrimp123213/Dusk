@@ -705,6 +705,9 @@ public class Character : MonoBehaviour, IHitable
                 Player.CanInput = false;
 
                 SoundManager.i.PlaySound("Hurt");
+
+                Renderer.UpdateTiming = UpdateTiming.InFixedUpdate;
+                Player.CatRenderer.UpdateTiming = UpdateTiming.InFixedUpdate;
             }
         }
 

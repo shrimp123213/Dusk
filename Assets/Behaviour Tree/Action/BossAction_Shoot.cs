@@ -10,7 +10,7 @@ public class BossAction_Shoot : EnemyStartAction
     public GameObject AttackRangeHint;
 
     public bool HintSpawnFlip = false;
-    public float HintspawnOffsetY = 0;
+    public Vector3 HintspawnOffset;
 
     private bool hintSpawned;
 
@@ -42,17 +42,12 @@ public class BossAction_Shoot : EnemyStartAction
         if (!hintSpawned)
         {
             float omenEuler = OmenSpawnEuler;
-            if (HintSpawnFlip) omenEuler = (this.transform.position.x > this.Target.Value.transform.position.x) ? 0f : 3.141593f;
+            if (HintSpawnFlip) omenEuler = (this.transform.position.x > this.Target.Value.transform.position.x) ? 180f : 0f;
 
-
-            Vector3 hintPos = new Vector3(transform.position.x, transform.position.y + HintspawnOffsetY, transform.position.z);
+            Vector3 hintPos = transform.position + HintspawnOffset;
             Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
 
-            GameObject attackRangeHint = GameObject.Instantiate(AttackRangeHint, hintPos, Quaternion.identity, omenTransform);
-            //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
-            
-            var hint = attackRangeHint.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            hint.startRotationY = omenEuler;
+            GameObject attackRangeHint = GameObject.Instantiate(AttackRangeHint, hintPos, Quaternion.Euler(new Vector3(0, omenEuler, -5)), null);
 
             hintSpawned = true;
         }

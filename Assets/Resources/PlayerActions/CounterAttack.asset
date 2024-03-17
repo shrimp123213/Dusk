@@ -87,6 +87,6 @@ MonoBehaviour:
   CanJumpWhenActing: 0
   _AnimationKeyClawEnd: CounterAttackEnd
   Effect: {fileID: 6550002981404218288, guid: c9ca592c98d758a4b8cb28bdc5fe9512, type: 3}
-  Effect_jump: {fileID: 0}
+  Effect_jump: {fileID: 6550002981404218288, guid: c9ca592c98d758a4b8cb28bdc5fe9512, type: 3}
   offset: {x: 1.1, y: 0.2, z: 0}
   hitSoundEffectName: CounterAttack
