@@ -50,7 +50,7 @@ public class ActionPietaObj : ActionBaseObj
         damageFactor = _m.Player.Morph.GetMorphLevelDamageFactor();
         _m.Player.Morph.Consume(1f, true);
 
-        //¼W¥[¶ZÂ÷¦Ü¦w¥ş¦ì¸m
+        //å¢åŠ è·é›¢è‡³å®‰å…¨ä½ç½®
         float endPosSafeZoneRadius = 2f;
 
         Vector3 endPos = new Vector3(Pieta.i.FarestTargetCollider2D.bounds.center.x, _m.transform.position.y) + Vector3Utility.CacuFacing(new Vector3(Pieta.i.FarestTargetCollider2D.bounds.extents.x, 0f) + Vector3.right * endPosSafeZoneRadius, _m.Facing);
@@ -64,7 +64,7 @@ public class ActionPietaObj : ActionBaseObj
             debug++;
             if (debug == 50)
             {
-                Debug.LogError("µL­­°j°é");
+                Debug.LogError("ç„¡é™è¿´åœˆ");
                 Debug.LogError(array.Length);
                 Debug.LogError(array[0].name);
             }
@@ -83,7 +83,7 @@ public class ActionPietaObj : ActionBaseObj
             
         }
 
-        //·s¼W¥i¸t¼Ü¥Ø¼Ğ¦Ü¦w¥ş¦ì¸m
+        //æ–°å¢å¯è–æ®¤ç›®æ¨™è‡³å®‰å…¨ä½ç½®
         float dis = Vector3.Distance(_m.transform.position, endPos);
         RaycastHit2D[] ray = Pieta.i.CanPietaRange(dis);
 
@@ -98,7 +98,7 @@ public class ActionPietaObj : ActionBaseObj
             }
         }
 
-        //¸t¼Üµ²§ô¦ì¸m
+        //è–æ®¤çµæŸä½ç½®
         Pieta.i.PietaEndDis = new Vector2(Mathf.Abs(endPos.x - _m.transform.position.x), Mathf.Abs(endPos.y - _m.transform.position.y));
 
 
@@ -108,7 +108,7 @@ public class ActionPietaObj : ActionBaseObj
     public override void ProcessAction(Character _m)
     {
         List<PietaTarget> triggeredTargetList = new List<PietaTarget>();
-        //foreach (PietaTarget pietaTarget in Pieta.i.CanPietaList)¸g¹L´NÄ²µo
+        //foreach (PietaTarget pietaTarget in Pieta.i.CanPietaList)ç¶“éå°±è§¸ç™¼
         //{
         //    if (_m.Facing * (pietaTarget.SlicePos.x - _m.transform.position.x) <= 0f) 
         //    {
@@ -117,7 +117,7 @@ public class ActionPietaObj : ActionBaseObj
         //        Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.up * 180), pietaTarget.Collider2D.transform).transform;
         //        slice.localScale *= pietaTarget.Collider2D.GetComponent<Character>().SliceMultiply;
         //
-        //        //³y¦¨¶Ë®`
+        //        //é€ æˆå‚·å®³
         //        bool num = pietaTarget.Collider2D.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m), DamageType), HitStun, _m, !pietaTarget.Collider2D.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
         //        _m.RegisterHit(pietaTarget.Collider2D.gameObject);
         //        if (num)
@@ -140,7 +140,7 @@ public class ActionPietaObj : ActionBaseObj
         //        }
         //    }
         //}
-        if (Pieta.i.CanPietaList.Count > 0 && _m.Facing * (Pieta.i.CanPietaList[Pieta.i.CanPietaList.Count - 1].SlicePos.x - _m.transform.position.x) <= 0f) //¸g¹L³Ì«á¤@°¦¤~Ä²µo
+        if (Pieta.i.CanPietaList.Count > 0 && _m.Facing * (Pieta.i.CanPietaList[Pieta.i.CanPietaList.Count - 1].SlicePos.x - _m.transform.position.x) <= 0f) //ç¶“éæœ€å¾Œä¸€éš»æ‰è§¸ç™¼
         {
             foreach (PietaTarget pietaTarget in Pieta.i.CanPietaList)
             {
@@ -149,7 +149,7 @@ public class ActionPietaObj : ActionBaseObj
                 Transform slice = Instantiate(SliceEffect, hitPoint, _m.Facing == 1 ? Quaternion.Euler(new Vector3(0, 0, -10)) : Quaternion.Euler(new Vector3(0, 180, -10)), pietaTarget.Collider2D.transform).transform;
                 slice.localScale *= pietaTarget.Collider2D.transform.parent.GetComponent<Character>().SliceMultiply;
 
-                //³y¦¨¶Ë®`
+                //é€ æˆå‚·å®³
                 bool num = pietaTarget.Collider2D.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(new Damage(_m.Attack.Final * GetDamageRatio(_m) * damageFactor, DamageType), HitStun, _m, !pietaTarget.Collider2D.transform.parent.GetComponent<Character>().ImmuneInterruptAction && CanInterruptAction);
                 _m.RegisterHit(new HittedGameObjectKey(0, pietaTarget.Collider2D.transform.parent.gameObject));
                 if (num)
