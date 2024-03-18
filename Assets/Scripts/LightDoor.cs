@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LightDoor : MonoBehaviour
 {
+    public int SceneOffset = -1;
+    
     private bool triggered = false;
     private int currentSceneIndex;
     
@@ -18,7 +20,7 @@ public class LightDoor : MonoBehaviour
     {
         if (other.CompareTag("Player") && !triggered)
         {
-            SceneManagerScript.i.ChangeScene(currentSceneIndex - 1);
+            SceneManagerScript.i.ChangeScene(currentSceneIndex + SceneOffset);
             triggered = true;
         }
             
