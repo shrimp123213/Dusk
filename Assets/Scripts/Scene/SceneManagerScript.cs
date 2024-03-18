@@ -10,10 +10,13 @@ public class SceneManagerScript : MonoBehaviour
     
     public GameObject FadePanel;
     public Image FadeImage;
+    public string musicName;
 
     private void Awake()
     {
         SceneManagerScript.i = this;
+        if(musicName != null)
+            MusicManager.i.Play(musicName, 0f, 1f, 1f);
     }
 
     public void ChangeScene(string SceneName)

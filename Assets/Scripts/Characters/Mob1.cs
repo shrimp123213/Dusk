@@ -14,8 +14,8 @@ public class Mob1 : Character
     public override void OnAwake()
     {
         base.OnAwake();
-        HealthMax = new CharacterStat(10f);
-        Speed = new CharacterStat(2f);
+        HealthMax = new CharacterStat(15f);
+        Speed = new CharacterStat(1.5f);
         
         Renderer = transform.GetChild(0).GetComponent<SkeletonMecanim>();
     }
@@ -24,10 +24,10 @@ public class Mob1 : Character
     {
         
         isDead = true;
-        DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 3f, (value) =>
+        DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 1f, (value) =>
         {
             Renderer.skeleton.SetColor(value);
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 1f);
         });
         AITree.enabled = false;
         base.gameObject.layer = 13;
