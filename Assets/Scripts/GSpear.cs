@@ -5,6 +5,7 @@ using UnityEngine;
 public class GSpear : Bullet
 {
     public GameObject Omen;
+    public float offsetY = -7;
     
     public override void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
     {
@@ -16,7 +17,7 @@ public class GSpear : Bullet
         {
             StartCoroutine(ButtleStartUp(_delay));
         }
-        Instantiate(Omen, new Vector3(transform.position.x, -7, 0), Quaternion.Euler(0, 0, 0));
+        Instantiate(Omen, new Vector3(transform.position.x, offsetY, 0), Quaternion.Euler(0, 0, 0));
         //Destroy(Omen, 0.5f);
     }
     

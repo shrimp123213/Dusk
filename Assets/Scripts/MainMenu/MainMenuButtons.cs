@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
@@ -145,7 +146,7 @@ public class MainMenuButtons : MonoBehaviour
 
     void IntoGameScene()
     {
-        SceneManagerScript.i.ChangeScene("TutorialScene");
+        SceneManagerScript.i.ChangeScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void ButtonFadeIn()

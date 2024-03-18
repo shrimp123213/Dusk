@@ -11,6 +11,7 @@ public class EnemyPatrol : EnemyActionBase
     public SharedTransformList PatrolPoints;
     public float IdleTime;
     public string AnimationName;
+    public float WaitTime;  // 新增：敵人在每個巡邏點停留的時間
 
     private float timer;
     private Animator Ani;
@@ -29,12 +30,23 @@ public class EnemyPatrol : EnemyActionBase
 
     public override TaskStatus OnUpdate()
     {
-        timer += Time.deltaTime;
+        if(timer >= IdleTime)
+        {
+            timer -= Time.deltaTime;
+            return TaskStatus.Running;
+        }
+        else
+        {
+            Patrol();
+            return TaskStatus.Success;
+        }
+        return TaskStatus.Running;
+        /*timer += Time.deltaTime;
         if(timer>= IdleTime)
         {
             Patrol();
         }
-        return TaskStatus.Running;
+        return TaskStatus.Running;*/
     }
 
     public override void OnEnd()
@@ -48,7 +60,7 @@ public class EnemyPatrol : EnemyActionBase
         {
             Ani.Play(AnimationName);
         }
-
+/*
         if (isPatrolForward)
         {
             patrolIndex++;
@@ -67,19 +79,20 @@ public class EnemyPatrol : EnemyActionBase
                 isPatrolForward = true;
             }
         }
+*/
+        //this.SelfCharacter.Value.Xinput = this.speed * (float)this.way;
 
-        this.SelfCharacter.Value.Xinput = this.speed * (float)this.way;
-
+        this.transform.position = Vector2.MoveTowards(this.transform.position, PatrolPoints.Value[patrolIndex].position, this.SelfCharacter.Value.Speed.Final * Time.deltaTime);
+        this.SelfCharacter.Value.Xinput = (float)((this.PatrolPoints.Value[patrolIndex].transform.position.x - this.transform.position.x > 0) ? 1 : -1);
+        
         if (Vector2.Distance(this.transform.position, PatrolPoints.Value[patrolIndex].transform.position) <.1f && Vector3Utility.IsFacing(this.SelfCharacter.Value.Facing,
                 this.PatrolPoints.Value[patrolIndex].transform.position.x - this.transform.position.x))
         {
-            Vector2 temp = PatrolPoints.Value[0].position;
-            for (int i = 0; i < PatrolPoints.Value.Count - 1; i++)
+            patrolIndex++;
+            if (patrolIndex >= PatrolPoints.Value.Count)
             {
-                PatrolPoints.Value[i].position = PatrolPoints.Value[i + 1].position;
-                this.transform.position = Vector2.MoveTowards(this.transform.position, PatrolPoints.Value[i].position, this.SelfCharacter.Value.Speed.Final);
+                patrolIndex = 0;
             }
-            PatrolPoints.Value[PatrolPoints.Value.Count - 1].position = temp;
         }
     }
 }

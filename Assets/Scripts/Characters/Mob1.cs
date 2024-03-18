@@ -15,9 +15,29 @@ public class Mob1 : Character
     {
         base.OnAwake();
         HealthMax = new CharacterStat(10f);
-        Speed = new CharacterStat(3f);
+        Speed = new CharacterStat(2f);
         
-
         Renderer = transform.GetChild(0).GetComponent<SkeletonMecanim>();
+    }
+
+    public override void Dead()
+    {
+        
+        isDead = true;
+        DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 3f, (value) =>
+        {
+            Renderer.skeleton.SetColor(value);
+            Destroy(gameObject, 3f);
+        });
+        AITree.enabled = false;
+        base.gameObject.layer = 13;
+        for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
+        {
+            //UnityEngine.Object.Instantiate(GeneralPrefabSO.i.P_HealthShard, base.transform.position + new Vector3(0f, 1.25f), Quaternion.identity);
+        }
+        //base.gameObject.SetActive(value: false);
+        //StartAction(DeadAction);
+        HurtBox.enabled = false;
+        CollisionBlockMove.enabled = false;
     }
 }
