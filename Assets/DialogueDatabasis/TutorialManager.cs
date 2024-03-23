@@ -42,7 +42,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ShowTutorialPanel()
     {
-        playerAct.Disable();
+        //playerAct.Disable();
         isPanelActive = true;
         if (InputDeviceManager.instance.inputDevice == InputDevice.Joystick)
         {
