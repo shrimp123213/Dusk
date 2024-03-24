@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using PixelCrushers;
@@ -12,11 +13,15 @@ public class RegisterMyControls : MonoBehaviour
     private Keyboard keyboard;
     private Gamepad gamepad;
     private PlayerInputActions controls;
+    private PlayerInput playerInput;
     
 
     void Awake()
     {
         controls = new PlayerInputActions();
+        playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        //InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
+        //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
     }
 
     void OnEnable()

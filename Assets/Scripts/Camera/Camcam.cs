@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Camcam : MonoBehaviour
 {
     public static Camcam i;
 
     public Camera cam;
+    public CinemachineVirtualCamera vCam;
 
     public Transform Target;
 
@@ -110,7 +112,15 @@ public class Camcam : MonoBehaviour
             float targetSize = Mathf.Clamp(distance, minDistance, maxDistance);
 
             // 平滑地改變攝影機的大小
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
+            if (vCam != null)
+            {
+                vCam.m_Lens.OrthographicSize = Mathf.Lerp(vCam.m_Lens.OrthographicSize, targetSize, Time.deltaTime * zoomSpeed);
+            }
+            else
+            {
+                cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
+            }
+            
         }
     }
 

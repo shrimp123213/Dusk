@@ -7,9 +7,12 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using Spine.Unity;
+using Cinemachine;
 
 public class Contact : MonoBehaviour
 {
+    public CinemachineVirtualCamera vCam;
+    
     public Animator[] fences;
 
     public BehaviorTree AITree;
@@ -41,14 +44,15 @@ public class Contact : MonoBehaviour
     {
         ani = AITree.GetComponentInChildren<Animator>();
         ani.Play("boss1-1_ST_sit_idle");
-
+        
         waitTime = 0;
     }
 
     private void Update()
     {
-        if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 && ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start") 
+        if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 && ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start")
         {
+            vCam.enabled = false;
             if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 280f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 318f / 501f) 
             {
                 fences[0].Play("FenceUp");
@@ -134,6 +138,7 @@ public class Contact : MonoBehaviour
                     ani.speed = 1;
                     BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
                     playInfo.SetActive(true);
+                    vCam.enabled = true;
                 }
 
                 if (BossHealthBar.localScale.x == .75f)
@@ -176,6 +181,7 @@ public class Contact : MonoBehaviour
 
         AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
         playInfo.SetActive(true);
+        vCam.enabled=true;
         gameObject.SetActive(false);
     }
 
