@@ -9,11 +9,14 @@ using InputDevice = PixelCrushers.InputDevice;
 
 public class InputDeviceUpdate : MonoBehaviour
 {
+    public static InputDeviceUpdate i;
+    
     private PlayerInput playerInput;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        i = this;
     }
 
     private void Start()
