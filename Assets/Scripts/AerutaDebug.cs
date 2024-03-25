@@ -144,17 +144,17 @@ public class AerutaDebug : MonoBehaviour
         //    ControlKeyboard.enabled = false;
         //    Time.timeScale = 1f;
         //}
-        if (ControlGamepad.gameObject.activeSelf && !ControlKeyboard.gameObject.activeSelf)
+        /*if (ControlGamepad.gameObject.activeSelf && !ControlKeyboard.gameObject.activeSelf)
         {
-            ControlGamepad.gameObject.SetActive(false);
-            ControlKeyboard.gameObject.SetActive(true);
+            //ControlGamepad.gameObject.SetActive(false);
+            //ControlKeyboard.gameObject.SetActive(true);
         }
         else if (!ControlGamepad.gameObject.activeSelf && ControlKeyboard.gameObject.activeSelf)
         {
-            ControlGamepad.gameObject.SetActive(false);
-            ControlKeyboard.gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        }
+            //ControlGamepad.gameObject.SetActive(false);
+            //ControlKeyboard.gameObject.SetActive(false);
+            //Time.timeScale = 1f;
+        }*/
     }
 
     private void SceneFadeIn()

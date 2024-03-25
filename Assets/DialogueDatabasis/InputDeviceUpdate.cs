@@ -16,7 +16,13 @@ public class InputDeviceUpdate : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        if(i != null && i != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         i = this;
+        
     }
 
     private void Start()
@@ -29,5 +35,7 @@ public class InputDeviceUpdate : MonoBehaviour
     private void Update()
     {
         InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
+        DialogueLua.SetVariable("InputDevice", InputDeviceManager.instance.inputDevice.ToString());
+        //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
     }
 }

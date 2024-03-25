@@ -39,7 +39,8 @@ public class ShowTips : MonoBehaviour
     void Start()
     {
         tipText.color = new Color(1, 1, 1, 0);
-        tipBackgroundPanel.color = new Color(0, 0, 0, 0);
+        if(tipBackgroundPanel != null)
+            tipBackgroundPanel.color = new Color(0, 0, 0, 0);
     }
     
     void Update()
@@ -71,14 +72,16 @@ public class ShowTips : MonoBehaviour
         }
         
         tipText.DOFade(1, 1);
-        tipBackgroundPanel.DOFade(1, 1);
+        if(tipBackgroundPanel != null)
+            tipBackgroundPanel.DOFade(1, 1);
         Debug.Log("Show tip");
     }
     
     void HideTip()
     {
         tipText.DOFade(0, 1);
-        tipBackgroundPanel.DOFade(0, 1);
+        if(tipBackgroundPanel != null)
+            tipBackgroundPanel.DOFade(0, 1);
         Debug.Log("Hide tip");
     }
 

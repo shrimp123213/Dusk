@@ -30,9 +30,13 @@ public class SceneManagerScript : MonoBehaviour
         StartCoroutine(ChangeSceneCoroutine(SceneIndex));
     }
 
-    public void ChangeSceneBySaveSystem(string SceneName, string spawnpointNameInDestinationScene)
+    public void ChangeSceneBySaveSystem(string sceneName, string spawnpointNameInDestinationScene)
     {
-        StartCoroutine(ChangeSceneCoroutineBySaveStem(SceneName,spawnpointNameInDestinationScene));
+        StartCoroutine(ChangeSceneCoroutineBySaveSystem(sceneName,spawnpointNameInDestinationScene));
+    }
+    public void ChangeSceneBySaveSystem(int sceneOffset, string spawnpointNameInDestinationScene)
+    {
+        StartCoroutine(ChangeSceneCoroutineBySaveSystem(sceneOffset,spawnpointNameInDestinationScene));
     }
     
 
@@ -72,7 +76,7 @@ public class SceneManagerScript : MonoBehaviour
         SceneManager.LoadScene(SceneIndex);
     }
     
-    public IEnumerator ChangeSceneCoroutineBySaveStem(string SceneName, string spawnpointNameInDestinationScene)
+    public IEnumerator ChangeSceneCoroutineBySaveSystem(string SceneName, string spawnpointNameInDestinationScene)
     {
         if(FadeImage == null || FadePanel == null)
         {
@@ -88,5 +92,27 @@ public class SceneManagerScript : MonoBehaviour
             yield return null;
         }
         SaveSystem.LoadScene(SceneName + "@" + spawnpointNameInDestinationScene);
+        if(string.IsNullOrEmpty(spawnpointNameInDestinationScene))
+            SceneManager.LoadScene(SceneName);
+        Debug.Log(SceneName + "@" + spawnpointNameInDestinationScene);
+    }
+    
+    public IEnumerator ChangeSceneCoroutineBySaveSystem(int sceneOffset, string spawnpointNameInDestinationScene)
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if(FadeImage == null || FadePanel == null)
+        {
+            Debug.LogError("FadeImage is null");
+            yield break;
+        }
+        
+        FadePanel.SetActive(true);
+        FadeImage.color = new Color(0f, 0f, 0f, 0f);
+        for (float i = 0f; i < 1f; i += Time.deltaTime)
+        {
+            FadeImage.color = new Color(0f, 0f, 0f, i);
+            yield return null;
+        }
+        SaveSystem.LoadScene(SceneManager.GetSceneByBuildIndex(sceneIndex + sceneOffset).name + "@" + spawnpointNameInDestinationScene);
     }
 }

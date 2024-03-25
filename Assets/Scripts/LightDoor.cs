@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class LightDoor : MonoBehaviour
 {
-    public int SceneOffset = -1;
-    
+    //public int sceneOffset = -1;
+    public string sceneName;
+    public string spawnpointNameInDestinationScene;
     private bool triggered = false;
     private int currentSceneIndex;
     private ScenePortal portal;
@@ -23,7 +24,7 @@ public class LightDoor : MonoBehaviour
     {
         if (other.CompareTag("Player") && !triggered)
         {
-            SceneManagerScript.i.ChangeSceneBySaveSystem("TutorialScene", "Tip_Entry");
+            SceneManagerScript.i.ChangeSceneBySaveSystem(sceneName, spawnpointNameInDestinationScene);
             
             //SceneManagerScript.i.ChangeScene(currentSceneIndex + SceneOffset);
             triggered = true;
