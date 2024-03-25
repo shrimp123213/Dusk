@@ -650,11 +650,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7b9abbc6-681a-41c8-a9e9-ab08d61bd8ab"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""id"": ""e5d26d35-1ab7-4a07-8815-d0d7e52c9f78"",
+                    ""path"": ""<Keyboard>/{Cancel}"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

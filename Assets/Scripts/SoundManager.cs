@@ -9,15 +9,29 @@ public class SoundManager : MonoBehaviour
     public Dictionary<string, AudioClip> Sounds = new Dictionary<string, AudioClip>();
 
     public AudioSource SoundSource;
+    public float volumeScale = 1f;
 
     private void Awake()
     {
-        SoundManager.i = this;
+        //SoundManager.i = this;
         AudioClip[] array = Resources.LoadAll<AudioClip>("Sounds");
         foreach (AudioClip audioClip in array)
         {
             Sounds.Add(audioClip.name, audioClip);
             //Debug.Log("Add");
+        }
+        
+        if(i == null)
+        {
+            i = this;
+        }
+        else
+        {
+            if(i != null)
+            {
+                Destroy(gameObject);
+            }
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -25,4 +39,9 @@ public class SoundManager : MonoBehaviour
     {
         SoundSource.PlayOneShot(Sounds[soundName]);
     }
+    
+    /*public void SetVolume(float volume)
+    {
+        volumeScale = volume;
+    }*/
 }

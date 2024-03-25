@@ -49,9 +49,14 @@ public class MainMenuButtons : MonoBehaviour
         //buttonSounds.Add("UI_Select");
         //buttonSounds.Add("UI_Cancel");
 
+        //MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
+    }
+
+    private void Start()
+    {
         MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
     }
-    
+
     public void StartGame()
     {
         currentButtonIndex = 0;
@@ -80,9 +85,17 @@ public class MainMenuButtons : MonoBehaviour
 
     public void Options()
     {
-        //mainMenu.SetActive(false);
-        //optionsMenu.SetActive(true);
+        mainMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        optionsMenu.GetComponent<Image>().DOFade(1, 1f);
+        
+        // 播放音效
+        SoundManager.i.PlaySound(confirmSound);
         Debug.Log("Options");
+        foreach (var selectable in mainMenu.GetComponentsInChildren<Selectable>())
+        {
+            selectable.interactable = false;
+        }
     }
 
     public void Credits()
