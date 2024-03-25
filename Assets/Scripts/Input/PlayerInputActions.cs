@@ -617,17 +617,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3afbd25a-994b-424f-bf52-830439feb135"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d4d21237-a7c3-4512-8a94-dc6eed576045"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
@@ -804,11 +793,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0a3baecb-244f-45f5-929a-7a98b3d69711"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""5e5ea756-b12a-4c81-b5f4-63adac071408"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": """",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

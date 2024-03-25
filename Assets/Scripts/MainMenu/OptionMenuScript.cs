@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class OptionMenuScript : MonoBehaviour
 {
     public GameObject keySettingObj;
-    public GameObject settingTipObj;
+    //public GameObject settingTipObj;
     public GameObject soundTipObj;
+    public Image[] settingTipImage;
     
     [Header("Panel")]
     public GameObject keySettingPanel;
@@ -28,13 +29,15 @@ public class OptionMenuScript : MonoBehaviour
     
     [Header("Image Objects")]
     private Image keySettingImage;
-    private Image settingTipImage;
+    
     private Image soundTipImage;
     
     private void Start()
     {
         keySettingImage = keySettingObj.GetComponent<Image>();
-        settingTipImage = settingTipObj.GetComponent<Image>();
+
+        //settingTipImage = settingTipObj.GetComponent<Image>();
+        
         soundTipImage = soundTipObj.GetComponent<Image>();
         
         if (InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Keyboard)
@@ -71,23 +74,37 @@ public class OptionMenuScript : MonoBehaviour
 
     public void SetTipKeyBoard(int index)
     {
-        settingTipImage.sprite = tipImageKeyBoard[index];
+        /*foreach (var i in settingTipImage)
+        {
+            i.sprite = tipImageKeyBoard[0];
+            i.SetNativeSize();
+        }*/
+        foreach (var i in settingTipImage)
+        {
+            i.sprite = tipImageKeyBoard[index];
+            i.SetNativeSize();
+        }
+        
         soundTipImage.sprite = tipImageKeyBoard[index+1];
         
         keySettingImage.sprite = tipImageKeyBoard[index+2];
         
-        settingTipImage.SetNativeSize();
+        
         soundTipImage.SetNativeSize();
     }
     
     public void SetTipGamePad(int index)
     {
-        settingTipImage.sprite = tipImageGamePad[index];
+        foreach (var i in settingTipImage)
+        {
+            i.sprite = tipImageGamePad[index];
+            i.SetNativeSize();
+        }
+        
         soundTipImage.sprite = tipImageGamePad[index+1];
         
         keySettingImage.sprite = tipImageGamePad[index+2];
         
-        settingTipImage.SetNativeSize();
         soundTipImage.SetNativeSize();
     }
     
@@ -106,12 +123,7 @@ public class OptionMenuScript : MonoBehaviour
     {
         keySettingPanel.SetActive(false);
         soundSettingPanel.SetActive(true);
-        /*foreach (var selectable in this.GetComponentsInChildren<Selectable>())
-        {
-            selectable.interactable = false;
-        }*/
-        musicSlider.interactable = true;
-        audioSlider.interactable = true;
+        
         musicSlider.Select();
     }
     
