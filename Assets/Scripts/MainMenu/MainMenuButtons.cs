@@ -28,6 +28,12 @@ public class MainMenuButtons : MonoBehaviour
     public string selectSound;
     public string cancelSound;
     
+    [Header("Hint")]
+    public Image hintImage;
+    public Sprite[] hintSprite;
+    
+    //public TextMeshProUGUI hintText;
+    
     private int currentButtonIndex;
     
     public void Awake()
@@ -55,6 +61,24 @@ public class MainMenuButtons : MonoBehaviour
     private void Start()
     {
         MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
+    }
+
+    private void Update()
+    {
+        
+        if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Keyboard)
+        {
+            hintImage.sprite = hintSprite[0];
+            hintImage.SetNativeSize();
+            //hintText.text = "<sprite=>選擇      確認";
+        }
+        else if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Gamepad)
+        {
+            hintImage.sprite = hintSprite[1];
+            hintImage.SetNativeSize();
+            //hintText.text = "選擇      確認";
+        }
+        
     }
 
     private void OnEnable()
