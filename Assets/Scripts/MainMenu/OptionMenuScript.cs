@@ -59,6 +59,9 @@ public class OptionMenuScript : MonoBehaviour
         {
             SetTipGamePad(0);
         }
+
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        audioSlider.value = PlayerPrefs.GetFloat("AudioVolume");
     }
 
     private void OnEnable()
@@ -100,7 +103,6 @@ public class OptionMenuScript : MonoBehaviour
         {
             currentPanel = mainMenuPanel;
         }
-        
     }
 
     public void SetTipKeyBoard(int index)
@@ -189,12 +191,16 @@ public class OptionMenuScript : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         mainMixer.SetFloat("MusicVolume", volume);
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+        
         Debug.Log(volume);
     }
     
     public void SetAudioVolume(float volume)
     {
         mainMixer.SetFloat("AudioVolume", volume);
+        PlayerPrefs.SetFloat("AudioVolume", audioSlider.value);
+        
         Debug.Log(volume);
     }
 }

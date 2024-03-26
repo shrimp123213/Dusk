@@ -26,7 +26,7 @@ public class Boss1 : Character
 
     public override void OnAwake()
     {
-        HealthMax = new CharacterStat(300f);
+        HealthMax = new CharacterStat(400f);
         Speed = new CharacterStat(3f);
         base.OnAwake();
         SliderHealthTop = GameObject.Find("BossHealthTop").GetComponent<Slider>();
@@ -82,7 +82,8 @@ public class Boss1 : Character
             }
             if (Renderer.skeleton.GetColor().a <= 0 && !AerutaDebug.i.Statistics.activeSelf)
             {
-                AerutaDebug.i.ShowStatistics();
+                //AerutaDebug.i.ShowStatistics();
+                SceneManagerScript.i.ChangeScene(0);
             }
         }
     }

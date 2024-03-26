@@ -32,7 +32,7 @@ public class EnemyMove : EnemyActionBase
     public override TaskStatus OnUpdate()
     {
         Animator Ani =this.transform.GetComponentInChildren<Animator>();
-        
+        this.timePassed += Time.deltaTime;
         if (AnimationName != null)
         {
             //Ani.Rebind();
@@ -58,6 +58,11 @@ public class EnemyMove : EnemyActionBase
             }
             this.SelfCharacter.Value.Xinput = this.speed * (float)this.way;
             this.timePassed += Time.deltaTime;
+        }
+        
+        if(this.timePassed >= this.MoveTime)
+        {
+            return TaskStatus.Failure;
         }
         return TaskStatus.Running;
     }
