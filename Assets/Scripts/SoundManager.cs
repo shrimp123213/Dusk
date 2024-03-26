@@ -39,9 +39,4 @@ public class SoundManager : MonoBehaviour
     {
         SoundSource.PlayOneShot(Sounds[soundName]);
     }
-    
-    /*public void SetVolume(float volume)
-    {
-        volumeScale = volume;
-    }*/
 }

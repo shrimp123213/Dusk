@@ -33,6 +33,8 @@ public class MusicManager : MonoBehaviour
             }
             DontDestroyOnLoad(gameObject);
         }
+        
+        
     }
 
     public void Play(string soundName)

@@ -57,6 +57,12 @@ public class MainMenuButtons : MonoBehaviour
         MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
     }
 
+    private void OnEnable()
+    {
+        currentButtonIndex = 0;
+        buttons[currentButtonIndex].Select();
+    }
+
     public void StartGame()
     {
         currentButtonIndex = 0;
@@ -85,7 +91,7 @@ public class MainMenuButtons : MonoBehaviour
 
     public void Options()
     {
-        mainMenu.SetActive(false);
+        //mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
         optionsMenu.GetComponent<Image>().DOFade(1, 1f);
         
@@ -94,7 +100,7 @@ public class MainMenuButtons : MonoBehaviour
         Debug.Log("Options");
         foreach (var selectable in mainMenu.GetComponentsInChildren<Selectable>())
         {
-            selectable.interactable = false;
+            //selectable.interactable = false;
         }
     }
 

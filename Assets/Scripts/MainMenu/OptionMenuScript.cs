@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class OptionMenuScript : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class OptionMenuScript : MonoBehaviour
     [Header("Panel")]
     public GameObject keySettingPanel;
     public GameObject soundSettingPanel;
+    public GameObject mainMenuPanel;
+    
     
     [Header("Button")]
     public Button keySettingButton;
     public Button soundSettingButton;
+    public Button startGameButton;
     
     [Header("Tip Image")]
     public Sprite[] tipImageKeyBoard;
@@ -27,15 +31,22 @@ public class OptionMenuScript : MonoBehaviour
     public Slider musicSlider;
     public Slider audioSlider;
     
+    [Header("Audio Mixer")]
+    public AudioMixer mainMixer;
+    
     [Header("Image Objects")]
     private Image keySettingImage;
-    
     private Image soundTipImage;
+    
+    [SerializeField]
+    private GameObject currentPanel;
+    
+    private GameObject optineMenuPanel;
     
     private void Start()
     {
         keySettingImage = keySettingObj.GetComponent<Image>();
-
+        
         //settingTipImage = settingTipObj.GetComponent<Image>();
         
         soundTipImage = soundTipObj.GetComponent<Image>();
@@ -53,6 +64,8 @@ public class OptionMenuScript : MonoBehaviour
     private void OnEnable()
     {
         keySettingButton.Select();
+        optineMenuPanel = this.gameObject;
+        currentPanel = optineMenuPanel;
     }
 
     private void Update()
@@ -70,6 +83,24 @@ public class OptionMenuScript : MonoBehaviour
         {
             Back();
         }
+
+        if (keySettingPanel.activeSelf)
+        {
+            currentPanel = keySettingPanel;
+        }
+        else if (soundSettingPanel.activeSelf)
+        {
+            currentPanel = soundSettingPanel;
+        }
+        else if (optineMenuPanel.activeSelf && !keySettingPanel.activeSelf && !soundSettingPanel.activeSelf)
+        {
+            currentPanel = optineMenuPanel;
+        }
+        else if (mainMenuPanel.activeSelf)
+        {
+            currentPanel = mainMenuPanel;
+        }
+        
     }
 
     public void SetTipKeyBoard(int index)
@@ -112,7 +143,8 @@ public class OptionMenuScript : MonoBehaviour
     {
         keySettingPanel.SetActive(true);
         soundSettingPanel.SetActive(false);
-
+        
+        currentPanel = keySettingPanel;
         foreach (var selectable in this.GetComponentsInChildren<Selectable>())
         {
             selectable.interactable = false;
@@ -124,30 +156,45 @@ public class OptionMenuScript : MonoBehaviour
         keySettingPanel.SetActive(false);
         soundSettingPanel.SetActive(true);
         
+        currentPanel = soundSettingPanel;
+        
         musicSlider.Select();
     }
     
     public void Back()
     {
-        keySettingPanel.SetActive(false);
-        soundSettingPanel.SetActive(false);
-        
-        foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+        if (currentPanel == keySettingPanel || currentPanel == soundSettingPanel)
         {
-            selectable.interactable = true;
+            keySettingPanel.SetActive(false);
+            soundSettingPanel.SetActive(false);
+            foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+            {
+                selectable.interactable = true;
+            }
+            keySettingButton.Select();
         }
-        keySettingButton.Select();
+        
+        if (currentPanel == optineMenuPanel)
+        {
+            this.gameObject.SetActive(false);
+            mainMenuPanel.SetActive(true);
+            foreach (var selectable in mainMenuPanel.GetComponentsInChildren<Selectable>())
+            {
+                selectable.interactable = true;
+            }
+            startGameButton.Select();
+        }
     }
     
     public void SetMusicVolume(float volume)
     {
-        //MusicManager.i.SetVolume(volume);
+        mainMixer.SetFloat("MusicVolume", volume);
         Debug.Log(volume);
     }
     
     public void SetAudioVolume(float volume)
     {
-        //SoundManager.i.SetVolume(volume);
+        mainMixer.SetFloat("AudioVolume", volume);
         Debug.Log(volume);
     }
 }
