@@ -1073,8 +1073,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u683C\u64CB\uFF1A\u5728\u6575\u4EBA\u653B\u64CA\u77AC\u9593\uFF0C\u6309\u4E0B
-          <sprite=7> \u9032\u884C\u683C\u64CB\u3002\n\u4F9D\u7167\u73A9\u5BB6\u4F7F\u51FA\u683C\u64CB\u7684\u6642\u6A5F\u6703\u89F8\u767C\u4E0D\u540C\u683C\u64CB\u6548\u679C\u3002\n\n\u5B8C\u7F8E\u683C\u64CB\uFF1A\u4E0D\u6703\u88AB\u64CA\u9000\u3002\u4E00\u822C\u683C\u64CB\uFF1A\u73A9\u5BB6\u6703\u88AB\u64CA\u9000\u3002"
+        value: "<color=#00FFFF>\u683C\u64CB</color>\uFF1A\u5728\u6575\u4EBA\u653B\u64CA\u77AC\u9593\uFF0C\u6309\u4E0B
+          <sprite=7> \u9032\u884C\u683C\u64CB\u3002\n\u4F9D\u7167\u73A9\u5BB6\u4F7F\u51FA\u683C\u64CB\u7684\u6642\u6A5F\u6703\u89F8\u767C\u4E0D\u540C\u683C\u64CB\u6548\u679C\u3002\n\n<color=orange>\u5B8C\u7F8E\u683C\u64CB</color>\uFF1A\u4E0D\u6703\u88AB\u64CA\u9000\u3002\u4E00\u822C\u683C\u64CB\uFF1A\u73A9\u5BB6\u6703\u88AB\u64CA\u9000\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1123,8 +1123,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u683C\u64CB\uFF1A\u5728\u6575\u4EBA\u653B\u64CA\u77AC\u9593\uFF0C\u6309\u4E0B
-          <sprite=14> \u9032\u884C\u683C\u64CB\u3002\n\u4F9D\u7167\u73A9\u5BB6\u4F7F\u51FA\u683C\u64CB\u7684\u6642\u6A5F\u6703\u89F8\u767C\u4E0D\u540C\u683C\u64CB\u6548\u679C\u3002\n\n\u5B8C\u7F8E\u683C\u64CB\uFF1A\u4E0D\u6703\u88AB\u64CA\u9000\u3002\u4E00\u822C\u683C\u64CB\uFF1A\u73A9\u5BB6\u6703\u88AB\u64CA\u9000\u3002"
+        value: "<color=#00FFFF>\u683C\u64CB</color>\uFF1A\u5728\u6575\u4EBA\u653B\u64CA\u77AC\u9593\uFF0C\u6309\u4E0B
+          <sprite=14> \u9032\u884C\u683C\u64CB\u3002\n\u4F9D\u7167\u73A9\u5BB6\u4F7F\u51FA\u683C\u64CB\u7684\u6642\u6A5F\u6703\u89F8\u767C\u4E0D\u540C\u683C\u64CB\u6548\u679C\u3002\n\n<color=orange>\u5B8C\u7F8E\u683C\u64CB</color>\uFF1A\u4E0D\u6703\u88AB\u64CA\u9000\u3002\u4E00\u822C\u683C\u64CB\uFF1A\u73A9\u5BB6\u6703\u88AB\u64CA\u9000\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1265,7 +1265,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -1424,7 +1424,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -1436,8 +1436,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u86FB\u8B8A\u69FD\uFF1A\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u96C6\u6EFF\u6642\u6309\u4E0B
-          <sprite=2> \u8F49\u63DB\u578B\u614B\u3002"
+        value: "\u86FB\u8B8A\u69FD\uFF1A\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u8490\u96C6\u9032\u5EA6\u53EF\u4EE5\u5F9E\u5DE6\u4E0A\u89D2\u86FB\u8B8A\u69FD\u67E5\u770B\u3002\u96C6\u6EFF\u6642\u6309\u4E0B
+          <sprite=2> \u53EF\u8F49\u63DB\u578B\u614B\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1474,7 +1474,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -1486,8 +1486,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u86FB\u8B8A\u69FD\uFF1A\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u96C6\u6EFF\u6642\u6309\u4E0B
-          <sprite=19> \u8F49\u63DB\u578B\u614B\u3002"
+        value: "\u86FB\u8B8A\u69FD\uFF1A\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u8490\u96C6\u9032\u5EA6\u53EF\u4EE5\u5F9E\u5DE6\u4E0A\u89D2\u86FB\u8B8A\u69FD\u67E5\u770B\u3002\u96C6\u6EFF\u6642\u6309\u4E0B
+          <sprite=19> \u53EF\u8F49\u63DB\u578B\u614B\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1628,7 +1628,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -1640,7 +1640,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u86FB\u8B8A\uFF1A\u5207\u63DB\u578B\u614B\u5F8C\uFF0C\u7DAD\u6301\u578B\u614B\u671F\u9593\u6703\u9010\u6F38\u6D88\u8017\u86FB\u8B8A\u69FD\uFF0C\u53EF\u900F\u904E\u5B8C\u7F8E\u683C\u64CB\u5EF6\u9577\u86FB\u8B8A\u6642\u9593\u3002\n\u86FB\u8B8A\u5F8C\u7684\u653B\u64CA\u50B7\u5BB3\u3001\u79FB\u52D5\u901F\u5EA6\u90FD\u6703\u63D0\u5347\u3002"
+        value: "\u86FB\u8B8A\uFF1A\u86FB\u8B8A\u5F8C\u7684\u653B\u64CA\u50B7\u5BB3\u3001\u79FB\u52D5\u901F\u5EA6\u90FD\u6703\u63D0\u5347\u3002\n\u9032\u5165\u86FB\u8B8A\u72C0\u614B\u5F8C\uFF0C\u6703\u9010\u6F38\u6D88\u8017\u86FB\u8B8A\u69FD\uFF0C\u53EF\u900F\u904E\u5B8C\u7F8E\u683C\u64CB\u5EF6\u9577\u86FB\u8B8A\u6642\u9593\u3002"
         type: 0
         typeString: 
       - title: Sequence

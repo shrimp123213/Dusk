@@ -147,10 +147,10 @@ public class OptionMenuScript : MonoBehaviour
         soundSettingPanel.SetActive(false);
         
         currentPanel = keySettingPanel;
-        foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+        /*foreach (var selectable in this.GetComponentsInChildren<Selectable>())
         {
             selectable.interactable = false;
-        }
+        }*/
     }
     
     public void SoundSetting()

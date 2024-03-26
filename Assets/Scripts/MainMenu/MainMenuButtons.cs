@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
@@ -32,6 +33,9 @@ public class MainMenuButtons : MonoBehaviour
     public Image hintImage;
     public Sprite[] hintSprite;
     
+    [Header("Audio")]
+    public AudioMixer mainMixer;
+    
     //public TextMeshProUGUI hintText;
     
     private int currentButtonIndex;
@@ -51,6 +55,9 @@ public class MainMenuButtons : MonoBehaviour
             buttonAni[i] = buttons[i].GetComponent<Animator>(); // 獲取每個按鈕的動畫控制器
         }
 
+        mainMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
+        mainMixer.SetFloat("AudioVolume", PlayerPrefs.GetFloat("AudioVolume"));
+        
         //buttonSounds.Add("UI_Confirm"); // 將按鈕音效加入按鈕音效清單
         //buttonSounds.Add("UI_Select");
         //buttonSounds.Add("UI_Cancel");
