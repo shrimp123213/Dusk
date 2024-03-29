@@ -70,7 +70,205 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 3
+    fields:
+    - title: Name
+      value: "\u79FB\u52D5"
+      type: 0
       typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 4
+    fields:
+    - title: Name
+      value: "\u8DF3\u8E8D"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 5
+    fields:
+    - title: Name
+      value: "\u885D\u523A"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 6
+    fields:
+    - title: Name
+      value: "\u653B\u64CA"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 7
+    fields:
+    - title: Name
+      value: "\u683C\u64CB"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 8
+    fields:
+    - title: Name
+      value: "\u53CD\u64CA"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 9
+    fields:
+    - title: Name
+      value: "\u86FB\u8B8A\u69FD"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 10
+    fields:
+    - title: Name
+      value: "\u86FB\u8B8A"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 11
+    fields:
+    - title: Name
+      value: "\u56DE\u5FA9"
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
     - title: IsPlayer
       value: False
       type: 2
@@ -106,6 +304,20 @@ MonoBehaviour:
       value: Joystick
       type: 0
       typeString: CustomFieldType_Text
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+  - id: 3
+    fields:
+    - title: Name
+      value: TutorialName
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: -1
+      type: 5
+      typeString: CustomFieldType_Actor
     - title: Description
       value: 
       type: 0
@@ -168,12 +380,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 3
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -229,19 +441,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 3
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u79FB\u52D5\uFF1A\u5DE6\u8611\u83C7\u982D\u9032\u884C\u79FB\u52D5\u3002"
+        value: "\u5DE6\u8611\u83C7\u982D\u9032\u884C\u79FB\u52D5\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -278,19 +490,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 3
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u79FB\u52D5\uFF1A <sprite=8> <sprite=9>\u9032\u884C\u79FB\u52D5\u3002"
+        value: " <sprite=8> <sprite=9>\u9032\u884C\u79FB\u52D5\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -313,7 +525,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 354
-        y: 98
+        y: 99
         width: 160
         height: 30
     entryGroups: []
@@ -376,12 +588,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 4
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -400,7 +612,7 @@ MonoBehaviour:
       isGroup: 0
       nodeColor: 
       delaySimStatus: 0
-      falseConditionAction: 
+      falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks:
       - originConversationID: 2
@@ -437,19 +649,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
-        type: 5
+        value: 4
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u8DF3\u8E8D\uFF1A<sprite=1> \u9032\u884C\u8DF3\u8E8D\uFF0C\u6EEF\u7A7A\u6642\u518D\u6B21\u4F7F\u7528\u53EF\u9032\u884C\u4E8C\u6BB5\u8DF3\u3002"
+        value: "<sprite=1> \u9032\u884C\u8DF3\u8E8D\uFF0C\u6EEF\u7A7A\u6642\u518D\u6B21\u4F7F\u7528\u53EF\u9032\u884C\u4E8C\u6BB5\u8DF3\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -486,19 +698,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 4
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u8DF3\u8E8D\uFF1A<sprite=21> \u9032\u884C\u8DF3\u8E8D\uFF0C\u6EEF\u7A7A\u6642\u518D\u6B21\u4F7F\u7528\u53EF\u9032\u884C\u4E8C\u6BB5\u8DF3\u3002"
+        value: "<sprite=21> \u9032\u884C\u8DF3\u8E8D\uFF0C\u6EEF\u7A7A\u6642\u518D\u6B21\u4F7F\u7528\u53EF\u9032\u884C\u4E8C\u6BB5\u8DF3\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -584,12 +796,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -645,19 +857,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u885D\u523A\uFF1A<sprite=6> \u5411\u79FB\u52D5\u65B9\u5411\u885D\u523A\u3002"
+        value: "<sprite=6> \u5411\u79FB\u52D5\u65B9\u5411\u885D\u523A\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -694,19 +906,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
-        type: 5
+        value: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u885D\u523A\uFF1A<sprite=12> \u5411\u79FB\u52D5\u65B9\u5411\u885D\u523A\u3002"
+        value: "<sprite=12> \u5411\u79FB\u52D5\u65B9\u5411\u885D\u523A\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -792,12 +1004,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 6
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -853,19 +1065,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 6
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u653B\u64CA\uFF1A<sprite=0> \u9032\u884C\u653B\u64CA\u3002\u653B\u64CA\u547D\u4E2D\u6575\u4EBA\u6642\uFF0C\u7372\u5F97\u86FB\u8B8A\u503C\u3002"
+        value: "<sprite=0> \u9032\u884C\u653B\u64CA\u3002\u653B\u64CA\u547D\u4E2D\u6575\u4EBA\u6642\uFF0C\u7372\u5F97\u86FB\u8B8A\u503C\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -902,19 +1114,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 6
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u653B\u64CA\uFF1A<sprite=13> \u9032\u884C\u653B\u64CA\u3002\u653B\u64CA\u547D\u4E2D\u6575\u4EBA\u6642\uFF0C\u7372\u5F97\u86FB\u8B8A\u503C\u3002"
+        value: "<sprite=13> \u9032\u884C\u653B\u64CA\u3002\u653B\u64CA\u547D\u4E2D\u6575\u4EBA\u6642\uFF0C\u7372\u5F97\u86FB\u8B8A\u503C\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1000,12 +1212,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 7
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1061,12 +1273,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 7
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1111,12 +1323,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 7
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1210,12 +1422,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 8
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1265,19 +1477,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 8
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u53CD\u64CA\uFF1A\u5728\u5B8C\u7F8E\u683C\u64CB\u7684\u77AC\u9593\u4F7F\u7528\u653B\u64CA\uFF0C\u53EF\u89F8\u767C\u53CD\u64CA\u9020\u6210\u8F03\u9AD8\u50B7\u5BB3\uFF0C\u4E26\u7372\u5F97\u8F03\u591A\u86FB\u8B8A\u503C\u3002"
+        value: "\u5728\u5B8C\u7F8E\u683C\u64CB\u7684\u77AC\u9593\u4F7F\u7528\u653B\u64CA\uFF0C\u53EF\u89F8\u767C\u53CD\u64CA\u9020\u6210\u8F03\u9AD8\u50B7\u5BB3\uFF0C\u4E26\u7372\u5F97\u8F03\u591A\u86FB\u8B8A\u503C\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1363,12 +1575,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 9
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1424,19 +1636,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 9
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u86FB\u8B8A\u69FD\uFF1A\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u8490\u96C6\u9032\u5EA6\u53EF\u4EE5\u5F9E\u5DE6\u4E0A\u89D2\u86FB\u8B8A\u69FD\u67E5\u770B\u3002\u96C6\u6EFF\u6642\u6309\u4E0B
+        value: "\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u8490\u96C6\u9032\u5EA6\u53EF\u4EE5\u5F9E\u5DE6\u4E0A\u89D2\u86FB\u8B8A\u69FD\u67E5\u770B\u3002\u96C6\u6EFF\u6642\u6309\u4E0B
           <sprite=2> \u53EF\u8F49\u63DB\u578B\u614B\u3002"
         type: 0
         typeString: 
@@ -1474,19 +1686,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 9
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u86FB\u8B8A\u69FD\uFF1A\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u8490\u96C6\u9032\u5EA6\u53EF\u4EE5\u5F9E\u5DE6\u4E0A\u89D2\u86FB\u8B8A\u69FD\u67E5\u770B\u3002\u96C6\u6EFF\u6642\u6309\u4E0B
+        value: "\u653B\u64CA\u6575\u4EBA\u7372\u5F97\u86FB\u8B8A\u503C\uFF0C\u8490\u96C6\u9032\u5EA6\u53EF\u4EE5\u5F9E\u5DE6\u4E0A\u89D2\u86FB\u8B8A\u69FD\u67E5\u770B\u3002\u96C6\u6EFF\u6642\u6309\u4E0B
           <sprite=19> \u53EF\u8F49\u63DB\u578B\u614B\u3002"
         type: 0
         typeString: 
@@ -1573,12 +1785,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 10
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1628,19 +1840,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 10
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u86FB\u8B8A\uFF1A\u86FB\u8B8A\u5F8C\u7684\u653B\u64CA\u50B7\u5BB3\u3001\u79FB\u52D5\u901F\u5EA6\u90FD\u6703\u63D0\u5347\u3002\n\u9032\u5165\u86FB\u8B8A\u72C0\u614B\u5F8C\uFF0C\u6703\u9010\u6F38\u6D88\u8017\u86FB\u8B8A\u69FD\uFF0C\u53EF\u900F\u904E\u5B8C\u7F8E\u683C\u64CB\u5EF6\u9577\u86FB\u8B8A\u6642\u9593\u3002"
+        value: "\u86FB\u8B8A\u5F8C\u7684\u653B\u64CA\u50B7\u5BB3\u3001\u79FB\u52D5\u901F\u5EA6\u90FD\u6703\u63D0\u5347\u3002\n\u9032\u5165\u86FB\u8B8A\u72C0\u614B\u5F8C\uFF0C\u6703\u9010\u6F38\u6D88\u8017\u86FB\u8B8A\u69FD\uFF0C\u53EF\u900F\u904E\u5B8C\u7F8E\u683C\u64CB\u5EF6\u9577\u86FB\u8B8A\u6642\u9593\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1726,12 +1938,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
-        type: 5
+        value: 11
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
         value: -1
-        type: 5
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
@@ -1787,19 +1999,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
-        type: 5
+        value: 11
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u56DE\u5FA9\uFF1A<sprite=5> \u6D88\u8017 <sprite=22> \uFF0C\u7DE9\u6162\u56DE\u5FA9\u8840\u91CF\u3002"
+        value: "<sprite=5> \u6D88\u8017 <sprite=22> \uFF0C\u7DE9\u6162\u56DE\u5FA9\u8840\u91CF\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1836,19 +2048,19 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
-        type: 5
+        value: 11
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
-        type: 5
+        value: -1
+        type: 0
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u56DE\u5FA9\uFF1A<sprite=16> \u6D88\u8017 <sprite=22> \uFF0C\u7DE9\u6162\u56DE\u5FA9\u8840\u91CF\u3002"
+        value: "<sprite=16> \u6D88\u8017 <sprite=22> \uFF0C\u7DE9\u6162\u56DE\u5FA9\u8840\u91CF\u3002"
         type: 0
         typeString: 
       - title: Sequence

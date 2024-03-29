@@ -14,6 +14,7 @@ public class InputDeviceUpdate : MonoBehaviour
     public PlayerInput playerInput;
     
     public InputType inputType;
+    
     public enum InputType
     {
         None,
@@ -31,30 +32,47 @@ public class InputDeviceUpdate : MonoBehaviour
         {
             if(i != null)
             {
-                Destroy(gameObject);
+                Destroy(this.gameObject);
             }
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
     private void Start()
     {
-        playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        //playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
         //InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
         //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
     }
     
     private void Update()
     {
+        OnDeviceChanged();
+        /*playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
         inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
-        if(GameObject.Find("Dialogue Manager") != null)
+        if (GameObject.Find("Dialogue Manager") != null)
         {
-            InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
+            InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad"
+                ? InputDevice.Joystick
+                : InputDevice.Keyboard;
+            DialogueLua.SetVariable("InputDevice", InputDeviceManager.instance.inputDevice.ToString());
+        }*/
+        //InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
+
+        //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
+    }
+    
+    public void OnDeviceChanged()
+    {
+        playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
+        if (GameObject.Find("Dialogue Manager") != null)
+        {
+            InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad"
+                ? InputDevice.Joystick
+                : InputDevice.Keyboard;
             DialogueLua.SetVariable("InputDevice", InputDeviceManager.instance.inputDevice.ToString());
         }
         
-        //InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
-        
-        //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
     }
 }

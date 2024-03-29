@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
     
     protected Collider2D Collider;
     protected Animator anim;
+    protected ParticleSystem ps;
     
     public enum Type
     {
@@ -36,6 +37,7 @@ public class Bullet : MonoBehaviour
         Rigid = GetComponent<Rigidbody2D>();
         Collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        ps=GetComponentInChildren<ParticleSystem>();
     }
     
     public virtual void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
@@ -51,7 +53,8 @@ public class Bullet : MonoBehaviour
         {
             StartCoroutine(ButtleStartUp(_delay));
         }
-        
+        if(ps != null)
+            ps.Play();
     }
     
     private void FixedUpdate()
@@ -66,6 +69,8 @@ public class Bullet : MonoBehaviour
             case Type.GSpear:
                 break;
         }
+
+        
     }
 
     public virtual void Death()

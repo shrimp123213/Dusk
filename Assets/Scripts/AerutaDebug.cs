@@ -177,7 +177,7 @@ public class AerutaDebug : MonoBehaviour
         FadeImage.color = new Color(0, 0, 0, FadeImage.color.a + 0.02f);
         if (FadeImage.color.a >= 1)
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

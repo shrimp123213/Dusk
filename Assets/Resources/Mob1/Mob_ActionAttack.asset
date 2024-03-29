@@ -23,8 +23,8 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 20
-    KeyFrameEnd: 24
+  - KeyFrameFrom: 40
+    KeyFrameEnd: 44
     Offset: {x: 0.5, y: 0.5, z: 0}
     Range: {x: 1, y: 1}
     Angle: 0
