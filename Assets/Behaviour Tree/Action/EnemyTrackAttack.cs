@@ -79,7 +79,7 @@ public class EnemyTrackAttack : EnemyStartAction
                 }
                 else
                 {
-                    actionMovement.FinishTime = maxTime;
+                    //actionMovement.FinishTime = maxTime;
                 }
             }
             tracked = true;

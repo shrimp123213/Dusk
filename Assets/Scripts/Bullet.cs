@@ -23,7 +23,8 @@ public class Bullet : MonoBehaviour
     public enum Type
     {
         Bullet,
-        GSpear
+        GSpear,
+        Laser
     }
     public Type TypeOfBullet;
     
@@ -33,6 +34,11 @@ public class Bullet : MonoBehaviour
     protected bool Awaked = false;
 
     private void Awake()
+    {
+        OnAwake();
+    }
+
+    public virtual void OnAwake()
     {
         Rigid = GetComponent<Rigidbody2D>();
         Collider = GetComponent<Collider2D>();
@@ -59,6 +65,11 @@ public class Bullet : MonoBehaviour
     
     private void FixedUpdate()
     {
+        OnFixedUpdate();
+    }
+    
+    public virtual void OnFixedUpdate()
+    {
         if(!Awaked)
             return;
         switch (TypeOfBullet)  
@@ -68,9 +79,9 @@ public class Bullet : MonoBehaviour
                 break;  
             case Type.GSpear:
                 break;
+            case Type.Laser:
+                break;
         }
-
-        
     }
 
     public virtual void Death()

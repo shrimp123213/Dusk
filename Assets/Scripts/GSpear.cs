@@ -20,21 +20,9 @@ public class GSpear : Bullet
         Instantiate(Omen, new Vector3(transform.position.x, offsetY, 0), Quaternion.Euler(0, 0, 0));
         //Destroy(Omen, 0.5f);
     }
-    
-    private void FixedUpdate()
+    public override void OnFixedUpdate()
     {
-        if(!Awaked)
-            return;
-        switch (TypeOfBullet)  
-        {  
-            case Type.Bullet:
-                Rigid.velocity = transform.right * Speed;  
-                break;  
-            case Type.GSpear:
-                break;
-            
-        }
-
+        base.OnFixedUpdate();
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             Death();

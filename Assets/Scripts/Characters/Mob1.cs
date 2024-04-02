@@ -13,10 +13,9 @@ public class Mob1 : Character
 {
     public override void OnAwake()
     {
-        base.OnAwake();
         HealthMax = new CharacterStat(15f);
         Speed = new CharacterStat(1.5f);
-        
+        base.OnAwake();
         Renderer = transform.GetChild(0).GetComponent<SkeletonMecanim>();
     }
 

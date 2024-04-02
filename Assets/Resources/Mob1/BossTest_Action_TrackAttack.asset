@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: BossTest_Action_TrackAttack
   DisplayName: 
   soundEffectName: 
-  _AnimationKey: JumpBack
+  _AnimationKey: TrackAttack
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -23,9 +23,9 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 80
-    KeyFrameEnd: 120
-    Offset: {x: 3, y: 1.5, z: 0}
+  - KeyFrameFrom: 74
+    KeyFrameEnd: 114
+    Offset: {x: 0, y: 1.5, z: 0}
     Range: {x: 5, y: 2.5}
     Angle: 0
     HitMax: 0
@@ -37,7 +37,37 @@ MonoBehaviour:
   ClearStoredMoves: 0
   Links: []
   Moves:
-  - KeyFrame: 40
+  - KeyFrame: 41
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: -3, y: 8}
+    FinishTime: 0.35
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  - KeyFrame: 73
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -53,8 +83,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -62,38 +92,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 3, y: 8}
-    FinishTime: 0.5
-    CanEvade: 0
-    StartEvadeFrame: 0
-    EndEvadeFrame: 0
-  - KeyFrame: 70
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    TargetDistance: {x: 13.385773, y: -8}
-    FinishTime: 0.75
+    TargetDistance: {x: 8.859985, y: -8}
+    FinishTime: 0.7
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0

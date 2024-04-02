@@ -23,9 +23,9 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 80
-    KeyFrameEnd: 100
-    Offset: {x: 3, y: 1.5, z: 0}
+  - KeyFrameFrom: 60
+    KeyFrameEnd: 85
+    Offset: {x: 0, y: 1.5, z: 0}
     Range: {x: 5, y: 2.5}
     Angle: 0
     HitMax: 0
@@ -37,15 +37,15 @@ MonoBehaviour:
   ClearStoredMoves: 0
   Links: []
   Moves:
-  - KeyFrame: 40
+  - KeyFrame: 41
     Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -53,8 +53,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -62,12 +62,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: -3, y: 5}
-    FinishTime: 0.3
+    TargetDistance: {x: -3, y: 3}
+    FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
-  - KeyFrame: 60
+  - KeyFrame: 65
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -92,8 +92,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: -3, y: -5}
-    FinishTime: 0.3
+    TargetDistance: {x: -3, y: -3}
+    FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0

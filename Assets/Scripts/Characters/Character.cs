@@ -822,6 +822,8 @@ public class Character : MonoBehaviour, IHitable
         return value;
     }
 
+    
+
 }
 
 public enum CharacterStates
