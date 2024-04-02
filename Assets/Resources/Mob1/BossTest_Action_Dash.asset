@@ -24,9 +24,9 @@ MonoBehaviour:
   SetCooldowns: []
   AttackSpots:
   - KeyFrameFrom: 41
-    KeyFrameEnd: 101
-    Offset: {x: 2, y: 1.5, z: 0}
-    Range: {x: 6, y: 2.5}
+    KeyFrameEnd: 62
+    Offset: {x: 1, y: 1.5, z: 0}
+    Range: {x: 4, y: 2.5}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
@@ -83,18 +83,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     TargetDistance: {x: 15, y: 0}
-    FinishTime: 1
+    FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0

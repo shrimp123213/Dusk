@@ -74,8 +74,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -92,8 +92,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 8.859985, y: -8}
-    FinishTime: 0.7
+    TargetDistance: {x: 6.7118225, y: -8}
+    FinishTime: 0.26779556
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0

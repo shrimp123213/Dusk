@@ -8,6 +8,12 @@ public class EnemyTrackAttack : EnemyStartAction
 {
     public bool fixedTime = false;
     
+    // 使用Lerp計算位移時間
+    public float minDistance = 0f; // 最小距離
+    public float maxDistance = 10f; // 最大距離
+    public float minTime = 0.1f; // 最小時間
+    public float maxTime = 0.7f; // 最大時間
+    
     private Vector2 targetDistance;
 
     private ActionMovement actionMovement;
@@ -62,12 +68,6 @@ public class EnemyTrackAttack : EnemyStartAction
                 float distance = Mathf.Abs(this.Target.Value.transform.position.x - this.SelfCharacter.Value.transform.position.x);
                 targetDistance = new Vector2((this.Target.Value.transform.position.x - this.SelfCharacter.Value.transform.position.x) * facing, actionMovement.TargetDistance.y);
                 actionMovement.TargetDistance = targetDistance;
-
-                // 使用Lerp計算位移時間
-                float minDistance = 0f; // 最小距離
-                float maxDistance = 10f; // 最大距離
-                float minTime = 0.25f; // 最小時間
-                float maxTime = 0.75f; // 最大時間
                 
                 if (fixedTime)
                 {
