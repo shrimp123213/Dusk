@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass
-  m_Shader: {fileID: -6465566751694194690, guid: dce1582f293a1ee41a560f85a0a3d2ff, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: aae070e0f96ac8e4ab9504ff56d4b280, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -56,4 +56,6 @@ Material:
     - Vector1_e19a6f73e9824493998ba7bebae9c03c: 0.05
     m_Colors:
     - Vector2_2ad9dffd23234809bbb6d55338af2214: {r: 1, g: 0, b: 0, a: 0}
+    - _FogColor: {r: 0, g: 0, b: 0, a: 0}
+    - _SpriteColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

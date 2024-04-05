@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Name: BossTest_Action_JumpBack
+  m_EditorClassIdentifier: 
+  Id: BossTest_Action_JumpBack
+  DisplayName: 
+  soundEffectName: 
+  _AnimationKey: JumpBack
+  EnableJumpVersion: 0
+  InterruptLevel: 0
+  InterruptSameLevel: 0
+  DamageRatio: 1
+  DamageType: 0
+  SetCooldowns: []
+  AttackSpots:
+  - KeyFrameFrom: 60
+    KeyFrameEnd: 85
+    Offset: {x: 0, y: 1.5, z: 0}
+    Range: {x: 5, y: 2.5}
+    Angle: 0
+    HitMax: 0
+    SpawnOmen: 1
+    SpawnKeyFrame: 10
+  SuckEffect: 0
+  CanInterruptAction: 1
+  CanTriggerMark: 0
+  ClearStoredMoves: 0
+  Links: []
+  Moves:
+  - KeyFrame: 41
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: -3, y: 3}
+    FinishTime: 0.35
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  - KeyFrame: 65
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: -3, y: -3}
+    FinishTime: 0.35
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  Toggles: []
+  Teleports: []
+  ApplyForce: {x: 0, y: 0}
+  ForceBasedByPos: 0
+  UsePopup: 0
+  TimeSlowAmount: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
+  EvadeEnergyRecovery: 0
+  EndActionFloatTime: 0
+  GroundOnly: 0
+  ResetCanAttack: 0
+  IsTriggered: 
+  IsTeleported: 
+  HitStun: 0.25
+  IsMovableX: 0
+  IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 0
