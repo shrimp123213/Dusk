@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
     
     protected Collider2D Collider;
     protected Animator anim;
+    [SerializeField]
     protected ParticleSystem ps;
     
     public enum Type
@@ -43,7 +44,7 @@ public class Bullet : MonoBehaviour
         Rigid = GetComponent<Rigidbody2D>();
         Collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
-        ps=GetComponentInChildren<ParticleSystem>();
+        ps = GetComponent<ParticleSystem>();
     }
     
     public virtual void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
@@ -58,6 +59,7 @@ public class Bullet : MonoBehaviour
         foreach (var data in _danmakuData.bulletSpawnData)
         {
             StartCoroutine(ButtleStartUp(_delay));
+            
         }
         if(ps != null)
             ps.Play();
