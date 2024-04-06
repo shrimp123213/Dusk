@@ -30,7 +30,8 @@ public class MainMenuButtons : MonoBehaviour
     public string cancelSound;
     
     [Header("Hint")]
-    public Image hintImage;
+    public Image C1;
+    public Image C2;
     public Sprite[] hintSprite;
     
     [Header("Audio")]
@@ -39,6 +40,8 @@ public class MainMenuButtons : MonoBehaviour
     //public TextMeshProUGUI hintText;
     
     private int currentButtonIndex;
+    
+    private GridLayoutGroup hintGridLayoutGroup;
     
     public void Awake()
     {
@@ -54,15 +57,16 @@ public class MainMenuButtons : MonoBehaviour
         {
             buttonAni[i] = buttons[i].GetComponent<Animator>(); // 獲取每個按鈕的動畫控制器
         }
-
-        mainMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
-        mainMixer.SetFloat("AudioVolume", PlayerPrefs.GetFloat("AudioVolume"));
+        //mainMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
+        //mainMixer.SetFloat("AudioVolume", PlayerPrefs.GetFloat("AudioVolume"));
         
         //buttonSounds.Add("UI_Confirm"); // 將按鈕音效加入按鈕音效清單
         //buttonSounds.Add("UI_Select");
         //buttonSounds.Add("UI_Cancel");
 
         //MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
+
+        hintGridLayoutGroup = C1.gameObject.GetComponentInParent<GridLayoutGroup>();
     }
 
     private void Start()
@@ -73,16 +77,22 @@ public class MainMenuButtons : MonoBehaviour
     private void Update()
     {
         
-        if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Keyboard)
+        if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Gamepad)
         {
-            hintImage.sprite = hintSprite[0];
-            hintImage.SetNativeSize();
+            hintGridLayoutGroup.cellSize = new Vector2(169, 51);
+            C1.sprite = hintSprite[0];
+            C1.SetNativeSize();
+            C2.sprite = hintSprite[1];
+            C2.SetNativeSize();
             //hintText.text = "<sprite=>選擇      確認";
         }
-        else if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Gamepad)
+        else if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Keyboard)
         {
-            hintImage.sprite = hintSprite[1];
-            hintImage.SetNativeSize();
+            hintGridLayoutGroup.cellSize = new Vector2(180, 51);
+            C1.sprite = hintSprite[2];
+            C1.SetNativeSize();
+            C2.sprite = hintSprite[3];
+            C2.SetNativeSize();
             //hintText.text = "選擇      確認";
         }
         

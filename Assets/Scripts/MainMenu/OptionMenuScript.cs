@@ -10,18 +10,25 @@ public class OptionMenuScript : MonoBehaviour
     public GameObject keySettingObj;
     //public GameObject settingTipObj;
     public GameObject soundTipObj;
-    public Image[] settingTipImage;
+    [Header("SettingTipImage")]
+    public Image[] C1;
+    public Image[] C2;
+    public Image[] C3;
     
     [Header("Panel")]
     public GameObject keySettingPanel;
     public GameObject soundSettingPanel;
+    public GameObject creditsPanel;
     public GameObject mainMenuPanel;
-    
     
     [Header("Button")]
     public Button keySettingButton;
     public Button soundSettingButton;
+    public Button creditsButton;
     public Button startGameButton;
+    
+    [Header("Hint GridLayoutGroup")]
+    public GridLayoutGroup[] hintGridLayoutGroup;
     
     [Header("Tip Image")]
     public Sprite[] tipImageKeyBoard;
@@ -43,6 +50,13 @@ public class OptionMenuScript : MonoBehaviour
     
     private GameObject optineMenuPanel;
     
+    
+
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         keySettingImage = keySettingObj.GetComponent<Image>();
@@ -60,8 +74,22 @@ public class OptionMenuScript : MonoBehaviour
             SetTipGamePad(0);
         }
 
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
-        audioSlider.value = PlayerPrefs.GetFloat("AudioVolume");
+        if(PlayerPrefs.HasKey("MusicVolume"))
+            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        else
+        {
+            musicSlider.value = 0;
+            PlayerPrefs.SetFloat("MusicVolume", 0);
+        }
+        if(PlayerPrefs.HasKey("AudioVolume"))
+            audioSlider.value = PlayerPrefs.GetFloat("AudioVolume");
+        else
+        {
+            audioSlider.value = 0;
+            PlayerPrefs.SetFloat("AudioVolume", 0);
+        }
+
+        
     }
 
     private void OnEnable()
@@ -69,6 +97,7 @@ public class OptionMenuScript : MonoBehaviour
         keySettingButton.Select();
         optineMenuPanel = this.gameObject;
         currentPanel = optineMenuPanel;
+        
     }
 
     private void Update()
@@ -87,21 +116,22 @@ public class OptionMenuScript : MonoBehaviour
             Back();
         }
 
-        if (keySettingPanel.activeSelf)
+        Dictionary<GameObject, Func<bool>> panelConditions = new Dictionary<GameObject, Func<bool>>
         {
-            currentPanel = keySettingPanel;
-        }
-        else if (soundSettingPanel.activeSelf)
+            { keySettingPanel, () => keySettingPanel.activeSelf },
+            { soundSettingPanel, () => soundSettingPanel.activeSelf },
+            { creditsPanel, () => creditsPanel.activeSelf },
+            { optineMenuPanel, () => optineMenuPanel.activeSelf && !keySettingPanel.activeSelf && !soundSettingPanel.activeSelf },
+            { mainMenuPanel, () => mainMenuPanel.activeSelf }
+        };
+
+        foreach (var panel in panelConditions)
         {
-            currentPanel = soundSettingPanel;
-        }
-        else if (optineMenuPanel.activeSelf && !keySettingPanel.activeSelf && !soundSettingPanel.activeSelf)
-        {
-            currentPanel = optineMenuPanel;
-        }
-        else if (mainMenuPanel.activeSelf)
-        {
-            currentPanel = mainMenuPanel;
+            if (panel.Value.Invoke())
+            {
+                currentPanel = panel.Key;
+                break;
+            }
         }
     }
 
@@ -112,15 +142,32 @@ public class OptionMenuScript : MonoBehaviour
             i.sprite = tipImageKeyBoard[0];
             i.SetNativeSize();
         }*/
-        foreach (var i in settingTipImage)
+        foreach (var i in C1)
         {
             i.sprite = tipImageKeyBoard[index];
             i.SetNativeSize();
         }
+        foreach (var i in C2)
+        {
+            i.sprite = tipImageKeyBoard[index+1];
+            i.SetNativeSize();
+        }
+        foreach (var i in C3)
+        {
+            i.sprite = tipImageKeyBoard[index+2];
+            i.SetNativeSize();
+        }
+        foreach (var gridLayoutGroup in hintGridLayoutGroup)
+        {
+            if (gridLayoutGroup != null)
+            {
+                gridLayoutGroup.cellSize = new Vector2(180, 51);
+            }
+        }
         
-        soundTipImage.sprite = tipImageKeyBoard[index+1];
+        soundTipImage.sprite = tipImageKeyBoard[index+3];
         
-        keySettingImage.sprite = tipImageKeyBoard[index+2];
+        keySettingImage.sprite = tipImageKeyBoard[index+4];
         
         
         soundTipImage.SetNativeSize();
@@ -128,15 +175,30 @@ public class OptionMenuScript : MonoBehaviour
     
     public void SetTipGamePad(int index)
     {
-        foreach (var i in settingTipImage)
+        foreach (var i in C1)
         {
             i.sprite = tipImageGamePad[index];
             i.SetNativeSize();
         }
+        foreach (var i in C2)
+        {
+            i.sprite = tipImageGamePad[index+1];
+            i.SetNativeSize();
+        }
+        foreach (var i in C3)
+        {
+            i.sprite = tipImageGamePad[index+2];
+            i.SetNativeSize();
+        }
         
-        soundTipImage.sprite = tipImageGamePad[index+1];
+        foreach (var gridLayoutGroup in hintGridLayoutGroup)
+        {
+            gridLayoutGroup.cellSize = new Vector2(169, 51);
+        }
         
-        keySettingImage.sprite = tipImageGamePad[index+2];
+        soundTipImage.sprite = tipImageGamePad[index+3];
+        
+        keySettingImage.sprite = tipImageGamePad[index+4];
         
         soundTipImage.SetNativeSize();
     }
@@ -145,30 +207,46 @@ public class OptionMenuScript : MonoBehaviour
     {
         keySettingPanel.SetActive(true);
         soundSettingPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         
         currentPanel = keySettingPanel;
-        /*foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+        foreach (var selectable in this.GetComponentsInChildren<Selectable>())
         {
             selectable.interactable = false;
-        }*/
+        }
     }
     
     public void SoundSetting()
     {
         keySettingPanel.SetActive(false);
         soundSettingPanel.SetActive(true);
+        creditsPanel.SetActive(false);
         
         currentPanel = soundSettingPanel;
         
         musicSlider.Select();
     }
+
+    public void ShowCredits()
+    {
+        keySettingPanel.SetActive(false);
+        soundSettingPanel.SetActive(false);
+        creditsPanel.SetActive(true);
+
+        currentPanel = creditsPanel;
+        foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+        {
+            selectable.interactable = false;
+        }
+    }
     
     public void Back()
     {
-        if (currentPanel == keySettingPanel || currentPanel == soundSettingPanel)
+        if (currentPanel == keySettingPanel || currentPanel == soundSettingPanel || currentPanel == creditsPanel)
         {
             keySettingPanel.SetActive(false);
             soundSettingPanel.SetActive(false);
+            creditsPanel.SetActive(false);
             foreach (var selectable in this.GetComponentsInChildren<Selectable>())
             {
                 selectable.interactable = true;
@@ -192,7 +270,7 @@ public class OptionMenuScript : MonoBehaviour
     {
         mainMixer.SetFloat("MusicVolume", volume);
         PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        
+        PlayerPrefs.Save();
         Debug.Log(volume);
     }
     
@@ -200,7 +278,7 @@ public class OptionMenuScript : MonoBehaviour
     {
         mainMixer.SetFloat("AudioVolume", volume);
         PlayerPrefs.SetFloat("AudioVolume", audioSlider.value);
-        
+        PlayerPrefs.Save();
         Debug.Log(volume);
     }
 }

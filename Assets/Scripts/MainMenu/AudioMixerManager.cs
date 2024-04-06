@@ -30,5 +30,14 @@ public class AudioMixerManager : MonoBehaviour
     {
         GameObject.Find("MusicManager").GetComponent<AudioSource>().outputAudioMixerGroup = audioMixer.FindMatchingGroups("Music")[0];
         GameObject.Find("AudioManager").GetComponent<AudioSource>().outputAudioMixerGroup = audioMixer.FindMatchingGroups("Audio")[0];
+        
+        if(PlayerPrefs.HasKey("MusicVolume"))
+        {
+            audioMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
+        }
+        if(PlayerPrefs.HasKey("AudioVolume"))
+        {
+            audioMixer.SetFloat("AudioVolume", PlayerPrefs.GetFloat("AudioVolume"));
+        }
     }
 }
