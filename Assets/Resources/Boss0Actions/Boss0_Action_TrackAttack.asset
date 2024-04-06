@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: Boss0_Action_TrackAttack
   DisplayName: 
   soundEffectName: 
-  _AnimationKey: TrackAttack
+  _AnimationKey: jumpatk
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
-  - KeyFrame: 73
+  - KeyFrame: 65
     Curve:
       serializedVersion: 2
       m_Curve:

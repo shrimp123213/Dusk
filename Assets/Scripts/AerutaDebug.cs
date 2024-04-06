@@ -63,11 +63,13 @@ public class AerutaDebug : MonoBehaviour
         FadeImage.color = new Color(0, 0, 0, 1);
         
         StartSceneFadeIn = true;
-        
-        failCanvas.SetActive(false);
-        failEffect = failCanvas.GetComponentInChildren<ParticleSystem>();
-        failCanvasActive = false;
-        failFadeImage = failCanvas.transform.GetChild(4).GetComponent<Image>();
+        if (failCanvas != null)
+        {
+            failCanvas.SetActive(false);
+            failEffect = failCanvas.GetComponentInChildren<ParticleSystem>();
+            failCanvasActive = false;
+            failFadeImage = failCanvas.transform.GetChild(4).GetComponent<Image>();
+        }
     }
 
     public void CallEffect(int num)//��ܥ��������ĤH�B�{�צ��\��UI

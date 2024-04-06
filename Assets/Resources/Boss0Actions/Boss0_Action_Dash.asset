@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: Boss0_Action_Dash
   DisplayName: Boss0_Action_Dash
   soundEffectName: 
-  _AnimationKey: Dash
+  _AnimationKey: dashatk
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -106,7 +106,11 @@ MonoBehaviour:
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
-  Toggles: []
+  Toggles:
+  - KeyFrame: 40
+    IsActive: 0
+  - KeyFrame: 65
+    IsActive: 1
   Teleports: []
   ApplyForce: {x: 0, y: 0}
   ForceBasedByPos: 0
@@ -119,7 +123,7 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 
+  IsTriggered: 0101
   IsTeleported: 
   HitStun: 0.25
   IsMovableX: 0
