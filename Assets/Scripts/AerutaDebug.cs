@@ -224,7 +224,7 @@ public class AerutaDebug : MonoBehaviour
         failCanvas.SetActive(true);
         failEffect.Play();
         failCanvasActive = true;
-        failFadeImage.DOFade(1, 2f).SetDelay(1f).OnComplete(() => {
+        failFadeImage.DOFade(1, 2f).SetDelay(2f).OnComplete(() => {
             if (failFadeImage.color.a >= 1)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

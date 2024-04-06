@@ -21,6 +21,7 @@ MonoBehaviour:
   InterruptSameLevel: 0
   DamageRatio: 1
   DamageType: 0
+  SetCooldowns: []
   AttackSpots:
   - KeyFrameFrom: 88
     KeyFrameEnd: 90
@@ -61,7 +62,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 0, y: -2}
+    TargetDistance: {x: 0, y: -2.3}
     FinishTime: 0.1
     CanEvade: 0
     StartEvadeFrame: 0
@@ -85,8 +86,6 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 0101
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
