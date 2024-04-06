@@ -42,7 +42,7 @@ public class BackgroundParallax : MonoBehaviour {
         {
             synZ = 100f;
         }
-
+        Debug.Log(backgrounds.Length);
     }
 
     // 每一幀執行
