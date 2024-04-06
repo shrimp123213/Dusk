@@ -81,7 +81,7 @@ public class PlayerMain : Character
 
     private float runSoundInverval;
     public float runSoundInvervalSet;
-
+    
     private void OnEnable()
     {
         playerAct.Enable();
@@ -599,10 +599,12 @@ public class PlayerMain : Character
                 {
                     targetRenderer.skeleton.SetColor(value);
                 });
+                
             }
             if (targetRenderer.skeleton.GetColor().a <= 0)
             {
-                AerutaDebug.i.StartSceneFadeOut = true;
+                //AerutaDebug.i.StartSceneFadeOut = true;
+                AerutaDebug.i.ShowFailCanvas();
                 //AerutaDebug.i.ShowStatistics();
                 //Time.timeScale = 0f;
             }

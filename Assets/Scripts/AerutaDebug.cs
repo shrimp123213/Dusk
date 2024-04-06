@@ -46,6 +46,12 @@ public class AerutaDebug : MonoBehaviour
     public Image FadeImage;
     public bool StartSceneFadeIn;
     public bool StartSceneFadeOut;
+    
+    [Header("玩家死亡介面")]
+    public GameObject failCanvas;
+    private ParticleSystem failEffect;
+    private bool failCanvasActive = false;
+    private Image failFadeImage;
 
     private void Awake()
     {
@@ -57,6 +63,11 @@ public class AerutaDebug : MonoBehaviour
         FadeImage.color = new Color(0, 0, 0, 1);
         
         StartSceneFadeIn = true;
+        
+        failCanvas.SetActive(false);
+        failEffect = failCanvas.GetComponentInChildren<ParticleSystem>();
+        failCanvasActive = false;
+        failFadeImage = failCanvas.transform.GetChild(4).GetComponent<Image>();
     }
 
     public void CallEffect(int num)//��ܥ��������ĤH�B�{�צ��\��UI
@@ -202,6 +213,22 @@ public class AerutaDebug : MonoBehaviour
         renderer.sharedMaterial.SetFloat("_V", point.y);
 
         Instantiate(PostBlurZoomOut, center, Quaternion.identity, null);
+    }
+    
+    public void ShowFailCanvas()
+    {
+        if(failCanvasActive)
+            return;
+        failCanvas.SetActive(true);
+        failEffect.Play();
+        failCanvasActive = true;
+        failFadeImage.DOFade(1, 2f).SetDelay(1f).OnComplete(() => {
+            if (failFadeImage.color.a >= 1)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Debug.Log("Restart");
+            }
+        });
     }
 
 }
