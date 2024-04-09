@@ -79,7 +79,7 @@ public class MainMenuButtons : MonoBehaviour
         
         if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Gamepad)
         {
-            hintGridLayoutGroup.cellSize = new Vector2(169, 51);
+            hintGridLayoutGroup.cellSize = new Vector2(131, 51);
             C1.sprite = hintSprite[0];
             C1.SetNativeSize();
             C2.sprite = hintSprite[1];

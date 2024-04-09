@@ -54,7 +54,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 0, y: 7}
+    TargetDistance: {x: 0, y: 11}
     FinishTime: 0.01
     CanEvade: 0
     StartEvadeFrame: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 0, y: -7}
+    TargetDistance: {x: 0, y: -11}
     FinishTime: 0.6
     CanEvade: 0
     StartEvadeFrame: 0

@@ -23,7 +23,7 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 41
+  - KeyFrameFrom: 40
     KeyFrameEnd: 62
     Offset: {x: 1, y: 1.5, z: 0}
     Range: {x: 4, y: 2.5}
@@ -44,65 +44,35 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    TargetDistance: {x: 2, y: 0}
-    FinishTime: 0.15
-    CanEvade: 0
-    StartEvadeFrame: 0
-    EndEvadeFrame: 0
-  - KeyFrame: 51
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0.024120038
+        inSlope: 0.40818417
+        outSlope: 0.40818417
         tangentMode: 0
         weightedMode: 3
         inWeight: 0
-        outWeight: 0.519568
+        outWeight: 0.99716705
       - serializedVersion: 3
-        time: 0.5
-        value: 0.5
-        inSlope: 4.951789
-        outSlope: 4.9532685
+        time: 0.4985962
+        value: 0.2
+        inSlope: 8.152891
+        outSlope: 8.152891
         tangentMode: 0
         weightedMode: 3
-        inWeight: 0.22596401
-        outWeight: 0.22596395
+        inWeight: 0.0028329492
+        outWeight: 0.15011722
       - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0.02415099
-        outSlope: 0
+        outSlope: 0.02415099
         tangentMode: 0
         weightedMode: 3
-        inWeight: 0.51890194
+        inWeight: 0.40949813
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 8, y: 0}
-    FinishTime: 0.2
+    TargetDistance: {x: 10, y: 0}
+    FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0

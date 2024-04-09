@@ -98,6 +98,11 @@ public class OptionMenuScript : MonoBehaviour
         optineMenuPanel = this.gameObject;
         currentPanel = optineMenuPanel;
         
+        foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+        {
+            selectable.interactable = true;
+            selectable.animator.enabled = true;
+        }
     }
 
     private void Update()
@@ -193,7 +198,7 @@ public class OptionMenuScript : MonoBehaviour
         
         foreach (var gridLayoutGroup in hintGridLayoutGroup)
         {
-            gridLayoutGroup.cellSize = new Vector2(169, 51);
+            gridLayoutGroup.cellSize = new Vector2(131, 55);
         }
         
         soundTipImage.sprite = tipImageGamePad[index+3];
@@ -242,8 +247,22 @@ public class OptionMenuScript : MonoBehaviour
     
     public void Back()
     {
-        if (currentPanel == keySettingPanel || currentPanel == soundSettingPanel || currentPanel == creditsPanel)
+        if (currentPanel != optineMenuPanel)
         {
+            foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+            {
+                selectable.animator.Rebind();
+                selectable.animator.Update(0);
+                selectable.interactable = true;
+            }
+            
+            keySettingPanel.SetActive(false);
+            soundSettingPanel.SetActive(false);
+            creditsPanel.SetActive(false);
+            
+            keySettingButton.Select();
+        }
+        /*{
             keySettingPanel.SetActive(false);
             soundSettingPanel.SetActive(false);
             creditsPanel.SetActive(false);
@@ -252,16 +271,27 @@ public class OptionMenuScript : MonoBehaviour
                 selectable.interactable = true;
             }
             keySettingButton.Select();
-        }
+        }*/
         
         if (currentPanel == optineMenuPanel)
         {
+            foreach (var selectable in this.GetComponentsInChildren<Selectable>())
+            {
+                // 停止或重置動畫
+                selectable.animator.Rebind();
+                selectable.animator.Update(0);
+                
+                // 然後設置為不可互動
+                selectable.interactable = false;
+            }
+            
             this.gameObject.SetActive(false);
             mainMenuPanel.SetActive(true);
             foreach (var selectable in mainMenuPanel.GetComponentsInChildren<Selectable>())
             {
                 selectable.interactable = true;
             }
+            
             startGameButton.Select();
         }
     }
@@ -280,5 +310,10 @@ public class OptionMenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("AudioVolume", audioSlider.value);
         PlayerPrefs.Save();
         Debug.Log(volume);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

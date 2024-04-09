@@ -10,12 +10,14 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Spine.Unity;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem.UI;
 
 public class PlayerMain : Character
 {
     //玩家Input
     public InputActionAsset inputActionAsset;
     private InputActionMap playerAct;
+    private InputActionMap UIAct;
 
     public static PlayerMain i;
 
@@ -82,6 +84,9 @@ public class PlayerMain : Character
     private float runSoundInverval;
     public float runSoundInvervalSet;
     
+    private bool isPause;
+    private GameObject eventSystem;
+    
     private void OnEnable()
     {
         playerAct.Enable();
@@ -112,6 +117,7 @@ public class PlayerMain : Character
 
         inputActionAsset = GetComponent<PlayerInput>().actions;
         playerAct = inputActionAsset.FindActionMap("Player");
+        UIAct = inputActionAsset.FindActionMap("UI");
 
         topMoveSpeed = .2f;
         bottomMoveSpeed = .2f;
@@ -125,6 +131,8 @@ public class PlayerMain : Character
         CatRenderer = gameObject.transform.GetChild(1).GetComponent<SkeletonMecanim>();
 
         CanInput = false;
+        
+        eventSystem = GameObject.Find("EventSystem");
     }
 
     private void Start()
@@ -533,6 +541,8 @@ public class PlayerMain : Character
             {
                 TryInput(InputKey.Transformation);
             }
+            
+            
             //if (playerAct.FindAction("UseButterfly").WasPressedThisFrame())
             //{
             //    //TryInput(InputKey.UseButterfly);
@@ -609,6 +619,27 @@ public class PlayerMain : Character
                 //Time.timeScale = 0f;
             }
             //Debug.Log(Renderer.skeleton.GetColor());
+        }
+        
+        if (playerAct.FindAction("Pause").WasPressedThisFrame())
+        {
+            AerutaDebug.i.PauseGame();
+            if (AerutaDebug.i.isPause)
+            {
+                playerAct.Disable();
+                UIAct.Enable();
+                Debug.Log("Pause");
+            }
+            
+        }
+        isPause = AerutaDebug.i.isPause;
+        if (isPause)
+        {
+            eventSystem.GetComponent<InputSystemUIInputModule>().submit = InputActionReference.Create(UIAct.FindAction("MainMenuSubmit"));
+        }
+        else
+        {
+            eventSystem.GetComponent<InputSystemUIInputModule>().submit = InputActionReference.Create(UIAct.FindAction("Submit"));
         }
     }
 

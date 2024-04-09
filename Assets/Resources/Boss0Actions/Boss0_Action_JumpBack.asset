@@ -23,10 +23,10 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 60
-    KeyFrameEnd: 85
-    Offset: {x: 0, y: 1.5, z: 0}
-    Range: {x: 5, y: 2.5}
+  - KeyFrameFrom: 125
+    KeyFrameEnd: 130
+    Offset: {x: 1.5, y: 1.5, z: 0}
+    Range: {x: 6, y: 2.5}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: -3, y: 3}
+    TargetDistance: {x: -5, y: 5}
     FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
@@ -92,8 +92,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: -3, y: -3}
-    FinishTime: 0.35
+    TargetDistance: {x: -8, y: -5}
+    FinishTime: 1
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0

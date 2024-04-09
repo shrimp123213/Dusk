@@ -65,6 +65,7 @@ public class Camcam : MonoBehaviour
         else if (BossShow)
         {
             BossShowing();
+            
         }
         else if ((bool)Target)
         {

@@ -11,7 +11,7 @@ using Cinemachine;
 
 public class Contact : MonoBehaviour
 {
-    public CinemachineVirtualCamera vCam;
+    public CinemachineVirtualCamera bossVCam;
     
     public Animator[] fences;
 
@@ -46,13 +46,13 @@ public class Contact : MonoBehaviour
         ani.Play("boss1-1_ST_sit_idle");
         
         waitTime = 0;
+        bossVCam.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 && ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1-1_ST_start")
         {
-            vCam.enabled = false;
             if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 280f / 501f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 318f / 501f) 
             {
                 fences[0].Play("FenceUp");
@@ -131,6 +131,9 @@ public class Contact : MonoBehaviour
                     progress += speed * 1.25f * Time.deltaTime; 
                     BossName.fontSize = Mathf.Lerp(startFontSize, endFontSize, progress);
                     BossNameBackground.color = BossNameBackground.color - new Color(0f, 0f, 0f, .25f * progress);
+                    bossVCam.gameObject.SetActive(true);
+                    bossVCam.enabled = true;
+                    Camcam.i.vCam.enabled = true;
                 }
 
                 if (BossName.rectTransform.localPosition == (Vector3)endPos)
@@ -138,11 +141,13 @@ public class Contact : MonoBehaviour
                     ani.speed = 1;
                     BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
                     playInfo.SetActive(true);
-                    vCam.enabled = true;
+                    
                 }
 
                 if (BossHealthBar.localScale.x == .75f)
                 {
+                    bossVCam.enabled = true;
+                    Camcam.i.vCam.enabled = true;
                     gameObject.SetActive(false);
                 }
                     
@@ -181,7 +186,9 @@ public class Contact : MonoBehaviour
 
         AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
         playInfo.SetActive(true);
-        vCam.enabled=true;
+        bossVCam.gameObject.SetActive(true);
+        bossVCam.enabled = true;
+        Camcam.i.vCam.enabled = true;
         gameObject.SetActive(false);
     }
 
@@ -206,6 +213,9 @@ public class Contact : MonoBehaviour
 
             MusicManager.i.Play("Zealot", 46f, 5f, .5f);
             playInfo.SetActive(false);
+            //bossVCam.gameObject.SetActive(true);
+            bossVCam.enabled = false;
+            Camcam.i.vCam.enabled = false;
         }
     }
 }

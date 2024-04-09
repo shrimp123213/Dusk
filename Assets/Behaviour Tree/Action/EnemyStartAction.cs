@@ -27,6 +27,10 @@ public class EnemyStartAction : EnemyActionBase
     
     public bool Fail;
 
+    public bool spawnBlur;
+    public int blurFrame;
+    private bool blurSpawned;
+
     private Vector3 omenPos;
 
     private bool[] omenSpawned;
@@ -48,6 +52,7 @@ public class EnemyStartAction : EnemyActionBase
         if (SelfCharacter.Value.NowAction.GetType() == typeof(ActionDanmakuObj))
             count += ((ActionDanmakuObj)SelfCharacter.Value.NowAction).danmaku.bulletSpawnData.Count;
         omenSpawned = new bool[count];
+        blurSpawned = false;
     }
 
     public override TaskStatus OnUpdate()
@@ -59,6 +64,9 @@ public class EnemyStartAction : EnemyActionBase
         if (this.SelfCharacter.Value.isActing)
         {
             TrySpawnOmen();
+            
+            if (spawnBlur)
+                TrySpawnBlur();
             return TaskStatus.Running;
         }
         return TaskStatus.Success;
@@ -103,6 +111,18 @@ public class EnemyStartAction : EnemyActionBase
                     omenSpawned[i] = true;
                 }
             }
+        }
+    }
+    
+    public virtual void TrySpawnBlur()
+    {
+        ActionPeformState actionState = SelfCharacter.Value.ActionState;
+        Transform eye = this.SelfCharacter.Value.transform.Find("Eye");
+        if (actionState.IsAfterFrame(blurFrame) && !blurSpawned)
+        {
+            AerutaDebug.i.forBoss0 = true;
+            AerutaDebug.i.SpawnPostBlurZoomOut(eye.position);
+            blurSpawned = true;
         }
     }
 

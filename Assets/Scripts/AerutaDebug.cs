@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using BehaviorDesigner.Runtime;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 
 public class AerutaDebug : MonoBehaviour
@@ -28,6 +31,8 @@ public class AerutaDebug : MonoBehaviour
     public GameObject PostBlurZoomIn;
     public GameObject PostBlurZoomInWeak;
     public GameObject PostBlurZoomOut;
+    public GameObject PostBlurZoomOutBoss0;
+    public bool forBoss0;
 
     //public GameObject BlockFlashYellow;
     //public GameObject BlockFlashBlue;
@@ -49,9 +54,26 @@ public class AerutaDebug : MonoBehaviour
     
     [Header("玩家死亡介面")]
     public GameObject failCanvas;
+    
     private ParticleSystem failEffect;
     private bool failCanvasActive = false;
     private Image failFadeImage;
+    
+    [Header("暫停介面")]
+    public GameObject pauseCanvas;
+    public bool isPause = false;
+    
+    [Header("玩家檢查點")]
+    public bool hasCheckPoint = false;
+    public Transform checkPointPos;
+    
+
+    /*public bool SetMenuStatus(bool open)
+    {
+        isPause = open;
+        Time.timeScale = open ? 0 : 1;
+        return open;
+    }*/
 
     private void Awake()
     {
@@ -90,6 +112,8 @@ public class AerutaDebug : MonoBehaviour
             SceneFadeIn();
         if (StartSceneFadeOut)
             SceneFadeOut();
+        /*if(hasCheckPoint && Respawn.i.player != null)
+            ReSpawnPlayer();*/
 
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -112,6 +136,27 @@ public class AerutaDebug : MonoBehaviour
         {
             SceneManager.LoadScene("Main_menu");
         }
+        
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            SceneManager.LoadScene(1);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            SceneManager.LoadScene(2);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            SceneManager.LoadScene(3);
+        }
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            if(checkPointPos != null)
+                PlayerMain.i.transform.position = checkPointPos.position;
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -128,6 +173,7 @@ public class AerutaDebug : MonoBehaviour
         {
             contact.Skip();
         }
+        //Debug.Log("isPause:"+isPause);
     }
 
     public void InsClap(Vector3 _v3)
@@ -214,7 +260,14 @@ public class AerutaDebug : MonoBehaviour
         renderer.sharedMaterial.SetFloat("_U", point.x);
         renderer.sharedMaterial.SetFloat("_V", point.y);
 
-        Instantiate(PostBlurZoomOut, center, Quaternion.identity, null);
+        if (PostBlurZoomOutBoss0 != null && forBoss0)
+        {
+            Instantiate(PostBlurZoomOutBoss0, center, Quaternion.identity, null);
+            forBoss0 = false;
+        }
+        else
+            Instantiate(PostBlurZoomOut, center, Quaternion.identity, null);
+        //Instantiate(PostBlurZoomOut, center, Quaternion.identity, null);
     }
     
     public void ShowFailCanvas()
@@ -232,7 +285,29 @@ public class AerutaDebug : MonoBehaviour
             }
         });
     }
+    
+    public void PauseGame()
+    {
+        if (isPause)
+        {
+            pauseCanvas.SetActive(false);
+            isPause = false;
+            Time.timeScale = 1;
+        }
+        else
+        {
+            pauseCanvas.SetActive(true);
+            isPause = true;
+            Time.timeScale = 0;
+        }
+    }
 
+    public void ReSpawnPlayer()
+    {
+        Respawn.i.RespawnPlayer();
+        hasCheckPoint = false;
+    }
+    
 }
 
 public class Feedback

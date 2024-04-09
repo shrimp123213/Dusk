@@ -9,10 +9,11 @@ public class BossCamScript : MonoBehaviour
     
     public CinemachineVirtualCamera bossVCam;
     public CinemachineCameraOffset bossCamOffset;
+
+    public float minOffsetY = 0f;
+    public float maxOffsetY = -3f;
     
     private float camSize;
-    private float minOffsetY;
-    private float maxOffsetY;
     private float minbossVCamSize;
     private float maxbossVCamSize;
     
@@ -22,8 +23,6 @@ public class BossCamScript : MonoBehaviour
         bossVCam = GetComponent<CinemachineVirtualCamera>();
         bossCamOffset = bossVCam.GetComponent<CinemachineCameraOffset>();
         
-        minOffsetY = 0f;
-        maxOffsetY = -3f;
         minbossVCamSize = bossVCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_MinimumOrthoSize;
         maxbossVCamSize = bossVCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_MaximumOrthoSize;
     }
@@ -32,6 +31,12 @@ public class BossCamScript : MonoBehaviour
     {
         camSize = mainCam.orthographicSize;
         bossCamOffset.m_Offset.y = Mathf.Lerp(maxOffsetY, minOffsetY, (camSize - minbossVCamSize) / (maxbossVCamSize - minbossVCamSize));
+
+        if (AerutaDebug.i.Boss1.isDead)
+        {
+            gameObject.SetActive(false);
+        }
+        
         //Debug.Log(bossCamOffset.m_Offset.y);
     }
 }

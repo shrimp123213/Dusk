@@ -13,12 +13,60 @@ public class TutoSceneContact : MonoBehaviour
 {
     public CinemachineVirtualCamera bossVCam;
     public BehaviorTree AITree;
+    public Transform BossHealthBar;
+    public TMP_Text BossName;
+    public Image BossNameBackground;
+    public int endFontSize;
+    public Vector2 endPos;
+    public Vector2 endSize;
     
+    private Animator ani;
+    private float speed;
     private bool triggered;
+    private GameObject bossObj;
     
     void Start()
     {
         triggered = false;
+        ani = AITree.GetComponentInChildren<Animator>();
+        bossObj = AITree.gameObject;
+        bossObj.SetActive(false);
+        //bossObj.GetComponent<Rigidbody2D>().gravityScale = 0f;
+    }
+
+    private void Update()
+    {
+        //Debug.Log(ani.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        if (ani.GetCurrentAnimatorClipInfo(0).Length > 0 &&
+            ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1_ap")
+        {
+            //bossObj.GetComponent<Rigidbody2D>().gravityScale = 1f;
+            if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75f)
+            {
+                speed = 1f;
+            }
+
+            if (speed > 0f)
+            {
+                BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, .75f, speed * Time.deltaTime), .75f, .75f);
+                
+                if (BossHealthBar.localScale.x >= .75f)
+                {
+                    gameObject.SetActive(false);
+                }
+                PlayerMain.i.CanInput = true;
+
+                if (BossName.text == "")
+                {
+                    BossName.text = "負傷駭獸";
+                    BossName.rectTransform.DOLocalMove(endPos, 0f);
+                    BossName.rectTransform.DOSizeDelta(endSize, 0f);
+                    BossName.fontSize = endFontSize;
+                    BossNameBackground.color = new Color(0f, 0f, 0f, 0f);
+                }
+                    
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -26,9 +74,16 @@ public class TutoSceneContact : MonoBehaviour
         if (other.CompareTag("Player") && !triggered)
         {
             triggered = true;
+            //ani.Play("ap");
             bossVCam.gameObject.SetActive(true);
             AITree.enabled = true;
-            gameObject.SetActive(false);
+            bossObj.SetActive(true);
+            
+            PlayerMain.i.StopMove();
+            PlayerMain.i.CanInput = false;
+            
+            
+            //gameObject.SetActive(false);
         }
     }
 }
