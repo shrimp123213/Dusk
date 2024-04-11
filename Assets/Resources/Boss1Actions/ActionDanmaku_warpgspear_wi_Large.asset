@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b642b81af3900234484470c6cec47567, type: 3}
+  m_Name: ActionDanmaku_warpgspear_wi_Large
+  m_EditorClassIdentifier: 
+  Id: ActionDanmaku_warpgspear_wi_Large
+  DisplayName: ActionDanmaku_warpgspear_wi_Large
+  soundEffectName: 
+  _AnimationKey: boss1-1_ATK_gspear_rs
+  EnableJumpVersion: 0
+  InterruptLevel: 0
+  InterruptSameLevel: 0
+  DamageRatio: 1
+  DamageType: 0
+  SetCooldowns: []
+  AttackSpots:
+  - KeyFrameFrom: 72
+    KeyFrameEnd: 80
+    Offset: {x: 0, y: 0, z: 0}
+    Range: {x: 0, y: 0}
+    Angle: 0
+    HitMax: 0
+    SpawnOmen: 1
+    SpawnKeyFrame: 10
+  - KeyFrameFrom: 103
+    KeyFrameEnd: 107
+    Offset: {x: 0, y: 0, z: 0}
+    Range: {x: 0, y: 0}
+    Angle: 0
+    HitMax: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
+  SuckEffect: 0
+  CanInterruptAction: 1
+  CanTriggerMark: 0
+  ClearStoredMoves: 0
+  Links: []
+  Moves: []
+  Toggles: []
+  Teleports: []
+  ApplyForce: {x: 0, y: 0}
+  ForceBasedByPos: 0
+  UsePopup: 0
+  TimeSlowAmount: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
+  EvadeEnergyRecovery: 0
+  EndActionFloatTime: 0
+  GroundOnly: 0
+  ResetCanAttack: 0
+  IsTriggered: 
+  IsTeleported: 
+  HitStun: 0.25
+  IsMovableX: 0
+  IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 0
+  danmaku: {fileID: 11400000, guid: 640bb9966c8b1aa48932e96c49d8d7a0, type: 2}

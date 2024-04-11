@@ -41,11 +41,12 @@ public class ShowTips : MonoBehaviour
         tipText.color = new Color(1, 1, 1, 0);
         if(tipBackgroundPanel != null)
             tipBackgroundPanel.color = new Color(0, 0, 0, 0);
+        inputType = InputType.Gamepad;
     }
     
     void Update()
     {
-        inputType = InputDeviceManager.instance.inputDevice == InputDevice.Joystick ? InputType.Gamepad : InputType.Keyboard;
+        //inputType = InputDeviceManager.instance.inputDevice == InputDevice.Joystick ? InputType.Gamepad : InputType.Keyboard;
     }
     
     void ShowTip(string tip)

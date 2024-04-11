@@ -81,7 +81,9 @@ public class ActionDanmakuObj : ActionBaseObj
                 var rotation = _m.Facing > 0 ? data.rotation : -data.rotation;
                 var damage = new Damage(_m.Attack.Final * DamageRatio,DamageType.Bullet);
                 var position = _mPosition;
-                
+                var scale = data.scale;
+                if(scale != Vector3.zero)
+                    danmaku.bulletPrefab.transform.localScale = scale;
                 Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation))
                     .GetComponent<Bullet>().SetAwake(_m, data.shotsDelay, damage, danmaku);
                 

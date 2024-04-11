@@ -53,6 +53,8 @@ public class Character : MonoBehaviour, IHitable
     public bool Evading;
 
     public bool Blocking;
+    
+    public bool isPerfectBlock;
 
     public bool CanLongJump;
 

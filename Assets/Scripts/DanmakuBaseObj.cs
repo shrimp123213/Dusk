@@ -32,6 +32,7 @@ public class DanmakuBaseObj : ScriptableObject
     public List<BulletSpawnData> bulletSpawnData;
     
     private Vector3 bulletSpawnPos;
+    private Vector3 bulletSpawnScale;
     
     public Vector3 SetBulletSpawnPos(Character _m, Vector3 mPosition, BulletSpawnData data)
     {
@@ -60,6 +61,7 @@ public class BulletSpawnData
     public DanmakuType danmakuType;
     public SpawnType spawnType;
     public Vector3 position;
+    public Vector3 scale;
     
     [Space]
     public float shotsDelay = 0;
@@ -75,6 +77,7 @@ public class BulletSpawnData
         spawnType = _bulletSpawnData.spawnType;
         position = _bulletSpawnData.position;
         rotation = _bulletSpawnData.rotation;
+        scale = _bulletSpawnData.scale;
     }
 
     [Header("紅眼提示")]

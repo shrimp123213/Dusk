@@ -46,6 +46,7 @@ public class Bullet : MonoBehaviour
         Collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         ps = GetComponent<ParticleSystem>();
+        
     }
     
     public virtual void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
@@ -94,8 +95,8 @@ public class Bullet : MonoBehaviour
         
         Dead = true;
         Awaked = false;
-        Rigid.velocity = Vector2.zero;
-        Collider.isTrigger = false;
+        //Rigid.velocity = Vector2.zero;
+        //Collider.isTrigger = false;
         if(destroyOnHit)
             Destroy(gameObject);
     }

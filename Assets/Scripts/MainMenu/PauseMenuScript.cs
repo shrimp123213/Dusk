@@ -119,7 +119,7 @@ public class PauseMenuScript : MonoBehaviour
             SetTipGamePad(0);
         }
         
-        if(InputDeviceUpdate.i.playerInput.actions["Back"].triggered)
+        if(PlayerMain.i.GetComponent<PlayerInput>().actions["Back"].triggered)
         {
             Back();
         }

@@ -9,7 +9,7 @@ public class MapBound : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Transform>().position = new Vector3(55.7f, 0, 0);
+            other.GetComponent<Transform>().position = new Vector3(69.5f, 0, 0);
             Debug.Log("Player is out of the map");
         }
     }

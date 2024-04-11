@@ -26,6 +26,8 @@ public class ActionBlockObj : ActionBaseObj
 
     public float CatMorphPauseTimeAmount_Perfect;
     public float CatMorphPauseTimeAmount_Normal;
+    
+    
 
     public override ActionPeformState StartAction(Character _m)
     {
