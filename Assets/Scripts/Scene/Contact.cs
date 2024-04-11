@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -185,6 +186,7 @@ public class Contact : MonoBehaviour
         MusicManager.i.Play("Zealot", 46f, 5f, .5f);
 
         AITree.GetComponentInChildren<SkeletonMecanim>().UpdateTiming = UpdateTiming.InFixedUpdate;
+        AITree.GetComponent<Character>().NowAction = null;
         playInfo.SetActive(true);
         bossVCam.gameObject.SetActive(true);
         bossVCam.enabled = true;

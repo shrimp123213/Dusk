@@ -11,13 +11,13 @@ public class GSpear : Bullet
     {
         Owner = _owner;
         Damage = _damage;
-        
-        Destroy(gameObject, LifeTime);
+        LifeTime += _delay;
+        //Destroy(gameObject, LifeTime+_delay);
         foreach (var data in _danmakuData.bulletSpawnData)
         {
             StartCoroutine(ButtleStartUp(_delay));
         }
-        Instantiate(Omen, new Vector3(transform.position.x, offsetY, 0), Quaternion.Euler(0, 0, 0));
+        StartCoroutine(SpawnOmen(_delay-0.5f));
         //Destroy(Omen, 0.5f);
     }
     public override void OnFixedUpdate()
@@ -38,7 +38,8 @@ public class GSpear : Bullet
         Awaked = false;
         //Rigid.velocity = Vector2.zero;
         Collider.isTrigger = false;
-        Destroy(gameObject);
+        if(destroyOnHit)
+            Destroy(gameObject);
     }
     
     private IEnumerator ButtleStartUp(float _delay)
@@ -47,7 +48,15 @@ public class GSpear : Bullet
         yield return new WaitForSeconds(_delay);
         Awaked = true;
         anim.Play("Action");
+        
         //Destroy(Omen);
+        yield break;
+    }
+    
+    private IEnumerator SpawnOmen(float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+        GameObject omen = Instantiate(Omen, new Vector3(transform.position.x, offsetY, 0), Quaternion.Euler(0, 0, 0));
         yield break;
     }
     

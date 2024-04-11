@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     
     protected float Speed;
     public float LifeTime = 3f;
+    public bool destroyOnHit = true;
     
     protected Collider2D Collider;
     protected Animator anim;
@@ -95,7 +96,8 @@ public class Bullet : MonoBehaviour
         Awaked = false;
         Rigid.velocity = Vector2.zero;
         Collider.isTrigger = false;
-        Destroy(gameObject);
+        if(destroyOnHit)
+            Destroy(gameObject);
     }
     
     private IEnumerator ButtleStartUp(float _delay)

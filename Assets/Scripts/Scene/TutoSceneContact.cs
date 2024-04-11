@@ -24,6 +24,7 @@ public class TutoSceneContact : MonoBehaviour
     private float speed;
     private bool triggered;
     private GameObject bossObj;
+    private CinemachineTargetGroup targetGroup;
     
     void Start()
     {
@@ -31,6 +32,7 @@ public class TutoSceneContact : MonoBehaviour
         ani = AITree.GetComponentInChildren<Animator>();
         bossObj = AITree.gameObject;
         bossObj.SetActive(false);
+        targetGroup = bossVCam.Follow.gameObject.GetComponent<CinemachineTargetGroup>();
         //bossObj.GetComponent<Rigidbody2D>().gravityScale = 0f;
     }
 
@@ -41,6 +43,10 @@ public class TutoSceneContact : MonoBehaviour
             ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1_ap")
         {
             //bossObj.GetComponent<Rigidbody2D>().gravityScale = 1f;
+            //targetGroup.m_Targets[0].weight = 0f;
+            //bossVCam.gameObject.SetActive(true);
+            //bossVCam.GetComponent<CinemachineCameraOffset>().m_Offset.y = 0f;
+            //bossVCam.GetComponent<BossCamScript>().maxOffsetY = 0f;
             if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75f)
             {
                 speed = 1f;
@@ -52,13 +58,16 @@ public class TutoSceneContact : MonoBehaviour
                 
                 if (BossHealthBar.localScale.x >= .75f)
                 {
+                    targetGroup.m_Targets[0].weight = 1f;
+                    bossVCam.GetComponent<CinemachineCameraOffset>().m_Offset.y = -3f;
+                    bossVCam.GetComponent<BossCamScript>().maxOffsetY = -3f;
                     gameObject.SetActive(false);
                 }
                 PlayerMain.i.CanInput = true;
 
                 if (BossName.text == "")
                 {
-                    BossName.text = "負傷駭獸";
+                    BossName.text = "負傷星獸";
                     BossName.rectTransform.DOLocalMove(endPos, 0f);
                     BossName.rectTransform.DOSizeDelta(endSize, 0f);
                     BossName.fontSize = endFontSize;
@@ -76,6 +85,7 @@ public class TutoSceneContact : MonoBehaviour
             triggered = true;
             //ani.Play("ap");
             bossVCam.gameObject.SetActive(true);
+            
             AITree.enabled = true;
             bossObj.SetActive(true);
             

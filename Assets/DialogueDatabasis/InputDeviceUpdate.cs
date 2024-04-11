@@ -35,7 +35,7 @@ public class InputDeviceUpdate : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()

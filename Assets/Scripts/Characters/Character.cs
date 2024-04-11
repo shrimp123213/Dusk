@@ -120,6 +120,8 @@ public class Character : MonoBehaviour, IHitable
 
     public ActionBaseObj DeadAction;
 
+    private MaterialPropertyBlock mpb;
+
     public float Health
     {
         get
@@ -264,6 +266,9 @@ public class Character : MonoBehaviour, IHitable
         //Debug.Log(Ani);
 
         Renderer = base.gameObject.transform.GetChild(0).GetComponent<SkeletonMecanim>();
+        if(mpb == null)
+            mpb = new MaterialPropertyBlock();
+        Renderer.GetComponent<Renderer>().SetPropertyBlock(mpb);
     }
 
     private void Update()
@@ -277,6 +282,7 @@ public class Character : MonoBehaviour, IHitable
         {
             NowAction.ProcessAction(this);
         }
+        
         //if (isDead && Renderer.skeleton.GetColor().a <= 0) 
             //base.gameObject.SetActive(value: false);
     }
@@ -651,6 +657,33 @@ public class Character : MonoBehaviour, IHitable
             if (_damage.Type != DamageType.Bullet)
                 LowGravityTime = 0.665f;
             HitEffect.SetHitStun(isActionInterrupted, ImmuneStunAction, _HitStun);
+            float angle = 0;
+            float fillPhase = 0;
+            DOVirtual.Float(0, 180, 0.5f, angle => {
+                //Debug.Log(Mathf.Sin(angle * Mathf.Deg2Rad));
+                fillPhase = Mathf.Sin(angle * Mathf.Deg2Rad);
+                //Debug.Log(fillPhase);
+            });
+            //DOTween.To(() => angle, x => angle = x, 360, 1);
+            mpb.SetFloat("_FillPhase", fillPhase);
+            /*float angle = 0; // I define a variable to "iterate" on with DOTween with my start value
+            DOTween.To( // This method is for custom tweens
+                    () => angle, // This is the getter for the tween to get the current value
+                    x => angle = x, // This is the setter for the tween to update the current value
+                    360, // Target value
+                    duration) // Duration of the tween
+                .OnUpdate(() => {
+                    // Here I just do a sin(angle) to get the final value requested by OP
+                    // - sin(0) = 0
+                    // - sin(90) = 1
+                    // - sin(180) = 0
+                    // - sin(270) = -1
+                    // - sin(360) = 0
+                    Debug.Log(Mathf.sin(angle * Mathf.Deg2Rad));
+                });*/
+            
+            //mpb.Clear();
+            
             //if ((bool)AITree)
             //{
             //    AITree.SendEvent("Attacked", (object)_attacker.transform);

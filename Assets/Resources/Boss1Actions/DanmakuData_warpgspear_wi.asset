@@ -51,57 +51,61 @@ MonoBehaviour:
     position: {x: 3, y: 0, z: 0}
     shotsDelay: 0.3
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: -3, y: 0, z: 0}
     shotsDelay: 0.3
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: 6, y: 0, z: 0}
     shotsDelay: 0.5
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: -6, y: 0, z: 0}
     shotsDelay: 0.5
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: 9, y: 0, z: 0}
     shotsDelay: 0.7
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: -9, y: 0, z: 0}
     shotsDelay: 0.7
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: 12, y: 0, z: 0}
     shotsDelay: 0.9
     rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   - shootKey: 89
     danmakuType: 0
     spawnType: 0
     position: {x: -12, y: 0, z: 0}
     shotsDelay: 0.9
     rotation: 0
-  - shootKey: 89
-    danmakuType: 0
-    spawnType: 0
-    position: {x: 15, y: 0, z: 0}
-    shotsDelay: 1.1
-    rotation: 0
-  - shootKey: 89
-    danmakuType: 0
-    spawnType: 0
-    position: {x: -15, y: 0, z: 0}
-    shotsDelay: 1.1
-    rotation: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0

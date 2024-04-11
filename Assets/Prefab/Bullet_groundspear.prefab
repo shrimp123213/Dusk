@@ -125,6 +125,8 @@ MonoBehaviour:
   ParentActionID: 
   Owner: {fileID: 0}
   LifeTime: 3
+  destroyOnHit: 0
+  ps: {fileID: 0}
   TypeOfBullet: 1
   Dead: 0
   Awaked: 0
