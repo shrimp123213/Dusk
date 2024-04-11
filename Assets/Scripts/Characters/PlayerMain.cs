@@ -62,6 +62,7 @@ public class PlayerMain : Character
     public bool CanInput;
 
     public float DashCooldown;
+    private float DashCooldownMax = .75f;
 
     public List<Image> Potions;
 
@@ -86,7 +87,10 @@ public class PlayerMain : Character
     
     private bool isPause;
     private GameObject eventSystem;
-    
+
+
+
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -203,7 +207,8 @@ public class PlayerMain : Character
                             Facing = ((Xinput > 0f) ? 1 : (-1));
                         }
 
-                        StartAction(ActionLoader.i.Actions["Dash"]);
+                        if (TryCastAction(ActionLoader.i.Actions["Dash"], false))
+                            StartAction(ActionLoader.i.Actions["Dash"]);
 
                         //Morph.Consume();
                         //CanDash = false;
@@ -351,6 +356,14 @@ public class PlayerMain : Character
                 SkillPopup.i.ShowMessage("Cant Heal at Full Health !");
         }
 
+        if (flag && _actionBaseObj.Id == "Dash")
+        {
+            if (!CanDash)
+                flag = false;
+            else
+                CanDash = false;
+        }
+
         if (flag && _actionBaseObj.name.Contains("Claw") && !isGround)
         {
             if (!CatMode && AirClawCount >= 4)
@@ -469,15 +482,15 @@ public class PlayerMain : Character
         //{
         //    CanDash = base.isGround;
         //}
-        //if (!CanDash)
-        //{
-        //    DashCooldown -= Time.deltaTime;
-        //    if (DashCooldown < 0f)
-        //    {
-        //        //DashCooldown = 1f;
-        //        CanDash = true;
-        //    }
-        //}
+        if (!CanDash)
+        {
+            DashCooldown -= Time.deltaTime;
+            if (DashCooldown < 0f)
+            {
+                DashCooldown = DashCooldownMax;
+                CanDash = true;
+            }
+        }
         foreach (InputCooldown cooldown in InputCooldowns)
         {
             if (cooldown.Time > 0)
@@ -521,7 +534,7 @@ public class PlayerMain : Character
                 TryInput(InputKey.Claw);
                 //}
             }
-            if (playerAct.FindAction("Dash").WasPressedThisFrame() && (DashCooldown < .1f || DashCooldown == 1f))
+            if (playerAct.FindAction("Dash").WasPressedThisFrame())
             {
                 TryInput(InputKey.Dash);
             }
