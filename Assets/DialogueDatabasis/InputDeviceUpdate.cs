@@ -18,6 +18,8 @@ public class InputDeviceUpdate : MonoBehaviour
     
     public GameObject dialogueManager;
     
+    public InputType lastInputType;
+    
     
     public enum InputType
     {
@@ -41,6 +43,7 @@ public class InputDeviceUpdate : MonoBehaviour
         }
         // 訂閱場景加載事件
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += arg0 => OnSceneUnloaded();
         
         DontDestroyOnLoad(this.gameObject);
     }
@@ -54,7 +57,7 @@ public class InputDeviceUpdate : MonoBehaviour
                 : PlayerMain.i.GetComponent<PlayerInput>();
         }
 
-        playerInput.onControlsChanged += ctx => OnDeviceChanged();
+        //playerInput.onControlsChanged += ctx => OnDeviceChanged();
         
         if(dialogueManager == null)
             dialogueManager = DialogueManager.instance.gameObject;
@@ -68,15 +71,7 @@ public class InputDeviceUpdate : MonoBehaviour
     private void Update()
     {
         OnDeviceChanged();
-        /*playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
-        inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
-        if (GameObject.Find("Dialogue Manager") != null)
-        {
-            InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad"
-                ? InputDevice.Joystick
-                : InputDevice.Keyboard;
-            DialogueLua.SetVariable("InputDevice", InputDeviceManager.instance.inputDevice.ToString());
-        }*/
+        
         //InputDeviceManager.instance.inputDevice = playerInput.currentControlScheme == "Gamepad" ? InputDevice.Joystick : InputDevice.Keyboard;
 
         //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
@@ -85,6 +80,7 @@ public class InputDeviceUpdate : MonoBehaviour
     public void OnDeviceChanged()
     {
         //playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        
         inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
         if (dialogueManager != null)
         {
@@ -112,8 +108,20 @@ public class InputDeviceUpdate : MonoBehaviour
         }
         if(dialogueManager == null)
             dialogueManager = DialogueManager.instance.gameObject;
+        inputType = lastInputType;
+        if(lastInputType == InputType.Gamepad)
+            playerInput.SwitchCurrentControlScheme("Gamepad");
+        else if(lastInputType == InputType.Keyboard)
+            playerInput.SwitchCurrentControlScheme("Keyboard");
+        Debug.Log("Input Device: " + playerInput.currentControlScheme);
         //inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
         //playerInput.onControlsChanged += ctx => OnDeviceChanged();
         //OnDeviceChanged();
+    }
+
+    private void OnSceneUnloaded()
+    {
+        lastInputType = inputType;
+        Debug.Log("Last Input Device: " + lastInputType);
     }
 }
