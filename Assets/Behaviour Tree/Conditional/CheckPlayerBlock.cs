@@ -7,13 +7,13 @@ using BehaviorDesigner.Runtime.Tasks;
 public class CheckPlayerBlock : EnemyConditionalBase
 {
     public SharedTransform Target;
-    public ActionPeformStateBlock actionPeformStateBlock;
-    public string rpActionName;
+    //public ActionPeformStateBlock actionPeformStateBlock;
+    //public string rpActionName;
     
-    public SharedFloat priority;
+    //public SharedFloat priority;
     
-    public BehaviorTree behaviorTree;
-    private Task task;
+    //public BehaviorTree behaviorTree;
+    //private Task task;
     
     public Character _m;
 
