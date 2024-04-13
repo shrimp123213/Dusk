@@ -76,7 +76,6 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Update()
     {
-        
         if(InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Gamepad)
         {
             hintGridLayoutGroup.cellSize = new Vector2(131, 51);

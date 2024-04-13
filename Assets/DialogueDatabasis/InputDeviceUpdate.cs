@@ -47,8 +47,13 @@ public class InputDeviceUpdate : MonoBehaviour
 
     private void Start()
     {
-        if(playerInput == null)
-            playerInput = PlayerMain.i.GetComponent<PlayerInput>();
+        if (playerInput == null)
+        {
+            playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>() != null
+                ? GameObject.FindWithTag("Player").GetComponent<PlayerInput>()
+                : PlayerMain.i.GetComponent<PlayerInput>();
+        }
+
         playerInput.onControlsChanged += ctx => OnDeviceChanged();
         
         if(dialogueManager == null)
@@ -97,8 +102,14 @@ public class InputDeviceUpdate : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // 重新獲取playerInput
-        if(playerInput == null)
-            playerInput = PlayerMain.i.GetComponent<PlayerInput>();
+        if (playerInput == null)
+        {
+            playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>() != null
+                ? GameObject.FindWithTag("Player").GetComponent<PlayerInput>()
+                : PlayerMain.i.GetComponent<PlayerInput>();
+            
+            //playerInput = PlayerMain.i.GetComponent<PlayerInput>();
+        }
         if(dialogueManager == null)
             dialogueManager = DialogueManager.instance.gameObject;
         //inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
