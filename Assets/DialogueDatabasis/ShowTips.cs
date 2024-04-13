@@ -46,7 +46,7 @@ public class ShowTips : MonoBehaviour
     
     void Update()
     {
-        //inputType = InputDeviceManager.instance.inputDevice == InputDevice.Joystick ? InputType.Gamepad : InputType.Keyboard;
+        inputType = InputDeviceManager.instance.inputDevice == InputDevice.Joystick ? InputType.Gamepad : InputType.Keyboard;
     }
     
     void ShowTip(string tip)
