@@ -41,7 +41,7 @@ public class ShowTips : MonoBehaviour
         tipText.color = new Color(1, 1, 1, 0);
         if(tipBackgroundPanel != null)
             tipBackgroundPanel.color = new Color(0, 0, 0, 0);
-        inputType = InputType.Gamepad;
+        inputType = (InputType)InputDeviceUpdate.i.inputType;
     }
     
     void Update()

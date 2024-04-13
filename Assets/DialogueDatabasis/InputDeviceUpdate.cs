@@ -113,7 +113,7 @@ public class InputDeviceUpdate : MonoBehaviour
         if(dialogueManager == null)
             dialogueManager = DialogueManager.instance.gameObject;
         //inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
-        playerInput.onControlsChanged += ctx => OnDeviceChanged();
+        //playerInput.onControlsChanged += ctx => OnDeviceChanged();
         //OnDeviceChanged();
     }
 }
