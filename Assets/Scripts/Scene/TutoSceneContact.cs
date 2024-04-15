@@ -47,6 +47,7 @@ public class TutoSceneContact : MonoBehaviour
             //bossVCam.gameObject.SetActive(true);
             //bossVCam.GetComponent<CinemachineCameraOffset>().m_Offset.y = 0f;
             //bossVCam.GetComponent<BossCamScript>().maxOffsetY = 0f;
+            
             if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75f)
             {
                 speed = 1f;
@@ -73,7 +74,7 @@ public class TutoSceneContact : MonoBehaviour
                     BossName.fontSize = endFontSize;
                     BossNameBackground.color = new Color(0f, 0f, 0f, 0f);
                 }
-                    
+                
             }
         }
     }
