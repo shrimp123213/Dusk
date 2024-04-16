@@ -23,9 +23,44 @@ public class ActionDanmakuObj : ActionBaseObj
     {
         base.ProcessAction(_m);
         ActionPeformState actionState = _m.ActionState;
-        foreach (var data in danmaku.bulletSpawnData)
+
+        for (int i = 0; i < danmaku.bulletSpawnData.Count; i++)
         {
-            if (actionState.IsAfterFrame(data.shootKey) && !shooted)
+            var data = danmaku.bulletSpawnData[i];
+            shooted = false;
+            if (actionState.IsAtFrame(data.shootKey))
+            {
+                _mPosition = _m.transform.position;
+                Debug.Log(string.Concat(new object[]
+                {
+                    "Fire in ",
+                    data.shootKey,
+                    "/",
+                    actionState.Frame,
+                    "/",
+                    actionState.LastFrame
+                }));
+                //_m.StartCoroutine(this.SpawnBullet(_m));
+                
+                var rotation = _m.Facing > 0 ? data.rotation : -data.rotation;
+                var damage = new Damage(_m.Attack.Final * DamageRatio,DamageType.Bullet);
+                var position = _mPosition;
+                var scale = data.scale;
+                if(scale != Vector3.zero)
+                    danmaku.bulletPrefab.transform.localScale = scale;
+                if(!shooted)
+                {
+                    Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation))
+                    .GetComponent<Bullet>().SetAwake(_m, data.shotsDelay, damage, danmaku);
+                    shooted = true;
+                }
+            }
+        }
+        
+        /*foreach (var data in danmaku.bulletSpawnData)
+        {
+            shooted = false;
+            if (actionState.IsWithinFrame(data.shootKey,data.shootKey+1) && !shooted)
             {
                 shooted = true;
                 _mPosition = _m.transform.position;
@@ -38,9 +73,18 @@ public class ActionDanmakuObj : ActionBaseObj
                     "/",
                     actionState.LastFrame
                 }));
-                _m.StartCoroutine(this.SpawnBullet(_m));
+                //_m.StartCoroutine(this.SpawnBullet(_m));
+                
+                var rotation = _m.Facing > 0 ? data.rotation : -data.rotation;
+                var damage = new Damage(_m.Attack.Final * DamageRatio,DamageType.Bullet);
+                var position = _mPosition;
+                var scale = data.scale;
+                if(scale != Vector3.zero)
+                    danmaku.bulletPrefab.transform.localScale = scale;
+                Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation))
+                    .GetComponent<Bullet>().SetAwake(_m, data.shotsDelay, damage, danmaku);
             }
-        }
+        }*/
         
     }
 

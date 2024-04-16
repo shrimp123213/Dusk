@@ -88,8 +88,8 @@ public class InputDeviceUpdate : MonoBehaviour
                 ? InputDevice.Joystick
                 : InputDevice.Keyboard;
             DialogueLua.SetVariable("InputDevice", InputDeviceManager.instance.inputDevice.ToString());
-            Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
-            Debug.Log("Input Device: " + DialogueLua.GetVariable("InputDevice").AsString);
+            //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
+            //Debug.Log("Input Device: " + DialogueLua.GetVariable("InputDevice").AsString);
         }
         
     }

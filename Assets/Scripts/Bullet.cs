@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
         Damage = _damage;
         Speed = _danmakuData.bulletSpeed * Owner.Facing;
         
-        transform.localScale = new Vector3(Owner.Facing, 1, 1) * .6f;
+        transform.localScale = new Vector3(transform.localScale.x * Owner.Facing, transform.localScale.y, transform.localScale.z);
         
         Destroy(gameObject, LifeTime);
         foreach (var data in _danmakuData.bulletSpawnData)
@@ -96,7 +96,7 @@ public class Bullet : MonoBehaviour
         Dead = true;
         Awaked = false;
         //Rigid.velocity = Vector2.zero;
-        //Collider.isTrigger = false;
+        Collider.enabled = false;
         if(destroyOnHit)
             Destroy(gameObject);
     }

@@ -45,7 +45,7 @@ public class GSpear : Bullet
         Dead = true;
         Awaked = false;
         //Rigid.velocity = Vector2.zero;
-        Collider.isTrigger = false;
+        Collider.enabled = false;
         if(destroyOnHit)
             Destroy(gameObject);
     }
@@ -67,6 +67,5 @@ public class GSpear : Bullet
         GameObject omen = Instantiate(Omen, new Vector3(transform.position.x, offsetY, 0), Quaternion.Euler(0, 0, 0));
         yield break;
     }
-    
 
 }

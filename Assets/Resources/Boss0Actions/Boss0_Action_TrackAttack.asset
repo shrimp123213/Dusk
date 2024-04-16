@@ -31,6 +31,14 @@ MonoBehaviour:
     HitMax: 0
     SpawnOmen: 1
     SpawnKeyFrame: 10
+  - KeyFrameFrom: 131
+    KeyFrameEnd: 136
+    Offset: {x: 4, y: 2, z: 0}
+    Range: {x: 4.5, y: 4}
+    Angle: 0
+    HitMax: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -101,7 +109,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 13.321167, y: -8}
+    TargetDistance: {x: 19.71611, y: -8}
     FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
