@@ -31,7 +31,7 @@ public class BossTest : Character
     
     public override void OnAwake()
     {
-        HealthMax = new CharacterStat(300f);
+        HealthMax = new CharacterStat(400f);
         Speed = new CharacterStat(3f);
         base.OnAwake();
         SliderHealthTop = GameObject.Find("BossHealthTop").GetComponent<Slider>();
@@ -84,6 +84,7 @@ public class BossTest : Character
                 door.SetActive(false);
                 BossHealthBar.localScale = new Vector3(0f, .75f, .75f);
                 BossName.text = "";
+                MusicManager.i.Play("OutSide", 0, 5f, 5f);
             }
                 
             
