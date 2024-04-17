@@ -78,39 +78,57 @@ public class ActionTransformationObj : ActionBaseObj
 
     public void ChangeRenderer(Character _m)
     {
-        if (_m.Player.CatMode)
+        if (_m.Player.dramaCatMode)
         {
-            //_m.Renderer.enabled = true;
-            //_m.Player.CatRenderer.enabled = false;
-            //_m.Ani.runtimeAnimatorController = _m.Player.HumanAni;
-            _m.Renderer.gameObject.SetActive(true);
-            _m.Player.CatRenderer.gameObject.SetActive(false);
+            //_m.Renderer = _m.Player.humanRenderer;
+            //_m.Renderer.gameObject.SetActive(true);
+            //_m.Player.CatRenderer.gameObject.SetActive(false);
+            //_m.Player.dramaCatRenderer.gameObject.SetActive(false);
 
-            _m.Ani = _m.Renderer.GetComponent<Animator>();
+            //_m.Ani = _m.Renderer.GetComponent<Animator>();
 
             _m.Player.EvadeState.Renderer = _m.Renderer;
             _m.Player.InvincibleState.Renderer = _m.Renderer;
             _m.Player.HitEffect.Ani = _m.Ani;
 
-            _m.Player.SwitchMode();
             _m.Player.CheckFace();
         }
         else
         {
-            //_m.Renderer.enabled = false;
-            //_m.Player.CatRenderer.enabled = true;
-            //_m.Ani.runtimeAnimatorController = _m.Player.CatAni;
-            _m.Renderer.gameObject.SetActive(false);
-            _m.Player.CatRenderer.gameObject.SetActive(true);
+            if (_m.Player.CatMode)
+            {
+                //_m.Renderer.enabled = true;
+                //_m.Player.CatRenderer.enabled = false;
+                //_m.Ani.runtimeAnimatorController = _m.Player.HumanAni;
+                _m.Renderer.gameObject.SetActive(true);
+                _m.Player.CatRenderer.gameObject.SetActive(false);
 
-            _m.Ani = _m.Player.CatRenderer.GetComponent<Animator>();
+                _m.Ani = _m.Renderer.GetComponent<Animator>();
 
-            _m.Player.EvadeState.Renderer = _m.Player.CatRenderer;
-            _m.Player.InvincibleState.Renderer = _m.Player.CatRenderer;
-            _m.Player.HitEffect.Ani = _m.Ani;
+                _m.Player.EvadeState.Renderer = _m.Renderer;
+                _m.Player.InvincibleState.Renderer = _m.Renderer;
+                _m.Player.HitEffect.Ani = _m.Ani;
 
-            _m.Player.SwitchMode();
-            _m.Player.CheckFace();
+                _m.Player.SwitchMode();
+                _m.Player.CheckFace();
+            }
+            else
+            {
+                //_m.Renderer.enabled = false;
+                //_m.Player.CatRenderer.enabled = true;
+                //_m.Ani.runtimeAnimatorController = _m.Player.CatAni;
+                _m.Renderer.gameObject.SetActive(false);
+                _m.Player.CatRenderer.gameObject.SetActive(true);
+
+                _m.Ani = _m.Player.CatRenderer.GetComponent<Animator>();
+
+                _m.Player.EvadeState.Renderer = _m.Player.CatRenderer;
+                _m.Player.InvincibleState.Renderer = _m.Player.CatRenderer;
+                _m.Player.HitEffect.Ani = _m.Ani;
+
+                _m.Player.SwitchMode();
+                _m.Player.CheckFace();
+            }
         }
     }
 }

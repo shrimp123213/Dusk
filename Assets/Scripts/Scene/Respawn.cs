@@ -2,16 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Respawn : MonoBehaviour
 {
     public static Respawn i;
     
-    public GameObject player;
     public List<Vector3> respawnPoints = new List<Vector3>();
 
     private Character playerChr;
     private string sceneName;
+    private GameObject player;
     
     private bool isRespawned = false;
     
@@ -31,16 +32,22 @@ public class Respawn : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
         
+        SceneManager.sceneLoaded += (scene, mode) => OnSceneLoaded();
     }
 
-    void Start()
+    private void OnSceneLoaded()
     {
-        player = GameObject.FindWithTag("Player");
-        playerChr = player.GetComponent<Character>();
+        player = PlayerMain.i.gameObject;
+        sceneName = SceneManager.GetActiveScene().name;
         if(sceneName == "TutorialScene")
         {
             RespawnPlayer();
         }
+    }
+
+    void Start()
+    {
+        
     }
 
     private void Update()
@@ -64,7 +71,7 @@ public class Respawn : MonoBehaviour
     {
         if (_sceneName == "TutorialScene")
         {
-            sceneName = _sceneName;
+            //sceneName = _sceneName;
             respawnPoints.Add(newRespawnPoint);
         }
     }
@@ -79,7 +86,7 @@ public class Respawn : MonoBehaviour
         }
         else
         {
-            player.transform.position = new Vector3(-18.6f, -5f, 0);
+            //player.transform.position = new Vector3(-18.6f, -5f, 0);
         }
     }
     

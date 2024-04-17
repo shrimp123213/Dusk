@@ -44,6 +44,7 @@ public class TutorialManager : MonoBehaviour
     {
         //playerAct.Disable();
         isPanelActive = true;
+        //PlayerMain.i.GetComponent<PlayerInput>().enabled = false;
         if (InputDeviceManager.instance.inputDevice == InputDevice.Joystick)
         {
             tutorialPanel_Pad.SetActive(true);

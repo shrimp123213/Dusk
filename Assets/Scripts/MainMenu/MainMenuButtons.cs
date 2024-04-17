@@ -72,6 +72,7 @@ public class MainMenuButtons : MonoBehaviour
     private void Start()
     {
         MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
+        
     }
 
     private void Update()
@@ -99,6 +100,9 @@ public class MainMenuButtons : MonoBehaviour
 
     private void OnEnable()
     {
+        DramaManager.i.dramaList.Clear();
+        DramaManager.i.dramaCatEnd = false;
+        Respawn.i.respawnPoints.Clear();
         currentButtonIndex = 0;
         buttons[currentButtonIndex].Select();
     }

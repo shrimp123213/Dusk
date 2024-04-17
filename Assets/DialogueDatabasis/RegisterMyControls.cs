@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
@@ -24,6 +25,14 @@ public class RegisterMyControls : MonoBehaviour
         //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
     }
 
+    private void Update()
+    {
+        /*if(controls.FindAction("Submit").WasPressedThisFrame())
+            Debug.Log("Action: " + controls.FindAction("Submit").name);
+        if(controls.FindAction("MainMenuSubmit").WasPressedThisFrame())
+            Debug.Log("Action: " + controls.FindAction("MainMenuSubmit").name);*/
+    }
+
     void OnEnable()
     {
         if (!isRegistered)
@@ -40,6 +49,7 @@ public class RegisterMyControls : MonoBehaviour
             InputDeviceManager.RegisterInputAction("UI_Movement", controls.UI.UI_Movement);
             InputDeviceManager.RegisterInputAction("Submit", controls.UI.Submit);
             InputDeviceManager.RegisterInputAction("Back", controls.UI.Back);
+            InputDeviceManager.RegisterInputAction("MainMenuSubmit", controls.UI.MainMenuSubmit);
         }
     }
 
@@ -59,6 +69,7 @@ public class RegisterMyControls : MonoBehaviour
             InputDeviceManager.UnregisterInputAction("UI_Movement");
             InputDeviceManager.UnregisterInputAction("Submit");
             InputDeviceManager.UnregisterInputAction("Back");
+            InputDeviceManager.UnregisterInputAction("MainMenuSubmit");
         }
     }
 }

@@ -127,9 +127,12 @@ public class AerutaDebug : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            Character component2 = Object.Instantiate(Resources.Load<GameObject>("Character/EnemyA/Enemy01"), PlayerMain.i.transform.position, Quaternion.identity).GetComponent<Character>();
-            component2.Health = 100f;
-            component2.Speed.BaseSet(0f);
+            if(!PlayerMain.i.isDead)
+                PlayerMain.i.Health = 100f;
+            
+            //Character component2 = Object.Instantiate(Resources.Load<GameObject>("Character/EnemyA/Enemy01"), PlayerMain.i.transform.position, Quaternion.identity).GetComponent<Character>();
+            //component2.Health = 100f;
+            //component2.Speed.BaseSet(0f);
         }
 
         if (Input.GetKeyDown(KeyCode.F5))
@@ -140,6 +143,7 @@ public class AerutaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F6))
         {
             SceneManager.LoadScene(1);
+            Respawn.i.respawnPoints.Clear();
         }
         
         if (Input.GetKeyDown(KeyCode.F7))
@@ -150,11 +154,14 @@ public class AerutaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F8))
         {
             SceneManager.LoadScene(3);
+            DramaManager.i.dramaCatEnd = true;
         }
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            if(checkPointPos != null)
-                PlayerMain.i.transform.position = checkPointPos.position;
+            if(checkPointPos == null)
+                return;
+            PlayerMain.i.transform.position = checkPointPos.position;
+            DramaManager.i.dramaCatEnd = true;
         }
         
 

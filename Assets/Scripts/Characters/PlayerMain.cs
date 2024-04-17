@@ -87,9 +87,12 @@ public class PlayerMain : Character
     
     private bool isPause;
     private GameObject eventSystem;
-
-
-
+    
+    public bool dramaCatMode = false;
+    public bool dramaEnd = false;
+    public SkeletonMecanim dramaCatRenderer;
+    public SkeletonMecanim humanRenderer;
+    
 
     private void OnEnable()
     {
@@ -132,8 +135,10 @@ public class PlayerMain : Character
 
         startedFade = false;
 
+        humanRenderer = gameObject.transform.GetChild(0).GetComponent<SkeletonMecanim>();
         CatRenderer = gameObject.transform.GetChild(1).GetComponent<SkeletonMecanim>();
-
+        dramaCatRenderer = gameObject.transform.GetChild(2).GetComponent<SkeletonMecanim>();
+        
         CanInput = false;
         
         eventSystem = GameObject.Find("EventSystem");
@@ -142,6 +147,25 @@ public class PlayerMain : Character
     private void Start()
     {
         MorphListDisplayer.i.Target = Morph;
+
+        if (dramaCatMode)
+        {
+            Renderer.gameObject.SetActive(false);
+            dramaCatRenderer.gameObject.SetActive(true);
+            Ani = dramaCatRenderer.GetComponent<Animator>();
+            Renderer = dramaCatRenderer;
+            Speed = new CharacterStat(2f);
+        }
+        /*else
+        {
+            //Renderer.gameObject.SetActive(true);
+            dramaCatRenderer.gameObject.SetActive(false);
+            Renderer = transform.GetChild(0).GetComponent<SkeletonMecanim>();
+            //Ani = Renderer.GetComponent<Animator>();
+            Speed = new CharacterStat(5.5f);
+            //StartAction(ActionLoader.i.Actions["CatTransformation"]);
+        }*/
+        
         //Debug.Log(Input.GetJoystickNames().Length);
         //Morph.Add(100000);
     }
@@ -156,6 +180,12 @@ public class PlayerMain : Character
         else
         {
             transform.GetChild(1).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(1).localScale.x) * (float)Facing, base.transform.GetChild(1).localScale.y, 1f);
+            EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
+        }
+
+        if (dramaCatMode)
+        {
+            transform.GetChild(2).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(1).localScale.x) * (float)Facing, base.transform.GetChild(1).localScale.y, 1f);
             EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
         }
     }
@@ -482,6 +512,22 @@ public class PlayerMain : Character
         //{
         //    CanDash = base.isGround;
         //}
+
+        if (DramaManager.i.dramaCatEnd && !dramaEnd)
+        {
+            Renderer = humanRenderer;
+            dramaCatMode = false;
+            Speed = new CharacterStat(5.5f);
+            //StartAction(ActionLoader.i.Actions["CatTransformation"]);
+            dramaEnd = true;
+            Renderer.gameObject.SetActive(true);
+            dramaCatRenderer.gameObject.SetActive(false);
+            Ani = Renderer.GetComponent<Animator>();
+            EvadeState.Renderer = Renderer;
+            InvincibleState.Renderer = Renderer;
+            HitEffect.Ani = Ani;
+        }
+        
         if (!CanDash)
         {
             DashCooldown -= Time.deltaTime;
@@ -505,12 +551,7 @@ public class PlayerMain : Character
         }
         if (CanInput)
         {
-            KeyJump = playerAct.FindAction("Jump").IsPressed();
             bool flag = Ani.GetCurrentAnimatorStateInfo(0).IsTag("Immobile");
-            if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
-            {
-                KeyJumpJust = true;
-            }
             Xinput = (flag ? 0f : playerAct.FindAction("Movement").ReadValue<Vector2>().x);
             if (Xinput != 0f && isGround)
             {
@@ -525,6 +566,14 @@ public class PlayerMain : Character
             else
                 runSoundInverval = 0f;
             Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
+            if(dramaCatMode)
+                return;
+            KeyJump = playerAct.FindAction("Jump").IsPressed();
+            if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
+            {
+                KeyJumpJust = true;
+            }
+            
             Morph.Drive = playerAct.FindAction("Hint_Energy").IsPressed();
             if (playerAct.FindAction("Claw").IsPressed())
             {
@@ -611,7 +660,7 @@ public class PlayerMain : Character
         if (isDead)
         {
             SkeletonMecanim targetRenderer = Renderer;
-            if (CatMode) 
+            if (CatMode)
                 targetRenderer = CatRenderer;
 
             if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Failed") && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .5f)
