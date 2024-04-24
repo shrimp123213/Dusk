@@ -78,30 +78,31 @@ public class ActionTransformationObj : ActionBaseObj
 
     public void ChangeRenderer(Character _m)
     {
-        if (_m.Player.dramaCatMode)
+        switch (_m.Player.state)
         {
-            //_m.Renderer = _m.Player.humanRenderer;
-            //_m.Renderer.gameObject.SetActive(true);
-            //_m.Player.CatRenderer.gameObject.SetActive(false);
-            //_m.Player.dramaCatRenderer.gameObject.SetActive(false);
+            case PlayerMain.State.Injured:
+                _m.Renderer = _m.Player.humanRenderer;
+                _m.Renderer.gameObject.SetActive(true);
+                _m.Player.CatRenderer.gameObject.SetActive(false);
+                _m.Player.dramaCatRenderer.gameObject.SetActive(false);
+                
+                _m.Ani = _m.Renderer.GetComponent<Animator>();
+                    
+                _m.Player.EvadeState.Renderer = _m.Renderer;
+                _m.Player.InvincibleState.Renderer = _m.Renderer;
+                _m.Player.HitEffect.Ani = _m.Ani;
 
-            //_m.Ani = _m.Renderer.GetComponent<Animator>();
-
-            _m.Player.EvadeState.Renderer = _m.Renderer;
-            _m.Player.InvincibleState.Renderer = _m.Renderer;
-            _m.Player.HitEffect.Ani = _m.Ani;
-
-            _m.Player.CheckFace();
-        }
-        else
-        {
-            if (_m.Player.CatMode)
-            {
+                _m.Player.SwitchMode();
+                _m.Player.CheckFace();
+                break;
+            //if (_m.Player.CatMode)
+            case PlayerMain.State.Cat:
                 //_m.Renderer.enabled = true;
                 //_m.Player.CatRenderer.enabled = false;
                 //_m.Ani.runtimeAnimatorController = _m.Player.HumanAni;
                 _m.Renderer.gameObject.SetActive(true);
                 _m.Player.CatRenderer.gameObject.SetActive(false);
+                _m.Player.dramaCatRenderer.gameObject.SetActive(false);
 
                 _m.Ani = _m.Renderer.GetComponent<Animator>();
 
@@ -111,14 +112,31 @@ public class ActionTransformationObj : ActionBaseObj
 
                 _m.Player.SwitchMode();
                 _m.Player.CheckFace();
-            }
-            else
-            {
+                break;
+            case PlayerMain.State.Human:
                 //_m.Renderer.enabled = false;
                 //_m.Player.CatRenderer.enabled = true;
                 //_m.Ani.runtimeAnimatorController = _m.Player.CatAni;
+                if (_m.Player.isInjured)
+                {
+                    _m.Renderer.gameObject.SetActive(false);
+                    _m.Player.CatRenderer.gameObject.SetActive(false);
+                    _m.Player.dramaCatRenderer.gameObject.SetActive(true);
+                    _m.Renderer = _m.Player.dramaCatRenderer;
+
+                    _m.Ani = _m.Player.dramaCatRenderer.GetComponent<Animator>();
+
+                    _m.Player.EvadeState.Renderer = _m.Player.dramaCatRenderer;
+                    _m.Player.InvincibleState.Renderer = _m.Player.dramaCatRenderer;
+                    _m.Player.HitEffect.Ani = _m.Ani;
+
+                    _m.Player.SwitchMode();
+                    _m.Player.CheckFace();
+                    return;
+                }
                 _m.Renderer.gameObject.SetActive(false);
                 _m.Player.CatRenderer.gameObject.SetActive(true);
+                _m.Player.dramaCatRenderer.gameObject.SetActive(false);
 
                 _m.Ani = _m.Player.CatRenderer.GetComponent<Animator>();
 
@@ -128,7 +146,7 @@ public class ActionTransformationObj : ActionBaseObj
 
                 _m.Player.SwitchMode();
                 _m.Player.CheckFace();
-            }
+                break;
         }
     }
 }

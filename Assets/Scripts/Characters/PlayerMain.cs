@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using DG.Tweening;
 using Spine.Unity;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerMain : Character
 {
@@ -72,7 +74,7 @@ public class PlayerMain : Character
 
     public Vector2 ButterflyPos;
 
-    public bool CatMode;
+    //public bool CatMode;
 
     public int AirClawCount;
 
@@ -88,11 +90,16 @@ public class PlayerMain : Character
     private bool isPause;
     private GameObject eventSystem;
     
-    public bool dramaCatMode = false;
+    //public bool dramaCatMode = false;
     public bool dramaEnd = false;
     public SkeletonMecanim dramaCatRenderer;
     public SkeletonMecanim humanRenderer;
     
+    public State state = State.Human;
+    public bool isInjured = false;
+    public GameObject playerDeadBodyPrefab;
+    
+    private bool ejection = false;
 
     private void OnEnable()
     {
@@ -129,7 +136,8 @@ public class PlayerMain : Character
         topMoveSpeed = .2f;
         bottomMoveSpeed = .2f;
 
-        CatMode = false;
+        //CatMode = false;
+        state = State.Human;
 
         CollisionBlockMove.enabled = false;
 
@@ -148,12 +156,14 @@ public class PlayerMain : Character
     {
         MorphListDisplayer.i.Target = Morph;
 
-        if (dramaCatMode)
+        //if (dramaCatMode)
+        if(state == State.Injured)
         {
             Renderer.gameObject.SetActive(false);
             dramaCatRenderer.gameObject.SetActive(true);
             Ani = dramaCatRenderer.GetComponent<Animator>();
             Renderer = dramaCatRenderer;
+            //Ani.SetLayerWeight(1,1);
             Speed = new CharacterStat(2f);
         }
         /*else
@@ -172,22 +182,15 @@ public class PlayerMain : Character
 
     public override void CheckFace()
     {
-        if (!CatMode)
+        int child = 0;
+        //child = !CatMode ? 0 : 1;
+        child = state == State.Human ? 0 : 1;
+        if (state == State.Injured)
         {
-            transform.GetChild(0).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(0).localScale.x) * (float)Facing, base.transform.GetChild(0).localScale.y, 1f);
-            EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
+            child = 2;
         }
-        else
-        {
-            transform.GetChild(1).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(1).localScale.x) * (float)Facing, base.transform.GetChild(1).localScale.y, 1f);
-            EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
-        }
-
-        if (dramaCatMode)
-        {
-            transform.GetChild(2).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(1).localScale.x) * (float)Facing, base.transform.GetChild(1).localScale.y, 1f);
-            EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
-        }
+        transform.GetChild(child).localScale = new Vector3(Mathf.Abs(base.transform.GetChild(child).localScale.x) * (float)Facing, base.transform.GetChild(child).localScale.y, 1f);
+        EvadeState.EvadeDistanceEffect.transform.localPosition = new Vector3(Mathf.Abs(EvadeState.EvadeDistanceEffect.transform.localPosition.x) * -(float)Facing, .1f, 1f);
     }
 
     public override void ProcessInput()
@@ -224,7 +227,8 @@ public class PlayerMain : Character
         //    NowAction.EndAction(this);
         //    Inputs.Remove(InputKey.Claw);
         //}
-        if (!CatMode)
+        //if (!CatMode)
+        if(state == State.Human)
         {
             if (Inputs.Contains(InputKey.Dash))
             {
@@ -396,12 +400,14 @@ public class PlayerMain : Character
 
         if (flag && _actionBaseObj.name.Contains("Claw") && !isGround)
         {
-            if (!CatMode && AirClawCount >= 4)
+            //if (!CatMode && AirClawCount >= 4)
+            if (state != State.Cat && AirClawCount >= 4)
             {
                 Debug.Log("空中連擊4次");
                 flag = false;
             }
-            else if (CatMode && AirClawCount >= 4)
+            //else if (CatMode && AirClawCount >= 4)
+            else if (state == State.Cat && AirClawCount >= 4)
             {
                 Debug.Log("空中連擊4次");
                 flag = false;
@@ -457,10 +463,19 @@ public class PlayerMain : Character
         CollisionBlockMove.enabled = false;
 
         CanInput = false;
-        if(!CatMode)
-            Renderer.skeleton.SetColor(Color.white);
-        else
-            CatRenderer.skeleton.SetColor(Color.white);
+        switch (state)
+        {
+            //if(!CatMode)
+            case State.Human:
+                Renderer.skeleton.SetColor(Color.white);
+                break;
+            case State.Cat:
+                CatRenderer.skeleton.SetColor(Color.white);
+                break;
+            case State.Injured:
+                dramaCatRenderer.skeleton.SetColor(Color.white);
+                break;
+        }
     }
 
     public override void TryInput(InputKey _InputKey)
@@ -515,17 +530,20 @@ public class PlayerMain : Character
 
         if (DramaManager.i.dramaCatEnd && !dramaEnd)
         {
-            Renderer = humanRenderer;
-            dramaCatMode = false;
-            Speed = new CharacterStat(5.5f);
-            //StartAction(ActionLoader.i.Actions["CatTransformation"]);
+            //Renderer = humanRenderer;
+            //dramaCatMode = false;
+            
+            //Speed = new CharacterStat(5.5f);
+            //StartAction(ActionLoader.i.Actions["Transformation"]);
+            StartAction(ActionLoader.i.Actions["CatTransformation"]);
+            //state = State.Human;
             dramaEnd = true;
-            Renderer.gameObject.SetActive(true);
+            /*Renderer.gameObject.SetActive(true);
             dramaCatRenderer.gameObject.SetActive(false);
             Ani = Renderer.GetComponent<Animator>();
             EvadeState.Renderer = Renderer;
             InvincibleState.Renderer = Renderer;
-            HitEffect.Ani = Ani;
+            HitEffect.Ani = Ani;*/
         }
         
         if (!CanDash)
@@ -566,7 +584,8 @@ public class PlayerMain : Character
             else
                 runSoundInverval = 0f;
             Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
-            if(dramaCatMode)
+            //if(dramaCatMode)
+            if(state == State.Injured)
                 return;
             KeyJump = playerAct.FindAction("Jump").IsPressed();
             if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
@@ -648,7 +667,8 @@ public class PlayerMain : Character
         else
             waitSliderHealthMove -= Time.deltaTime;
 
-        if (CatMode && CatMorphPauseTime <= 0f)
+        //if (CatMode && CatMorphPauseTime <= 0f)
+        if (state == State.Cat && CatMorphPauseTime <= 0f)
         {
             Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
             if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "CatTransformation")) 
@@ -657,10 +677,29 @@ public class PlayerMain : Character
         else if (CatMorphPauseTime > 0f)
             CatMorphPauseTime -= Time.deltaTime;
 
+        if (state == State.Human && isInjured)
+        {
+            //state = State.Injured;
+            if (CanInput && (NowAction == null || NowAction.Id != "Transformation"))
+                StartAction(ActionLoader.i.Actions["Transformation"]);
+            if (!ejection)
+            {
+                ejection = true;
+                Instantiate(playerDeadBodyPrefab, transform.position, Quaternion.identity).GetComponent<DeadBody>().SetFace(i);
+            }
+        }
+        
+        /*if(state == State.Injured && isInjured && !ejection)
+        {
+            ejection = true;
+            Instantiate(playerDeadBodyPrefab, transform.position, Quaternion.identity).GetComponent<DeadBody>().SetFace(i);
+        }*/
+
         if (isDead)
         {
             SkeletonMecanim targetRenderer = Renderer;
-            if (CatMode)
+            //if (CatMode)
+            if (state == State.Cat)
                 targetRenderer = CatRenderer;
 
             if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Failed") && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .5f)
@@ -742,11 +781,43 @@ public class PlayerMain : Character
 
     public void SwitchMode()
     {
-        CatMode = !CatMode;
+        switch (state)
+        {
+            case State.Human:
+                if (isInjured)
+                {
+                    state = State.Injured;
+                    Speed = new CharacterStat(2f);
+                }
+                else
+                {
+                    state = State.Cat;
+                    Speed = new CharacterStat(10.5f);
+                }
+                break;
+            case State.Cat:
+                state = State.Human;
+                Speed = new CharacterStat(5.5f);
+                break;
+            case State.Injured:
+                state = State.Human;
+                Speed = new CharacterStat(5.5f);
+                ejection = false;
+                break;
+        }
+        
+        /*CatMode = !CatMode;
 
         if (CatMode)
             Speed.BaseAdd(5f);
         else
-            Speed.BaseAdd(-5f);
+            Speed.BaseAdd(-5f);*/
+    }
+    
+    public enum State
+    {
+        Human,
+        Cat,
+        Injured
     }
 }

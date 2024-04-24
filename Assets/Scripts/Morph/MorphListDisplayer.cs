@@ -52,7 +52,8 @@ public class MorphListDisplayer : MonoBehaviour
         else
             MorphUI[0].SetFill(Target.MorphProgress, Target.Drive);
 
-        if (!PlayerMain.i.CatMode)
+        //if (!PlayerMain.i.CatMode)
+        if(PlayerMain.i.state != PlayerMain.State.Cat)
         {
             if (MarkLevelImage.color != Color.white)
             {

@@ -63,7 +63,8 @@ public class DramaManager : MonoBehaviour
                     if(drama.dramaEnd)
                     {
                         dramaCatEnd = true;
-                        PlayerMain.i.dramaCatMode = false;
+                        PlayerMain.i.state = PlayerMain.State.Human;
+                        //PlayerMain.i.dramaCatMode = false;
                     }
                 }
             }
@@ -72,8 +73,9 @@ public class DramaManager : MonoBehaviour
 
     void OnSceneLoaded()
     {
-        if(!dramaCatEnd)
-            PlayerMain.i.dramaCatMode = true;
+        if (!dramaCatEnd)
+            PlayerMain.i.state = PlayerMain.State.Injured;
+            //PlayerMain.i.dramaCatMode = true;
         
         if(dramaList.Count > 0)
         {
@@ -86,7 +88,8 @@ public class DramaManager : MonoBehaviour
 
         if (dramaCatEnd)
         {
-            PlayerMain.i.dramaCatMode = false;
+            PlayerMain.i.state = PlayerMain.State.Human;
+            //PlayerMain.i.dramaCatMode = false;
         }
     }
     

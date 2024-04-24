@@ -722,11 +722,13 @@ public class Character : MonoBehaviour, IHitable
 
                 //Player.Morph.Consume(Player.Morph.MorphProgress);
 
-                if (Player.CatMode)
+                //if (Player.CatMode)
+                if(Player.state == PlayerMain.State.Cat)
                     _damage.Amount *= 2;
 
                 Vector3 blurPoint = transform.position + Vector3.up * .5f;
-                if (Player.CatMode)
+                //if (Player.CatMode)
+                if(Player.state != PlayerMain.State.Human)
                     blurPoint = transform.position + Vector3.up * -.2f + Vector3.right * .3f * Facing;
                 AerutaDebug.i.SpawnPostBlurZoomIn(blurPoint, false);
 
@@ -754,6 +756,16 @@ public class Character : MonoBehaviour, IHitable
             {
                 _attacker.OnKillMob?.Invoke(this);
             }
+            
+            if(Player.state == PlayerMain.State.Human && !Player.isInjured)
+            {
+                //Player.state = PlayerMain.State.Injured;
+                Player.isInjured = true;
+                Health = 1f;
+                TakeForce(Vector3Utility.CacuFacing(Vector2.right * 60f, Vector3Utility.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+                return false;
+            }
+            
             Dead();
         }
         return true;
