@@ -10724,11 +10724,17 @@ MonoBehaviour:
   HurtEffect: {fileID: 678518315324238586, guid: e284d30a886628249a232b460d2f1312, type: 3}
   DoubleJumpEffect: {fileID: 4206865383206891496, guid: 39f14e62ec9d5824d82f94dfcb6f0a0e, type: 3}
   ButterflyPos: {x: -0.8, y: 0.8}
-  CatMode: 0
   AirClawCount: 0
   CatRenderer: {fileID: 0}
   CatMorphPauseTime: 0
   runSoundInvervalSet: 0.32
+  dramaEnd: 0
+  dramaCatRenderer: {fileID: 0}
+  humanRenderer: {fileID: 0}
+  state: 0
+  isInjured: 0
+  playerDeadBodyPrefab: {fileID: 1073523510611644835, guid: d73af890f4a40e745a997329c3a54512, type: 3}
+  bossvCam: {fileID: 0}
 --- !u!114 &1073523510611644857
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,8 +19,9 @@ MonoBehaviour:
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1
+  DamageRatio: 2
   DamageType: 0
+  SetCooldowns: []
   AttackSpots:
   - KeyFrameFrom: 87
     KeyFrameEnd: 93
@@ -93,8 +94,6 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 0101
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

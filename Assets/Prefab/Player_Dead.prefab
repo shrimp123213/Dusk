@@ -281,8 +281,7 @@ GameObject:
   - component: {fileID: 1073523510611644860}
   - component: {fileID: 8203989384288814317}
   - component: {fileID: 1569698617092382832}
-  - component: {fileID: 8413432850373905316}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Player_Dead
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -322,7 +321,9 @@ MonoBehaviour:
   playerMain: {fileID: 0}
   deadBodyRender: {fileID: 0}
   reviveSlider: {fileID: 4529929290352245850}
-  reviveTime: 3
+  reviveTime: 1
+  reviveTimer: 0
+  reviveCanvas: {fileID: 633164980375718894}
 --- !u!61 &1569698617092382832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -333,7 +334,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.12760085, y: 0}
@@ -349,48 +350,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2031912, y: 1.6397709}
   m_EdgeRadius: 0
---- !u!23 &8413432850373905316
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073523510611644835}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1513918903661095493
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,8 +540,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchoredPosition: {x: 0, y: 1.5}
+  m_SizeDelta: {x: 2560, y: 1440}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4230878148145416294
 Canvas:

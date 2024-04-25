@@ -63,7 +63,7 @@ public class DramaManager : MonoBehaviour
                     if(drama.dramaEnd)
                     {
                         dramaCatEnd = true;
-                        PlayerMain.i.state = PlayerMain.State.Human;
+                        //PlayerMain.i.state = PlayerMain.State.Human;
                         //PlayerMain.i.dramaCatMode = false;
                     }
                 }

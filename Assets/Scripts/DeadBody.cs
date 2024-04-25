@@ -15,9 +15,14 @@ public class DeadBody : MonoBehaviour
     public Image reviveSlider;
     
     public float reviveTime = 3f;
+    [SerializeField]
     private float reviveTimer = 0f;
     
     private Animator deadBodyAnimator;
+    
+    private bool isReviving;
+    
+    public RectTransform reviveCanvas;
 
     private void Awake()
     {
@@ -30,11 +35,35 @@ public class DeadBody : MonoBehaviour
     void Start()
     {
         reviveSlider.fillAmount = 0;
+        isReviving = false;
     }
     
     void Update()
     {
         reviveSlider.fillAmount = reviveTimer / reviveTime;
+        /*
+        // 將物件的世界座標轉換為螢幕座標
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+
+        // 將螢幕座標轉換為Canvas座標
+        Vector2 canvasPosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(reviveCanvas.parent as RectTransform, screenPosition, Camera.main, out canvasPosition);
+
+        // 將reviveCanvas的位置設定為物件的上方
+        reviveCanvas.localPosition = canvasPosition + new Vector2(0, 1.5f); //物件與reviveCanvas之間的距離
+        */
+        if (!isReviving && reviveTimer >= reviveTime)
+        {
+            isReviving = true;
+            playerMain.Revive();
+            reviveCanvas.gameObject.SetActive(false);
+            DOVirtual.Color(deadBodyRender.skeleton.GetColor(), new Color(1f, 1f, 1f, 0), 1f, (value) =>
+            {
+                deadBodyRender.skeleton.SetColor(value);
+                Destroy(gameObject,1);
+            });
+            reviveTimer = 0;
+        }
     }
     
     public void SetFace(Character _m)
@@ -49,22 +78,21 @@ public class DeadBody : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!isReviving && other.CompareTag("Player") && !playerMain.isDead)
         {
             reviveTimer += Time.deltaTime;
             reviveTimer = Mathf.Clamp(reviveTimer, 0, reviveTime);
+            Debug.Log("Revive Timer: " + reviveTimer);
         }
-        if (reviveTimer >= reviveTime)
-        {
-            //playerMain.Revive();
-            Destroy(gameObject);
-            reviveTimer = 0;
-        }
+        
     }
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        reviveTimer -= Time.deltaTime;
-        reviveTimer = Mathf.Clamp(reviveTimer, 0, reviveTime);
+        if (!isReviving)
+        {
+            //reviveTimer -= Time.deltaTime;
+            //reviveTimer = Mathf.Clamp(reviveTimer, 0, reviveTime);
+        }
     }
 }

@@ -756,14 +756,17 @@ public class Character : MonoBehaviour, IHitable
             {
                 _attacker.OnKillMob?.Invoke(this);
             }
-            
-            if(Player.state == PlayerMain.State.Human && !Player.isInjured)
+
+            if ((bool)Player)
             {
-                //Player.state = PlayerMain.State.Injured;
-                Player.isInjured = true;
-                Health = 1f;
-                TakeForce(Vector3Utility.CacuFacing(Vector2.right * 60f, Vector3Utility.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
-                return false;
+                if(Player.state == PlayerMain.State.Human && !Player.isInjured)
+                {
+                    //Player.state = PlayerMain.State.Injured;
+                    Player.isInjured = true;
+                    Health = 1f;
+                    TakeForce(Vector3Utility.CacuFacing(Vector2.right * 60f, Vector3Utility.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
+                    return false;
+                }
             }
             
             Dead();

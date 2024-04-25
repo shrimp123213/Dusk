@@ -98,8 +98,11 @@ public class PlayerMain : Character
     public State state = State.Human;
     public bool isInjured = false;
     public GameObject playerDeadBodyPrefab;
+
+    public GameObject bossvCam;
     
     private bool ejection = false;
+    private bool revived = false;
 
     private void OnEnable()
     {
@@ -150,6 +153,9 @@ public class PlayerMain : Character
         CanInput = false;
         
         eventSystem = GameObject.Find("EventSystem");
+        
+        ejection = false;
+        revived = false;
     }
 
     private void Start()
@@ -530,20 +536,20 @@ public class PlayerMain : Character
 
         if (DramaManager.i.dramaCatEnd && !dramaEnd)
         {
-            //Renderer = humanRenderer;
+            Renderer = humanRenderer;
             //dramaCatMode = false;
             
-            //Speed = new CharacterStat(5.5f);
+            Speed = new CharacterStat(5.5f);
             //StartAction(ActionLoader.i.Actions["Transformation"]);
-            StartAction(ActionLoader.i.Actions["CatTransformation"]);
-            //state = State.Human;
+            //StartAction(ActionLoader.i.Actions["CatTransformation"]);
+            state = State.Human;
             dramaEnd = true;
-            /*Renderer.gameObject.SetActive(true);
+            Renderer.gameObject.SetActive(true);
             dramaCatRenderer.gameObject.SetActive(false);
             Ani = Renderer.GetComponent<Animator>();
             EvadeState.Renderer = Renderer;
             InvincibleState.Renderer = Renderer;
-            HitEffect.Ani = Ani;*/
+            HitEffect.Ani = Ani;
         }
         
         if (!CanDash)
@@ -677,11 +683,14 @@ public class PlayerMain : Character
         else if (CatMorphPauseTime > 0f)
             CatMorphPauseTime -= Time.deltaTime;
 
-        if (state == State.Human && isInjured)
+        if (state == State.Human && isInjured && !revived)
         {
             //state = State.Injured;
             if (CanInput && (NowAction == null || NowAction.Id != "Transformation"))
+            {
                 StartAction(ActionLoader.i.Actions["Transformation"]);
+                //bossvCam.SetActive(false);
+            }
             if (!ejection)
             {
                 ejection = true;
@@ -802,7 +811,7 @@ public class PlayerMain : Character
             case State.Injured:
                 state = State.Human;
                 Speed = new CharacterStat(5.5f);
-                ejection = false;
+                //ejection = false;
                 break;
         }
         
@@ -812,6 +821,15 @@ public class PlayerMain : Character
             Speed.BaseAdd(5f);
         else
             Speed.BaseAdd(-5f);*/
+    }
+
+    public void Revive()
+    {
+        if (ejection && (NowAction == null || NowAction.Id != "CatTransformation"))
+            StartAction(ActionLoader.i.Actions["CatTransformation"]);
+        Health = 10f;
+        revived = true;
+        //bossvCam.SetActive(true);
     }
     
     public enum State
