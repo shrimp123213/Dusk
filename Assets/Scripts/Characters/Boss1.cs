@@ -26,6 +26,9 @@ public class Boss1 : Character
 
     public GameObject drama_End;
     private bool dramaEnd = false;
+    
+    public Transform BossHealthBar;
+    public TMP_Text BossName;
 
     public override void OnAwake()
     {
@@ -87,6 +90,8 @@ public class Boss1 : Character
             {
                 //AerutaDebug.i.ShowStatistics();
                 //SceneManagerScript.i.ChangeScene(0,0);
+                BossHealthBar.localScale = new Vector3(0f, .75f, .75f);
+                BossName.text = "";
                 if (dramaEnd == false)
                 {
                     dramaEnd = true;

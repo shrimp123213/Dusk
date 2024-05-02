@@ -3462,12 +3462,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'SetActive(Video,true);
+        value: 'SetActive(story2,true)@1;
 
-          SetActive(story2,true)@1;
-
-          SetDialoguePanel(false);
-          SetDialoguePanel(true)@2;'
+          SetDialoguePanel(false); SetDialoguePanel(true)@2;'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13
@@ -3922,10 +3919,7 @@ MonoBehaviour:
       - title: Sequence
         value: 'SetActive(story3-2,false);
 
-          Fade(unstay,1,#FFFFFF);
-
-          SetActive(Light
-          Door,true);'
+          SetActive(Light Door,true);'
         type: 0
         typeString: CustomFieldType_Text
       - title: Response Menu Sequence
@@ -3947,8 +3941,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 77.84415
-        y: 432.20667
+        x: 76.57832
+        y: 434.73828
         width: 160
         height: 30
     entryGroups: []
@@ -4848,7 +4842,7 @@ MonoBehaviour:
       isGroup: 0
       nodeColor: 
       delaySimStatus: 0
-      falseConditionAction: 
+      falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks:
       - originConversationID: 15

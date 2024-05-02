@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using PixelCrushers;
+using PixelCrushers.DialogueSystem;
 using Spine.Unity;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.UI;
@@ -18,7 +20,7 @@ public class PlayerMain : Character
 {
     //玩家Input
     public InputActionAsset inputActionAsset;
-    private InputActionMap playerAct;
+    public InputActionMap playerAct;
     private InputActionMap UIAct;
 
     public static PlayerMain i;
@@ -102,7 +104,7 @@ public class PlayerMain : Character
     public GameObject bossvCam;
     
     private bool ejection = false;
-    private bool revived = false;
+    public bool revived = false;
 
     private void OnEnable()
     {
@@ -636,8 +638,42 @@ public class PlayerMain : Character
                 TryInput(InputKey.Dash);
             }
             
+            if (playerAct.FindAction("Pause").WasPressedThisFrame())
+            {
+                AerutaDebug.i.SetPauseStatus(true);
+                /*if (AerutaDebug.i.isPause)
+                {
+                    //playerAct.Disable();
+                    //UIAct.Enable();
+                    Debug.Log("Pause");
+                }*/
+            
+            }
+            isPause = AerutaDebug.i.isPause;
+            if (isPause)
+            {
+                eventSystem.GetComponent<InputSystemUIInputModule>().submit = InputActionReference.Create(UIAct.FindAction("MainMenuSubmit"));
+            }
+            else
+            {
+                eventSystem.GetComponent<InputSystemUIInputModule>().submit = InputActionReference.Create(UIAct.FindAction("Submit"));
+            }
+            
+            if (waitSliderHealthMove <= 0f)
+            {
+                SliderHealthTop.value = Mathf.MoveTowards(SliderHealthTop.value, base.Health / HealthMax.Final, topMoveSpeed * Time.deltaTime);
+                SliderHealthBottom.value = Mathf.MoveTowards(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomMoveSpeed * Time.deltaTime);
+            }
+            else
+                waitSliderHealthMove -= Time.deltaTime;
+            
+            if (lastHealth != base.Health)
+                HealthChenged();
+            
+            //殘障貓斷點
             if(state == State.Injured)
                 return;
+            
             
             KeyJump = playerAct.FindAction("Jump").IsPressed();
             if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
@@ -704,16 +740,8 @@ public class PlayerMain : Character
 
         
 
-        if (lastHealth != base.Health)
-            HealthChenged();
-
-        if (waitSliderHealthMove <= 0f)
-        {
-            SliderHealthTop.value = Mathf.MoveTowards(SliderHealthTop.value, base.Health / HealthMax.Final, topMoveSpeed * Time.deltaTime);
-            SliderHealthBottom.value = Mathf.MoveTowards(SliderHealthBottom.value, base.Health / HealthMax.Final, bottomMoveSpeed * Time.deltaTime);
-        }
-        else
-            waitSliderHealthMove -= Time.deltaTime;
+        
+        
 
         //if (CatMode && CatMorphPauseTime <= 0f)
         if (state == State.Cat && CatMorphPauseTime <= 0f)
@@ -772,27 +800,6 @@ public class PlayerMain : Character
             }
             //Debug.Log(Renderer.skeleton.GetColor());
         }
-        
-        if (playerAct.FindAction("Pause").WasPressedThisFrame())
-        {
-            AerutaDebug.i.PauseGame();
-            if (AerutaDebug.i.isPause)
-            {
-                playerAct.Disable();
-                UIAct.Enable();
-                Debug.Log("Pause");
-            }
-            
-        }
-        isPause = AerutaDebug.i.isPause;
-        if (isPause)
-        {
-            eventSystem.GetComponent<InputSystemUIInputModule>().submit = InputActionReference.Create(UIAct.FindAction("MainMenuSubmit"));
-        }
-        else
-        {
-            eventSystem.GetComponent<InputSystemUIInputModule>().submit = InputActionReference.Create(UIAct.FindAction("Submit"));
-        }
     }
 
     public void HealthChenged()
@@ -835,7 +842,7 @@ public class PlayerMain : Character
         switch (state)
         {
             case State.Human:
-                if (isInjured)
+                if (isInjured && !revived)
                 {
                     state = State.Injured;
                     Speed = new CharacterStat(2f);

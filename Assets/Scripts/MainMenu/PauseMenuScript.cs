@@ -100,7 +100,9 @@ public class PauseMenuScript : MonoBehaviour
 
     private void OnEnable()
     {
-        keySettingButton.Select();
+        //inputActionAsset.FindActionMap("UI").Enable();
+        //inputActionAsset.FindActionMap("Player").Disable();
+        
         optineMenuPanel = this.gameObject;
         currentPanel = optineMenuPanel;
         foreach (var selectable in this.GetComponentsInChildren<Selectable>())
@@ -108,9 +110,13 @@ public class PauseMenuScript : MonoBehaviour
             selectable.interactable = true;
             selectable.animator.enabled = true;
         }
-        PixelCrushers.UIPanel.monitorSelection = false; // Don't allow dialogue UI to steal back input focus.
-        PixelCrushers.UIButtonKeyTrigger.monitorInput = false; // Disable hotkeys.
-        PixelCrushers.DialogueSystem.DialogueManager.Pause(); // Stop DS timers (e.g., sequencer commands).
+        
+        keySettingButton.Select();
+        
+        //PixelCrushers.UIPanel.monitorSelection = false; // Don't allow dialogue UI to steal back input focus.
+        //PixelCrushers.UIButtonKeyTrigger.monitorInput = false; // Disable hotkeys.
+        //PixelCrushers.DialogueSystem.DialogueManager.Pause(); // Stop DS timers (e.g., sequencer commands).
+        DialogueManager.displaySettings.defaultCanvas.enabled = false;
     }
 
     private void OnDisable()
@@ -120,10 +126,10 @@ public class PauseMenuScript : MonoBehaviour
             selectable.interactable = false;
             selectable.animator.enabled = false;
         }
-        PixelCrushers.UIPanel.monitorSelection = true; // Allow dialogue UI to steal back input focus again.
-        PixelCrushers.UIButtonKeyTrigger.monitorInput = true; // Re-enable hotkeys.
-        PixelCrushers.DialogueSystem.DialogueManager.Unpause(); // Resume DS timers (e.g., sequencer commands).
-        EventSystem.current.SetSelectedGameObject(null);
+        //PixelCrushers.UIPanel.monitorSelection = true; // Allow dialogue UI to steal back input focus again.
+        //PixelCrushers.UIButtonKeyTrigger.monitorInput = true; // Re-enable hotkeys.
+        //PixelCrushers.DialogueSystem.DialogueManager.Unpause(); // Resume DS timers (e.g., sequencer commands).
+        DialogueManager.displaySettings.defaultCanvas.enabled = true;
     }
 
     private void Update()
@@ -306,12 +312,14 @@ public class PauseMenuScript : MonoBehaviour
             }
             
             this.gameObject.SetActive(false);
-            inputActionAsset.FindActionMap("UI").Disable();
-            inputActionAsset.FindActionMap("Player").Enable();
+            //inputActionAsset.FindActionMap("UI").Disable();
+            //inputActionAsset.FindActionMap("Player").Enable();
             Time.timeScale = 1f;
             currentPanel = null;
-            AerutaDebug.i.isPause = false;
+            //AerutaDebug.i.isPause = false;
+            AerutaDebug.i.SetPauseStatus(false);
             Debug.Log("Resume Game");
+            //EventSystem.current.SetSelectedGameObject(null);
         }
     }
     

@@ -117,7 +117,7 @@ public class ActionTransformationObj : ActionBaseObj
                 //_m.Renderer.enabled = false;
                 //_m.Player.CatRenderer.enabled = true;
                 //_m.Ani.runtimeAnimatorController = _m.Player.CatAni;
-                if (_m.Player.isInjured)
+                if (_m.Player.isInjured && !_m.Player.revived)
                 {
                     _m.Renderer.gameObject.SetActive(false);
                     _m.Player.CatRenderer.gameObject.SetActive(false);

@@ -293,19 +293,23 @@ public class AerutaDebug : MonoBehaviour
         });
     }
     
-    public void PauseGame()
+    public void SetPauseStatus(bool pause)
     {
-        if (isPause)
+        if (pause)
         {
-            pauseCanvas.SetActive(false);
-            isPause = false;
-            Time.timeScale = 1;
-        }
-        else
-        {
+            if (isPause) return;
             pauseCanvas.SetActive(true);
             isPause = true;
             Time.timeScale = 0;
+            PlayerMain.i.playerAct.Disable();
+        }
+        else
+        {
+            if (!isPause) return;
+            pauseCanvas.SetActive(false);
+            isPause = false;
+            Time.timeScale = 1;
+            PlayerMain.i.playerAct.Enable();
         }
     }
 
