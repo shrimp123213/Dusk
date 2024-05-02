@@ -84,7 +84,7 @@ public class BossTest : Character
                 door.SetActive(false);
                 BossHealthBar.localScale = new Vector3(0f, .75f, .75f);
                 BossName.text = "";
-                MusicManager.i.Play("OutSide", 0, 5f, 5f);
+                MusicManager.i.Play("OutSide", 0, 5f, .5f);
             }
                 
             

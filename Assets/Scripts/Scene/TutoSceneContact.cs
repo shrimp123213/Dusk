@@ -92,7 +92,7 @@ public class TutoSceneContact : MonoBehaviour
             
             PlayerMain.i.StopMove();
             PlayerMain.i.CanInput = false;
-            MusicManager.i.Play("Boss0", 0, 5f, 5f);
+            MusicManager.i.Play("Boss0", 1, 5f, .5f);
 
             //gameObject.SetActive(false);
         }

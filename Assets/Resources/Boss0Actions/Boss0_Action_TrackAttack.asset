@@ -28,7 +28,7 @@ MonoBehaviour:
     Offset: {x: -0.5, y: 2, z: 0}
     Range: {x: 4, y: 4}
     Angle: 0
-    HitMax: 0
+    HitMax: 1
     SpawnOmen: 1
     SpawnKeyFrame: 10
   - KeyFrameFrom: 131
@@ -36,7 +36,7 @@ MonoBehaviour:
     Offset: {x: 4, y: 2, z: 0}
     Range: {x: 4.5, y: 4}
     Angle: 0
-    HitMax: 0
+    HitMax: 1
     SpawnOmen: 0
     SpawnKeyFrame: 0
   SuckEffect: 0
@@ -109,8 +109,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 9.404739, y: -8}
-    FinishTime: 0.32916588
+    TargetDistance: {x: 24.887909, y: -8}
+    FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
