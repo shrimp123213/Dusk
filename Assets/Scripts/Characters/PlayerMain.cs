@@ -228,109 +228,149 @@ public class PlayerMain : Character
             Inputs.Clear();
             return;
         }
-        //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) 攻擊時向後走可以取消攻擊，bug
-        //{
-        //    NowAction.EndAction(this);
-        //    Inputs.Remove(InputKey.Claw);
-        //}
-        //if (!CatMode)
-        if(state == State.Human)
+
+        switch (state)
         {
-            if (Inputs.Contains(InputKey.Dash))
+            //if (Xinput != 0 && base.isActing && (NowAction.Id == "Claw1" || NowAction.Id == "Claw2" || NowAction.Id == "Claw3" || NowAction.Id == "Claw4")) 攻擊時向後走可以取消攻擊，bug
+            //{
+            //    NowAction.EndAction(this);
+            //    Inputs.Remove(InputKey.Claw);
+            //}
+            //if (!CatMode)
+            case State.Human:
             {
-                if (!base.isActing || (base.isActing && NowAction.Id != "Dash"))
+                if (Inputs.Contains(InputKey.Dash))
                 {
-                    if (!Blocking)
+                    if (!base.isActing || (base.isActing && NowAction.Id != "Dash"))
                     {
-                        if (Xinput != 0f)
+                        if (!Blocking)
                         {
-                            Facing = ((Xinput > 0f) ? 1 : (-1));
+                            if (Xinput != 0f)
+                            {
+                                Facing = ((Xinput > 0f) ? 1 : (-1));
+                            }
+
+                            if (TryCastAction(ActionLoader.i.Actions["Dash"], false))
+                                StartAction(ActionLoader.i.Actions["Dash"]);
+
+                            //Morph.Consume();
+                            //CanDash = false;
+
+                            Inputs.Clear();
                         }
+                    }
+                }
 
-                        if (TryCastAction(ActionLoader.i.Actions["Dash"], false))
-                            StartAction(ActionLoader.i.Actions["Dash"]);
+                if (!base.isActing)
+                {
+                    if (Inputs.Contains(InputKey.Block))
+                    {
+                        StartAction(ActionLoader.i.Actions["Block"]);
+                        Inputs.Clear();
+                    }
 
-                        //Morph.Consume();
-                        //CanDash = false;
+                    if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
+                    {
+                        if (TryCastAction(ActionLoader.i.Actions["Claw1"], false))
+                            StartAction(ActionLoader.i.Actions["Claw1"]);
+                        Inputs.Clear();
+                    }
+
+                    if (Inputs.Contains(InputKey.Transformation))
+                    {
+                        if (TryCastAction(ActionLoader.i.Actions["Transformation"], false))
+                            StartAction(ActionLoader.i.Actions["Transformation"]);
+                        Inputs.Clear();
+                    }
+
+                    if (Inputs.Contains(InputKey.Heal))
+                    {
+                        if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                        {
+                            StartAction(ActionLoader.i.Actions["Heal"]);
+                            Potions[Potions.Count - 1].enabled = false;
+                            Potions.RemoveAt(Potions.Count - 1);
+                        }
 
                         Inputs.Clear();
                     }
                 }
+
+                break;
             }
-            if (!base.isActing)
+            case State.Cat:
             {
-                if (Inputs.Contains(InputKey.Block))
+                if (Inputs.Contains(InputKey.Dash))
                 {
-                    StartAction(ActionLoader.i.Actions["Block"]);
-                    Inputs.Clear();
-                }
-                if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
-                {
-                    if (TryCastAction(ActionLoader.i.Actions["Claw1"], false))
-                        StartAction(ActionLoader.i.Actions["Claw1"]);
-                    Inputs.Clear();
-                }
-                if (Inputs.Contains(InputKey.Transformation))
-                {
-                    if (TryCastAction(ActionLoader.i.Actions["Transformation"], false))
-                        StartAction(ActionLoader.i.Actions["Transformation"]);
-                    Inputs.Clear();
-                }
-                if (Inputs.Contains(InputKey.Heal))
-                {
-                    if (TryCastAction(ActionLoader.i.Actions["Heal"]))
+                    if (!base.isActing || (base.isActing && NowAction.Id != "CatDash"))
                     {
-                        StartAction(ActionLoader.i.Actions["Heal"]);
-                        Potions[Potions.Count - 1].enabled = false;
-                        Potions.RemoveAt(Potions.Count - 1);
-                    }
-                    Inputs.Clear();
-                }
-            }
-        }
-        else
-        {
-            if (Inputs.Contains(InputKey.Dash))
-            {
-                if (!base.isActing || (base.isActing && NowAction.Id != "CatDash"))
-                {
-                    if (!Blocking)
-                    {
-                        if (Xinput != 0f)
+                        if (!Blocking)
                         {
-                            Facing = ((Xinput > 0f) ? 1 : (-1));
+                            if (Xinput != 0f)
+                            {
+                                Facing = ((Xinput > 0f) ? 1 : (-1));
+                            }
+
+                            StartAction(ActionLoader.i.Actions["CatDash"]);
+
+                            //Morph.Consume();
+                            //CanDash = false;
+
+                            Inputs.Clear();
                         }
+                    }
+                }
 
-                        StartAction(ActionLoader.i.Actions["CatDash"]);
+                if (!base.isActing)
+                {
+                    if (Inputs.Contains(InputKey.Block))
+                    {
+                        StartAction(ActionLoader.i.Actions["CatBlock"]);
+                        Inputs.Clear();
+                    }
 
-                        //Morph.Consume();
-                        //CanDash = false;
+                    if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
+                    {
+                        if (TryCastAction(ActionLoader.i.Actions["CatClaw1"], false))
+                            StartAction(ActionLoader.i.Actions["CatClaw1"]); //CatCounterAttack
+                        Inputs.Clear();
+                    }
 
+                    if (Inputs.Contains(InputKey.Transformation))
+                    {
+                        StartAction(ActionLoader.i.Actions["CatTransformation"]);
                         Inputs.Clear();
                     }
                 }
+
+                break;
             }
-            if (!base.isActing)
+            case State.Injured:
             {
-                if (Inputs.Contains(InputKey.Block))
+                if (Inputs.Contains(InputKey.Dash))
                 {
-                    StartAction(ActionLoader.i.Actions["CatBlock"]);
-                    Inputs.Clear();
+                    if (!base.isActing || (base.isActing && NowAction.Id != "CatRolling"))
+                    {
+                        if (!Blocking)
+                        {
+                            if (Xinput != 0f)
+                            {
+                                Facing = ((Xinput > 0f) ? 1 : (-1));
+                            }
+
+                            StartAction(ActionLoader.i.Actions["CatRolling"]);
+
+                            //Morph.Consume();
+                            //CanDash = false;
+
+                            Inputs.Clear();
+                        }
+                    }
                 }
-                if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
-                {
-                    if (TryCastAction(ActionLoader.i.Actions["CatClaw1"], false))
-                        StartAction(ActionLoader.i.Actions["CatClaw1"]);//CatCounterAttack
-                    Inputs.Clear();
-                }
-                if (Inputs.Contains(InputKey.Transformation))
-                {
-                    StartAction(ActionLoader.i.Actions["CatTransformation"]);
-                    Inputs.Clear();
-                }
+
+                break;
             }
         }
-        
     }
 
     public override void TriggerMark()
@@ -591,8 +631,14 @@ public class PlayerMain : Character
                 runSoundInverval = 0f;
             Yinput = playerAct.FindAction("Movement").ReadValue<Vector2>().y;
             //if(dramaCatMode)
+            if (playerAct.FindAction("Dash").WasPressedThisFrame())
+            {
+                TryInput(InputKey.Dash);
+            }
+            
             if(state == State.Injured)
                 return;
+            
             KeyJump = playerAct.FindAction("Jump").IsPressed();
             if (playerAct.FindAction("Jump").WasPressedThisFrame() && !flag)
             {
@@ -607,10 +653,6 @@ public class PlayerMain : Character
                 //{
                 TryInput(InputKey.Claw);
                 //}
-            }
-            if (playerAct.FindAction("Dash").WasPressedThisFrame())
-            {
-                TryInput(InputKey.Dash);
             }
             if (playerAct.FindAction("Heal").WasPressedThisFrame())
             {

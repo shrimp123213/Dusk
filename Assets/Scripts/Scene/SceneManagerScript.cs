@@ -20,15 +20,16 @@ public class SceneManagerScript : MonoBehaviour
             MusicManager.i.Play(musicName, 0f, 1f, 1f);
     }
 
-    public void ChangeScene(string SceneName)
+    public void ChangeScene(string SceneName, float delay)
     {
-        StartCoroutine(ChangeSceneCoroutine(SceneName));
+        StartCoroutine(ChangeSceneCoroutine(SceneName,delay));
     }
     
-    public void ChangeScene(int SceneIndex)
+    public void ChangeScene(int SceneIndex, float delay)
     {
-        StartCoroutine(ChangeSceneCoroutine(SceneIndex));
+        StartCoroutine(ChangeSceneCoroutine(SceneIndex,delay));
     }
+    
 
     public void ChangeSceneBySaveSystem(string sceneName, string spawnpointNameInDestinationScene)
     {
@@ -40,7 +41,7 @@ public class SceneManagerScript : MonoBehaviour
     }
     
 
-    public IEnumerator ChangeSceneCoroutine(string SceneName)
+    public IEnumerator ChangeSceneCoroutine(string SceneName, float delay)
     {
         if(FadeImage == null || FadePanel == null)
         {
@@ -55,10 +56,11 @@ public class SceneManagerScript : MonoBehaviour
             FadeImage.color = new Color(0f, 0f, 0f, i);
             yield return null;
         }
+        yield return delay;
         SceneManager.LoadScene(SceneName);
     }
     
-    public IEnumerator ChangeSceneCoroutine(int SceneIndex)
+    public IEnumerator ChangeSceneCoroutine(int SceneIndex, float delay)
     {
         if(FadeImage == null || FadePanel == null)
         {
@@ -73,6 +75,7 @@ public class SceneManagerScript : MonoBehaviour
             FadeImage.color = new Color(0f, 0f, 0f, i);
             yield return null;
         }
+        yield return delay;
         SceneManager.LoadScene(SceneIndex);
     }
     

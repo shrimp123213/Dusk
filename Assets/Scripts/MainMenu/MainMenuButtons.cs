@@ -72,7 +72,9 @@ public class MainMenuButtons : MonoBehaviour
     private void Start()
     {
         MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
-        
+        FadePanel.gameObject.SetActive(true);
+        FadePanel.color = new Color(0, 0, 0, 1);
+        FadePanel.DOFade(0, 2f);
     }
 
     private void Update()
@@ -209,7 +211,7 @@ public class MainMenuButtons : MonoBehaviour
 
     void IntoGameScene()
     {
-        SceneManagerScript.i.ChangeScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManagerScript.i.ChangeScene(SceneManager.GetActiveScene().buildIndex + 1,0);
     }
 
     void ButtonFadeIn()

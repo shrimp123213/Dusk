@@ -25,7 +25,7 @@ MonoBehaviour:
   AttackSpots:
   - KeyFrameFrom: 40
     KeyFrameEnd: 44
-    Offset: {x: 1, y: 0.5, z: 0}
+    Offset: {x: 0.5, y: 0.5, z: 0}
     Range: {x: 2, y: 1}
     Angle: 0
     HitMax: 0
@@ -36,7 +36,67 @@ MonoBehaviour:
   CanTriggerMark: 0
   ClearStoredMoves: 0
   Links: []
-  Moves: []
+  Moves:
+  - KeyFrame: 20
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 3.000003
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.333333
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333302
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: -1, y: 0}
+    FinishTime: 0.16
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  - KeyFrame: 31
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 2.000003
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.333333
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333302
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: 1.5, y: 0}
+    FinishTime: 0.166
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
   Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}

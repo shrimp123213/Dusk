@@ -10,8 +10,9 @@ public class DeadBody : MonoBehaviour
 {
     public Transform deadBody;
     public PlayerMain playerMain;
-    public SkeletonMecanim deadBodyRender;
-    
+    //public SkeletonMecanim deadBodyRender;
+    public SpriteRenderer deadBodyRender;
+    public ParticleSystem playerDeadBodyEffect;
     public Image reviveSlider;
     
     public float reviveTime = 3f;
@@ -20,6 +21,7 @@ public class DeadBody : MonoBehaviour
     
     private Animator deadBodyAnimator;
     
+    
     private bool isReviving;
     
     public RectTransform reviveCanvas;
@@ -27,9 +29,11 @@ public class DeadBody : MonoBehaviour
     private void Awake()
     {
         playerMain = PlayerMain.i;
-        deadBody = gameObject.transform.GetChild(0);
-        deadBodyRender = deadBody.GetComponent<SkeletonMecanim>();
-        deadBodyAnimator = deadBody.GetComponent<Animator>();
+        deadBody = gameObject.transform.GetChild(1);
+        deadBodyRender = deadBody.GetComponent<SpriteRenderer>();
+        
+        /*deadBodyRender = deadBody.GetComponent<SkeletonMecanim>();
+        deadBodyAnimator = deadBody.GetComponent<Animator>();*/
     }
     
     void Start()
@@ -57,11 +61,17 @@ public class DeadBody : MonoBehaviour
             isReviving = true;
             playerMain.Revive();
             reviveCanvas.gameObject.SetActive(false);
-            DOVirtual.Color(deadBodyRender.skeleton.GetColor(), new Color(1f, 1f, 1f, 0), 1f, (value) =>
+            DOVirtual.Color(deadBodyRender.color, new Color(1f, 1f, 1f, 0), 1f, (value) =>
+            {
+                deadBodyRender.color = value;
+                playerDeadBodyEffect.Stop();
+                Destroy(gameObject,1);
+            });
+            /*DOVirtual.Color(deadBodyRender.skeleton.GetColor(), new Color(1f, 1f, 1f, 0), 1f, (value) =>
             {
                 deadBodyRender.skeleton.SetColor(value);
                 Destroy(gameObject,1);
-            });
+            });*/
             reviveTimer = 0;
         }
     }
@@ -69,11 +79,15 @@ public class DeadBody : MonoBehaviour
     public void SetFace(Character _m)
     {
         deadBody.localScale = new Vector3(_m.Facing, 1, 1);
-        DOVirtual.Color(deadBodyRender.skeleton.GetColor(), new Color(.3f, .3f, .3f, 1), 1f, (value) =>
+        DOVirtual.Color(deadBodyRender.color, new Color(.3f, .3f, .3f, 1), 1f, (value) =>
+        {
+            deadBodyRender.color = value;
+        });
+        /*DOVirtual.Color(deadBodyRender.skeleton.GetColor(), new Color(.3f, .3f, .3f, 1), 1f, (value) =>
         {
             deadBodyRender.skeleton.SetColor(value);
-        });
-        deadBodyAnimator.Play("Failed", 0, 1);
+        });*/
+        //deadBodyAnimator.Play("Failed", 0, 1);
     }
 
     private void OnTriggerStay2D(Collider2D other)

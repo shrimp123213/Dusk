@@ -24,6 +24,9 @@ public class Boss1 : Character
 
     private bool startedFade;
 
+    public GameObject drama_End;
+    private bool dramaEnd = false;
+
     public override void OnAwake()
     {
         HealthMax = new CharacterStat(500f);
@@ -83,7 +86,12 @@ public class Boss1 : Character
             if (Renderer.skeleton.GetColor().a <= 0 && !AerutaDebug.i.Statistics.activeSelf)
             {
                 //AerutaDebug.i.ShowStatistics();
-                SceneManagerScript.i.ChangeScene(0);
+                //SceneManagerScript.i.ChangeScene(0,0);
+                if (dramaEnd == false)
+                {
+                    dramaEnd = true;
+                    drama_End.SetActive(true);
+                }
             }
         }
     }

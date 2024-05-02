@@ -56,16 +56,19 @@ public class DramaManager : MonoBehaviour
         
         if(hasDrama)
         {
-            foreach(var drama in dramaList)
+            for (int  index = 0; index < dramaList.Count; index++)
             {
-                if(drama.dramaIndex == 3)
+                var drama = dramaList[index];
+                if (drama is { dramaIndex: 3, dramaEnd: true })
                 {
-                    if(drama.dramaEnd)
-                    {
-                        dramaCatEnd = true;
-                        //PlayerMain.i.state = PlayerMain.State.Human;
-                        //PlayerMain.i.dramaCatMode = false;
-                    }
+                    dramaCatEnd = true;
+                    //PlayerMain.i.state = PlayerMain.State.Human;
+                    //PlayerMain.i.dramaCatMode = false;
+                }
+                
+                if (drama is { dramaIndex: 90, dramaEnd: true })
+                {
+                    SceneManagerScript.i.ChangeScene(0,1);
                 }
             }
         }

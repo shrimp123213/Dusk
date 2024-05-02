@@ -18,7 +18,12 @@ public class TutorialManager : MonoBehaviour
     
     private bool isPanelActive = false;
     
+    private InputDeviceUpdate inputDeviceUpdate;
     
+    private void Awake()
+    {
+        inputDeviceUpdate = InputDeviceUpdate.i;
+    }
 
     private void Start()
     {
@@ -45,7 +50,7 @@ public class TutorialManager : MonoBehaviour
         //playerAct.Disable();
         isPanelActive = true;
         //PlayerMain.i.GetComponent<PlayerInput>().enabled = false;
-        if (InputDeviceManager.instance.inputDevice == InputDevice.Joystick)
+        if (InputDeviceUpdate.i.inputType == InputDeviceUpdate.InputType.Gamepad)
         {
             tutorialPanel_Pad.SetActive(true);
             tutorialPanel_Keyboard.SetActive(false);

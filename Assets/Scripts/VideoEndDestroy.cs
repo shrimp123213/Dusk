@@ -16,12 +16,13 @@ public class VideoEndDestroy : MonoBehaviour
     public GameObject lightDoor;
     
     private bool conversationEnd = false;
+    public bool videoEnd = false;
     
     private void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         //fadeImage.gameObject.SetActive(false);
-        rawImage.color = new Color(0, 0, 0, 0f);
+        //rawImage.color = new Color(0, 0, 0, 0f);
         videoPlayer.loopPointReached += StopVideo;
         foreach (var dramaData in DramaManager.i.dramaList)
         {
@@ -35,9 +36,10 @@ public class VideoEndDestroy : MonoBehaviour
 
     private void OnEnable()
     {
-        rawImage.DOColor(new Color(1, 1, 1, 1), 1f).OnComplete(PlayVideo);
-        fadeImage.gameObject.SetActive(true);
-        fadeImage.color = new Color(0, 0, 0, 1f);
+        //rawImage.DOColor(new Color(1, 1, 1, 1), 1f).OnComplete(PlayVideo);
+        PlayVideo();
+        //fadeImage.gameObject.SetActive(true);
+        //fadeImage.color = new Color(0, 0, 0, 1f);
     }
     
     private void Update()
@@ -45,21 +47,25 @@ public class VideoEndDestroy : MonoBehaviour
         
     }
     
+
     public void PlayVideo()
     {
         videoPlayer.Play();
         PlayerMain.i.CanInput = false;
     }
-    
+
     public void StopVideo(VideoPlayer vp)
     {
-        drama_4.SetActive(true);
+        videoEnd = true;
+        //lightDoor.SetActive(true);
+        
+        //drama_4.SetActive(true);
         //fadeImage.color = new Color(0, 0, 0, 1f);
         rawImage.DOColor(new Color(0, 0, 0, 0f), 1f).OnComplete(() =>
         {
             gameObject.SetActive(false);
             PlayerMain.i.CanInput = true;
-            fadeImage.gameObject.SetActive(false);
+            //fadeImage.gameObject.SetActive(false);
             lightDoor.SetActive(true);
         });
     }
