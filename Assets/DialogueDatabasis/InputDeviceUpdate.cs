@@ -79,8 +79,15 @@ public class InputDeviceUpdate : MonoBehaviour
     public void OnDeviceChanged()
     {
         //playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
-        
-        inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
+
+        if (playerInput.enabled)
+        {
+            inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
+        }
+        else
+        {
+            inputType = lastInputType;
+        }
         if (dialogueManager != null)
         {
             InputDeviceManager.instance.inputDevice = inputType == InputType.Gamepad
@@ -90,6 +97,7 @@ public class InputDeviceUpdate : MonoBehaviour
             //DialogueLua.SetVariable("InputDevice", inputType == InputType.Gamepad ? "Joystick" : "Keyboard");
             //Debug.Log("Input Device: " + InputDeviceManager.instance.inputDevice);
             //Debug.Log("Input Device: " + DialogueLua.GetVariable("InputDevice").AsString);
+            
         }
         
     }
@@ -113,9 +121,10 @@ public class InputDeviceUpdate : MonoBehaviour
             playerInput.SwitchCurrentControlScheme("Keyboard");
         
         InputDeviceManager.instance.inputDevice = lastInputType == InputType.Gamepad ? InputDevice.Joystick : InputDevice.Keyboard;
-        //DialogueLua.SetVariable("InputDevice", lastInputType == InputType.Gamepad ? "Joystick" : "Keyboard");
+        DialogueLua.SetVariable("InputDevice", lastInputType == InputType.Gamepad ? "Joystick" : "Keyboard");
         
-        Debug.Log("Input Device: " + playerInput.currentControlScheme);
+        Debug.Log("Input Device: " + DialogueLua.GetVariable("InputDevice").AsString);
+        //Debug.Log("Input Device: " + playerInput.currentControlScheme);
         //inputType = playerInput.currentControlScheme == "Gamepad" ? InputType.Gamepad : InputType.Keyboard;
         //playerInput.onControlsChanged += ctx => OnDeviceChanged();
         //OnDeviceChanged();

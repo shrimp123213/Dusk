@@ -3142,10 +3142,7 @@ MonoBehaviour:
       - title: Sequence
         value: 'SetActive(story3,false);
 
-          SetActive(story3-1,true);
-
-          SetDialoguePanel(false);
-          SetDialoguePanel(true)@1;'
+          SetActive(story3-1,true);'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13

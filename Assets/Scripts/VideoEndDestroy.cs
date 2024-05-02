@@ -65,6 +65,7 @@ public class VideoEndDestroy : MonoBehaviour
         {
             gameObject.SetActive(false);
             PlayerMain.i.CanInput = true;
+            DramaManager.i.dramaCatEnd = true;
             //fadeImage.gameObject.SetActive(false);
             lightDoor.SetActive(true);
         });
