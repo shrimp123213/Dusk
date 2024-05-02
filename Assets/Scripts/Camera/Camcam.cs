@@ -36,6 +36,8 @@ public class Camcam : MonoBehaviour
 
     public bool FocusPlayer;
 
+    private Camera UIcam;
+
     private void Awake()
     {
         cam = GetComponent<Camera>();
@@ -48,6 +50,7 @@ public class Camcam : MonoBehaviour
     private void Start()
     {
         Target = PlayerMain.i.transform;
+        UIcam = GameObject.Find("UICamera").GetComponent<Camera>();
     }
 
     private void FixedUpdate()
@@ -57,6 +60,7 @@ public class Camcam : MonoBehaviour
 
     private void LateUpdate()
     {
+        UIcam.orthographicSize = cam.orthographicSize;
         if (FadeIn)
         {
             PosOverride = new Vector3(0, -3f, -10f);

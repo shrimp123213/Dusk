@@ -2907,9 +2907,12 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'SetActive(story2,true);
+        value: 'SetActive(Video,true);
 
-'
+          SetActive(story2,true)@1;
+
+          SetDialoguePanel(false);
+          SetDialoguePanel(true)@2;'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13
@@ -2994,7 +2997,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 144.4241
+        y: 143.15828
         width: 160
         height: 30
     - id: 5
@@ -3024,13 +3027,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'SetDialoguePanel(false); SetDialoguePanel(true)@2;
-
-          SetActive(Video,true)@0.1;
-
-          SetActive(story2-1,false)@1;
-
-          SetActive(story3,true)@1;'
+        value: Fade(stay,,#FFFFFF);
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13
@@ -3054,8 +3051,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 79.70332
-        y: 188.17493
+        x: 78.4375
+        y: 186.90912
         width: 160
         height: 30
     - id: 6
@@ -3085,7 +3082,11 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: 'SetActive(story2-1,false);
+
+          SetActive(story3,true);
+
+          Fade(unstay,1,#FFFFFF);'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13
@@ -3197,7 +3198,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: Fade(stay,,#FFFFFF);
+        value: 
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13
@@ -3309,7 +3310,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: SetActive(story3-2,false);
+        value: 'Fade(stay,1,#FFFFFF);
+
+          SetActive(story3-2,false)@1;'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 13
@@ -3334,7 +3337,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 76.28165
-        y: 390.69083
+        y: 389.425
         width: 160
         height: 30
     - id: 11
