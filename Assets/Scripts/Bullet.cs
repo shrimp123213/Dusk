@@ -63,8 +63,8 @@ public class Bullet : MonoBehaviour
             StartCoroutine(ButtleStartUp(_delay));
             
         }
-        if(ps != null)
-            ps.Play();
+        /*if(ps != null)
+            ps.Play();*/
     }
     
     private void FixedUpdate()

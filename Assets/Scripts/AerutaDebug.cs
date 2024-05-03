@@ -163,6 +163,8 @@ public class AerutaDebug : MonoBehaviour
             PlayerMain.i.transform.position = checkPointPos.position;
             DramaManager.i.dramaCatEnd = true;
         }
+        if(Input.GetKeyDown(KeyCode.F10))
+            PlayerMain.i.Health = 1;
         
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
