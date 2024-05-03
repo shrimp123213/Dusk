@@ -7,17 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2818656613357968311, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+      propertyPath: m_Name
+      value: TutoVideo_Block
+      objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: 41.2
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.52
+      value: -0.95
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -53,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257270, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_Name
-      value: Tip_Block
+      value: Tip_Block Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257271, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: conversation
@@ -62,6 +66,23 @@ PrefabInstance:
     - target: {fileID: 5039787342755257271, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: conversationActor
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7707306972952089322}
+    - target: {fileID: 8868657479438481825, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 3a8006b3630ee6546a46b6e99bb93ecc, type: 3}
+    - target: {fileID: 8868657479438481825, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: be430c6fd0ec65d4887ec7d6f4f3d61b, type: 2}
+    - target: {fileID: 9185500098406556247, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: be430c6fd0ec65d4887ec7d6f4f3d61b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+--- !u!4 &7707306972952089322 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+  m_PrefabInstance: {fileID: 3388168418734410051}
+  m_PrefabAsset: {fileID: 0}

@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: 59.03
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.52
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224116, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_Name
-      value: Tip_Heal
+      value: Tip_Heal Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224117, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: conversation
@@ -62,6 +62,27 @@ PrefabInstance:
     - target: {fileID: 1138621009474224117, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: conversationActor
       value: 
+      objectReference: {fileID: 8231126955967173013}
+    - target: {fileID: 3543795078845996515, guid: acba24e5451a76b4081d742a13816682, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 6a5358da5ce146f438848b408e83a8b0, type: 3}
+    - target: {fileID: 3543795078845996515, guid: acba24e5451a76b4081d742a13816682, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: df17842e482f1394bbc4aa5174622528, type: 2}
+    - target: {fileID: 3838379185453696533, guid: acba24e5451a76b4081d742a13816682, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: df17842e482f1394bbc4aa5174622528, type: 2}
+    - target: {fileID: 7863350258140446709, guid: acba24e5451a76b4081d742a13816682, type: 3}
+      propertyPath: m_Name
+      value: TutoVideo_Heal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acba24e5451a76b4081d742a13816682, type: 3}
+--- !u!4 &8231126955967173013 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
+  m_PrefabInstance: {fileID: 9076978238236995198}
+  m_PrefabAsset: {fileID: 0}

@@ -7,17 +7,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2039866936695893853, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+      propertyPath: m_Name
+      value: TutoVideo_Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630049611088252235, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: ecad4dc3cc1059a41be7e6d00ad6fedc, type: 3}
+    - target: {fileID: 4630049611088252235, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 495773d6298b8d845942248c2638d254, type: 2}
+    - target: {fileID: 4912163607103788733, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 495773d6298b8d845942248c2638d254, type: 2}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: 28.45
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.52
+      value: -6.57
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29,15 +45,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -53,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962396, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_Name
-      value: Tip_Jump
+      value: Tip_Jump Variant
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962397, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: conversation
@@ -62,6 +78,11 @@ PrefabInstance:
     - target: {fileID: 9124884969472962397, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: conversationActor
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3733085852573872293}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+--- !u!4 &3733085852573872293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+  m_PrefabInstance: {fileID: 5578991566716870630}
+  m_PrefabAsset: {fileID: 0}

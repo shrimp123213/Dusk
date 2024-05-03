@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1279669734337472770, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_Name
-      value: Tip_TransBar
+      value: Tip_TransBar Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472771, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: conversation
@@ -18,18 +18,18 @@ PrefabInstance:
     - target: {fileID: 1279669734337472771, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: conversationActor
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2881060171033223209}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: 107.07
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.52
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -41,15 +41,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -63,5 +63,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3119820921498079459, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 85a5db56bb4c9be4d859b4d27f2a29e8, type: 2}
+    - target: {fileID: 3396114101924367125, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 697ee41239ab5e94d8d7c673b1f666a5, type: 3}
+    - target: {fileID: 3396114101924367125, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 85a5db56bb4c9be4d859b4d27f2a29e8, type: 2}
+    - target: {fileID: 8299930104619788547, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
+      propertyPath: m_Name
+      value: TutoVideo_TransBar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
+--- !u!4 &2881060171033223209 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1279669734337472797, guid: a5abfa82cb625684c82fbee045e77fed, type: 3}
+  m_PrefabInstance: {fileID: 3907391791992064308}
+  m_PrefabAsset: {fileID: 0}

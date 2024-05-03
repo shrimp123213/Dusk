@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6650707680470496150}
   - component: {fileID: 7837400177453144292}
   m_Layer: 5
-  m_Name: TotuVideo_Move
+  m_Name: TutoVideo_Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1168933663
   m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &6650707680470496150
@@ -593,7 +593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6648053392148771258
 RectTransform:
   m_ObjectHideFlags: 0
@@ -820,8 +820,8 @@ MonoBehaviour:
   skipBarkIfNoValidEntries: 0
   cacheBarkLines: 0
   conversation: Movement
-  conversationConversant: {fileID: 9124884969472962371}
-  conversationActor: {fileID: 0}
+  conversationConversant: {fileID: 0}
+  conversationActor: {fileID: 9124884969472962371}
   startConversationEntryID: -1
   startConversationEntryTitle: 
   exclusive: 0
@@ -923,6 +923,10 @@ PrefabInstance:
     - target: {fileID: 1652143759095011289, guid: e2c1ac940434a5242b54d72b66654687, type: 3}
       propertyPath: m_Name
       value: CFXR2 Shiny Item (Loop)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652143759095011289, guid: e2c1ac940434a5242b54d72b66654687, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1652143759095011302, guid: e2c1ac940434a5242b54d72b66654687, type: 3}
       propertyPath: m_RootOrder

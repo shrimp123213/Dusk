@@ -7,17 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 668517926164941147, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 9462a417005d78445bc83089e0fc5028, type: 2}
+    - target: {fileID: 949611713376211629, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 6ce7906c17103414f88697ff8811256e, type: 3}
+    - target: {fileID: 949611713376211629, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 9462a417005d78445bc83089e0fc5028, type: 2}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: 18.18
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.52
+      value: -6.47
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29,15 +41,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -53,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872314, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: m_Name
-      value: Tip_Dash
+      value: Tip_Dash Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3733085852573872315, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: conversation
@@ -62,6 +74,15 @@ PrefabInstance:
     - target: {fileID: 3733085852573872315, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
       propertyPath: conversationActor
       value: 
+      objectReference: {fileID: 4195040052306978505}
+    - target: {fileID: 5846692039237677243, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
+      propertyPath: m_Name
+      value: TutoVideo_Dash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
+--- !u!4 &4195040052306978505 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3733085852573872293, guid: 63e5ac33d5dceb14c90bac9d5f40afb4, type: 3}
+  m_PrefabInstance: {fileID: 718697417632421484}
+  m_PrefabAsset: {fileID: 0}
