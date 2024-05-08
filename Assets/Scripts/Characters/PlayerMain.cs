@@ -173,6 +173,7 @@ public class PlayerMain : Character
             Renderer = dramaCatRenderer;
             //Ani.SetLayerWeight(1,1);
             Speed = new CharacterStat(2f);
+            runSoundInvervalSet *= 2;
         }
         /*else
         {
@@ -580,7 +581,7 @@ public class PlayerMain : Character
         {
             Renderer = humanRenderer;
             //dramaCatMode = false;
-            
+            runSoundInvervalSet = 0.32f;
             Speed = new CharacterStat(5.5f);
             //StartAction(ActionLoader.i.Actions["Transformation"]);
             //StartAction(ActionLoader.i.Actions["CatTransformation"]);
@@ -626,7 +627,13 @@ public class PlayerMain : Character
                 {
                     runSoundInverval = runSoundInvervalSet;
                     if (NowAction == null)
-                        SoundManager.i.PlaySound("Run-" + Random.Range(1, 21));
+                    {
+                        //SoundManager.i.PlaySound("Run-" + Random.Range(1, 21));
+                        if (state == State.Human)
+                            SoundManager.i.PlaySound("Footstep_Human0" + Random.Range(1, 8));
+                        else
+                            SoundManager.i.PlaySound("Footstep_Cat0" + Random.Range(1, 8));
+                    }
                 }
             }
             else
@@ -845,6 +852,7 @@ public class PlayerMain : Character
                 if (isInjured && !revived)
                 {
                     state = State.Injured;
+                    runSoundInvervalSet *= 2;
                     Speed = new CharacterStat(2f);
                 }
                 else
@@ -859,6 +867,7 @@ public class PlayerMain : Character
                 break;
             case State.Injured:
                 state = State.Human;
+                runSoundInvervalSet /= 2;
                 Speed = new CharacterStat(5.5f);
                 //ejection = false;
                 break;
@@ -879,6 +888,19 @@ public class PlayerMain : Character
         Health = 10f;
         revived = true;
         //bossvCam.SetActive(true);
+    }
+    
+    public void ResetPlayerHealth()
+    {
+        Health = 100f;
+        Potions.Clear();
+        for (int j = 0; j < 3; j++)
+        {
+            Potions.Add(GameObject.Find("Potion" + (j + 1)).GetComponent<Image>());
+            Potions[j].enabled = true;
+        }
+        
+        
     }
     
     public enum State

@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: BlockNormal
   DisplayName: BlockNormal
-  soundEffectName: BlockNormal
+  soundEffectName: Block_N
   _AnimationKey: BlockNormal
   EnableJumpVersion: 1
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0
   DamageType: 0
+  SetCooldowns: []
   AttackSpots: []
   SuckEffect: 0
   CanInterruptAction: 0
@@ -73,8 +74,6 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

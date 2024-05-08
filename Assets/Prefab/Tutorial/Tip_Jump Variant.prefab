@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.45
+      value: 32.79
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72,6 +72,10 @@ PrefabInstance:
       value: Tip_Jump Variant
       objectReference: {fileID: 0}
     - target: {fileID: 9124884969472962397, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+      propertyPath: trigger
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124884969472962397, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
       propertyPath: conversation
       value: Jump
       objectReference: {fileID: 0}
@@ -86,3 +90,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9124884969472962371, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
   m_PrefabInstance: {fileID: 5578991566716870630}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3733085852573872314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9124884969472962396, guid: dd165fac81093f342974003cb6b7a52d, type: 3}
+  m_PrefabInstance: {fileID: 5578991566716870630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5096883901312709702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733085852573872314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cc3fe795116744185c4b69ac855c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dramaEnd: 0
+  dramaIndex: -11
+  fadeImage: {fileID: 0}
+  musicName: 
+  isTrigger: 0

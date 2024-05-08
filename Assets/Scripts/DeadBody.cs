@@ -45,17 +45,7 @@ public class DeadBody : MonoBehaviour
     void Update()
     {
         reviveSlider.fillAmount = reviveTimer / reviveTime;
-        /*
-        // 將物件的世界座標轉換為螢幕座標
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-
-        // 將螢幕座標轉換為Canvas座標
-        Vector2 canvasPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(reviveCanvas.parent as RectTransform, screenPosition, Camera.main, out canvasPosition);
-
-        // 將reviveCanvas的位置設定為物件的上方
-        reviveCanvas.localPosition = canvasPosition + new Vector2(0, 1.5f); //物件與reviveCanvas之間的距離
-        */
+        
         if (!isReviving && reviveTimer >= reviveTime)
         {
             isReviving = true;

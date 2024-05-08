@@ -48,7 +48,8 @@ MonoBehaviour:
   - shootKey: 86
     danmakuType: 0
     spawnType: 0
-    position: {x: -12, y: 1, z: 0}
+    position: {x: -11.5, y: 1, z: 0}
+    scale: {x: 0, y: 0, z: 0}
     shotsDelay: 0
     rotation: -90
     SpawnOmen: 0
@@ -57,6 +58,7 @@ MonoBehaviour:
     danmakuType: 0
     spawnType: 0
     position: {x: -20, y: 1, z: 0}
+    scale: {x: 0, y: 0, z: 0}
     shotsDelay: 0.6
     rotation: -90
     SpawnOmen: 0

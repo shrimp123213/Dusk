@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class MapBound : MonoBehaviour
 {
+    public Transform checkPoint;
+    private Vector2 checkPointPos;
+    
+    void Start()
+    {
+        checkPointPos = checkPoint.position;
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Transform>().position = new Vector3(69.5f, 0, 0);
+            other.GetComponent<Transform>().position = checkPointPos;
             Debug.Log("Player is out of the map");
         }
     }

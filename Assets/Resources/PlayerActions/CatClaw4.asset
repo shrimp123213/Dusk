@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatClaw4
   DisplayName: CatClaw4
-  soundEffectName: Swing
+  soundEffectName: Cat_ATK04
   _AnimationKey: Claw4
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -87,4 +87,4 @@ MonoBehaviour:
   Effect: {fileID: 7890692569181667357, guid: 738255e2d38379846930bdd2ed9c0e5d, type: 3}
   Effect_jump: {fileID: 8183595572756886113, guid: 0dd1931612cbf5e478425c87c3c7c541, type: 3}
   offset: {x: -0.5, y: -0.75, z: 0}
-  hitSoundEffectName: Claw
+  hitSoundEffectName: Cat_Hit04

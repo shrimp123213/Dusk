@@ -270,7 +270,7 @@ public class Character : MonoBehaviour, IHitable
         Renderer = base.gameObject.transform.GetChild(0).GetComponent<SkeletonMecanim>();
         if(mpb == null)
             mpb = new MaterialPropertyBlock();
-        Renderer.GetComponent<Renderer>().SetPropertyBlock(mpb);
+        Renderer.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
     }
 
     private void Update()
@@ -661,13 +661,15 @@ public class Character : MonoBehaviour, IHitable
             HitEffect.SetHitStun(isActionInterrupted, ImmuneStunAction, _HitStun);
             float angle = 0;
             float fillPhase = 0;
-            DOVirtual.Float(0, 180, 0.5f, angle => {
+            DOVirtual.Float(0, 180, .25f, angle => {
                 //Debug.Log(Mathf.Sin(angle * Mathf.Deg2Rad));
                 fillPhase = Mathf.Sin(angle * Mathf.Deg2Rad);
+                mpb.SetFloat("_FillPhase", fillPhase * 0.75f);
+                Renderer.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
                 //Debug.Log(fillPhase);
             });
             //DOTween.To(() => angle, x => angle = x, 360, 1);
-            mpb.SetFloat("_FillPhase", fillPhase);
+            //mpb.SetFloat("_FillPhase", fillPhase);
             /*float angle = 0; // I define a variable to "iterate" on with DOTween with my start value
             DOTween.To( // This method is for custom tweens
                     () => angle, // This is the getter for the tween to get the current value

@@ -128,7 +128,7 @@ public class AerutaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F4))
         {
             if(!PlayerMain.i.isDead)
-                PlayerMain.i.Health = 100f;
+                PlayerMain.i.ResetPlayerHealth();
             
             //Character component2 = Object.Instantiate(Resources.Load<GameObject>("Character/EnemyA/Enemy01"), PlayerMain.i.transform.position, Quaternion.identity).GetComponent<Character>();
             //component2.Health = 100f;
@@ -181,6 +181,10 @@ public class AerutaDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             contact.Skip();
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Boss1.Health = 1;
         }
         //Debug.Log("isPause:"+isPause);
     }

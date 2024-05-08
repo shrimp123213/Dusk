@@ -148,7 +148,7 @@ public class HitEffector : MonoBehaviour
 
         HitStun += _HitStun;
         if (_HitStun == 0)
-            defaultHitStun = .1f;
+            defaultHitStun = .25f;
     }
 
     public void SetTimeSlow(float _Time)

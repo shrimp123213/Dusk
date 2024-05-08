@@ -126,7 +126,7 @@ public class Bullet : MonoBehaviour
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+            //bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
             if(other.transform.parent.TryGetComponent<Character>(out var character) && !character.Evading)

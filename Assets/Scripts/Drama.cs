@@ -29,19 +29,49 @@ public class Drama : MonoBehaviour
         gameObject.SetActive(!dramaEnd);
         
         dialogueSystemTrigger = GetComponent<DialogueSystemTrigger>();
+        
+        DialogueManager.instance.conversationStarted += OnConversationStarted;
         DialogueManager.instance.conversationEnded += OnConversationEnded;
+        
+        if(!dialogueSystemTrigger)
+            return;
+        
+        foreach (var dramaData in DramaManager.i.dramaList)
+        {
+            if (dramaData.dramaIndex == dramaIndex)
+            {
+                dramaEnd = dramaData.dramaEnd;
+            }
+        }
+    }
+
+    private void OnConversationStarted(Transform t)
+    {
+        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemy.GetComponent<Character>().AITree.DisableBehavior(pause:true);
+            enemy.GetComponent<Character>().StopMove();
+        }
     }
 
     private void OnConversationEnded(Transform t)
     {
         t.GetComponent<Drama>().dramaEnd = true;
         t.GetComponent<Drama>().newDrama.dramaEnd = true;
+        
+        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemy.GetComponent<Character>().AITree.EnableBehavior();
+        }
     }
 
     private void OnEnable()
     {
         if(!string.IsNullOrEmpty(musicName))
             MusicManager.i.Play(musicName,0,1,1);
+        
+        if(!DramaManager.i)
+            return;
         
         foreach (var dramaData in DramaManager.i.dramaList)
         {

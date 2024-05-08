@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: boss1_v0_boss1_v0
-  m_Shader: {fileID: 4800000, guid: 3bb7ed9d223c7d749bc42dad56e4ad0f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 45495790b394f894a967dbf44489b57b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _LIGHT_AFFECTS_ADDITIVE
@@ -42,6 +42,7 @@ Material:
     m_Floats:
     - _Cutoff: 0.1
     - _EnableExternalAlpha: 0
+    - _FillPhase: 0
     - _LightAffectsAdditive: 1
     - _OutlineMipLevel: 0
     - _OutlineOpaqueAlpha: 1
@@ -57,6 +58,7 @@ Material:
     m_Colors:
     - _Black: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _FillColor: {r: 1, g: 1, b: 1, a: 0.6666667}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

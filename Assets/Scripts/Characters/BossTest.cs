@@ -69,15 +69,18 @@ public class BossTest : Character
             {
                 startedFade = true;
                 //BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, 0f, 1 * Time.deltaTime), .75f, .75f);
-                
+
                 DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 3f, (value) =>
                 {
                     Renderer.skeleton.SetColor(value);
-                });
-                DOVirtual.Color(doorSpriteColor, new Color(1, 1, 1, 0), 3f, (value) =>
+                }).OnComplete(() =>
                 {
-                    doorSpriteColor = value;
+                    DOVirtual.Color(doorSpriteColor, new Color(1, 1, 1, 0), 1f, (value) =>
+                    {
+                        doorSpriteColor = door.GetComponent<SpriteRenderer>().color = value;
+                    });
                 });
+
             }
             if (doorSpriteColor.a <= 0)
             {

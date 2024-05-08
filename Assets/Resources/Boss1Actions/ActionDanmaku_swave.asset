@@ -21,7 +21,16 @@ MonoBehaviour:
   InterruptSameLevel: 0
   DamageRatio: 1
   DamageType: 0
-  AttackSpots: []
+  SetCooldowns: []
+  AttackSpots:
+  - KeyFrameFrom: 85
+    KeyFrameEnd: 95
+    Offset: {x: 4.5, y: 3, z: 0}
+    Range: {x: 2, y: 6}
+    Angle: 0
+    HitMax: 0
+    SpawnOmen: 0
+    SpawnKeyFrame: 10
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -43,8 +52,6 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
