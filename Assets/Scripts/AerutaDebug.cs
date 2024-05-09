@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using BehaviorDesigner.Runtime;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
 
@@ -324,6 +326,32 @@ public class AerutaDebug : MonoBehaviour
         Respawn.i.RespawnPlayer();
         hasCheckPoint = false;
     }
+    
+    public void GamepadVibrate(float low, float high, float time) => StartCoroutine(IEGamepadVibrate(low, high, time));
+ 
+    public IEnumerator IEGamepadVibrate(float low, float high, float time)
+    {
+        //防止因未连接手柄造成的 DebugError
+        if (Gamepad.current == null)
+            yield break;
+ 
+        //设置手柄的 震动速度 以及 恢复震动 , 计时到达之后暂停震动
+        Gamepad.current.SetMotorSpeeds(low, high);
+        Gamepad.current.ResumeHaptics();
+        var endTime = Time.time + time;
+ 
+        while (Time.time < endTime)
+        {
+            Gamepad.current.ResumeHaptics();
+            yield return null;
+        }
+ 
+        if (Gamepad.current == null)
+            yield break;
+ 
+        Gamepad.current.PauseHaptics();
+    }
+    
     
 }
 

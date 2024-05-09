@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4195040052306978505, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.49
+      value: 97.87
       objectReference: {fileID: 0}
     - target: {fileID: 4195040052306978505, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.28
+      value: 3.41
       objectReference: {fileID: 0}
     - target: {fileID: 4195040052306978505, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -79,10 +79,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutoVideo_Attack
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5711293961010553386, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
 --- !u!4 &5039787342755257257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4195040052306978505, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
   m_PrefabInstance: {fileID: 9207377790912232800}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5039787342755257270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4195040052306978518, guid: 39e35f29b1984df4987fb3e323d8c9ec, type: 3}
+  m_PrefabInstance: {fileID: 9207377790912232800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3496406055590223690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039787342755257270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cc3fe795116744185c4b69ac855c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dramaEnd: 0
+  dramaIndex: -14
+  fadeImage: {fileID: 0}
+  musicName: 
+  isTrigger: 0

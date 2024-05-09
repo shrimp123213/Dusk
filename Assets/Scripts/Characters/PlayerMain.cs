@@ -105,6 +105,7 @@ public class PlayerMain : Character
     
     private bool ejection = false;
     public bool revived = false;
+    public bool onConversation = false;
 
     private void OnEnable()
     {
@@ -745,20 +746,22 @@ public class PlayerMain : Character
                 ActionLinkTime.value = 0f;
         }
 
-        
 
-        
-        
 
-        //if (CatMode && CatMorphPauseTime <= 0f)
-        if (state == State.Cat && CatMorphPauseTime <= 0f)
+
+
+
+        if (!onConversation)
         {
-            Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
-            if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "CatTransformation")) 
-                StartAction(ActionLoader.i.Actions["CatTransformation"]);
+            if (state == State.Cat && CatMorphPauseTime <= 0f)
+            {
+                Morph.Consume(Time.deltaTime * .04f);//貓維持25秒
+                if (Morph.TotalMorph <= 0 && (NowAction == null || NowAction.Id != "CatTransformation")) 
+                    StartAction(ActionLoader.i.Actions["CatTransformation"]);
+            }
+            else if (CatMorphPauseTime > 0f)
+                CatMorphPauseTime -= Time.deltaTime;
         }
-        else if (CatMorphPauseTime > 0f)
-            CatMorphPauseTime -= Time.deltaTime;
 
         if (state == State.Human && isInjured && !revived)
         {

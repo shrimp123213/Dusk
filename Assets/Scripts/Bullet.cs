@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
     protected Animator anim;
     [SerializeField]
     protected ParticleSystem ps;
+    protected ActionDanmakuObj danmaku;
     
     public enum Type
     {
@@ -32,8 +33,8 @@ public class Bullet : MonoBehaviour
     
     [SerializeField]
     protected bool Dead = false;
-    [SerializeField]
-    protected bool Awaked = false;
+    
+    public bool Awaked = false;
 
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class Bullet : MonoBehaviour
         Owner = _owner;
         Damage = _damage;
         Speed = _danmakuData.bulletSpeed * Owner.Facing;
+        danmaku = Owner.NowAction as ActionDanmakuObj;
         
         transform.localScale = new Vector3(transform.localScale.x * Owner.Facing, transform.localScale.y, transform.localScale.z);
         
@@ -114,9 +116,13 @@ public class Bullet : MonoBehaviour
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
+            //if (danmaku != null) danmaku.BulletCheckHit(Owner, other);
+            
+            //Death();
             bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
-            //if (num)
+            /*if (num)
+                Death();*/
             if(other.transform.parent.TryGetComponent<Character>(out var character) && !character.Evading)
                 Death();
         }
@@ -126,7 +132,7 @@ public class Bullet : MonoBehaviour
     {
         if (Awaked && other.transform.parent.CompareTag("Player"))
         {
-            //bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
+            bool num = other.transform.parent.TryGetComponent<IHitable>(out var IHitable) && IHitable.TakeDamage(Damage, 0.25f, Owner, !other.transform.parent.GetComponent<Character>().ImmuneInterruptAction, other.ClosestPoint(transform.position));
 
             //if (num)
             if(other.transform.parent.TryGetComponent<Character>(out var character) && !character.Evading)

@@ -30,6 +30,11 @@ public class EnemyStartAction : EnemyActionBase
     public bool spawnBlur;
     public int blurFrame;
     private bool blurSpawned;
+    
+    public bool spawnDust;
+    public int dustFrame;
+    private bool dustSpawned;
+    public GameObject DustEffect;
 
     private Vector3 omenPos;
 
@@ -51,6 +56,7 @@ public class EnemyStartAction : EnemyActionBase
             count += ((ActionDanmakuObj)SelfCharacter.Value.NowAction).danmaku.bulletSpawnData.Count;
         omenSpawned = new bool[count];
         blurSpawned = false;
+        dustSpawned = false;
     }
 
     public override TaskStatus OnUpdate()
@@ -65,6 +71,10 @@ public class EnemyStartAction : EnemyActionBase
             
             if (spawnBlur)
                 TrySpawnBlur();
+            
+            if (spawnDust)
+                TrySpawnDust();
+            
             return TaskStatus.Running;
         }
         return TaskStatus.Success;
@@ -122,6 +132,18 @@ public class EnemyStartAction : EnemyActionBase
             AerutaDebug.i.SpawnPostBlurZoomOut(eye.position);
             blurSpawned = true;
         }
+    }
+
+    public virtual void TrySpawnDust()
+    {
+        ActionPeformState actionState = SelfCharacter.Value.ActionState;
+        Transform foot = this.SelfCharacter.Value.transform;
+        if (actionState.IsAfterFrame(dustFrame) && !dustSpawned)
+        {
+            GameObject.Instantiate(DustEffect, foot.position, Quaternion.identity, foot);
+            dustSpawned = true;
+        }
+        
     }
 
     public override void OnEnd()

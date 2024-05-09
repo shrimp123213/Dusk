@@ -26,7 +26,7 @@ MonoBehaviour:
   - KeyFrameFrom: 75
     KeyFrameEnd: 120
     Offset: {x: 0, y: 1.5, z: 0}
-    Range: {x: 4, y: 2.5}
+    Range: {x: 5, y: 2.5}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
@@ -78,7 +78,7 @@ MonoBehaviour:
     EndEvadeFrame: 0
   Toggles:
   - KeyFrame: 40
-    IsActive: 0
+    IsActive: 1
   - KeyFrame: 65
     IsActive: 1
   Teleports: []
@@ -93,7 +93,7 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 0101
+  IsTriggered: 0100
   IsTeleported: 
   HitStun: 0.25
   IsMovableX: 0

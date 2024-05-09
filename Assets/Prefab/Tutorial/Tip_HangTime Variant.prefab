@@ -29,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2881060171033223209, guid: ce246dcb1c61a0048a7475dae1a23efb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 191.79
+      value: 161.6
       objectReference: {fileID: 0}
     - target: {fileID: 2881060171033223209, guid: ce246dcb1c61a0048a7475dae1a23efb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.94
+      value: 4.77
       objectReference: {fileID: 0}
     - target: {fileID: 2881060171033223209, guid: ce246dcb1c61a0048a7475dae1a23efb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dramaEnd: 0
-  dramaIndex: -19
+  dramaIndex: -20
   fadeImage: {fileID: 0}
   musicName: 
   isTrigger: 0

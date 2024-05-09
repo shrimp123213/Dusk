@@ -10697,6 +10697,12 @@ MonoBehaviour:
   Renderer: {fileID: 0}
   DeadAction: {fileID: 11400000, guid: e26ced2e2a9db4f4c86b6d05c19fb80a, type: 2}
   inputActionAsset: {fileID: -944628639613478452, guid: 566886060a401fb41bba845ef3148021, type: 3}
+  playerAct:
+    m_Name: Player Act
+    m_Id: a9558e15-3eb1-42c7-a33d-7010daaa8c3f
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
   Morph: {fileID: 0}
   EvadeState: {fileID: 0}
   InvincibleState: {fileID: 0}
@@ -10735,6 +10741,7 @@ MonoBehaviour:
   isInjured: 0
   playerDeadBodyPrefab: {fileID: 1073523510611644835, guid: d73af890f4a40e745a997329c3a54512, type: 3}
   bossvCam: {fileID: 0}
+  revived: 0
 --- !u!114 &1073523510611644857
 MonoBehaviour:
   m_ObjectHideFlags: 0

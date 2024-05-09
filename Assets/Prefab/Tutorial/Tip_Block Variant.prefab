@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 41.2
+      value: 110.64
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.95
+      value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 8868657479438481825, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 3a8006b3630ee6546a46b6e99bb93ecc, type: 3}
+      objectReference: {fileID: 32900000, guid: 251d328e07d46364bb1023b661a20d37, type: 3}
     - target: {fileID: 8868657479438481825, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
       propertyPath: m_TargetTexture
       value: 
@@ -79,10 +79,33 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 8400000, guid: be430c6fd0ec65d4887ec7d6f4f3d61b, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3496406055590223690, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
 --- !u!4 &7707306972952089322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5039787342755257257, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
   m_PrefabInstance: {fileID: 3388168418734410051}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7707306972952089333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5039787342755257270, guid: d738b50719687a04abfdb4a0911647bc, type: 3}
+  m_PrefabInstance: {fileID: 3388168418734410051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2269968083024500233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707306972952089333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cc3fe795116744185c4b69ac855c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dramaEnd: 0
+  dramaIndex: -15
+  fadeImage: {fileID: 0}
+  musicName: 
+  isTrigger: 0

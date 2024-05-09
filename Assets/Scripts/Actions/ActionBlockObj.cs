@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using static ActionPeformStateBlock;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using DG.Tweening;
 
 [CreateAssetMenu(fileName = "ActionBlock", menuName = "Actions/Block")]
 public class ActionBlockObj : ActionBaseObj
@@ -103,6 +105,9 @@ public class ActionBlockObj : ActionBaseObj
         ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
 
         _m.Blocking = false;
+        
+        if (Gamepad.current != null)
+            Gamepad.current.SetMotorSpeeds(0,0);
 
         base.EndAction(_m);
     }
@@ -144,8 +149,6 @@ public class ActionBlockObj : ActionBaseObj
 
         _m.Blocking = false;
 
-        
-
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {
             AerutaDebug.i.SpawnPostBlurZoomIn(_ClosestPoint, true);
@@ -161,6 +164,10 @@ public class ActionBlockObj : ActionBaseObj
             _m.Player.CatMorphPauseTime = CatMorphPauseTimeAmount_Perfect;
 
             _m.StartAction(ActionLoader.i.Actions[blockReactionsId[0]]);
+
+            if (Gamepad.current != null)
+                AerutaDebug.i.GamepadVibrate(0.4f, 0.4f, 0.25f);
+            
         }
         else
         {
@@ -173,8 +180,10 @@ public class ActionBlockObj : ActionBaseObj
             _m.Player.CatMorphPauseTime = CatMorphPauseTimeAmount_Normal;
 
             _m.StartAction(ActionLoader.i.Actions[blockReactionsId[1]]);
+            
+            if(Gamepad.current != null)
+                AerutaDebug.i.GamepadVibrate(0.15f, 0.15f, 0.25f);
         }
-
         
     }
 }

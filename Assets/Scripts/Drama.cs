@@ -47,6 +47,7 @@ public class Drama : MonoBehaviour
 
     private void OnConversationStarted(Transform t)
     {
+        PlayerMain.i.onConversation = true;
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.GetComponent<Character>().AITree.DisableBehavior(pause:true);
@@ -59,6 +60,7 @@ public class Drama : MonoBehaviour
         t.GetComponent<Drama>().dramaEnd = true;
         t.GetComponent<Drama>().newDrama.dramaEnd = true;
         
+        PlayerMain.i.onConversation = false;
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.GetComponent<Character>().AITree.EnableBehavior();

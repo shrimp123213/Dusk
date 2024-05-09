@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.03
+      value: 145.67
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
       propertyPath: m_LocalPosition.z
@@ -79,8 +79,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutoVideo_Heal
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8842924435105446664, guid: acba24e5451a76b4081d742a13816682, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: acba24e5451a76b4081d742a13816682, type: 3}
+--- !u!1 &8231126955967173002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1138621009474224116, guid: acba24e5451a76b4081d742a13816682, type: 3}
+  m_PrefabInstance: {fileID: 9076978238236995198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &526788603612091766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231126955967173002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cc3fe795116744185c4b69ac855c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dramaEnd: 0
+  dramaIndex: -17
+  fadeImage: {fileID: 0}
+  musicName: 
+  isTrigger: 0
 --- !u!4 &8231126955967173013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1138621009474224107, guid: acba24e5451a76b4081d742a13816682, type: 3}
