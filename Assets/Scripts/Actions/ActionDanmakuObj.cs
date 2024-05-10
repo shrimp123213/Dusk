@@ -11,10 +11,12 @@ public class ActionDanmakuObj : ActionBaseObj
 
     private bool shooted = false;
     private Vector3 _mPosition;
+    private List<BulletSpawnData> bulletSpawnData;
 
     public override ActionPeformState StartAction(Character _m)
     {
         shooted = false;
+        bulletSpawnData = new List<BulletSpawnData>(danmaku.bulletSpawnData);
         return base.StartAction(_m);
     }
 
@@ -22,7 +24,7 @@ public class ActionDanmakuObj : ActionBaseObj
     {
         base.ProcessAction(_m);
         ActionPeformState actionState = _m.ActionState;
-        List<BulletSpawnData> bulletSpawnData = danmaku.bulletSpawnData;
+        
         for (int i = 0; i < bulletSpawnData.Count; i++)
         {
             var data = bulletSpawnData[i];
@@ -52,8 +54,8 @@ public class ActionDanmakuObj : ActionBaseObj
                     GameObject bullet = Instantiate<GameObject>(danmaku.bulletPrefab,
                         danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation));
                     bullet.GetComponent<Bullet>().SetAwake(_m, data.shotsDelay, damage, danmaku);
+
                     bulletSpawnData.Remove(data);
-                    
                     //bullets.Add(bullet);
                     shooted = true;
                     /*Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation))
