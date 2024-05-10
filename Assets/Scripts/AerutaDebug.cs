@@ -338,9 +338,9 @@ public class AerutaDebug : MonoBehaviour
         //设置手柄的 震动速度 以及 恢复震动 , 计时到达之后暂停震动
         Gamepad.current.SetMotorSpeeds(low, high);
         Gamepad.current.ResumeHaptics();
-        var endTime = Time.time + time;
+        var endTime = Time.unscaledTime + time;
  
-        while (Time.time < endTime)
+        while (Time.unscaledTime < endTime)
         {
             Gamepad.current.ResumeHaptics();
             yield return null;

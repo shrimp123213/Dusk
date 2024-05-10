@@ -22,9 +22,10 @@ public class ActionDanmakuObj : ActionBaseObj
     {
         base.ProcessAction(_m);
         ActionPeformState actionState = _m.ActionState;
-        for (int i = 0; i < danmaku.bulletSpawnData.Count; i++)
+        List<BulletSpawnData> bulletSpawnData = danmaku.bulletSpawnData;
+        for (int i = 0; i < bulletSpawnData.Count; i++)
         {
-            var data = danmaku.bulletSpawnData[i];
+            var data = bulletSpawnData[i];
             shooted = false;
             if (actionState.IsAtFrame(data.shootKey))
             {
@@ -51,6 +52,8 @@ public class ActionDanmakuObj : ActionBaseObj
                     GameObject bullet = Instantiate<GameObject>(danmaku.bulletPrefab,
                         danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation));
                     bullet.GetComponent<Bullet>().SetAwake(_m, data.shotsDelay, damage, danmaku);
+                    bulletSpawnData.Remove(data);
+                    
                     //bullets.Add(bullet);
                     shooted = true;
                     /*Instantiate<GameObject>(danmaku.bulletPrefab,danmaku.SetBulletSpawnPos(_m, position, data), Quaternion.Euler(0f, 0f, rotation))

@@ -166,7 +166,7 @@ public class ActionBlockObj : ActionBaseObj
             _m.StartAction(ActionLoader.i.Actions[blockReactionsId[0]]);
 
             if (Gamepad.current != null)
-                AerutaDebug.i.GamepadVibrate(0.4f, 0.4f, 0.25f);
+                AerutaDebug.i.GamepadVibrate(0.5f, 0.5f, 0.25f);
             
         }
         else
@@ -182,7 +182,7 @@ public class ActionBlockObj : ActionBaseObj
             _m.StartAction(ActionLoader.i.Actions[blockReactionsId[1]]);
             
             if(Gamepad.current != null)
-                AerutaDebug.i.GamepadVibrate(0.15f, 0.15f, 0.25f);
+                AerutaDebug.i.GamepadVibrate(0.15f, 0.15f, 0.2f);
         }
         
     }

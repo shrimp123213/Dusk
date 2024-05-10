@@ -747,6 +747,8 @@ public class Character : MonoBehaviour, IHitable
 
                 Renderer.UpdateTiming = UpdateTiming.InFixedUpdate;
                 Player.CatRenderer.UpdateTiming = UpdateTiming.InFixedUpdate;
+                
+                AerutaDebug.i.GamepadVibrate(0.3f, 0.3f, 0.1f);
             }
         }
 
