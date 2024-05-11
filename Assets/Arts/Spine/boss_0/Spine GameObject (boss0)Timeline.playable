@@ -24,8 +24,8 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -3469385443209867523}
-    m_Duration: 4
+    m_Asset: {fileID: -121838005198701130}
+    m_Duration: 3.3333334922790527
     m_TimeScale: 1
     m_ParentTrack: {fileID: -6817990929948665769}
     m_EaseInDuration: 0
@@ -89,12 +89,12 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: boss1_backjumpatk
+    m_DisplayName: boss1_dead
   m_Markers:
     m_Objects: []
   trackIndex: 0
   unscaledTime: 0
---- !u!114 &-3469385443209867523
+--- !u!114 &-121838005198701130
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: SpineAnimationStateClip
   m_EditorClassIdentifier: 
   template:
-    animationReference: {fileID: 11400000, guid: 78550c8ef7240fc4f9d87962aabba578, type: 2}
+    animationReference: {fileID: 11400000, guid: f02d09139b1c88b4c9e7e00d60db09d7, type: 2}
     loop: 0
     customDuration: 1
     useBlendDuration: 1

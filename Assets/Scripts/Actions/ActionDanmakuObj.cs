@@ -29,7 +29,7 @@ public class ActionDanmakuObj : ActionBaseObj
         {
             var data = bulletSpawnData[i];
             shooted = false;
-            if (actionState.IsAtFrame(data.shootKey))
+            if (actionState.IsAfterFrame(data.shootKey))
             {
                 _mPosition = _m.transform.position;
                 Debug.Log(string.Concat(new object[]

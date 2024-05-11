@@ -11,6 +11,10 @@ public class CameraTrack : MonoBehaviour
     public float camSize = 5f;
 
     public PlayerInput playInput;
+
+    public Drama drama;
+    
+    public BackgroundParallax backgroundParallax;
     
     private float pathPosition = 0f;
     void Start()
@@ -28,8 +32,15 @@ public class CameraTrack : MonoBehaviour
         if (pathPosition >= 1f)
         {
             vCam.gameObject.SetActive(false);
-            playInput.enabled = true;
+            //playInput.enabled = true;
             //pathPosition = 0f;
+        }
+
+        if (drama.dramaEnd)
+        {
+            vCam.gameObject.SetActive(false);
+            playInput.enabled = true;
+            
         }
             
     }

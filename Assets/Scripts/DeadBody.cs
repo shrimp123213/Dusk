@@ -69,7 +69,7 @@ public class DeadBody : MonoBehaviour
     public void SetFace(Character _m)
     {
         deadBody.localScale = new Vector3(_m.Facing, 1, 1);
-        DOVirtual.Color(deadBodyRender.color, new Color(.3f, .3f, .3f, 1), 1f, (value) =>
+        DOVirtual.Color(deadBodyRender.color, new Color(1f, 1f, 1f, 1), 1f, (value) =>
         {
             deadBodyRender.color = value;
         });

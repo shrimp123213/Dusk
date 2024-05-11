@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b642b81af3900234484470c6cec47567, type: 3}
-  m_Name: ActionDanmaku_warpgspear_wi_Large
+  m_Name: ActionDanmaku_gspear_rs_Large
   m_EditorClassIdentifier: 
-  Id: ActionDanmaku_warpgspear_wi_Large
-  DisplayName: ActionDanmaku_warpgspear_wi_Large
+  Id: ActionDanmaku_gspear_rs_Large
+  DisplayName: ActionDanmaku_gspear_rs_Large
   soundEffectName: 
   _AnimationKey: boss1-1_ATK_gspear_rs
   EnableJumpVersion: 0
@@ -24,9 +24,9 @@ MonoBehaviour:
   SetCooldowns: []
   AttackSpots:
   - KeyFrameFrom: 72
-    KeyFrameEnd: 80
+    KeyFrameEnd: 75
     Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
+    Range: {x: 1.4, y: 1}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
@@ -34,7 +34,7 @@ MonoBehaviour:
   - KeyFrameFrom: 103
     KeyFrameEnd: 107
     Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
+    Range: {x: 1.4, y: 1}
     Angle: 0
     HitMax: 0
     SpawnOmen: 0

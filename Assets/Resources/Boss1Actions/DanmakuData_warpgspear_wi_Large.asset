@@ -45,75 +45,75 @@ MonoBehaviour:
   timeBetweenShots: 0
   shotsPerInterval: 1
   bulletSpawnData:
-  - shootKey: 42
+  - shootKey: 75
     danmakuType: 0
     spawnType: 0
-    position: {x: 3, y: 0, z: 0}
+    position: {x: 1.5, y: 0, z: 0}
     scale: {x: 0.4, y: 0.4, z: 0.4}
     shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 42
+  - shootKey: 75
     danmakuType: 0
     spawnType: 0
-    position: {x: -3, y: 0, z: 0}
+    position: {x: -1.5, y: 0, z: 0}
     scale: {x: 0.4, y: 0.4, z: 0.4}
     shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 42
+  - shootKey: 75
     danmakuType: 0
     spawnType: 0
-    position: {x: 5.5, y: 0, z: 0}
+    position: {x: 4.5, y: 0, z: 0}
     scale: {x: 0.4, y: 0.4, z: 0.4}
     shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 42
+  - shootKey: 75
     danmakuType: 0
     spawnType: 0
-    position: {x: -5.5, y: 0, z: 0}
+    position: {x: -4.5, y: 0, z: 0}
     scale: {x: 0.4, y: 0.4, z: 0.4}
     shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 103
+  - shootKey: 130
     danmakuType: 0
     spawnType: 0
-    position: {x: 3, y: 0, z: 0}
+    position: {x: 2.5, y: 0, z: 0}
     scale: {x: 0.6, y: 0.6, z: 0.6}
-    shotsDelay: 1.98
+    shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 103
+  - shootKey: 130
     danmakuType: 0
     spawnType: 0
-    position: {x: -3, y: 0, z: 0}
+    position: {x: -2.5, y: 0, z: 0}
     scale: {x: 0.6, y: 0.6, z: 0.6}
-    shotsDelay: 1.98
+    shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 103
+  - shootKey: 130
     danmakuType: 0
     spawnType: 0
-    position: {x: 5.5, y: 0, z: 0}
+    position: {x: 6, y: 0, z: 0}
     scale: {x: 0.6, y: 0.6, z: 0.6}
-    shotsDelay: 1.98
+    shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
-  - shootKey: 103
+  - shootKey: 130
     danmakuType: 0
     spawnType: 0
-    position: {x: -5.5, y: 0, z: 0}
+    position: {x: -6, y: 0, z: 0}
     scale: {x: 0.6, y: 0.6, z: 0.6}
-    shotsDelay: 1.98
+    shotsDelay: 0.5
     rotation: 0
     SpawnOmen: 0
     SpawnKeyFrame: 0
