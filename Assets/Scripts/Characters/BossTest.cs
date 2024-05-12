@@ -28,6 +28,8 @@ public class BossTest : Character
     
     public Transform BossHealthBar;
     public TMP_Text BossName;
+    public GameObject drama;
+    private bool dramaEnd = false;
     
     public override void OnAwake()
     {
@@ -75,21 +77,27 @@ public class BossTest : Character
                     Renderer.skeleton.SetColor(value);
                 }).OnComplete(() =>
                 {
+                    BossHealthBar.localScale = new Vector3(0f, .75f, .75f);
+                    BossName.text = "";
+                    if (dramaEnd == false)
+                    {
+                        dramaEnd = true;
+                        drama.SetActive(true);
+                    }
+                    
                     DOVirtual.Color(doorSpriteColor, new Color(1, 1, 1, 0), 1f, (value) =>
                     {
                         doorSpriteColor = door.GetComponent<SpriteRenderer>().color = value;
                     });
+                    
                 });
 
             }
             if (doorSpriteColor.a <= 0)
             {
                 door.SetActive(false);
-                BossHealthBar.localScale = new Vector3(0f, .75f, .75f);
-                BossName.text = "";
-                MusicManager.i.Play("OutSide", 0, 5f, .5f);
+                //MusicManager.i.Play("OutSide", 5f, .5f);
             }
-                
             
         }
     }

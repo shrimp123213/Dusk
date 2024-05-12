@@ -21,7 +21,7 @@ public class BackgroundParallax : MonoBehaviour {
     private Vector3 previousCamPos;
     // 攝像機同步背景層的 z 值
     [Header("攝像機同步背景層 Z 值，若 0 為背景層 0")]
-    public float synZ = 0f;
+    public float synZ = 2f;
     [Header("偏移 x 係數")]
     public float parallaxScaleX = 1f;
     [Header("偏移 y 係數")]

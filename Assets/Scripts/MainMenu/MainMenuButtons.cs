@@ -71,7 +71,7 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.i.Play("MainMenu", 0f, 1f, 1f);
+        MusicManager.i.Play("MainMenu", 1f, 1f);
         FadePanel.gameObject.SetActive(true);
         FadePanel.color = new Color(0, 0, 0, 1);
         FadePanel.DOFade(0, 2f);

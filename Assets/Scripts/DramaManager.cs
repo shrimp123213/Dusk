@@ -110,6 +110,18 @@ public class DramaManager : MonoBehaviour
         dramaList.Add(newDrama);
     }
     
+    public bool CheckDrama(int dramaIndex)
+    {
+        foreach (var drama in dramaList)
+        {
+            if (drama.dramaIndex == dramaIndex)
+            {
+                return drama.dramaEnd;
+            }
+        }
+        return false;
+    }
+    
     [Serializable]
     public class DramaData
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Unity.VisualScripting;
+using Cinemachine;
 
 public class EnemyStartAction : EnemyActionBase
 {
@@ -35,6 +36,10 @@ public class EnemyStartAction : EnemyActionBase
     public int dustFrame;
     private bool dustSpawned;
     public GameObject DustEffect;
+    
+    public bool spawnImpulse;
+    public int impulseFrame;
+    private bool impulseSpawned;
 
     private Vector3 omenPos;
 
@@ -57,6 +62,7 @@ public class EnemyStartAction : EnemyActionBase
         omenSpawned = new bool[count];
         blurSpawned = false;
         dustSpawned = false;
+        impulseSpawned = false;
     }
 
     public override TaskStatus OnUpdate()
@@ -74,6 +80,8 @@ public class EnemyStartAction : EnemyActionBase
             
             if (spawnDust)
                 TrySpawnDust();
+            if(spawnImpulse)
+                TrySpawnImpulse();
             
             return TaskStatus.Running;
         }
@@ -144,6 +152,20 @@ public class EnemyStartAction : EnemyActionBase
             dustSpawned = true;
         }
         
+    }
+    
+    public virtual void TrySpawnImpulse()
+    {
+        CinemachineImpulseSource impulse = this.SelfCharacter.Value.GameObject().GetComponent<CinemachineImpulseSource>();
+        ActionPeformState actionState = SelfCharacter.Value.ActionState;
+        if (impulse)
+        {
+            if (actionState.IsAfterFrame(impulseFrame) && !impulseSpawned)
+            {
+                impulse.GenerateImpulse();
+                impulseSpawned = true;
+            }
+        }
     }
 
     public override void OnEnd()

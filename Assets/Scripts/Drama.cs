@@ -57,8 +57,7 @@ public class Drama : MonoBehaviour
 
     private void OnConversationEnded(Transform t)
     {
-        t.GetComponent<Drama>().dramaEnd = true;
-        t.GetComponent<Drama>().newDrama.dramaEnd = true;
+        t.GetComponent<Drama>().SetDramaEnd();
         
         PlayerMain.i.onConversation = false;
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
@@ -70,7 +69,7 @@ public class Drama : MonoBehaviour
     private void OnEnable()
     {
         if(!string.IsNullOrEmpty(musicName))
-            MusicManager.i.Play(musicName,0,1,1);
+            MusicManager.i.Play(musicName,1,1);
         
         if(!DramaManager.i)
             return;
@@ -99,10 +98,15 @@ public class Drama : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                dramaEnd = true;
-                newDrama.dramaEnd = true;
+                SetDramaEnd();
             }
         }
         
+    }
+    
+    public void SetDramaEnd()
+    {
+        dramaEnd = true;
+        newDrama.dramaEnd = true;
     }
 }

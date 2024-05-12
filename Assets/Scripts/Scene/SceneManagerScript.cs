@@ -17,7 +17,7 @@ public class SceneManagerScript : MonoBehaviour
     {
         SceneManagerScript.i = this;
         if(!string.IsNullOrEmpty(musicName))
-            MusicManager.i.Play(musicName);
+            MusicManager.i.Play(musicName,1f,1f);
     }
 
     public void ChangeScene(string SceneName, float delay)

@@ -8,6 +8,7 @@ using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using Cinemachine;
 
 [CreateAssetMenu(fileName = "ActionNormal", menuName = "Actions/Normal")]
 public class ActionBaseObj : ScriptableObject
@@ -412,6 +413,8 @@ public class ActionBaseObj : ScriptableObject
         if (soundEffectName != "" && soundEffectName != null)
             SoundManager.i.PlaySound(soundEffectName);
     }
+    
+    
 
     private void DrawRectangle(Vector2 point1, Vector2 point2, Vector3 origin, Quaternion orientation, Color color)
     {

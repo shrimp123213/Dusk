@@ -21,6 +21,7 @@ public class CameraTrack : MonoBehaviour
     {
         vCam.m_Lens.OrthographicSize = camSize;
         playInput.enabled = false;
+        vCam.enabled = true;
     }
 
     
@@ -32,6 +33,8 @@ public class CameraTrack : MonoBehaviour
         if (pathPosition >= 1f)
         {
             vCam.gameObject.SetActive(false);
+            backgroundParallax.enabled = true;
+            drama.gameObject.SetActive(true);
             //playInput.enabled = true;
             //pathPosition = 0f;
         }
@@ -40,7 +43,7 @@ public class CameraTrack : MonoBehaviour
         {
             vCam.gameObject.SetActive(false);
             playInput.enabled = true;
-            
+            backgroundParallax.enabled = true;
         }
             
     }

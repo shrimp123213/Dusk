@@ -50,6 +50,18 @@ public class MusicManager : MonoBehaviour
         MusicSource.Play();
     }
 
+    public void Play(string soundName, float FADE_TIME_SECONDS, float FADE_VOLUME)
+    {
+        Debug.Log("Play"+ soundName);
+        StartCoroutine(FadeIn(FADE_TIME_SECONDS, FADE_VOLUME));
+
+        MusicSource.clip = Musics[soundName];
+        MusicSource.Play();
+
+        //StartCoroutine(FadeOut(MusicSource.clip.length - skipTimeTo - FADE_TIME_SECONDS, 5f));
+        StartCoroutine(Repeat(MusicSource.clip.length, soundName, FADE_TIME_SECONDS, FADE_VOLUME));
+    }
+    
     public void Play(string soundName, float skipTimeTo, float FADE_TIME_SECONDS, float FADE_VOLUME)
     {
         StartCoroutine(FadeIn(FADE_TIME_SECONDS, FADE_VOLUME));
@@ -62,10 +74,24 @@ public class MusicManager : MonoBehaviour
         StartCoroutine(Repeat(MusicSource.clip.length - skipTimeTo, soundName, skipTimeTo, FADE_TIME_SECONDS, FADE_VOLUME));
     }
 
+    IEnumerator Repeat(float delay, string soundName,float FADE_TIME_SECONDS, float FADE_VOLUME)
+    {
+        AudioClip currentClip = MusicSource.clip;
+        yield return new WaitForSeconds(currentClip.length);
+        if (MusicSource.clip == currentClip)
+        {
+            Play(soundName, FADE_TIME_SECONDS, FADE_VOLUME);
+        }
+    }
+    
     IEnumerator Repeat(float delay, string soundName, float skipTimeTo, float FADE_TIME_SECONDS, float FADE_VOLUME)
     {
-        yield return new WaitForSeconds(delay);
-        Play(soundName, skipTimeTo, FADE_TIME_SECONDS, FADE_VOLUME);
+        AudioClip currentClip = MusicSource.clip;
+        yield return new WaitForSeconds(currentClip.length - MusicSource.time);
+        if (MusicSource.clip == currentClip)
+        {
+            Play(soundName, skipTimeTo, FADE_TIME_SECONDS, FADE_VOLUME);
+        }
     }
 
     IEnumerator FadeOut(float delay, float FADE_TIME_SECONDS, float FADE_VOLUME)
