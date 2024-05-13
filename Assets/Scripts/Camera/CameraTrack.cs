@@ -10,6 +10,8 @@ public class CameraTrack : MonoBehaviour
     public float speed = 0.3f;
     public float camSize = 5f;
 
+    public bool trackStart = false;
+    
     public PlayerInput playInput;
 
     public Drama drama;
@@ -27,7 +29,8 @@ public class CameraTrack : MonoBehaviour
     
     void Update()
     {
-        pathPosition += speed * Time.deltaTime;
+        if(trackStart)
+            pathPosition += speed * Time.deltaTime;
         vCam.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = pathPosition;
 
         if (pathPosition >= 1f)

@@ -14,6 +14,7 @@ public class DramaManager : MonoBehaviour
     
     public bool hasDrama = false;
     public bool dramaCatEnd = false;
+    public Drama openVideo;
     
     
     private void Awake()
@@ -94,6 +95,10 @@ public class DramaManager : MonoBehaviour
             PlayerMain.i.state = PlayerMain.State.Human;
             //PlayerMain.i.dramaCatMode = false;
         }
+
+        openVideo = GameObject.Find("Video_Open").GetComponent<Drama>();
+        if(openVideo.dramaEnd && openVideo != null)
+            openVideo.gameObject.SetActive(false);
     }
     
     public void AddDramaData(DramaData newDrama)

@@ -30,6 +30,7 @@ public class BossTest : Character
     public TMP_Text BossName;
     public GameObject drama;
     private bool dramaEnd = false;
+    private bool doorActive = false;
     
     public override void OnAwake()
     {
@@ -67,6 +68,7 @@ public class BossTest : Character
 
         if (isDead)
         {
+            
             if (!startedFade && Ani.GetCurrentAnimatorClipInfo(0).Length > 0 && Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name == "boss1_dead" && Ani.GetCurrentAnimatorStateInfo(0).normalizedTime > .8f)
             {
                 startedFade = true;
@@ -93,10 +95,11 @@ public class BossTest : Character
                 });
 
             }
-            if (doorSpriteColor.a <= 0)
+            if (doorSpriteColor.a <= 0 && !doorActive)
             {
                 door.SetActive(false);
-                //MusicManager.i.Play("OutSide", 5f, .5f);
+                MusicManager.i.Play("OutSide", 1f, 1f);
+                doorActive = true;
             }
             
         }

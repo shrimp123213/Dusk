@@ -3282,8 +3282,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 160
-        y: 30
+        x: 168.24744
+        y: 36.18557
         width: 160
         height: 30
     - id: 1
@@ -3313,7 +3313,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorBool(Started,true,DramaCatRender);
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 10
@@ -3374,7 +3374,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: SetDialoguePanel(false); SetDialoguePanel(true)@5;
+        value: 'SetDialoguePanel(false); SetDialoguePanel(true)@5;
+
+          AnimatorPlay(cat_start_idle,DramaCatRender)@1;'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 10
@@ -9879,7 +9881,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 159
-        y: 233
+        y: 232
         width: 160
         height: 30
     - id: 5
@@ -10152,8 +10154,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasScrollPosition: {x: 49.939606, y: 89.42401}
+    canvasZoom: 1.1199999
   syncInfo:
     syncActors: 0
     syncItems: 0
