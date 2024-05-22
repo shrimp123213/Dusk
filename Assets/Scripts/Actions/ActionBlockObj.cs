@@ -148,6 +148,7 @@ public class ActionBlockObj : ActionBaseObj
         ActionPeformStateBlock actionState = (ActionPeformStateBlock)_m.ActionState;
 
         _m.Blocking = false;
+        
 
         if (actionState.IsWithinFrame(PerfectFrameStart, NormalFrameStart - 1))
         {

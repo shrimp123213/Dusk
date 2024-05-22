@@ -15,6 +15,7 @@ MonoBehaviour:
   Id: boss1-1_ATK_swave
   DisplayName: boss1-1_ATK_swave
   soundEffectName: 
+  SoundEffects: []
   _AnimationKey: boss1-1_ATK_swave
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

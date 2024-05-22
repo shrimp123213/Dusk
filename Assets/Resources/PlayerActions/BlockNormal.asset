@@ -15,6 +15,8 @@ MonoBehaviour:
   Id: BlockNormal
   DisplayName: BlockNormal
   soundEffectName: Block_N
+  SoundEffects:
+  - KeyFrame: 0
   _AnimationKey: BlockNormal
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -56,9 +58,9 @@ MonoBehaviour:
       m_RotationOrder: 4
     TargetDistance: {x: -5, y: 0}
     FinishTime: 0.5
-    CanEvade: 0
+    CanEvade: 1
     StartEvadeFrame: 0
-    EndEvadeFrame: 0
+    EndEvadeFrame: 40
   Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}
@@ -74,6 +76,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 01
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

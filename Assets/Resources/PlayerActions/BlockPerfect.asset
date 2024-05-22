@@ -15,6 +15,8 @@ MonoBehaviour:
   Id: BlockPerfect
   DisplayName: BlockPerfect
   soundEffectName: Block_P
+  SoundEffects:
+  - KeyFrame: 0
   _AnimationKey: BlockPerfect
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -60,7 +62,19 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: Block
     CanChangeFace: 1
-  Moves: []
+  Moves:
+  - KeyFrame: 0
+    Curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: 0, y: 0}
+    FinishTime: 0.1
+    CanEvade: 1
+    StartEvadeFrame: 0
+    EndEvadeFrame: 6
   Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}
@@ -76,6 +90,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 01
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

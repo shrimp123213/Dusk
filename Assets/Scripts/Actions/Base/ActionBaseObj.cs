@@ -19,6 +19,7 @@ public class ActionBaseObj : ScriptableObject
 
     [Header("音效")]
     public string soundEffectName;
+    public List<SoundEffect> SoundEffects;
 
     [Header("動畫")]
     public string _AnimationKey;
@@ -104,6 +105,8 @@ public class ActionBaseObj : ScriptableObject
     public bool[] IsTriggered;
 
     public bool[] IsTeleported;
+    
+    public bool[] IsSoundPlayed;
 
     public float HitStun;
 
@@ -143,10 +146,17 @@ public class ActionBaseObj : ScriptableObject
             }
         }
 
+        if (!string.IsNullOrEmpty(soundEffectName) && SoundEffects.Count == 0)
+        {
+            SoundEffects.Add(new SoundEffect() { KeyFrame = 0 });
+            IsSoundPlayed = new bool[1];
+        }
+
         IsTriggered = new bool[_m.NowAction.Toggles.Count];
         IsTeleported = new bool[_m.NowAction.Teleports.Count];
-
-        PlaySoundEffect();
+        IsSoundPlayed = new bool[_m.NowAction.SoundEffects.Count];
+        
+        //PlaySoundEffect();
     }
 
     public virtual bool MovableX(Character _m)
@@ -331,6 +341,20 @@ public class ActionBaseObj : ScriptableObject
                 i++;
             }
         }
+        
+        if (_m.NowAction.SoundEffects.Count > 0)
+        {
+            int i = 0;
+            foreach (SoundEffect soundEffect in SoundEffects)
+            {
+                if (!IsSoundPlayed[i] && actionState.IsAfterFrame(soundEffect.KeyFrame))
+                {
+                    IsSoundPlayed[i] = true;
+                    PlaySoundEffect();
+                }
+                i++;
+            }
+        }
 
         int currentAttackSpot = -1;
         foreach (AttackTiming attackSpot in _m.NowAction.AttackSpots)
@@ -410,7 +434,7 @@ public class ActionBaseObj : ScriptableObject
 
     public virtual void PlaySoundEffect()
     {
-        if (soundEffectName != "" && soundEffectName != null)
+        if (!string.IsNullOrEmpty(soundEffectName))
             SoundManager.i.PlaySound(soundEffectName);
     }
     
@@ -501,4 +525,10 @@ public class Teleport
     public bool Local;//打勾的話是原本的位置+Pos，沒有的話是世界座標
 
     public Vector3 Pos;
+}
+
+[Serializable]
+public class SoundEffect
+{
+    public int KeyFrame;
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Drama : MonoBehaviour
@@ -48,6 +49,7 @@ public class Drama : MonoBehaviour
     private void OnConversationStarted(Transform t)
     {
         PlayerMain.i.onConversation = true;
+        PlayerMain.i.GetComponent<PlayerInput>().enabled = false;
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.GetComponent<Character>().AITree.DisableBehavior(pause:true);
@@ -58,8 +60,8 @@ public class Drama : MonoBehaviour
     private void OnConversationEnded(Transform t)
     {
         t.GetComponent<Drama>().SetDramaEnd();
-        
         PlayerMain.i.onConversation = false;
+        PlayerMain.i.GetComponent<PlayerInput>().enabled = true;
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.GetComponent<Character>().AITree.EnableBehavior();
@@ -104,9 +106,9 @@ public class Drama : MonoBehaviour
         
     }
     
-    public void SetDramaEnd()
+    public void SetDramaEnd(bool end = true)
     {
-        dramaEnd = true;
-        newDrama.dramaEnd = true;
+        dramaEnd = end;
+        newDrama.dramaEnd = end;
     }
 }

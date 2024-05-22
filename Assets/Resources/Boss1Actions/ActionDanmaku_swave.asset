@@ -15,18 +15,19 @@ MonoBehaviour:
   Id: ActionDanmaku_swave
   DisplayName: boss1-1_ATK_swave
   soundEffectName: 
+  SoundEffects: []
   _AnimationKey: boss1-1_ATK_swave
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1
+  DamageRatio: 2.5
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
   - KeyFrameFrom: 85
     KeyFrameEnd: 95
     Offset: {x: 4.5, y: 3, z: 0}
-    Range: {x: 2, y: 6}
+    Range: {x: 0, y: 6}
     Angle: 0
     HitMax: 0
     SpawnOmen: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

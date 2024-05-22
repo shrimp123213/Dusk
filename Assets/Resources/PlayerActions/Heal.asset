@@ -15,6 +15,7 @@ MonoBehaviour:
   Id: Heal
   DisplayName: Heal
   soundEffectName: Heal
+  SoundEffects: []
   _AnimationKey: Heal
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -54,6 +55,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

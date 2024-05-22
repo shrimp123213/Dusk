@@ -15,18 +15,19 @@ MonoBehaviour:
   Id: Boss0_Action_TrackAttack
   DisplayName: 
   soundEffectName: 
+  SoundEffects: []
   _AnimationKey: jumpatk
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1
+  DamageRatio: 2
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 74
+  - KeyFrameFrom: 80
     KeyFrameEnd: 135
     Offset: {x: 0, y: 2, z: 0}
-    Range: {x: 6, y: 4}
+    Range: {x: 5.8, y: 4}
     Angle: 0
     HitMax: 1
     SpawnOmen: 1
@@ -100,7 +101,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 20.174011, y: -8}
+    TargetDistance: {x: 10.461212, y: -8}
     FinishTime: 0.35
     CanEvade: 0
     StartEvadeFrame: 0
@@ -120,6 +121,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

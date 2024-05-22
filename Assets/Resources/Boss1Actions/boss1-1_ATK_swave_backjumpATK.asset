@@ -15,11 +15,12 @@ MonoBehaviour:
   Id: boss1-1_ATK_swave_backjumpATK
   DisplayName: boss1-1_ATK_swave_backjumpATK
   soundEffectName: 
+  SoundEffects: []
   _AnimationKey: boss1-1_ATK_swave_backjumpATK
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1
+  DamageRatio: 2
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
@@ -116,6 +117,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 0100
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

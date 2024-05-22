@@ -15,8 +15,8 @@ public class DramaManager : MonoBehaviour
     public bool hasDrama = false;
     public bool dramaCatEnd = false;
     public Drama openVideo;
-    
-    
+
+    private GameObject drama_5;
     private void Awake()
     {
         if(i == null)
@@ -72,6 +72,7 @@ public class DramaManager : MonoBehaviour
                     SceneManagerScript.i.ChangeScene(0,1);
                 }
             }
+            
         }
     }
 
@@ -99,6 +100,20 @@ public class DramaManager : MonoBehaviour
         openVideo = GameObject.Find("Video_Open").GetComponent<Drama>();
         if(openVideo.dramaEnd && openVideo != null)
             openVideo.gameObject.SetActive(false);
+        drama_5 = GameObject.Find("5_").gameObject;
+        drama_5.SetActive(false);
+        foreach (var vDramaData in dramaList)
+        {
+            if (vDramaData is { dramaIndex: 3, dramaEnd: true })
+                Invoke(nameof(Drama_5), 0.5f);
+        }
+        
+        
+    }
+    
+    private void Drama_5()
+    {
+        drama_5.GetComponent<Drama>().gameObject.SetActive(true);
     }
     
     public void AddDramaData(DramaData newDrama)

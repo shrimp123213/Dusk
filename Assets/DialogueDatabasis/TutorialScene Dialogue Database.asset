@@ -1166,7 +1166,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "<sprite=6> \u5411\u79FB\u52D5\u65B9\u5411\u885D\u523A\u3002"
+        value: "<sprite=7> \u5411\u79FB\u52D5\u65B9\u5411\u885D\u523A\u3002"
         type: 0
         typeString: 
       - title: Sequence
@@ -1716,7 +1716,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "\u5728\u6575\u4EBA\u653B\u64CA\u77AC\u9593\uFF0C\u6309\u4E0B <sprite=7>
+        value: "\u5728\u6575\u4EBA\u653B\u64CA\u77AC\u9593\uFF0C\u6309\u4E0B <sprite=6>
           \u9032\u884C\u683C\u64CB\u3002"
         type: 0
         typeString: 
@@ -1747,8 +1747,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 160
-        y: 80
+        x: 155
+        y: 86
         width: 160
         height: 30
     - id: 2
@@ -3872,8 +3872,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasScrollPosition: {x: 6.934121, y: 16.576971}
+    canvasZoom: 1.03
   - id: 13
     fields:
     - title: Title
@@ -4806,7 +4806,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 162.47052
-        y: 95.92616
+        y: 95.00873
         width: 160
         height: 30
     - id: 15
@@ -5574,8 +5574,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1.1363525, y: 23.321144}
-    canvasZoom: 0.8800001
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 1.0899999
   - id: 15
     fields:
     - title: Title
@@ -5790,8 +5790,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 28.936157
-        y: 116.80852
+        x: 31.208878
+        y: 119.08125
         width: 160
         height: 30
     - id: 4
@@ -8474,7 +8474,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\u6EEF\u7A7A\u6642\u6309\u4E0B <sprite=0>  <sprite=7>\n\u53EF\u9032\u884C\u7A7A\u4E2D\u653B\u64CA\u8207\u683C\u6A94\u3002"
+        value: "\u6EEF\u7A7A\u6642\u6309\u4E0B <sprite=0> \u3001 <sprite=6>\n\u53EF\u9032\u884C\u7A7A\u4E2D\u653B\u64CA\u8207\u683C\u6A94\u3002"
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -8529,7 +8529,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\u6EEF\u7A7A\u6642\u6309\u4E0B <sprite=13>  <sprite=14>\n\u53EF\u9032\u884C\u7A7A\u4E2D\u653B\u64CA\u8207\u683C\u6A94\u3002"
+        value: "\u6EEF\u7A7A\u6642\u6309\u4E0B <sprite=13> \u3001 <sprite=14>\n\u53EF\u9032\u884C\u7A7A\u4E2D\u653B\u64CA\u8207\u683C\u6A94\u3002"
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -8558,7 +8558,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 365
-        y: 105
+        y: 102
         width: 160
         height: 30
     - id: 3

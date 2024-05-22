@@ -315,7 +315,7 @@ public class Character : MonoBehaviour, IHitable
 
         if (setAnimationIdle && NowAction == null)
         {
-            if (Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Attacked")
+            if (Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Attacked" || Ani.GetCurrentAnimatorClipInfo(0)[0].clip.name != "cat_attacked")
             {
                 AnimatorExtensions.RebindAndRetainParameter(Ani);
                 //Ani.Rebind();

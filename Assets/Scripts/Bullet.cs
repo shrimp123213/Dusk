@@ -17,6 +17,8 @@ public class Bullet : MonoBehaviour
     public float LifeTime = 3f;
     public bool destroyOnHit = true;
     
+    public string SoundEffectName;
+    
     protected Collider2D Collider;
     protected Animator anim;
     [SerializeField]
@@ -35,6 +37,8 @@ public class Bullet : MonoBehaviour
     protected bool Dead = false;
     
     public bool Awaked = false;
+    
+    protected bool IsSoundPlayed;
 
     private void Awake()
     {
@@ -47,7 +51,7 @@ public class Bullet : MonoBehaviour
         Collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         ps = GetComponent<ParticleSystem>();
-        
+        IsSoundPlayed = false;
     }
     
     public virtual void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
@@ -103,12 +107,24 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
     }
     
+    public virtual void PlaySoundEffect(string _soundName)
+    {
+        if(!string.IsNullOrEmpty(SoundEffectName))
+            SoundManager.i.PlaySound(_soundName);
+    }
+    
     private IEnumerator ButtleStartUp(float _delay)
     {
         Debug.Log("Fire in " + _delay + "s");
         yield return new WaitForSeconds(_delay);
         Awaked = true;
         anim.Play("Action");
+        PlaySoundEffect(SoundEffectName);
+        /*if (!IsSoundPlayed)
+        {
+            
+            IsSoundPlayed = true;
+        }*/
         yield break;
     }
     

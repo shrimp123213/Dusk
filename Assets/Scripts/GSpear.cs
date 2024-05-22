@@ -12,6 +12,7 @@ public class GSpear : Bullet
         Collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         ps = GetComponent<ParticleSystem>();
+        IsSoundPlayed = false;
     }
     
     public override void SetAwake(Character _owner, float _delay, Damage _damage, DanmakuBaseObj _danmakuData)
@@ -56,7 +57,7 @@ public class GSpear : Bullet
         yield return new WaitForSeconds(_delay);
         Awaked = true;
         anim.Play("Action");
-        
+        PlaySoundEffect(SoundEffectName);
         //Destroy(Omen);
         yield break;
     }

@@ -15,11 +15,12 @@ MonoBehaviour:
   Id: ActionDanmaku_gspear_rs_Large
   DisplayName: ActionDanmaku_gspear_rs_Large
   soundEffectName: 
+  SoundEffects: []
   _AnimationKey: boss1-1_ATK_gspear_rs
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1
+  DamageRatio: 1.8
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
@@ -60,6 +61,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

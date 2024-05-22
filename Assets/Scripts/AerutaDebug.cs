@@ -164,6 +164,7 @@ public class AerutaDebug : MonoBehaviour
                 return;
             PlayerMain.i.transform.position = checkPointPos.position;
             DramaManager.i.dramaCatEnd = true;
+            GameObject.Find("Track Camera").GetComponent<CameraTrack>().drama.dramaEnd = true;
         }
         if(Input.GetKeyDown(KeyCode.F10))
             PlayerMain.i.Health = 1;
