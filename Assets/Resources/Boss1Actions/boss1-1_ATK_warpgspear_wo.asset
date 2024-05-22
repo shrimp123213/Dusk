@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_warpgspear_wo
   DisplayName: boss1-1_ATK_warpgspear_wo
+  SoundEffects:
+  - soundEffectName: flap_2_
+    KeyFrame: 5
   _AnimationKey: boss1-1_ATK_warpgspear_wo
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
   DamageRatio: 0
   DamageType: 0
+  SetCooldowns: []
   AttackSpots: []
   SuckEffect: 0
   CanInterruptAction: 0
@@ -46,10 +50,11 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 0101
   IsTeleported: 
-  IsLightAttack: 0
-  IsHeavyAttack: 0
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0

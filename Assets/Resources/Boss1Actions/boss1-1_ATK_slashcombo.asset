@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_slashcombo
   DisplayName: boss1-1_ATK_slashcombo
-  soundEffectName: 
+  SoundEffects:
+  - soundEffectName: slash_2_
+    KeyFrame: 30
+  - soundEffectName: slash_3_
+    KeyFrame: 50
+  - soundEffectName: slash_4_
+    KeyFrame: 70
   _AnimationKey: boss1-1_ATK_slashcombo
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -158,6 +164,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 010101
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

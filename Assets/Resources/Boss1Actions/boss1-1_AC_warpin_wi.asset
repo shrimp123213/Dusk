@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_AC_warpin_wi
   DisplayName: boss1-1_AC_warpin_wi
-  soundEffectName: flap_1
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: flap_1_
+    KeyFrame: 35
+  - soundEffectName: flap_2_
+    KeyFrame: 60
   _AnimationKey: boss1-1_AC_warpin_wi
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -47,7 +50,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 01
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 0101
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

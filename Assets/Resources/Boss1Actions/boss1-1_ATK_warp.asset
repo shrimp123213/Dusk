@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_warp
   DisplayName: boss1-1_ATK_warp
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: flap_1_
+    KeyFrame: 22
+  - soundEffectName: spur_
+    KeyFrame: 65
+  - soundEffectName: slash_4_
+    KeyFrame: 135
   _AnimationKey: boss1-1_ATK_warp
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -95,7 +100,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 0101
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 010101
   HitStun: 0.5
   IsMovableX: 0
   IsMovableY: 0

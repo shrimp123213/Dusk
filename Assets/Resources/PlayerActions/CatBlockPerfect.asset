@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatBlockPerfect
   DisplayName: CatBlockPerfect
-  soundEffectName: Block_P
+  SoundEffects:
+  - soundEffectName: Block_P
+    KeyFrame: 0
   _AnimationKey: BlockPerfect
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -76,6 +78,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

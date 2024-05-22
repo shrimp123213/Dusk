@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_AC_warpout_wo
   DisplayName: boss1-1_AC_warpout_wo
-  soundEffectName: flap_2
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: flap_2_
+    KeyFrame: 20
+  - soundEffectName: flap_1_
+    KeyFrame: 55
   _AnimationKey: boss1-1_AC_warpout_wo
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -47,9 +50,9 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 0101
+  IsTriggered: 0100
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 01
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

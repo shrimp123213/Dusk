@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_warpgspear_wi
   DisplayName: boss1-1_ATK_warpgspear_wi
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: flap_1_
+    KeyFrame: 10
   _AnimationKey: boss1-1_ATK_warpgspear_wi
   EnableJumpVersion: 0
   InterruptLevel: 0

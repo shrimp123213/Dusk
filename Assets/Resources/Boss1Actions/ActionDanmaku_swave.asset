@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ActionDanmaku_swave
   DisplayName: boss1-1_ATK_swave
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: slash_2_
+    KeyFrame: 80
   _AnimationKey: boss1-1_ATK_swave
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -53,7 +54,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 01
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

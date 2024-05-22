@@ -18,9 +18,6 @@ public class ActionHealObj : ActionBaseObj
         lastValue = -HealAmount / 2;
         _m.TakeDamage(new Damage(lastValue, DamageType));
 
-
-        PlaySoundEffect();
-
         return base.StartAction(_m);
     }
 
@@ -35,6 +32,7 @@ public class ActionHealObj : ActionBaseObj
         _m.TakeDamage(new Damage(currentValue - lastValue, DamageType));
 
         lastValue = currentValue;
+        
     }
 
     public override void Init(Character _m)
@@ -51,6 +49,7 @@ public class ActionHealObj : ActionBaseObj
         Afterimage.ScaleTime = Afterimage.FadeTime;
         Afterimage.ScaleMultiply = 3f;
         Afterimage.SetLifeTime(StartDelay, Duration);
+        IsSoundPlayed = new bool[_m.NowAction.SoundEffects.Count];
 
     }
 

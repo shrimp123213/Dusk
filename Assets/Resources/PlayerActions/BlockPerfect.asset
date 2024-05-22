@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: BlockPerfect
   DisplayName: BlockPerfect
-  soundEffectName: Block_P
   SoundEffects:
-  - KeyFrame: 0
+  - soundEffectName: Block_P
+    KeyFrame: 0
   _AnimationKey: BlockPerfect
   EnableJumpVersion: 1
   InterruptLevel: 0

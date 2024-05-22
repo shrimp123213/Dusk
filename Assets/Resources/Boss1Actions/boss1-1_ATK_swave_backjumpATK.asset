@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_swave_backjumpATK
   DisplayName: boss1-1_ATK_swave_backjumpATK
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: spur_
+    KeyFrame: 70
   _AnimationKey: boss1-1_ATK_swave_backjumpATK
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -115,9 +116,9 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 0100
+  IsTriggered: 0101
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 01
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

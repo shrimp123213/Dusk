@@ -14,8 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ActionDanmaku_gspear_rs_Large
   DisplayName: ActionDanmaku_gspear_rs_Large
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: shave2
+    KeyFrame: 25
+  - soundEffectName: groundspear1_
+    KeyFrame: 75
+  - soundEffectName: groundspear2_
+    KeyFrame: 105
+  - soundEffectName: groundspear3_
+    KeyFrame: 165
   _AnimationKey: boss1-1_ATK_gspear_rs
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -24,15 +31,15 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 72
-    KeyFrameEnd: 75
+  - KeyFrameFrom: 75
+    KeyFrameEnd: 78
     Offset: {x: 0, y: 0, z: 0}
     Range: {x: 1.4, y: 1}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
     SpawnKeyFrame: 10
-  - KeyFrameFrom: 103
+  - KeyFrameFrom: 105
     KeyFrameEnd: 107
     Offset: {x: 0, y: 0, z: 0}
     Range: {x: 1.4, y: 1}

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatBlockNormal
   DisplayName: CatBlockNormal
-  soundEffectName: Block_N
+  SoundEffects:
+  - soundEffectName: Block_N
+    KeyFrame: 0
   _AnimationKey: BlockNormal
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -74,6 +76,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

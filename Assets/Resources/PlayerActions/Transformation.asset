@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Transformation
   DisplayName: Transformation
-  soundEffectName: Transformation
+  SoundEffects:
+  - soundEffectName: Transformation
+    KeyFrame: 0
   _AnimationKey: TransformationToCatFirstClip
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -54,6 +56,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0

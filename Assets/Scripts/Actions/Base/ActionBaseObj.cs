@@ -18,7 +18,6 @@ public class ActionBaseObj : ScriptableObject
     public string DisplayName;
 
     [Header("音效")]
-    public string soundEffectName;
     public List<SoundEffect> SoundEffects;
 
     [Header("動畫")]
@@ -144,12 +143,6 @@ public class ActionBaseObj : ScriptableObject
                 Afterimage.SetLifeTime(StartDelay, Duration);
 
             }
-        }
-
-        if (!string.IsNullOrEmpty(soundEffectName) && SoundEffects.Count == 0)
-        {
-            SoundEffects.Add(new SoundEffect() { KeyFrame = 0 });
-            IsSoundPlayed = new bool[1];
         }
 
         IsTriggered = new bool[_m.NowAction.Toggles.Count];
@@ -350,7 +343,7 @@ public class ActionBaseObj : ScriptableObject
                 if (!IsSoundPlayed[i] && actionState.IsAfterFrame(soundEffect.KeyFrame))
                 {
                     IsSoundPlayed[i] = true;
-                    PlaySoundEffect();
+                    PlaySoundEffect(soundEffect);
                 }
                 i++;
             }
@@ -432,14 +425,12 @@ public class ActionBaseObj : ScriptableObject
         }
     }
 
-    public virtual void PlaySoundEffect()
+    public virtual void PlaySoundEffect(SoundEffect soundEffect)
     {
-        if (!string.IsNullOrEmpty(soundEffectName))
-            SoundManager.i.PlaySound(soundEffectName);
+        if (!string.IsNullOrEmpty(soundEffect.soundEffectName))
+            SoundManager.i.PlaySound(soundEffect.soundEffectName);
     }
     
-    
-
     private void DrawRectangle(Vector2 point1, Vector2 point2, Vector3 origin, Quaternion orientation, Color color)
     {
         // Calculate extent as a distance between point1 and point2
@@ -530,5 +521,6 @@ public class Teleport
 [Serializable]
 public class SoundEffect
 {
+    public string soundEffectName;
     public int KeyFrame;
 }

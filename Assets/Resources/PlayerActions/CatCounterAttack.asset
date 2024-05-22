@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatCounterAttack
   DisplayName: CatCounterAttack
-  soundEffectName: Swing
+  SoundEffects: []
   _AnimationKey: CounterAttack
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.2
   IsMovableX: 0
   IsMovableY: 1

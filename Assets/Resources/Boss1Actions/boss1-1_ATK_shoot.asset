@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boss1-1_ATK_shoot
   DisplayName: boss1-1_ATK_shoot
-  soundEffectName: beamslash
   SoundEffects:
-  - KeyFrame: 50
+  - soundEffectName: beamslash_
+    KeyFrame: 63
   _AnimationKey: boss1-1_ATK_shoot
   EnableJumpVersion: 0
   InterruptLevel: 0

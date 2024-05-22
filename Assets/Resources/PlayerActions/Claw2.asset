@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Claw2
   DisplayName: Claw2
-  soundEffectName: Human_ATK02
+  SoundEffects:
+  - soundEffectName: Human_ATK02
+    KeyFrame: 0
   _AnimationKey: Claw2
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -78,6 +80,7 @@ MonoBehaviour:
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.1
   IsMovableX: 0
   IsMovableY: 1

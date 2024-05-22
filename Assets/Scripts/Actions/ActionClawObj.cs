@@ -41,6 +41,19 @@ public class ActionClawObj : ActionBaseObj
     {
         ActionPeformState actionState = _m.ActionState;
         actionState.SetTime(_m.Ani.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if (_m.NowAction.SoundEffects.Count > 0)
+        {
+            int i = 0;
+            foreach (SoundEffect soundEffect in SoundEffects)
+            {
+                if (!IsSoundPlayed[i] && actionState.IsAfterFrame(soundEffect.KeyFrame))
+                {
+                    IsSoundPlayed[i] = true;
+                    PlaySoundEffect(soundEffect);
+                }
+                i++;
+            }
+        }
 
         if (actionState.ActionTime >= .625f && _m.Ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer." + AnimationKeyClawEnd))
         {
@@ -54,13 +67,6 @@ public class ActionClawObj : ActionBaseObj
         else
         {
             base.ProcessAction(_m);
-        }
-
-        if (!soundPlayed && actionState.IsAfterFrame(_m.NowAction.AttackSpots[0].KeyFrameFrom - 1))
-        {
-            soundPlayed = true;
-            PlaySoundEffect();
-            //Debug.Log("PlaySound");
         }
     }
 
@@ -133,6 +139,7 @@ public class ActionClawObj : ActionBaseObj
 
         IsTriggered = new bool[_m.NowAction.Toggles.Count];
         IsTeleported = new bool[_m.NowAction.Teleports.Count];
+        IsSoundPlayed = new bool[_m.NowAction.SoundEffects.Count];
 
         SpawnEffect(_m);
     }

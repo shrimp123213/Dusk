@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ActionDanmaku_warpgspear_wi_small
   DisplayName: ActionDanmaku_warpgspear_wi_small
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: flap_1_
+    KeyFrame: 10
+  - soundEffectName: flyspear
+    KeyFrame: 80
   _AnimationKey: boss1-1_ATK_warpgspear_wi
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -87,7 +90,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 0101
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 0101
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

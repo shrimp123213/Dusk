@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Heal
   DisplayName: Heal
-  soundEffectName: Heal
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: Heal
+    KeyFrame: 0
   _AnimationKey: Heal
   EnableJumpVersion: 0
   InterruptLevel: 0

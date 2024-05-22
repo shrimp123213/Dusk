@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: CatClaw2
   DisplayName: CatClaw2
-  soundEffectName: Cat_ATK02
+  SoundEffects:
+  - soundEffectName: Cat_ATK02
+    KeyFrame: 0
   _AnimationKey: Claw2
   EnableJumpVersion: 1
   InterruptLevel: 0
@@ -76,6 +78,7 @@ MonoBehaviour:
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 00
   HitStun: 0.075
   IsMovableX: 0
   IsMovableY: 1
