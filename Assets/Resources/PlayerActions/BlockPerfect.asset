@@ -62,19 +62,7 @@ MonoBehaviour:
     KeyArrow: 0
     LinkActionId: Block
     CanChangeFace: 1
-  Moves:
-  - KeyFrame: 0
-    Curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    TargetDistance: {x: 0, y: 0}
-    FinishTime: 0.1
-    CanEvade: 1
-    StartEvadeFrame: 0
-    EndEvadeFrame: 6
+  Moves: []
   Toggles: []
   Teleports: []
   ApplyForce: {x: 0, y: 0}

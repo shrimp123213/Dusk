@@ -61,7 +61,7 @@ public class TutoSceneContact : MonoBehaviour
                 {
                     targetGroup.m_Targets[0].weight = 1f;
                     bossVCam.GetComponent<CinemachineCameraOffset>().m_Offset.y = -3f;
-                    bossVCam.GetComponent<BossCamScript>().maxOffsetY = -3f;
+                    bossVCam.GetComponent<BossCamScript>().maxOffsetY = -4f;
                     gameObject.SetActive(false);
                 }
                 PlayerMain.i.CanInput = true;

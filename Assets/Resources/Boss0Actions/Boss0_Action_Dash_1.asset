@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Boss0_Action_Dash_1
   DisplayName: Boss0_Action_Dash_1
-  soundEffectName: 
   SoundEffects: []
   _AnimationKey: dashatk
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
-  DamageRatio: 1.8
+  DamageRatio: 1.5
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 75
+  - KeyFrameFrom: 82
     KeyFrameEnd: 120
     Offset: {x: -0.5, y: 1.5, z: 0}
     Range: {x: 6, y: 2.5}

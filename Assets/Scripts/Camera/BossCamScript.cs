@@ -11,7 +11,7 @@ public class BossCamScript : MonoBehaviour
     public CinemachineCameraOffset bossCamOffset;
 
     public float minOffsetY = 0f;
-    public float maxOffsetY = -3f;
+    public float maxOffsetY = -4f;
     
     private float camSize;
     private float minbossVCamSize;

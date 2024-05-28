@@ -87,8 +87,8 @@ MonoBehaviour:
   - KeyFrame: 90
     IsActive: 1
   Teleports: []
-  ApplyForce: {x: 0, y: 0}
-  ForceBasedByPos: 0
+  ApplyForce: {x: 50, y: 0}
+  ForceBasedByPos: 1
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0
@@ -98,10 +98,10 @@ MonoBehaviour:
   EndActionFloatTime: 0
   GroundOnly: 0
   ResetCanAttack: 0
-  IsTriggered: 0101
+  IsTriggered: 0100
   IsTeleported: 
-  IsSoundPlayed: 010101
-  HitStun: 0.5
+  IsSoundPlayed: 000000
+  HitStun: 0.75
   IsMovableX: 0
   IsMovableY: 0
   LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}

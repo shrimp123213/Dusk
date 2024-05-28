@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Mob_ActionAttack
   DisplayName: Mob_ActionAttack
-  soundEffectName: 
-  _AnimationKey: attack
+  SoundEffects: []
+  _AnimationKey: atk
   EnableJumpVersion: 0
   InterruptLevel: 0
   InterruptSameLevel: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: -1.5, y: 0}
+    TargetDistance: {x: -0.5, y: 0}
     FinishTime: 0.15
     CanEvade: 0
     StartEvadeFrame: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 2, y: 0}
+    TargetDistance: {x: 1.5, y: 0}
     FinishTime: 0.166
     CanEvade: 0
     StartEvadeFrame: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

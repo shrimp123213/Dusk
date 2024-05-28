@@ -10,6 +10,7 @@ public class ActionBlockPerfectObj : ActionBaseObj
     {
         Camcam.i.FocusPlayer = true;
         PlayerMain.i.isPerfectBlock = true;
+        _m.Player.InvincibleState.Invincible(.2f, false);
         return base.StartAction(_m);
     }
 

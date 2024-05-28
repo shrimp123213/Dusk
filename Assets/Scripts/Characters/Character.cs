@@ -479,17 +479,19 @@ public class Character : MonoBehaviour, IHitable
         bool value = false;
         if (isKnockback)
         {
-            if (/*velocity.y <= 0f && isGround LowGravityTime <= 0f || isGround*/true)
+            Rigid.drag = Mathf.Lerp(Rigid.drag, 7.5f, Time.fixedDeltaTime * 7.5f);
+            //if (velocity.y <= 0f && isGround || LowGravityTime <= 0f && isGround)
+            if(HitEffect.HitStun <= 0)
             {
                 isKnockback = false;
                 Rigid.drag = 0f;
 
                 LowGravityTime = 0f;
             }
-            else
+            /*else
             {
                 Rigid.drag = Mathf.Lerp(Rigid.drag, 7.5f, Time.fixedDeltaTime * 7.5f);
-            }
+            }*/
         }
         else if (Xinput != 0f && !Airbrone && isMovableX)
         {
@@ -737,7 +739,7 @@ public class Character : MonoBehaviour, IHitable
                 Instantiate(Player.HurtEffect, transform.position, Quaternion.identity, transform);
                 HitEffect.SetGlobalSlowNextFrame(.5f, 0);
 
-                Player.InvincibleState.Invincible();
+                Player.InvincibleState.Invincible(1f);
 
                 MarkManager.i.ClearMarkedTargets();
 

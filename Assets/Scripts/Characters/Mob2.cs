@@ -22,10 +22,10 @@ public class Mob2 : Character
     public override void Dead()
     {
         isDead = true;
-        DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 1f, (value) =>
+        DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 2f, (value) =>
         {
             Renderer.skeleton.SetColor(value);
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 2f);
         });
         AITree.enabled = false;
         base.gameObject.layer = 13;
@@ -34,7 +34,7 @@ public class Mob2 : Character
             //UnityEngine.Object.Instantiate(GeneralPrefabSO.i.P_HealthShard, base.transform.position + new Vector3(0f, 1.25f), Quaternion.identity);
         }
         //base.gameObject.SetActive(value: false);
-        //StartAction(DeadAction);
+        StartAction(DeadAction);
         HurtBox.enabled = false;
         CollisionBlockMove.enabled = false;
     }
