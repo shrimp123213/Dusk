@@ -74,7 +74,7 @@ public class BossTest : Character
                 startedFade = true;
                 //BossHealthBar.localScale = new Vector3(Mathf.MoveTowards(BossHealthBar.localScale.x, 0f, 1 * Time.deltaTime), .75f, .75f);
 
-                DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 3f, (value) =>
+                DOVirtual.Color(Renderer.skeleton.GetColor(), new Color(1, 1, 1, 0), 2f, (value) =>
                 {
                     Renderer.skeleton.SetColor(value);
                 }).OnComplete(() =>

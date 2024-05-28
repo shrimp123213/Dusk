@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Boss0_Action_Beam
   DisplayName: Boss0_Action_Beam
-  soundEffectName: 
+  SoundEffects:
+  - soundEffectName: "Boss0_\u9060\u8DDD\u653B\u64CA"
+    KeyFrame: 0
   _AnimationKey: beamatk
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -52,6 +54,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 01
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

@@ -275,11 +275,19 @@ public class PlayerMain : Character
 
                     if (Inputs.Contains(InputKey.Claw) && CanAttack && AirClawCount < 4)
                     {
-                        if (TryCastAction(ActionLoader.i.Actions["Claw1"], false))
-                            StartAction(ActionLoader.i.Actions["Claw1"]);
+                        /*if (InputUtility.GetHighestAxis(Xinput, Yinput) == InputKey.Down && !isGround)
+                        {
+                            if (TryCastAction(ActionLoader.i.Actions["Claw1"], false))
+                                StartAction(ActionLoader.i.Actions["DownClaw"]);
+                        }
+                        else*/
+                        {
+                            if (TryCastAction(ActionLoader.i.Actions["Claw1"], false))
+                                StartAction(ActionLoader.i.Actions["Claw1"]);
+                        }
                         Inputs.Clear();
                     }
-
+                    
                     if (Inputs.Contains(InputKey.Transformation))
                     {
                         if (TryCastAction(ActionLoader.i.Actions["Transformation"], false))
@@ -464,6 +472,11 @@ public class PlayerMain : Character
             }
             else
                 AirClawCount++;
+        }
+
+        if (flag && _actionBaseObj.name.Contains("DownClaw") && !isGround)
+        {
+            flag = false;
         }
 
         if (flag && _actionBaseObj.Id == "Transformation" && Morph.TotalMorph < 1)

@@ -14,8 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Boss0_Action_TrackAttack
   DisplayName: 
-  soundEffectName: 
-  SoundEffects: []
+  SoundEffects:
+  - soundEffectName: "Boss0_\u8DF3\u8E8D"
+    KeyFrame: 40
+  - soundEffectName: "Boss0_\u7A7A\u4E2D\u65CB\u8F49"
+    KeyFrame: 105
+  - soundEffectName: "Boss0_\u65CB\u8F49\u649E\u64CA"
+    KeyFrame: 130
+  - soundEffectName: "Boss0_\u543C\u53EB"
+    KeyFrame: 180
   _AnimationKey: jumpatk
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -101,8 +108,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TargetDistance: {x: 10.461212, y: -8}
-    FinishTime: 0.35
+    TargetDistance: {x: 9.832031, y: -8}
+    FinishTime: 0.3441211
     CanEvade: 0
     StartEvadeFrame: 0
     EndEvadeFrame: 0
@@ -121,7 +128,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsSoundPlayed: 
+  IsSoundPlayed: 01010101
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

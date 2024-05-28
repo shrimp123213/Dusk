@@ -21,9 +21,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AddTexture:
-        m_Texture: {fileID: 2800000, guid: ef8db69d40e76ee4fa2e2fd0cbfb0406, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a826b2f74301474f921b37df15456c3, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: -0.05, y: -0.05}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,13 +44,14 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
-    - _WaveHeight: 0
+    - _WaveHeight: 0.21999688
     - _smoothness: 0.002
     - _waveTilling: 10
     m_Colors:
-    - _AddColor: {r: 0, g: 0, b: 0, a: 0}
-    - _AddSpeed: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _AddColor: {r: 0, g: 0.8509803, b: 1, a: 0.53333336}
+    - _AddSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _waveIntersity_XminYmax: {r: 0.015, g: 0.015, b: 0, a: 0}
   m_BuildTextureStacks: []

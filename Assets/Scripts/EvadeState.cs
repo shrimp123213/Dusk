@@ -62,7 +62,7 @@ public class EvadeState : MonoBehaviour
         //var main = EvadeCanUseEffect.main;
         //main.loop = false;
         
-        EvadeDistanceEffect.Play();
+        //EvadeDistanceEffect.Play();
         EvadeDistanceEffect.transform.rotation = _m.Facing == 1 ? Quaternion.identity : Quaternion.Euler(Vector3.forward * 180);
 
         _m.Evading = true;

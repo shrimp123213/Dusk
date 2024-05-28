@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Boss0_Action_Start
   DisplayName: Boss0_Action_Start
-  soundEffectName: 
+  SoundEffects:
+  - soundEffectName: "Boss0_\u958B\u5834\u543C\u53EB"
+    KeyFrame: 80
   _AnimationKey: ap
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -104,6 +106,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 01
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

@@ -31,22 +31,14 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 75
-    KeyFrameEnd: 78
+  - KeyFrameFrom: 0
+    KeyFrameEnd: 0
     Offset: {x: 0, y: 0, z: 0}
     Range: {x: 0, y: 0}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
     SpawnKeyFrame: 10
-  - KeyFrameFrom: 105
-    KeyFrameEnd: 107
-    Offset: {x: 0, y: 0, z: 0}
-    Range: {x: 0, y: 0}
-    Angle: 0
-    HitMax: 0
-    SpawnOmen: 0
-    SpawnKeyFrame: 0
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0

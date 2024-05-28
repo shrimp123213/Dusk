@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Boss0_ActionDanmaku_Laser
   DisplayName: 
-  soundEffectName: 
+  SoundEffects:
+  - soundEffectName: "Boss0_\u9060\u8DDD\u653B\u64CA"
+    KeyFrame: 1
   _AnimationKey: beamatk
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -44,6 +46,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 00
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0

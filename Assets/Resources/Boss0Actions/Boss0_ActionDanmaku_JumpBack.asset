@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Boss0_ActionDanmaku_JumpBack
   DisplayName: Boss0_ActionDanmaku_JumpBack
-  soundEffectName: 
+  SoundEffects:
+  - soundEffectName: "Boss0_\u8DF3\u8E8D"
+    KeyFrame: 40
+  - soundEffectName: "Boss0_\u62CD\u5730\u677F"
+    KeyFrame: 125
   _AnimationKey: backjumpatk
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -112,6 +116,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 0101
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
@@ -120,4 +125,3 @@ MonoBehaviour:
   CanChangeFacingWhenActing: 0
   CanJumpWhenActing: 0
   danmaku: {fileID: 11400000, guid: 509d4eb21b511734199d842741d2a11f, type: 2}
-  bullets: []

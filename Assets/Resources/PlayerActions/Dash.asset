@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Dash
   DisplayName: Dash
-  soundEffectName: Dash
+  SoundEffects:
+  - soundEffectName: Dash
+    KeyFrame: 0
   _AnimationKey: Dash
   EnableJumpVersion: 0
   InterruptLevel: 0
@@ -82,6 +84,7 @@ MonoBehaviour:
   ResetCanAttack: 1
   IsTriggered: 
   IsTeleported: 
+  IsSoundPlayed: 01
   HitStun: 0
   IsMovableX: 0
   IsMovableY: 0
