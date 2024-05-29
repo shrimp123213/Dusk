@@ -20,8 +20,8 @@ public class ActionTransformationObj : ActionBaseObj
 
     public override ActionPeformState StartAction(Character _m)
     {
+        _m.Player.Evading = false;
         _m.Player.InvincibleState.Invincible(.8f, false);
-
         return base.StartAction(_m);
     }
 

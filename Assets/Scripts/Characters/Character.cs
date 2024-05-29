@@ -728,7 +728,7 @@ public class Character : MonoBehaviour, IHitable
 
                 //if (Player.CatMode)
                 if(Player.state == PlayerMain.State.Cat)
-                    _damage.Amount *= 2;
+                    _damage.Amount *= 1.5f;
 
                 Vector3 blurPoint = transform.position + Vector3.up * .5f;
                 //if (Player.CatMode)
@@ -770,6 +770,7 @@ public class Character : MonoBehaviour, IHitable
                     //Player.state = PlayerMain.State.Injured;
                     Player.isInjured = true;
                     Health = 1f;
+                    HitEffect.SetGlobalSlow(1.5f, 1);
                     TakeForce(Vector3Utility.CacuFacing(Vector2.right * 60f, Vector3Utility.GetFacingByPos(_attacker.transform, transform)), new Vector2(0f, 0f));
                     return false;
                 }

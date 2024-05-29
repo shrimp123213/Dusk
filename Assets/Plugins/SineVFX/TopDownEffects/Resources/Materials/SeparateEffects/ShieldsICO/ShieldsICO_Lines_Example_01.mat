@@ -90,6 +90,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AppearGradientAbsSwitch: 1
@@ -141,6 +153,8 @@ Material:
     - _OffsetToOpacityTopFixExp: 8
     - _OffsetToOpacityTopFixValue: 0.25
     - _OffsetTrisOpacityNegate: 0.25
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _RAMPENABLED: 1
     - _RampAffectedByDynamics: 0.85
     - _RampAffectedByDynamics1: 0.85

@@ -521,6 +521,7 @@ public class PlayerMain : Character
     {
         SliderHealthTop.value = base.Health / HealthMax.Final;
 
+        HitEffect.SetGlobalSlow(1.5f, 1);
         isDead = true;
         base.gameObject.layer = 13;
         //AITree.enabled = false;

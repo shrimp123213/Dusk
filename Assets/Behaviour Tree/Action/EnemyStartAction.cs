@@ -102,7 +102,13 @@ public class EnemyStartAction : EnemyActionBase
                 omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y + spawnOffsetY, transform.position.z);
                 Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
 
-                GameObject.Instantiate(Omen, omenPos, Quaternion.identity, omenTransform);
+                Quaternion omenRot = Quaternion.Euler(new Vector3(0, 0, OmenSpawnEuler));
+                
+                
+                
+                var omenObj = GameObject.Instantiate(Omen, omenPos, omenRot, omenTransform);
+                if(OmenSpawnFlip)
+                    omenObj.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing, 1, 1);
                 //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
 
                 omenSpawned[i] = true;
@@ -121,7 +127,11 @@ public class EnemyStartAction : EnemyActionBase
                     omenPos = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.position : new Vector3(transform.position.x, transform.position.y + spawnOffsetY, transform.position.z);
                     Transform omenTransform = OmenSpawnPointWithTarget ? OmenSpawnPoint.Value.transform : null;
 
-                    GameObject.Instantiate(Omen, omenPos, Quaternion.identity, omenTransform);
+                    Quaternion omenRot = Quaternion.Euler(new Vector3(0, 0, OmenSpawnEuler));
+                
+                    var omenObj = GameObject.Instantiate(Omen, omenPos, omenRot, omenTransform);
+                    if(OmenSpawnFlip)
+                        omenObj.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing, 1, 1);
                     //Omen.transform.localScale = new Vector3(this.SelfCharacter.Value.Facing,1,1);
 
                     omenSpawned[i] = true;
