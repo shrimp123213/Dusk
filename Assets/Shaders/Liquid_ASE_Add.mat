@@ -21,9 +21,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AddTexture:
-        m_Texture: {fileID: 2800000, guid: 5a826b2f74301474f921b37df15456c3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 13794f369874464798db79539edfe116, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: -0.05, y: -0.05}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -34,8 +34,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AddTex: 0
     - _ColorMask: 15
-    - _NoiseIntersity: 0.1
+    - _NoiseIntersity: 0
     - _SinTimeScale: 2
     - _SpeedScale: 3
     - _Stencil: 0
@@ -44,11 +45,11 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
-    - _WaveHeight: 0.21999688
+    - _WaveHeight: 0
     - _smoothness: 0.002
     - _waveTilling: 10
     m_Colors:
-    - _AddColor: {r: 0, g: 0.8509803, b: 1, a: 0.53333336}
+    - _AddColor: {r: 0, g: 0.8509803, b: 1, a: 0.5176471}
     - _AddSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 1, g: 1, b: 1, a: 1}

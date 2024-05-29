@@ -107,6 +107,9 @@ public class PlayerMain : Character
     public bool revived = false;
     public bool onConversation = false;
 
+    public GameObject LowHPEffect;
+    private bool LowHP = false;
+
     private void OnEnable()
     {
         playerAct.Enable();
@@ -590,6 +593,18 @@ public class PlayerMain : Character
         //{
         //    CanDash = base.isGround;
         //}
+        
+        LowHP = base.Health / HealthMax.Final < .3f;
+        if(LowHP)
+        {
+            if (!LowHPEffect.activeSelf)
+                LowHPEffect.SetActive(true);
+        }
+        else
+        {
+            if (LowHPEffect.activeSelf)
+                LowHPEffect.SetActive(false);
+        }
 
         if (DramaManager.i.dramaCatEnd && !dramaEnd)
         {

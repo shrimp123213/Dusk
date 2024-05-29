@@ -28,11 +28,11 @@ MonoBehaviour:
   - KeyFrameFrom: 140
     KeyFrameEnd: 195
     Offset: {x: 25, y: 2.05, z: 0}
-    Range: {x: 50, y: 2}
+    Range: {x: 55, y: 2}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
-    SpawnKeyFrame: 10
+    SpawnKeyFrame: 90
   SuckEffect: 0
   CanInterruptAction: 1
   CanTriggerMark: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
   Moves: []
   Toggles: []
   Teleports: []
-  ApplyForce: {x: 0, y: 0}
-  ForceBasedByPos: 0
+  ApplyForce: {x: 80, y: 0}
+  ForceBasedByPos: 1
   UsePopup: 0
   TimeSlowAmount: 0
   MorphCost: 0

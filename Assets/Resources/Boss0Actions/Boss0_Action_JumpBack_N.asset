@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea39010ae1a5ed408a3e050bfae64c5, type: 3}
+  m_Name: Boss0_Action_JumpBack_N
+  m_EditorClassIdentifier: 
+  Id: Boss0_Action_JumpBack_N
+  DisplayName: Boss0_Action_JumpBack_N
+  SoundEffects:
+  - soundEffectName: "Boss0_\u8DF3\u8E8D"
+    KeyFrame: 20
+  _AnimationKey: backjump
+  EnableJumpVersion: 0
+  InterruptLevel: 0
+  InterruptSameLevel: 0
+  DamageRatio: 1.5
+  DamageType: 0
+  SetCooldowns: []
+  AttackSpots: []
+  SuckEffect: 0
+  CanInterruptAction: 1
+  CanTriggerMark: 0
+  ClearStoredMoves: 0
+  Links: []
+  Moves:
+  - KeyFrame: 21
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.5
+        inSlope: 1.9999939
+        outSlope: 1.9999943
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333403
+        outWeight: 0.33333397
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333397
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: -4, y: 3}
+    FinishTime: 0.29
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  - KeyFrame: 40
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.5
+        inSlope: 1.9999939
+        outSlope: 1.9999943
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333403
+        outWeight: 0.33333397
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333397
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TargetDistance: {x: -4, y: -3}
+    FinishTime: 0.3
+    CanEvade: 0
+    StartEvadeFrame: 0
+    EndEvadeFrame: 0
+  Toggles: []
+  Teleports: []
+  ApplyForce: {x: 0, y: 0}
+  ForceBasedByPos: 0
+  UsePopup: 0
+  TimeSlowAmount: 0
+  MorphCost: 0
+  MorphRecovery: 0
+  MorphRecoveryAdditionalByMark: 0
+  EvadeEnergyRecovery: 0
+  EndActionFloatTime: 0
+  GroundOnly: 0
+  ResetCanAttack: 0
+  IsTriggered: 
+  IsTeleported: 
+  IsSoundPlayed: 01
+  HitStun: 0.25
+  IsMovableX: 0
+  IsMovableY: 0
+  LimitX: {x: -3.4028235e+38, y: 3.4028235e+38}
+  LimitY: {x: -3.4028235e+38, y: 3.4028235e+38}
+  CanChangeFacingWhenActing: 0
+  CanJumpWhenActing: 0

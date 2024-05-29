@@ -20,5 +20,14 @@ public class LiquidASE : MonoBehaviour
     {
         waveHeight = img.fillAmount;
         mat.SetFloat("_WaveHeight", waveHeight);
+        
+        if(waveHeight >= 0.99)
+        {
+            mat.SetInt("_AddTex",1);
+        }
+        else
+        {
+            mat.SetInt("_AddTex",0);
+        }
     }
 }
