@@ -481,17 +481,19 @@ public class Character : MonoBehaviour, IHitable
         {
             Rigid.drag = Mathf.Lerp(Rigid.drag, 7.5f, Time.fixedDeltaTime * 7.5f);
             //if (velocity.y <= 0f && isGround || LowGravityTime <= 0f && isGround)
-            if(HitEffect.HitStun <= 0)
+            
+            if (HitEffect.HitStun <= 0)
             {
                 isKnockback = false;
                 Rigid.drag = 0f;
 
                 LowGravityTime = 0f;
             }
-            /*else
+            /*else if (velocity.y >= 0f && !isGround)
             {
                 Rigid.drag = Mathf.Lerp(Rigid.drag, 7.5f, Time.fixedDeltaTime * 7.5f);
             }*/
+
         }
         else if (Xinput != 0f && !Airbrone && isMovableX)
         {
@@ -815,7 +817,6 @@ public class Character : MonoBehaviour, IHitable
 
     public void TakeForce(Vector2 _Force, Vector2 _AddiForce)
     {
-        
         if (!isGround)
         {
             Rigid.velocity = Vector2.zero;
@@ -832,11 +833,16 @@ public class Character : MonoBehaviour, IHitable
             }
             //Debug.Log(string.Concat(Rigid.velocity, isActing.ToString()));
         }
-        isKnockback = true;
-        CanLongJump = false;
+        if(_Force == Vector2.zero)
+        {
+            LowGravityTime = 0f;
+        }
+        else
+        {
+            isKnockback = true;
+            CanLongJump = false;
+        }
         Rigid.drag = 0f;
-
-
         HitEffect.SetTimeSlow(0.15f);
     }
 

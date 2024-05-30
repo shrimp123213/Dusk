@@ -105,7 +105,9 @@ public class DramaManager : MonoBehaviour
         foreach (var vDramaData in dramaList)
         {
             if (vDramaData is { dramaIndex: 3, dramaEnd: true })
-                Invoke(nameof(Drama_5), 0.5f);
+            {
+                Invoke(nameof(Drama_5), 1f);
+            }
         }
         
         

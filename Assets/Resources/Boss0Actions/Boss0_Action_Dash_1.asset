@@ -27,10 +27,10 @@ MonoBehaviour:
   DamageType: 0
   SetCooldowns: []
   AttackSpots:
-  - KeyFrameFrom: 80
+  - KeyFrameFrom: 78
     KeyFrameEnd: 120
     Offset: {x: 0.5, y: 1.5, z: 0}
-    Range: {x: 4.5, y: 2.5}
+    Range: {x: 5, y: 2.5}
     Angle: 0
     HitMax: 0
     SpawnOmen: 1
@@ -95,7 +95,7 @@ MonoBehaviour:
   ResetCanAttack: 0
   IsTriggered: 
   IsTeleported: 
-  IsSoundPlayed: 0101
+  IsSoundPlayed: 0000
   HitStun: 0.25
   IsMovableX: 0
   IsMovableY: 0
